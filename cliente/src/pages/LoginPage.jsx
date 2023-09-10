@@ -62,7 +62,7 @@ export default function LoginPage() {
                                 <label htmlFor="reg-log"></label>
                                 <div className="card-3d-wrap mx-auto">
                                     <div className="card-3d-wrapper">
-
+                                        <div className='card-front'>
                                         <div className="center-wrap">
                                             {
                                                 LoginErrors.map((error, i) => (
@@ -99,21 +99,15 @@ export default function LoginPage() {
                                                                 )
                                                             }
                                                         </div>
-                                                        <button className='bg-yellow-200 hover:bg-yellow-400 text-black font-semibold uppercase transition duration-200 ease-in-out px-8 py-2 rounded-lg inline-flex items-center' type='submit'>Ingresar</button>
                                                     </div>
                                                 </div>
+                                                <button type='submit' className='bg-yellow-200 hover:bg-yellow-400 text-black font-semibold uppercase transition duration-200 ease-in-out px-8 py-2 rounded-lg inline-flex items-center' >Ingresar</button>
                                             </form>
                                         </div>
-
+                                        </div>
                                         <div className="card-back">
                                             <div className="center-wrap">
-                                                {
-                                                    LoginErrors.map((error, i) => (
-                                                        <div className='bg-red-400 text-white' key={i}>
-                                                            {error}
-                                                        </div>
-                                                    ))
-                                                }
+
                                                 <form onSubmit={onSubmit2}>
                                                     <div className='text-center'>
                                                         <h4 className="mb-2 pb-3">RUC</h4>
@@ -139,14 +133,14 @@ export default function LoginPage() {
                                                         </div>
                                                         <div className='pt-2 pb-4'>
                                                             <ion-icon name="lock-closed-outline" ></ion-icon>
-                                                            <input type="password" placeholder="Contraseña"
+                                                            <input type="password2" placeholder="Contraseña"
                                                                 className="form-style"
-                                                                {...register("password", { required: true })}
+                                                                {...register("password2", { required: true })}
                                                             />
 
                                                         </div>
-                                                        <button className='bg-yellow-200 hover:bg-yellow-400 text-black font-semibold uppercase transition duration-200 ease-in-out px-8 py-2 rounded-lg inline-flex items-center' type='submit'>Ingresar</button>
                                                     </div>
+                                                    <button className='bg-yellow-200 hover:bg-yellow-400 text-black font-semibold uppercase transition duration-200 ease-in-out px-8 py-2 rounded-lg inline-flex items-center' type='submit'>Ingresar</button>
                                                 </form>
                                             </div>
                                         </div>
