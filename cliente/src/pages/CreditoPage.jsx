@@ -13,7 +13,7 @@ function CreditoPage() {
               Indique los datos del servicio prestado
             </h1>
             <form action="submit.php" method="post">
-              <label htmlFor="description" className="text-gray-400 font-sans font-bold">
+              <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                 Descripción o Título de Servicio Prestado:
               </label>
               <input
@@ -21,9 +21,9 @@ function CreditoPage() {
                 name="description"
                 type="text"
                 aria-label="default input example"
-                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-bold text-gray-300 focus:border-yellow-100"
+                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
               />
-              <label htmlFor="observation" className="text-gray-400 font-sans font-bold">
+              <label htmlFor="observation" className="text-gray-400 font-sans font-semibold">
                 Observación (Opcional):
               </label>
               <input
@@ -33,21 +33,21 @@ function CreditoPage() {
                 aria-label="default input example"
                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-bold text-gray-300 focus:border-yellow-100"
               />
-              <label htmlFor="date_issue" className="text-gray-400 font-sans font-bold">
+              <label htmlFor="date_issue" className="text-gray-400 font-sans font-semibold">
                 Fecha de Emisión:
               </label>
               <input
                 type="date"
                 id="date_issue"
                 name="date_issue"
-                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-bold text-gray-300 focus:border-yellow-100"
+                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
               />
             </form>
           </div>
 
           <div className="bg-zinc-900 p-4 rounded-lg mb-4">
             <h1 className="text-lg font-semibold text-yellow-100 mb-5">
-              Indique el tipo de Renta de Cuarta Categoría, de acuerdo al inciso aplicable del artículo 33 LIR:
+              Indique el tipo de Renta de Cuarta Categoría, de acuerdo al inciso aplicable del artículo 33 LIR
             </h1>
             <form action="submit.php" method="post">
               <input
@@ -57,10 +57,11 @@ function CreditoPage() {
                 value="si"
                 className="mr-2"
               />
-              <label htmlFor="free" className="text-gray-400 font-sans font-bold">
-                Inciso A: El ejercicio individual, de acuerdo profesión, arte, ciencia, oficio o actividades no incluidas expresamente en la tercera categoría
+              <label htmlFor="free" className="text-gray-400 font-sans font-semibold">
+                Inciso A: El ejercicio individual, de acuerdo profesión, arte, ciencia, oficio o actividades no incluidas expresamente en la tercera categoría.
               </label>
-              <br />
+              <br/>
+              <div className="h-3"></div>
               <input
                 type="radio"
                 id="not_free"
@@ -68,8 +69,8 @@ function CreditoPage() {
                 value="no"
                 className="mr-2"
               />
-              <label htmlFor="not_free" className="text-gray-400 font-sans font-bold">
-                Inciso B: El desempeño de funciones de funciones de director de empresas, síndico, mandatario, gestor de negocios, albacea y actividades similares, incluyendo el desempeño de las funciones del consejero regional, por las cuales perciban dietas
+              <label htmlFor="not_free" className="text-gray-400 font-sans font-semibold">
+                Inciso B: El desempeño de funciones de funciones de director de empresas, síndico, mandatario, gestor de negocios, albacea y actividades similares, incluyendo el desempeño de las funciones del consejero regional, por las cuales perciban dietas.
               </label>
               <br />
             </form>
@@ -77,7 +78,7 @@ function CreditoPage() {
 
           <div className="bg-zinc-900 p-4 rounded-lg mb-4">
             <h1 className="text-lg font-semibold text-yellow-100 mb-5">
-              Retención del Impuesto a la Renta:
+              Retención del Impuesto a la Renta
             </h1>
             <form action="submit.php" method="post">
               <input
@@ -87,10 +88,11 @@ function CreditoPage() {
                 value="yes"
                 className="mr-2"
               />
-              <label htmlFor="retention_yes" className="text-gray-400 font-sans font-bold">
+              <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                 SI
               </label>
               <br />
+              <div className="h-1"></div>
               <input
                 type="radio"
                 id="retention_no"
@@ -98,7 +100,7 @@ function CreditoPage() {
                 value="no"
                 className="mr-2"
               />
-              <label htmlFor="retention_no" className="text-gray-400 font-sans font-bold">
+              <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                 NO
               </label>
               <br />
@@ -117,7 +119,7 @@ function CreditoPage() {
                 value="yes"
                 className="mr-2"
               />
-              <label htmlFor="payment_yes" className="text-gray-400 font-sans font-bold">
+              <label htmlFor="payment_yes" className="text-gray-400 font-sans font-semibold">
                 SI
               </label>
               <br />
@@ -128,12 +130,13 @@ function CreditoPage() {
                 value="no"
                 className="mr-2"
               />
-              <label htmlFor="payment_no" className="text-gray-400 font-sans font-bold">
+              <label htmlFor="payment_no" className="text-gray-400 font-sans font-semibold">
                 NO
               </label>
               <br />
+              <div className="h-2"></div>
               <select
-                className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-bold text-gray-300 focus:border-yellow-100"
+                className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 aria-label="Medio de Pago"
               >
                 <option selected>-- Seleccione Medio de Pago --</option>
@@ -162,13 +165,15 @@ function CreditoPage() {
               Tipo de Moneda
             </h1>
             <select
-              className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-bold text-gray-300 focus:border-yellow-100"
+              className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
               aria-label="Tipo de Moneda"
             >
-              <option selected>SOL</option>
-              <option value="1">DOLAR</option>
-              <option value="2">EURO</option>
+            <option selected>-- Tipo de cambio --</option>
+              <option value="1">SOL</option>
+              <option value="2">DOLAR</option>
+              <option value="3">EURO</option>
             </select>
+            <div className="h-1"></div>
             <form action="submit.php" method="post">
               <label htmlFor="honorarios" className="text-gray-400 font-sans font-bold">
                 Monto total de los honorarios:
@@ -179,30 +184,33 @@ function CreditoPage() {
                 placeholder="0.00"
                 aria-label=".form-control-lg example"
               />
+              <div className="h-1"></div>
               <label htmlFor="retencion" className="text-gray-400 font-sans font-bold">
                 Retención (8%) Impuesto a la Renta:
               </label>
               <input
-                className="monto w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                className="monto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 type="text"
                 placeholder="0.00"
                 aria-label=".form-control-lg example"
+                disabled
               />
               <label htmlFor="total_net" className="text-gray-400 font-sans font-bold">
                 Total Neto Recibido:
               </label>
               <input
-                className="monto w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                className="monto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 type="text"
                 placeholder="0.00"
                 aria-label=".form-control-lg example"
+                disabled
               />
             </form>
           </div>
 
           <div className="bg-zinc-900 p-4 rounded-lg mb-4">
             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
-              Indique Información del Crédito:
+              Indique Información del Crédito
             </h1>
             <form action="submit.php" method="post">
               <label htmlFor="monto_pendiente" className="text-gray-400 font-sans font-bold">
@@ -214,7 +222,9 @@ function CreditoPage() {
                 placeholder="0.00"
                 aria-label=".form-control-lg example"
               />
-              <h1 className="text-base font-bold text-gray-400 mb-3">
+            <div className="h-4"></div>
+            <div className="bg-zinc-800 p-4 rounded-lg mb-4">
+              <h1 className="text-base font-bold mb-3 text-white">
                 Agregue las cuotas asociadas al crédito:
               </h1>
               <label htmlFor="fecha_vencimiento" className="text-gray-400 font-sans font-bold">
@@ -235,32 +245,35 @@ function CreditoPage() {
                 placeholder="0.00"
                 aria-label=".form-control-lg example"
               />
+              <div className="h-1"></div>
+              <div className="flex justify-end">
               <input
                 type="submit"
                 value="Agregar Cuota"
                 className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
                 />
+                </div>
+            </div>
               <h1 className="text-gray-400 font-sans font-bold">
                 Máximo podrá agregar hasta 60 Cuotas
               </h1>
-              <div className="mx-auto">
-                <table className="min-w-full table-auto border-collapse border border-gray-300">
+              <div className="mx-auto bg-text-zinc-900 p-6 dark:text-white">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
                     <thead>
                     <tr className="bg-gray-200">
-                        <th className="border bg-yellow-100 text-zinc-900">Modificar</th>
-                        <th className="border bg-yellow-100 text-zinc-900">Eliminar</th>
-                        <th className="border bg-yellow-100 text-zinc-900">Número Cuota</th>
-                        <th className="border bg-yellow-100 text-zinc-900">Fecha Vencimiento</th>
+                        <th className="border bg-gray-500 text-gray-300">Modificar</th>
+                        <th className="border bg-gray-500 text-gray-300">Eliminar</th>
+                        <th className="border bg-zinc-500 text-gray-300">Número Cuota</th>
+                        <th className="border bg-zinc-500 text-gray-300">Fecha Vencimiento</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="font-sans font-semibold">
                     <tr>
-                        <td className="border border-gray-300 text-gray-300 text-center">...</td>
-                        <td className="border border-gray-300 text-gray-300 text-center">...</td>
-                        <td className="border border-gray-300 text-gray-300 text-center">No se han ingresado cuotas</td>
-                        <td className="border border-gray-300 text-gray-300 text-center">...</td>
+                        <td className="border border-gray-400 text-gray-300 text-center">...</td>
+                        <td className="border border-gray-400 text-gray-300 text-center">...</td>
+                        <td className="border border-gray-400 text-gray-300 text-center">No se han ingresado cuotas</td>
+                        <td className="border border-gray-400 text-gray-300 text-center">...</td>
                     </tr>
-                    {/* Puedes agregar más filas de datos aquí */}
                     </tbody>
                 </table>
                 </div>
