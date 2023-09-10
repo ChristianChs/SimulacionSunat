@@ -1,6 +1,6 @@
 import React from 'react'
 import Imagen from '../assets/images/sunat.png'
-import Imagen1 from '../assets/images/image.png'
+import Imagen1 from '../assets/images/fondo.jpg'
 import Imagen2 from '../assets/images/unjbg.png'
 import Imagen3 from '../assets/images/atencion.png'
 
@@ -33,7 +33,7 @@ function HomePage() {
           </div>
 
         </div>
-        <img src={Imagen3} class="w-full xl:w-1/4 xl:absolute bottom-8 right-56"></img>
+        <img src={Imagen3} class="w-full xl:w-1/3 xl:absolute bottom-0 right-56"></img>
 
       </div>  
     </div>
