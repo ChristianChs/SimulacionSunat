@@ -267,12 +267,12 @@ function CreditoPage() {
                         <th className="border bg-zinc-500 text-gray-300">Fecha Vencimiento</th>
                     </tr>
                     </thead>
-                    <tbody className="font-sans font-semibold">
+                    <tbody className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
                     <tr>
-                        <td className="border border-gray-400 text-gray-300 text-center">...</td>
-                        <td className="border border-gray-400 text-gray-300 text-center">...</td>
-                        <td className="border border-gray-400 text-gray-300 text-center">No se han ingresado cuotas</td>
-                        <td className="border border-gray-400 text-gray-300 text-center">...</td>
+                        <td >...</td>
+                        <td >...</td>
+                        <td>No se han ingresado cuotas</td>
+                        <td >...</td>
                     </tr>
                     </tbody>
                 </table>
