@@ -104,7 +104,7 @@ function ReciboxHPage() {
             </div>
             <input
               type="text"
-              className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+              className="w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
               placeholder="Nombre o Razón Social del Usuario"
               value={ isDestinatario?isDestinatario.razonSocial:''}
               disabled
@@ -113,7 +113,7 @@ function ReciboxHPage() {
 
               selectedValue.checked === '0' ? (<input
                 type="text"
-                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                className="w-full py-2 px-3 border border-gray-900 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 placeholder="Domicilio del Usuario"
                 value={isDestinatario?isDestinatario.direccion===null?'-':isDestinatario.direccion:''}
                 disabled
