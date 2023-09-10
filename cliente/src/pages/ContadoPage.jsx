@@ -72,7 +72,7 @@ export default function ContadoPage() {
             <form action="submit.php" method="post" onSubmit={onSubmit}>
               <input
                 type="radio"
-                id="free"
+                id="inciso"
                 name="free"
                 value="1"
                 className="mr-2"
@@ -86,7 +86,7 @@ export default function ContadoPage() {
               <div className="h-3"></div>
               <input
                 type="radio"
-                id="not_free"
+                id="not_inciso"
                 name="free"
                 value="0"
                 className="mr-2"
@@ -209,6 +209,7 @@ export default function ContadoPage() {
                 Monto total de los honorarios:
               </label>
               <input
+                id="monto_total"
                 className="monto w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 type="text"
                 placeholder="0.00"
@@ -221,6 +222,7 @@ export default function ContadoPage() {
                 Retención (8%) Impuesto a la Renta:
               </label>
               <input
+              id="impuesto"
                 className="monto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 type="text"
                 placeholder="0.00"
@@ -231,6 +233,7 @@ export default function ContadoPage() {
                 Total Neto Recibido:
               </label>
               <input
+              id="total_neto"
                 className="monto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 type="text"
                 placeholder="0.00"

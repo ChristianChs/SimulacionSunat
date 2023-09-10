@@ -69,7 +69,7 @@ function HomePage() {
               </p>
 
               <div className='mt-6 md:mt-10'>
-                <a href="MenuPage.jsx" className='bg-yellow-300 rounded-3xl py-3 px-8 font-medium inline-block mr-4 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent'>Ingresar</a>
+                <a href="/login" className='bg-yellow-300 rounded-3xl py-3 px-8 font-medium inline-block mr-4 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent'>Ingresar</a>
                 <a href="LoginPage.jsx">Registrarse <span className='text-lg inline-block rotate-90'>&#10148;</span></a>
               </div>
             </div>
