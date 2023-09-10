@@ -9,7 +9,6 @@ function MenuPage() {
     <section className="p-10 mt-8">
       <div className="container mx-auto mb-8 text-center">
       <h1 className="text-4xl md:text-5xl font-bold text-ffeba7 mb-4 animate-pulse shadow-md text-red">TIPO DE DOCUMENTO FUENTE</h1>
-
       </div>
       <ul role="list" className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center">
         <li>
