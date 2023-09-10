@@ -12,13 +12,17 @@ export default function LoginPage() {
         await signin(values)
     })
 
+    const onSubmit2 = handleSubmit(async (values) => {
+        console.log("s")
+    })
+
     useEffect(() => {
         if (isAuthenticated) navigate("/menu")
     }, [isAuthenticated])
     return (
         <>
-        {/* <Starts/> */}
-        <div className='max-w-md p-10 rounded-md'>
+            {/* <Starts/> */}
+            {/* <div className='max-w-md p-10 rounded-md'>
             {
                 LoginErrors.map((error, i) => (
                     <div className='bg-red-400 text-white' key={i}> 
@@ -43,58 +47,102 @@ export default function LoginPage() {
                 }
                 <button type='submit' >Login</button>
             </form>
-        </div>
-        
-        {/* <div class="section">
-            <div class="container">
-                <div class="row full-height justify-content-center">
-                    <div class="col-12 text-center align-self-center py-5">
-                        <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                            <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
-                            <label for="reg-log"></label>
-                            <div class="card-3d-wrap mx-auto">
-                                <div class="card-3d-wrapper">
-                                    <div class="card-front">
-                                        <div class="center-wrap">
-                                            <form action="validar2.php" method="post">
-                                                <div class="section text-center">
-                                                    <h4 class="mb-4 pb-3">DNI</h4>
-                                                    <div class="form-dni">
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-style" id="dnii" placeholder="Numero de DNI" name="dni" />
-                                                            <i class="input-icon uil uil-user"></i>
+        </div> */}
+
+            <div className='p-8'>
+                <div className='mx-auto max-w-screen-lg'>
+                    <div className='flex items-center justify-center h-screen'>
+                        <div className='w-full text-center self-center py-5'>
+                            <div className='py-5 pt-10 sm:pt-2 text-center'>
+                                <h6 className="mb-0 pb-3">
+                                    <span className="mr-2">LOGIN DNI</span>
+                                    <span>LOGIN RUC</span>
+                                </h6>
+                                <input className="checkbox" type="checkbox" id="reg-log" name="reg-log" />
+                                <label htmlFor="reg-log"></label>
+                                <div className="card-3d-wrap mx-auto">
+                                    <div className="card-3d-wrapper">
+                                        <div className='card-front'>
+                                        <div className="center-wrap">
+                                            {
+                                                LoginErrors.map((error, i) => (
+                                                    <div className='bg-red-400 text-white' key={i}>
+                                                        {error}
+                                                    </div>
+                                                ))
+                                            }
+                                            <form onSubmit={onSubmit}>
+                                                <div className='text-center'>
+                                                    <h4 className="mb-2 pb-3">DNI</h4>
+                                                    <div >
+                                                        <div >
+                                                            <ion-icon name="mail-unread-outline"></ion-icon>
+                                                            <input type="text" className="form-style" placeholder="Numero de DNI"
+                                                                {...register("dni", { required: true })}
+                                                            />
+                                                            {
+                                                                errors.dni && (
+                                                                    <p className='text-red-500'>DNI requerido</p>
+                                                                )
+                                                            }
+
                                                         </div>
-                                                        <div className='mt-2' >
+                                                        <div className='mt-2 pb-4' >
+
+                                                            <ion-icon name="lock-closed-outline" ></ion-icon>
                                                             <input type="password" className="form-style" placeholder="Contraseña"
-                                                             />
-                                                            <i class="input-icon uil uil-lock-alt"></i>
+                                                                {...register("password", { required: true })}
+                                                            />
+                                                            {
+                                                                errors.password && (
+                                                                    <p className='text-red-500'>Contraseña requerida</p>
+                                                                )
+                                                            }
                                                         </div>
-                                                        <button id="identificardni" class="btn mt-4">Ingresar</button>
                                                     </div>
                                                 </div>
+                                                <button type='submit' className='bg-yellow-200 hover:bg-yellow-400 text-black font-semibold uppercase transition duration-200 ease-in-out px-8 py-2 rounded-lg inline-flex items-center' >Ingresar</button>
                                             </form>
                                         </div>
-                                    </div>
-                                    <div class="card-back">
-                                        <div class="center-wrap">
-                                            <form action="validar.php" method="post">
-                                                <div class="section text-center">
-                                                    <h4 class="mb-3 pb-3">RUC</h4>
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-style" placeholder="Numero de RUC" id="rucc" name="ruc" />
-                                                        <i class="input-icon uil uil-user"></i>
+                                        </div>
+                                        <div className="card-back">
+                                            <div className="center-wrap">
+
+                                                <form onSubmit={onSubmit2}>
+                                                    <div className='text-center'>
+                                                        <h4 className="mb-2 pb-3">RUC</h4>
+                                                        <div>
+                                                            <ion-icon name="mail-unread-outline"></ion-icon>
+                                                            <input type="text" placeholder="Numero de RUC"
+                                                                className="form-style"
+                                                                {...register("nruc", { required: true })}
+                                                            />
+                                                            {
+                                                                errors.dni && (
+                                                                    <p className='text-red-500'>DNI requerido</p>
+                                                                )
+                                                            }
+
+                                                        </div>
+                                                        <div className='pt-2' >
+                                                            <ion-icon name="person-outline"></ion-icon>
+                                                            <input type="text" placeholder="Usuario"
+                                                                className="form-style"
+                                                                {...register("user", { required: true })}
+                                                            />
+                                                        </div>
+                                                        <div className='pt-2 pb-4'>
+                                                            <ion-icon name="lock-closed-outline" ></ion-icon>
+                                                            <input type="password2" placeholder="Contraseña"
+                                                                className="form-style"
+                                                                {...register("password2", { required: true })}
+                                                            />
+
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group mt-2">
-                                                        <input type="text" class="form-style" placeholder="Usuario" name="usuario" />
-                                                        <i class="input-icon uil uil-at"></i>
-                                                    </div>
-                                                    <div class="form-group mt-2">
-                                                        <input type="password" class="form-style" placeholder="Contraseña" name="clave" />
-                                                        <i class="input-icon uil uil-lock-alt"></i>
-                                                    </div>
-                                                    <button id="ingresarruc" class="btn mt-4">Ingresar</button>
-                                                </div>
-                                            </form>
+                                                    <button className='bg-yellow-200 hover:bg-yellow-400 text-black font-semibold uppercase transition duration-200 ease-in-out px-8 py-2 rounded-lg inline-flex items-center' type='submit'>Ingresar</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +151,6 @@ export default function LoginPage() {
                     </div>
                 </div>
             </div>
-        </div> */}
         </>
     )
 }
