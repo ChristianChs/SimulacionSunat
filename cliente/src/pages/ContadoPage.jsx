@@ -11,26 +11,26 @@ function ContadoPage() {
           <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
             <h1 className="text-lg font-semibold text-yellow-100 mb-4">Indique los datos del servicio prestado</h1>
             <form action="submit.php" method="post">
-              <label htmlFor="free" className="cursor-pointer font-sans font-bold text-gray-400 block">
+              <label htmlFor="free" className="text-gray-400 font-sans font-semibold">
                 El Servicio se Prestó a Título Gratuito:
                 <input type="radio" id="free" name="free" value="si" className="ml-2" />
-                <span className="ml-2">SI</span>
+                <span className="ml-2 text-gray-400 font-sans font-semibold">SI</span>
                 <input type="radio" id="not_free" name="free" value="no" className="ml-2" />
-                <span className="ml-2">NO</span>
+                <span className="ml-2 text-gray-400 font-sans font-semibold">NO</span>
               </label>
-              <label htmlFor="message" className="mt-4 block font-sans font-bold text-gray-400">
+              <label htmlFor="message" className="mt-4 block text-gray-400 font-sans font-semibold">
                 Descripción o Título de Servicio Prestado:
                 <input id="description" name="description" type="text" aria-label="default input example" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" />
               </label>
-              <label htmlFor="message" className="mt-4 block font-sans font-bold text-gray-400">
+              <label htmlFor="message" className="mt-4 block text-gray-400 font-sans font-semibold">
                 Observación (Opcional):
                 <input id="observation" name="observation" type="text" aria-label="default input example" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" />
               </label>
-              <label htmlFor="date_issue" className="mt-4 block font-sans font-bold text-gray-400">
+              <label htmlFor="date_issue" className="mt-4 block text-gray-400 font-sans font-semibold">
                 Fecha de Emisión:
                 <input type="date" id="date_issue" name="date_issue" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" />
               </label>
-              <label htmlFor="date_expiration" className="mt-4 block font-sans font-bold text-gray-400">
+              <label htmlFor="date_expiration" className="mt-4 block text-gray-400 font-sans font-semibold">
                 Fecha de Vencimiento (Opcional):
                 <input type="date" id="date_expiration" name="date_expiration" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" />
               </label>
@@ -42,49 +42,93 @@ function ContadoPage() {
               Indique el tipo de Renta de Cuarta Categoría, de acuerdo al inciso aplicable del artículo 33 LIR:
             </h1>
             <form action="submit.php" method="post">
-              <label className="cursor-pointer font-sans font-bold text-gray-400 block">
-                <input type="radio" id="free" name="free" value="si" className="ml-2" />
-                <span className="ml-2">
-                  Inciso A: El ejercicio individual, de acuerdo profesión, arte, ciencia, oficio o actividades no incluidas expresamente en la tercera categoría
-                </span>
+              <input
+                type="radio"
+                id="free"
+                name="free"
+                value="si"
+                className="mr-2"
+              />
+              <label htmlFor="free" className="text-gray-400 font-sans font-semibold">
+                Inciso A: El ejercicio individual, de acuerdo profesión, arte, ciencia, oficio o actividades no incluidas expresamente en la tercera categoría.
               </label>
-              <label className="cursor-pointer font-sans font-bold text-gray-400 block">
-                <input type="radio" id="not_free" name="free" value="no" className="ml-2" />
-                <span className="ml-2">
-                  Inciso B: El desempeño de funciones de funciones de director de empresas, síndico, mandatario, gestor de negocios, albacea y actividades similares, incluyendo el desempeño de las funciones del consejero regional, por las cuales perciban dietas
-                </span>
+              <br/>
+              <div className="h-3"></div>
+              <input
+                type="radio"
+                id="not_free"
+                name="free"
+                value="no"
+                className="mr-2"
+              />
+              <label htmlFor="not_free" className="text-gray-400 font-sans font-semibold">
+                Inciso B: El desempeño de funciones de funciones de director de empresas, síndico, mandatario, gestor de negocios, albacea y actividades similares, incluyendo el desempeño de las funciones del consejero regional, por las cuales perciban dietas.
               </label>
+              <br />
             </form>
           </div>
 
           <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
             <h1 className="text-lg font-semibold text-yellow-100 mb-4">Retención del Impuesto a la Renta:</h1>
             <form action="submit.php" method="post">
-              <label className="cursor-pointer font-sans font-bold text-gray-400 block">
-                <input type="radio" id="free" name="free" value="si" className="ml-2" />
-                <span className="ml-2">SI</span>
+              <input
+                type="radio"
+                id="retention_yes"
+                name="retention"
+                value="yes"
+                className="mr-2"
+              />
+              <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
+                SI
               </label>
-              <label className="cursor-pointer font-sans font-bold text-gray-400 block">
-                <input type="radio" id="not_free" name="free" value="no" className="ml-2" />
-                <span className="ml-2">NO</span>
+              <br />
+              <div className="h-1"></div>
+              <input
+                type="radio"
+                id="retention_no"
+                name="retention"
+                value="no"
+                className="mr-2"
+              />
+              <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
+                NO
               </label>
+              <br />
             </form>
           </div>
 
           <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
-            <h1 className="text-lg font-semibold text-yellow-100 mb-4">
+            <h1 className="text-lg font-sans font-semibold text-yellow-100 mb-4">
               ¿El pago total del servicio está siendo efectuado al momento de la emisión de este comprobante?
             </h1>
             <form action="submit.php" method="post">
-              <label className="cursor-pointer font-sans font-bold text-gray-400 block">
-                <input type="radio" id="free" name="free" value="si" className="ml-2" />
-                <span className="ml-2">SI</span>
+              <input
+                type="radio"
+                id="payment_yes"
+                name="payment"
+                value="yes"
+                className="mr-2"
+              />
+              <label htmlFor="payment_yes" className="text-gray-400 font-sans font-semibold">
+                SI
               </label>
-              <label className="cursor-pointer font-sans font-bold text-gray-400 block">
-                <input type="radio" id="not_free" name="free" value="no" className="ml-2" />
-                <span className="ml-2">NO</span>
+              <br />
+              <input
+                type="radio"
+                id="payment_no"
+                name="payment"
+                value="no"
+                className="mr-2"
+              />
+              <label htmlFor="payment_no" className="text-gray-400 font-sans font-semibold">
+                NO
               </label>
-              <select className="form-select mt-4 w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md text-gray-300 focus:border-yellow-100">
+              <br />
+              <div className="h-2"></div>
+              <select
+                className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                aria-label="Medio de Pago"
+              >
                 <option selected>-- Seleccione Medio de Pago --</option>
                 <option value="1">Depósito de Cuenta</option>
                 <option value="2">Giro</option>
@@ -103,23 +147,67 @@ function ContadoPage() {
             </form>
           </div>
 
-          <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
-            <h1 className="text-lg font-semibold text-yellow-100 mb-4">Indique el monto de los Honorarios</h1>
-            <h1 className="text-base font-bold text-gray-400 mb-3">Tipo de Moneda</h1>
-            <select className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md text-gray-300 focus:border-yellow-100">
-              <option selected>SOL</option>
-              <option value="1">DOLAR</option>
-              <option value="2">EURO</option>
+          <div className="bg-zinc-900 p-4 rounded-lg mb-4 col-span-2">
+            <h1 className="text-lg font-semibold text-yellow-100 mb-4">
+              Indique el monto de los Honorarios
+            </h1>
+            <h1 className="text-base font-bold text-gray-400 mb-3">
+              Tipo de Moneda
+            </h1>
+            <select
+              className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+              aria-label="Tipo de Moneda"
+            >
+            <option selected>-- Tipo de cambio --</option>
+              <option value="1">SOL</option>
+              <option value="2">DOLAR</option>
+              <option value="3">EURO</option>
             </select>
-            <input type="text" className="monto w-full mt-4 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" placeholder="Monto total de los honorarios" />
-            <input type="text" className="monto w-full mt-4 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" placeholder="Retención (8%) Impuesto a la Renta" />
-            <input type="text" className="monto w-full mt-4 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" placeholder="Total Neto Recibido" />
+            <div className="h-1"></div>
+            <form action="submit.php" method="post">
+              <label htmlFor="honorarios" className="text-gray-400 font-sans font-bold">
+                Monto total de los honorarios:
+              </label>
+              <input
+                className="monto w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                type="text"
+                placeholder="0.00"
+                aria-label=".form-control-lg example"
+              />
+              <div className="h-1"></div>
+              <label htmlFor="retencion" className="text-gray-400 font-sans font-bold">
+                Retención (8%) Impuesto a la Renta:
+              </label>
+              <input
+                className="monto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                type="text"
+                placeholder="0.00"
+                aria-label=".form-control-lg example"
+                disabled
+              />
+              <label htmlFor="total_net" className="text-gray-400 font-sans font-bold">
+                Total Neto Recibido:
+              </label>
+              <input
+                className="monto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                type="text"
+                placeholder="0.00"
+                aria-label=".form-control-lg example"
+                disabled
+              />
+            </form>
           </div>
 
-          <div className="col-span-2 mt-4">
-            <input type="submit" value="Enviar" className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7" />
-            <input type="submit" value="Cancelar" className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7" />
-          </div>
+          <input
+            type="submit"
+            value="Continuar"
+            className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"
+          />
+          <input
+            type="submit"
+            value="Cancelar"
+            className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7"
+          />
         </form>
       </section>
     </div>

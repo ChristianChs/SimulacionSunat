@@ -279,7 +279,8 @@ function CreditoPage() {
                 </div>
             </form>
           </div>
-
+          <div className="h-3"></div>
+          <div className="grid grid-cols-2 gap-4">
           <input
             type="submit"
             value="Continuar"
@@ -290,6 +291,7 @@ function CreditoPage() {
             value="Cancelar"
             className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7"
           />
+          </div>
         </form>
       </section>
     </div>
