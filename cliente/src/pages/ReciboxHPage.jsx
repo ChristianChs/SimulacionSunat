@@ -101,6 +101,7 @@ function ReciboxHPage() {
             />
             <div className="flex justify-end">
               <input
+                type="button"
                 onClick={onSubmit}
                 value="Validar"
                 className=" bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-6 hover:bg-yellow-200 hover:font-bold hover:px-6" />

@@ -198,8 +198,8 @@ function ContadoPage() {
             />
           </div>
 
-          <input type="submit" value="Enviar" className="bg-primary text-secondary p-2 rounded cursor-pointer" />
-          <input type="submit" value="Cancelar" className="bg-secondary text-primary p-2 rounded cursor-pointer ml-2" />
+          <input type="submit" value="Enviar" className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7" />
+          <input type="submit" value="Cancelar" className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7" />
         </form>
       </div>
     </div>
