@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage'
 import ProtectedRoute from './ProtectedRoute'
 import ReciboxHPage from './pages/ReciboxHPage'
 import MenuPage from './pages/MenuPage'
+import ContadoPage from './pages/ContadoPage'
 import { ReciboxHProvider } from './context/ReciboxHContext'
 
 export default function App() {
@@ -15,10 +16,11 @@ export default function App() {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/login' element={<LoginPage />} />
-            <Route element={<ProtectedRoute />}>
+            {/*<Route element={<ProtectedRoute />}>*/}
               <Route path='menu' element={<MenuPage />} />
               <Route path='rxh' element={<ReciboxHPage />} />
-            </Route>
+              <Route path='cont' element={<ContadoPage />} />
+            {/*</Route>*/}
           </Routes>
         </BrowserRouter>
       </ReciboxHProvider>
