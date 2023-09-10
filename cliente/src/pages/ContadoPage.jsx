@@ -2,137 +2,89 @@ import React from 'react';
 
 function ContadoPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-primary text-secondary">
-      <div className="w-full md:w-2/3 p-8 bg-secondary text-primary rounded-lg shadow-md overflow-y-auto">
-        <h1 className="text-2xl font-bold mb-4">Emisión del Recibo por Honorarios Electrónico</h1>
-        <form action="submit.php" method="post">
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <label className="block mb-2" htmlFor="free">
-              El Servicio se Prestó a Título Gratuito:
-            </label>
-            <input type="radio" id="free" name="free" value="si" className="mr-2" />
-            <label htmlFor="free">SI</label>
-            <input type="radio" id="not_free" name="free" value="no" className="mr-2" />
-            <label htmlFor="not_free">NO</label>
+    <div className="bg-primary min-h-screen flex items-center justify-center">
+      <section className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
+        <h2 className="text-2xl font-bold text-center text-yellow-100 mb-6">
+          Emisión del Recibo por Honorarios Electrónico
+        </h2>
+        <form className="grid grid-cols-2 gap-4">
+          <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
+            <h1 className="text-lg font-semibold text-yellow-100 mb-4">Indique los datos del servicio prestado</h1>
+            <form action="submit.php" method="post">
+              <label htmlFor="free" className="cursor-pointer font-sans font-bold text-gray-400 block">
+                El Servicio se Prestó a Título Gratuito:
+                <input type="radio" id="free" name="free" value="si" className="ml-2" />
+                <span className="ml-2">SI</span>
+                <input type="radio" id="not_free" name="free" value="no" className="ml-2" />
+                <span className="ml-2">NO</span>
+              </label>
+              <label htmlFor="message" className="mt-4 block font-sans font-bold text-gray-400">
+                Descripción o Título de Servicio Prestado:
+                <input id="description" name="description" type="text" aria-label="default input example" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" />
+              </label>
+              <label htmlFor="message" className="mt-4 block font-sans font-bold text-gray-400">
+                Observación (Opcional):
+                <input id="observation" name="observation" type="text" aria-label="default input example" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" />
+              </label>
+              <label htmlFor="date_issue" className="mt-4 block font-sans font-bold text-gray-400">
+                Fecha de Emisión:
+                <input type="date" id="date_issue" name="date_issue" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" />
+              </label>
+              <label htmlFor="date_expiration" className="mt-4 block font-sans font-bold text-gray-400">
+                Fecha de Vencimiento (Opcional):
+                <input type="date" id="date_expiration" name="date_expiration" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" />
+              </label>
+            </form>
           </div>
 
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <label className="block mb-2" htmlFor="description">
-              Descripción o Título de Servicio Prestado:
-            </label>
-            <input
-              id="description"
-              name="description"
-              type="text"
-              aria-label="default input example"
-              className="w-full p-2 border rounded"
-            />
-          </div>
-
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <label className="block mb-2" htmlFor="observation">
-              Observación (Opcional):
-            </label>
-            <input
-              id="observation"
-              name="observation"
-              type="text"
-              aria-label="default input example"
-              className="w-full p-2 border rounded"
-            />
-          </div>
-
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <label className="block mb-2" htmlFor="date_issue">
-              Fecha de Emisión:
-            </label>
-            <input type="date" id="date_issue" name="date_issue" className="w-full p-2 border rounded" />
-          </div>
-
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <label className="block mb-2" htmlFor="date_expiration">
-              Fecha de Vencimiento (Opcional):
-            </label>
-            <input
-              type="date"
-              id="date_expiration"
-              name="date_expiration"
-              className="w-full p-2 border rounded"
-            />
-          </div>
-
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <label className="block mb-2" htmlFor="free">
+          <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
+            <h1 className="text-lg font-semibold text-yellow-100 mb-4">
               Indique el tipo de Renta de Cuarta Categoría, de acuerdo al inciso aplicable del artículo 33 LIR:
-            </label>
-            <input
-              type="radio"
-              id="free"
-              name="free"
-              value="si"
-              className="mr-2"
-            />
-            <label htmlFor="free">
-              Inciso A: El ejercicio individual, de acuerdo profesión, arte, ciencia, oficio o actividades no incluidas expresamente en la tercera categoría
-            </label>
-            <br></br>
-            <input
-              type="radio"
-              id="not_free"
-              name="free"
-              value="no"
-              className="mr-2"
-            />
-            <label htmlFor="not_free">
-              Inciso B: El desempeño de funciones de funciones de director de empresas, síndico, mandatario, gestor de negocios, albacea y actividades similares, incluyendo el desempeño de las funciones del consejero regional, por las cuales perciban dietas
-            </label>
+            </h1>
+            <form action="submit.php" method="post">
+              <label className="cursor-pointer font-sans font-bold text-gray-400 block">
+                <input type="radio" id="free" name="free" value="si" className="ml-2" />
+                <span className="ml-2">
+                  Inciso A: El ejercicio individual, de acuerdo profesión, arte, ciencia, oficio o actividades no incluidas expresamente en la tercera categoría
+                </span>
+              </label>
+              <label className="cursor-pointer font-sans font-bold text-gray-400 block">
+                <input type="radio" id="not_free" name="free" value="no" className="ml-2" />
+                <span className="ml-2">
+                  Inciso B: El desempeño de funciones de funciones de director de empresas, síndico, mandatario, gestor de negocios, albacea y actividades similares, incluyendo el desempeño de las funciones del consejero regional, por las cuales perciban dietas
+                </span>
+              </label>
+            </form>
           </div>
 
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <label className="block mb-2" htmlFor="free">
-              Retención del Impuesto a la Renta:
-            </label>
-            <input
-              type="radio"
-              id="free"
-              name="free"
-              value="si"
-              className="mr-2"
-            />
-            <label htmlFor="free">SI</label>
-            <input
-              type="radio"
-              id="not_free"
-              name="free"
-              value="no"
-              className="mr-2"
-            />
-            <label htmlFor="not_free">NO</label>
+          <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
+            <h1 className="text-lg font-semibold text-yellow-100 mb-4">Retención del Impuesto a la Renta:</h1>
+            <form action="submit.php" method="post">
+              <label className="cursor-pointer font-sans font-bold text-gray-400 block">
+                <input type="radio" id="free" name="free" value="si" className="ml-2" />
+                <span className="ml-2">SI</span>
+              </label>
+              <label className="cursor-pointer font-sans font-bold text-gray-400 block">
+                <input type="radio" id="not_free" name="free" value="no" className="ml-2" />
+                <span className="ml-2">NO</span>
+              </label>
+            </form>
           </div>
 
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <label className="block mb-2" htmlFor="free">
+          <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
+            <h1 className="text-lg font-semibold text-yellow-100 mb-4">
               ¿El pago total del servicio está siendo efectuado al momento de la emisión de este comprobante?
-            </label>
-            <input
-              type="radio"
-              id="free"
-              name="free"
-              value="si"
-              className="mr-2"
-            />
-            <label htmlFor="free">SI</label>
-            <input
-              type="radio"
-              id="not_free"
-              name="free"
-              value="no"
-              className="mr-2"
-            />
-            <label htmlFor="not_free">NO</label>
-          </div>
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <select className="w-full p-2 border rounded mb-4" aria-label="Default select example">
+            </h1>
+            <form action="submit.php" method="post">
+              <label className="cursor-pointer font-sans font-bold text-gray-400 block">
+                <input type="radio" id="free" name="free" value="si" className="ml-2" />
+                <span className="ml-2">SI</span>
+              </label>
+              <label className="cursor-pointer font-sans font-bold text-gray-400 block">
+                <input type="radio" id="not_free" name="free" value="no" className="ml-2" />
+                <span className="ml-2">NO</span>
+              </label>
+              <select className="form-select mt-4 w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md text-gray-300 focus:border-yellow-100">
                 <option selected>-- Seleccione Medio de Pago --</option>
                 <option value="1">Depósito de Cuenta</option>
                 <option value="2">Giro</option>
@@ -147,61 +99,29 @@ function ContadoPage() {
                 <option value="11">Documentos de EDPYMES y Cooperativas de Ahorro y Crédito</option>
                 <option value="12">Tarjeta de Crédito emitida o no en el país por entes ajenos al Sistema F.</option>
                 <option value="13">Tarjetas de Crédito emitidas en el exterior por bancos o F. no domiciliadas</option>
-            </select>
+              </select>
+            </form>
           </div>
 
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <label className="block mb-2" htmlFor="free">
-              Indique el monto de los Honorarios
-            </label>
-            <h1 className="mb-2">Tipo de Moneda</h1>
-            <select className="w-full p-2 border rounded" aria-label="Default select example">
+          <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
+            <h1 className="text-lg font-semibold text-yellow-100 mb-4">Indique el monto de los Honorarios</h1>
+            <h1 className="text-base font-bold text-gray-400 mb-3">Tipo de Moneda</h1>
+            <select className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md text-gray-300 focus:border-yellow-100">
               <option selected>SOL</option>
               <option value="1">DOLAR</option>
               <option value="2">EURO</option>
             </select>
+            <input type="text" className="monto w-full mt-4 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" placeholder="Monto total de los honorarios" />
+            <input type="text" className="monto w-full mt-4 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" placeholder="Retención (8%) Impuesto a la Renta" />
+            <input type="text" className="monto w-full mt-4 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" placeholder="Total Neto Recibido" />
           </div>
 
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <label className="block mb-2" htmlFor="message">
-              Monto total de los honorarios:
-            </label>
-            <input
-              className="w-full p-2 border rounded"
-              type="text"
-              placeholder="0.00"
-              aria-label=".form-control-lg example"
-            />
+          <div className="col-span-2 mt-4">
+            <input type="submit" value="Enviar" className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7" />
+            <input type="submit" value="Cancelar" className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7" />
           </div>
-
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <label className="block mb-2" htmlFor="message">
-              Retención (8%) Impuesto a la Renta:
-            </label>
-            <input
-              className="w-full p-2 border rounded"
-              type="text"
-              placeholder="0.00"
-              aria-label=".form-control-lg example"
-            />
-          </div>
-
-          <div className="mb-4 col-span-2 sm:col-span-1 bg-zinc-900 p-4 rounded-lg">
-            <label className="block mb-2" htmlFor="message">
-              Total Neto Recibido:
-            </label>
-            <input
-              className="w-full p-2 border rounded"
-              type="text"
-              placeholder="0.00"
-              aria-label=".form-control-lg example"
-            />
-          </div>
-
-          <input type="submit" value="Enviar" className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7" />
-          <input type="submit" value="Cancelar" className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7" />
         </form>
-      </div>
+      </section>
     </div>
   );
 }
