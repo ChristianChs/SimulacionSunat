@@ -1,6 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useLogin } from '../context/LoginContext'
+import { useNavigate } from 'react-router-dom'
+import Starts from '../components/Stars'
 
-function ContadoPage() {
+export default function ContadoPage() {
+  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { signin, isAuthenticated, errors: LoginErrors } = useLogin()
+  const navigate = useNavigate()
+  const [selectedOption, setSelectedOption] = useState('4')
+  const [selectedValue, setSelectedValue] = useState({
+    checked: null
+  });
+  
+  const handleRadioChange = e => {
+    setSelectedValue({
+      checked: e.target.value
+    })
+  };
+  const onSubmit = handleSubmit(async (values) => {
+    await signin(values)
+  })
+
+  const onSubmit2 = handleSubmit(async (values) => {
+    await signin(values)
+  })
   return (
     <div className="bg-primary min-h-screen flex items-center justify-center">
       <section className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
@@ -10,29 +34,33 @@ function ContadoPage() {
         <form className="grid grid-cols-2 gap-4">
           <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
             <h1 className="text-lg font-semibold text-yellow-100 mb-4">Indique los datos del servicio prestado</h1>
-            <form action="submit.php" method="post">
+            <form action="submit.php" method="post" onSubmit={onSubmit}>
               <label htmlFor="free" className="text-gray-400 font-sans font-semibold">
                 El Servicio se Prestó a Título Gratuito:
-                <input type="radio" id="free" name="free" value="si" className="ml-2" />
+                <input type="radio" id='free' name="free" value="1" className="ml-2" checked={selectedValue.checked === '1'} onChange={handleRadioChange} />
                 <span className="ml-2 text-gray-400 font-sans font-semibold">SI</span>
-                <input type="radio" id="not_free" name="free" value="no" className="ml-2" />
+                <input type="radio" id="not_free" name="free" value="0" className="ml-2"checked={selectedValue.checked === '0'} onChange={handleRadioChange} />
                 <span className="ml-2 text-gray-400 font-sans font-semibold">NO</span>
               </label>
               <label htmlFor="message" className="mt-4 block text-gray-400 font-sans font-semibold">
                 Descripción o Título de Servicio Prestado:
-                <input id="description" name="description" type="text" aria-label="default input example" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" />
+                <input id="description" name="description" type="text" aria-label="default input example" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" {...register("descripcion_rxh", { required: true })} />
+                { errors.descripcion_rxh && ( <p className='text-red-500'>Llenar el campo</p>)}
               </label>
               <label htmlFor="message" className="mt-4 block text-gray-400 font-sans font-semibold">
                 Observación (Opcional):
-                <input id="observation" name="observation" type="text" aria-label="default input example" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" />
+                <input id="observation" name="observation" type="text" aria-label="default input example" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" {...register("obs_rxh", { required: true })}/>
+                { errors.obs_rxh && ( <p className='text-red-500'>Llenar el campo</p>)}
               </label>
               <label htmlFor="date_issue" className="mt-4 block text-gray-400 font-sans font-semibold">
                 Fecha de Emisión:
-                <input type="date" id="date_issue" name="date_issue" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" />
+                <input type="date" id="date_issue" name="date_issue" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" {...register("fecha_emision", { required: true })}/>
+                { errors.fecha_emision && ( <p className='text-red-500'>Llenar el campo</p>)}
               </label>
               <label htmlFor="date_expiration" className="mt-4 block text-gray-400 font-sans font-semibold">
                 Fecha de Vencimiento (Opcional):
-                <input type="date" id="date_expiration" name="date_expiration" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" />
+                <input type="date" id="date_expiration" name="date_expiration" className="w-full mt-1 border border-gray-900 bg-gray-900 rounded-md py-2 px-3 text-gray-300 focus:border-yellow-100" {...register("fecha_vencimiento", { required: true })}/>
+                { errors.fecha_vencimiento && ( <p className='text-red-500'>Llenar el campo</p>)}
               </label>
             </form>
           </div>
@@ -41,13 +69,15 @@ function ContadoPage() {
             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
               Indique el tipo de Renta de Cuarta Categoría, de acuerdo al inciso aplicable del artículo 33 LIR:
             </h1>
-            <form action="submit.php" method="post">
+            <form action="submit.php" method="post" onSubmit={onSubmit}>
               <input
                 type="radio"
                 id="free"
                 name="free"
-                value="si"
+                value="1"
                 className="mr-2"
+                checked={selectedValue.checked === '1'}
+                onChange={handleRadioChange}
               />
               <label htmlFor="free" className="text-gray-400 font-sans font-semibold">
                 Inciso A: El ejercicio individual, de acuerdo profesión, arte, ciencia, oficio o actividades no incluidas expresamente en la tercera categoría.
@@ -58,8 +88,10 @@ function ContadoPage() {
                 type="radio"
                 id="not_free"
                 name="free"
-                value="no"
+                value="0"
                 className="mr-2"
+                checked={selectedValue.checked === '0'}
+                onChange={handleRadioChange}
               />
               <label htmlFor="not_free" className="text-gray-400 font-sans font-semibold">
                 Inciso B: El desempeño de funciones de funciones de director de empresas, síndico, mandatario, gestor de negocios, albacea y actividades similares, incluyendo el desempeño de las funciones del consejero regional, por las cuales perciban dietas.
@@ -70,13 +102,15 @@ function ContadoPage() {
 
           <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
             <h1 className="text-lg font-semibold text-yellow-100 mb-4">Retención del Impuesto a la Renta:</h1>
-            <form action="submit.php" method="post">
+            <form action="submit.php" method="post" onSubmit={onSubmit}>
               <input
                 type="radio"
                 id="retention_yes"
                 name="retention"
-                value="yes"
+                value="1"
                 className="mr-2"
+                checked={selectedValue.checked === '1'}
+                onChange={handleRadioChange}
               />
               <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                 SI
@@ -87,8 +121,10 @@ function ContadoPage() {
                 type="radio"
                 id="retention_no"
                 name="retention"
-                value="no"
+                value="0"
                 className="mr-2"
+                checked={selectedValue.checked === '0'}
+                onChange={handleRadioChange}
               />
               <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                 NO
@@ -101,13 +137,15 @@ function ContadoPage() {
             <h1 className="text-lg font-sans font-semibold text-yellow-100 mb-4">
               ¿El pago total del servicio está siendo efectuado al momento de la emisión de este comprobante?
             </h1>
-            <form action="submit.php" method="post">
+            <form action="submit.php" method="post" onSubmit={onSubmit}>
               <input
                 type="radio"
                 id="payment_yes"
                 name="payment"
-                value="yes"
+                value="1"
                 className="mr-2"
+                checked={selectedValue.checked === '1'}
+                onChange={handleRadioChange}
               />
               <label htmlFor="payment_yes" className="text-gray-400 font-sans font-semibold">
                 SI
@@ -117,8 +155,10 @@ function ContadoPage() {
                 type="radio"
                 id="payment_no"
                 name="payment"
-                value="no"
+                value="0"
                 className="mr-2"
+                checked={selectedValue.checked === '0'}
+                onChange={handleRadioChange}
               />
               <label htmlFor="payment_no" className="text-gray-400 font-sans font-semibold">
                 NO
@@ -130,19 +170,19 @@ function ContadoPage() {
                 aria-label="Medio de Pago"
               >
                 <option selected>-- Seleccione Medio de Pago --</option>
-                <option value="1">Depósito de Cuenta</option>
-                <option value="2">Giro</option>
-                <option value="3">Transferencia de Fondos</option>
-                <option value="4">Orden de Pago</option>
-                <option value="5">Tarjeta de Débito</option>
-                <option value="6">Tarjeta de Crédito emitida en el país por una empresa del Sistema Financiero</option>
-                <option value="7">Cheques con Claúsula: No negociables - Intransferibles - No a la orden o similar</option>
-                <option value="8">Efectivo - Por operaciones donde no existe obligación de utilizar Medios de Pago</option>
-                <option value="9">Efectivo - en los demás casos</option>
-                <option value="10">Medios de Pago Usados en Comercio Exterior</option>
-                <option value="11">Documentos de EDPYMES y Cooperativas de Ahorro y Crédito</option>
-                <option value="12">Tarjeta de Crédito emitida o no en el país por entes ajenos al Sistema F.</option>
-                <option value="13">Tarjetas de Crédito emitidas en el exterior por bancos o F. no domiciliadas</option>
+                <option value="1"checked={selectedValue.checked === '1'} onChange={handleRadioChange}>Depósito de Cuenta</option>
+                <option value="2" checked={selectedValue.checked === '2'} onChange={handleRadioChange}>Giro</option>
+                <option value="3"checked={selectedValue.checked === '3'} onChange={handleRadioChange}>Transferencia de Fondos</option>
+                <option value="4"checked={selectedValue.checked === '4'} onChange={handleRadioChange}>Orden de Pago</option>
+                <option value="5"checked={selectedValue.checked === '5'} onChange={handleRadioChange}>Tarjeta de Débito</option>
+                <option value="6"checked={selectedValue.checked === '6'} onChange={handleRadioChange}>Tarjeta de Crédito emitida en el país por una empresa del Sistema Financiero</option>
+                <option value="7"checked={selectedValue.checked === '7'} onChange={handleRadioChange}>Cheques con Claúsula: No negociables - Intransferibles - No a la orden o similar</option>
+                <option value="8"checked={selectedValue.checked === '8'} onChange={handleRadioChange}>Efectivo - Por operaciones donde no existe obligación de utilizar Medios de Pago</option>
+                <option value="9"checked={selectedValue.checked === '9'} onChange={handleRadioChange}>Efectivo - en los demás casos</option>
+                <option value="10"checked={selectedValue.checked === '10'} onChange={handleRadioChange}>Medios de Pago Usados en Comercio Exterior</option>
+                <option value="11"checked={selectedValue.checked === '11'} onChange={handleRadioChange}>Documentos de EDPYMES y Cooperativas de Ahorro y Crédito</option>
+                <option value="12"checked={selectedValue.checked === '12'} onChange={handleRadioChange}>Tarjeta de Crédito emitida o no en el país por entes ajenos al Sistema F.</option>
+                <option value="13"checked={selectedValue.checked === '13'} onChange={handleRadioChange}>Tarjetas de Crédito emitidas en el exterior por bancos o F. no domiciliadas</option>
               </select>
             </form>
           </div>
@@ -151,6 +191,7 @@ function ContadoPage() {
             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
               Indique el monto de los Honorarios
             </h1>
+            <form action="submit.php" method="post" onSubmit={onSubmit}>
             <h1 className="text-base font-bold text-gray-400 mb-3">
               Tipo de Moneda
             </h1>
@@ -159,12 +200,11 @@ function ContadoPage() {
               aria-label="Tipo de Moneda"
             >
             <option selected>-- Tipo de cambio --</option>
-              <option value="1">SOL</option>
-              <option value="2">DOLAR</option>
-              <option value="3">EURO</option>
+              <option value="1"checked={selectedValue.checked === '1'} onChange={handleRadioChange}>SOL</option>
+              <option value="2" checked={selectedValue.checked === '2'} onChange={handleRadioChange}>DOLAR</option>
+              <option value="3"checked={selectedValue.checked === '3'} onChange={handleRadioChange}>EURO</option>
             </select>
             <div className="h-1"></div>
-            <form action="submit.php" method="post">
               <label htmlFor="honorarios" className="text-gray-400 font-sans font-bold">
                 Monto total de los honorarios:
               </label>
@@ -173,7 +213,9 @@ function ContadoPage() {
                 type="text"
                 placeholder="0.00"
                 aria-label=".form-control-lg example"
+                {...register("monto_total", { required: true })}
               />
+              { errors.monto_total && ( <p className='text-red-500'>Llenar el campo</p>)}
               <div className="h-1"></div>
               <label htmlFor="retencion" className="text-gray-400 font-sans font-bold">
                 Retención (8%) Impuesto a la Renta:
@@ -213,5 +255,3 @@ function ContadoPage() {
     </div>
   );
 }
-
-export default ContadoPage;
