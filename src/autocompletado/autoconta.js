@@ -10,16 +10,14 @@ function autocontado() {
     document.getElementById('observation').value='-';
     document.getElementById('date_issue').value='2023-09-13';
     document.getElementById('date_expiration').value='2023-12-31';
-    document.getElementById('not-inciso').checked=true;
+    document.getElementById('not_inciso').checked=true;
     document.getElementById('retention_yes').checked=true;
     document.getElementById('payment_yes').checked=true;
-    document.getElementById('monto_total').checked=100;
+    document.getElementById('monto_total').value=100;
     
 
     medioDePagoSelect.dispatchEvent(new Event('change'));
 }
-
-
 
 const input = document.getElementById('monto_total');
 const casillero = document.getElementById('total_neto');

@@ -179,6 +179,7 @@ function CreditoPage() {
                 Monto total de los honorarios:
               </label>
               <input
+                id="monto_total"
                 className="monto w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 type="text"
                 placeholder="0.00"
@@ -189,6 +190,7 @@ function CreditoPage() {
                 Retención (8%) Impuesto a la Renta:
               </label>
               <input
+                id="impuesto"
                 className="monto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 type="text"
                 placeholder="0.00"
@@ -199,6 +201,7 @@ function CreditoPage() {
                 Total Neto Recibido:
               </label>
               <input
+                id="total_neto"
                 className="monto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 type="text"
                 placeholder="0.00"
@@ -217,10 +220,12 @@ function CreditoPage() {
                 Monto Neto Pendiente de Pago:
               </label>
               <input
-                className="monto-neto w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                id="pendiente"
+                className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 type="text"
                 placeholder="0.00"
                 aria-label=".form-control-lg example"
+                disable
               />
             <div className="h-4"></div>
             <div className="bg-zinc-800 p-4 rounded-lg mb-4">
@@ -242,36 +247,40 @@ function CreditoPage() {
               <input
                 className="monto-cuota w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 type="text"
+                id="monto_cuota"
                 placeholder="0.00"
                 aria-label=".form-control-lg example"
               />
               <div className="h-1"></div>
               <div className="flex justify-end">
               <input
+                id="agregar"
                 type="submit"
                 value="Agregar Cuota"
                 className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
                 />
-                </div>
+              </div>
             </div>
               <h1 className="text-gray-400 font-sans font-bold">
                 Máximo podrá agregar hasta 60 Cuotas
               </h1>
               <div className="mx-auto bg-text-zinc-900 p-6 dark:text-white">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
+                <table id="cuotas" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
                     <thead>
                     <tr className="bg-gray-200">
                         <th className="border bg-gray-500 text-gray-300">Modificar</th>
                         <th className="border bg-gray-500 text-gray-300">Eliminar</th>
                         <th className="border bg-zinc-500 text-gray-300">Número Cuota</th>
                         <th className="border bg-zinc-500 text-gray-300">Fecha Vencimiento</th>
+                        <th className="border bg-zinc-500 text-gray-300">Monto Cuota</th>
                     </tr>
                     </thead>
                     <tbody className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
                     <tr>
                         <td >...</td>
                         <td >...</td>
-                        <td>No se han ingresado cuotas</td>
+                        <td>...</td>
+                        <td >...</td>
                         <td >...</td>
                     </tr>
                     </tbody>
