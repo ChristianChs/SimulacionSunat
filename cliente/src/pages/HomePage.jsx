@@ -5,13 +5,10 @@ import Imagen2 from '../assets/images/unjbg.png'
 import Imagen3 from '../assets/images/atencion.png'
 
 function HomePage() {
-  const estilo = {
-    backgroundImage: `url(${Imagen1})`,
-  };
   return (
-    <>
     <div>
-      <div className="container min-h-screen bg-center bg-cover px-28 py-5 relative" style={estilo}>
+      <img className='absolute w-full h-full object-cover mix-blend-overlay' src={Imagen1} alt="" />
+      <div className="container min-h-screen bg-center bg-cover px-28 py-5 relative">
         <nav class="flex items-center">
           <img src={Imagen} class="w-40 cursor-pointer"></img>
           <ul class="flex-1 text-center">
@@ -33,11 +30,11 @@ function HomePage() {
           </div>
 
         </div>
-        <img src={Imagen3} class="w-full xl:w-1/3 xl:absolute bottom-0 right-56"></img>
+        <img src={Imagen3} className="w-full xl:w-1/3 xl:absolute bottom-0 right-56"></img>
 
-      </div>  
+      </div>
     </div>
-    </>
+
   )
 }
 
