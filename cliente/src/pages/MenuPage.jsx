@@ -33,7 +33,7 @@ function MenuPage() {
               <div className="flow-content gap-1 mt-6">
                 <p className="card__name font-bold text-lg">HONORARIOS</p>
                 <p className="card__position text-sm">Recibo de pago</p>
-              </div>e
+              </div>
             </div>
           </a>
           </Link>
