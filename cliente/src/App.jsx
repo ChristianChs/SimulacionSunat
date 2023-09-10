@@ -17,12 +17,12 @@ export default function App() {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/login' element={<LoginPage />} />
-            {/*<Route element={<ProtectedRoute />}>*/}
+            <Route element={<ProtectedRoute />}>
               <Route path='menu' element={<MenuPage />} />
               <Route path='rxh' element={<ReciboxHPage />} />
               <Route path='cont' element={<ContadoPage />} />
               <Route path='cre' element={<CreditoPage/>} />
-            {/*</Route>*/}
+            </Route>
           </Routes>
         </BrowserRouter>
       </ReciboxHProvider>
