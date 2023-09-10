@@ -6,6 +6,7 @@ import ProtectedRoute from './ProtectedRoute'
 import ReciboxHPage from './pages/ReciboxHPage'
 import MenuPage from './pages/MenuPage'
 import ContadoPage from './pages/ContadoPage'
+import CreditoPage from './pages/CreditoPage'
 import { ReciboxHProvider } from './context/ReciboxHContext'
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
               <Route path='menu' element={<MenuPage />} />
               <Route path='rxh' element={<ReciboxHPage />} />
               <Route path='cont' element={<ContadoPage />} />
+              <Route path='cre' element={<CreditoPage/>} />
             {/*</Route>*/}
           </Routes>
         </BrowserRouter>
