@@ -6,7 +6,7 @@ import Imagen3 from '../assets/images/atencion.png';
 
 function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showMenu, setShowMenu] = useState(window.innerWidth >= 1000);
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1200);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -14,11 +14,7 @@ function HomePage() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1000) {
-        setShowMenu(false);
-      } else {
-        setShowMenu(true);
-      }
+      setIsLargeScreen(window.innerWidth >= 1200);
     };
 
     window.addEventListener('resize', handleResize);
@@ -28,13 +24,6 @@ function HomePage() {
     };
   }, []);
 
-  const menuItems = [
-    { label: 'Trámites y Servicios', link: 'https://ww1.sunat.gob.pe/index.html#tramites-y-servicios' },
-    { label: 'Campañas', link: 'https://ww1.sunat.gob.pe/index.html#campanas' },
-    { label: 'Contactos y Redes Sociales', link: 'https://ww1.sunat.gob.pe/index.html#contacto' },
-    { label: 'Información Institucional', link: 'https://ww1.sunat.gob.pe/index.html#informacion-institucional' },
-  ];
-
   return (
     <div>
       <div>
@@ -42,21 +31,27 @@ function HomePage() {
         <div className='container mx-auto px-4 md:px-10 py-5 relative'>
           <nav className='flex items-center justify-between'>
             <img src={Imagen} className='w-32 md:w-40 cursor-pointer' alt='Logo' />
-            {showMenu ? (
-              <ul className={`flex-1 text-center space-x-4 md:space-x-8 ${menuOpen ? 'block' : 'hidden'}`}>
-                {menuItems.map((item, index) => (
-                  <li
-                    key={index}
-                    className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent"
-                  >
-                    <a href={item.link} className='no-underline text-white px-2'>{item.label}</a>
-                  </li>
-                ))}
+            {isLargeScreen ? (
+              <ul className='flex-1 text-center space-x-4 md:space-x-8'>
+                <li className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent">
+                  <a href="https://ww1.sunat.gob.pe/index.html#tramites-y-servicios" className='no-underline text-white px-2'>Trámites y Servicios</a>
+                </li>
+                <li className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent">
+                  <a href="https://ww1.sunat.gob.pe/index.html#campanas" className='no-underline text-white px-2'>Campañas</a>
+                </li>
+                <li className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent">
+                  <a href="https://ww1.sunat.gob.pe/index.html#contacto" className='no-underline text-white px-2'>Contactos y Redes Sociales</a>
+                </li>
+                <li className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent">
+                  <a href="https://ww1.sunat.gob.pe/index.html#informacion-institucional" className='no-underline text-white px-2'>Información Institucional</a>
+                </li>
               </ul>
             ) : (
-              <button onClick={toggleMenu} className={`text-white md:hidden ${menuOpen ? 'open' : ''}`}>
-                ☰ {/* Icono de hamburguesa */}
-              </button>
+              <div className="md:hidden">
+                <button onClick={toggleMenu} className={`text-white ${menuOpen ? 'open' : ''}`}>
+                  ☰ {/* Icono de hamburguesa */}
+                </button>
+              </div>
             )}
             <img src={Imagen2} className='w-10 md:w-14 cursor-pointer' alt='Image 2' />
           </nav>
@@ -80,7 +75,9 @@ function HomePage() {
             </div>
           </div>
           <div>
-            <img src={Imagen3} className='hidden md:block w-1/3 xl:w-1/3 absolute bottom-0 right-0' alt='Image 3' />
+            {isLargeScreen ? (
+              <img src={Imagen3} className='hidden md:block w-1/3 xl:w-1/3 absolute top-20 right-20' alt='Image 3' />
+            ) : null}
           </div>
         </div>
       </div>
