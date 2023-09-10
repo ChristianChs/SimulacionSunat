@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useReciboxH } from '../context/ReciboxHContext';
 
 function ReciboxHPage() {
-  const { consultaRUC,isDestinatario, errors: ValidarRUCErrors } = useReciboxH()
+  const { consultaRUC,isContinue,isDestinatario, errors: ValidarRUCErrors } = useReciboxH()
   const [selectedOption, setSelectedOption] = useState('4');
   const [documentNumber, setDocumentNumber] = useState('')
-  const [isContinue, setIsContinue] = useState(false)
   const [selectedValue, setSelectedValue] = useState({
     checked: null
   });
@@ -23,14 +22,11 @@ function ReciboxHPage() {
     })
   };
 
-  const onSubmit = () => {
+  const onSubmit = async() => {
     if (selectedOption === '4') {
-       consultaRUC(documentNumber)
-       .then(()=>{
-         console.log(isDestinatario)
-       })
+      await consultaRUC(documentNumber)
     }
-
+    
   }
 
   return (
@@ -110,6 +106,7 @@ function ReciboxHPage() {
               type="text"
               className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
               placeholder="Nombre o Razón Social del Usuario"
+              value={ isDestinatario?isDestinatario.razonSocial:''}
               disabled
             />
             {
@@ -118,6 +115,7 @@ function ReciboxHPage() {
                 type="text"
                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 placeholder="Domicilio del Usuario"
+                value={isDestinatario?isDestinatario.direccion===null?'-':isDestinatario.direccion:''}
                 disabled
               />) : null
             }
