@@ -6,7 +6,19 @@ import Starts from '../components/Stars'
 import { useReciboxH } from '../context/ReciboxHContext'
 
 export default function ContadoPage() {
+  React.useEffect(() => {
+    
+const currentDate = new Date();
+currentDate.setDate(currentDate.getDate()-2);
+const formattedDate = currentDate.toISOString().split('T')[0];
+document.getElementById('date_issue').setAttribute('min', formattedDate);
 
+const currentDate1 = new Date();
+currentDate1.setDate(currentDate1.getDate());
+const formattedDate1 = currentDate1.toISOString().split('T')[0];
+document.getElementById('date_expiration').setAttribute('min', formattedDate1);
+
+    }, []);
   const precargado = () => {
     setValue('descripcion_rxh', "TEST 1")
     setValue('fecha_emision', '2023-09-09')
@@ -216,7 +228,7 @@ useEffect(()=>{
           </div>
 
           <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
-            <h1 className="text-lg font-sans font-semibold text-yellow-100 mb-4">
+            <h1 className="text-lg font-semibold text-yellow-100 mb-5">
               ¿El pago total del servicio está siendo efectuado al momento de la emisión de este comprobante?
             </h1>
 
