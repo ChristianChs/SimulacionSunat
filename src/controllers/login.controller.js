@@ -20,14 +20,14 @@ export const login = async (req, res) => {
 }
 
 export const login2 = async (req, res) => {
-    const { ruc, user, password } = req.body;
+    const { nruc, user, password2 } = req.body;
     try {
-        const userFound = await model.findUser2(ruc)
+        const userFound = await model.findUser2(nruc)
         console.log(userFound)
         if (!userFound) return res.status(400).json({ message: "RUC no registrado" })
         const isMatchUser = user === userFound[0].usuario ? true : false
         if (!isMatchUser) return res.status(400).json({ message: "Usuario incorrecto" })
-        const isMatch = password === userFound[0].clave ? true : false
+        const isMatch = password2 === userFound[0].clave ? true : false
         if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" })
         res.json({
             ruc: userFound[0].ruc,

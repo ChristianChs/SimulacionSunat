@@ -94,7 +94,7 @@ function HomePage() {
 
                 <div className='mt-6 md:mt-10'>
                   <a href="/login" className='bg-primary rounded-3xl py-3 px-8 font-medium inline-block mr-4 object-cover border-1 hover:scale-0.75 hover:bg-zinc-900 border-white hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent'>Ingresar</a>
-                  <a href="dsadss">Registrarse <span className='text-lg inline-block rotate-90'>&#10148;</span></a>
+                  <a href="/regis">Registrarse <span className='text-lg inline-block rotate-90'>&#10148;</span></a>
                 </div>
               </div>
             </div>
