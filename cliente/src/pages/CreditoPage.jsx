@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useLogin } from '../context/LoginContext'
+import { useNavigate } from 'react-router-dom'
+import Starts from '../components/Stars'
+import { useReciboxH } from '../context/ReciboxHContext'
 
-function CreditoPage() {
+export default function CreditoPage() {
 let a = 1;
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -469,5 +474,3 @@ function recalcularSuma() {
     </div>
   );
 }
-
-export default CreditoPage;
