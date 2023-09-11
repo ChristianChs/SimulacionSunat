@@ -90,14 +90,12 @@ function insertFila() {
     let col2 = newRow.insertCell(1);
     let col3 = newRow.insertCell(2);
     let col4 = newRow.insertCell(3);
-    let col5 = newRow.insertCell(4);
 
-    col1.innerHTML = "a";
-    col2.innerHTML = "a";
-    col3.innerHTML = a;
+    col1.innerHTML = '<button id="fila'+a+'" onclick="eliminarFila("fila'+a+'") className="text-red-900">x</button>';
+    col2.innerHTML = a;
     a = a + 1;
-    col4.innerHTML = fechaVencimiento;
-    col5.innerHTML = montoCuota;
+    col3.innerHTML = fechaVencimiento;
+    col4.innerHTML = montoCuota;
 
     var table = document.getElementById('cuotas');
 
@@ -106,7 +104,29 @@ function insertFila() {
     var suma = 0;
 
     for (var i = 1; i < rows.length - 1; i++) {
-        var cell = rows[i].getElementsByTagName('td')[4];
+        var cell = rows[i].getElementsByTagName('td')[3];
+        if (cell) {
+            suma += parseFloat(cell.textContent || cell.innerText);
+        }
+    }
+
+    document.getElementById('suma_tabla').textContent = suma;
+}
+
+function eliminarFila(button) {
+    var row = button.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+
+    recalcularSuma();
+}
+
+function recalcularSuma() {
+    var table = document.getElementById('cuotas');
+    var rows = table.getElementsByTagName('tr');
+    var suma = 0;
+
+    for (var i = 1; i < rows.length - 1; i++) {
+        var cell = rows[i].getElementsByTagName('td')[3];
         if (cell) {
             suma += parseFloat(cell.textContent || cell.innerText);
         }

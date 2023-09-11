@@ -1,75 +1,139 @@
 import React from 'react';
 
 function CreditoPage() {
-  React.useEffect(() => {
-    function autocredito() {
-      const medioDePagoSelect = document.querySelector('select[aria-label="Medio de Pago"]');
-      const tipoDeMonedaSelect = document.querySelector('select[aria-label="Tipo de Moneda"]');
-      
-      tipoDeMonedaSelect.value = '1';
-      medioDePagoSelect.value = '1';
 
-      document.getElementById('description').value = 'NOTICIERO DEL CONTADOR S.A.C.';
-      document.getElementById('observation').value = '-';
-      document.getElementById('date_issue').value = '2023-09-13';
-      document.getElementById('not_free').checked = true;
-      document.getElementById('retention_no').checked = true;
-      document.getElementById('payment_yes').checked = true;
+  let a = 1;
 
-      medioDePagoSelect.dispatchEvent(new Event('change'));
-    };
+    function insertarFila() {
+        const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
+        const montoCuota = document.getElementById('monto_cuota').value;
 
+        if (fechaVencimiento.trim() === '' || montoCuota.trim() === '') {
+            alert('Por favor, ingrese un valor en Fecha de Vencimiento y Monto de Cuota.');
+            return;
+        }
+
+        let tblDatos = document.getElementById('cuotas');
+        let newRow = tblDatos.insertRow(tblDatos.rows.length - 1);
+
+        let col1 = newRow.insertCell(0);
+        let col2 = newRow.insertCell(1);
+        let col3 = newRow.insertCell(2);
+        let col4 = newRow.insertCell(3);
+
+        col1.innerHTML = '<button id="fila'+a+'" onclick={eliminarFila("fila'+a+'"} className="text-red-900">x</button>';
+        col2.innerHTML = a;
+        a = a + 1;
+        col3.innerHTML = fechaVencimiento;
+        col4.innerHTML = montoCuota;
+
+        var table = document.getElementById('cuotas');
+
+        var rows = table.getElementsByTagName('tr');
+
+        var suma = 0;
+
+        for (var i = 1; i < rows.length - 1; i++) {
+            var cell = rows[i].getElementsByTagName('td')[3];
+            if (cell) {
+                suma += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('suma_tabla').textContent = suma;
+      }
     
-      const input = document.getElementById('monto_total');
-      const casillero = document.getElementById('total_neto');
-      const porcentaje = document.getElementById('impuesto');
-      const pendiente=document.getElementById('pendiente');
+      function eliminarFila(button) {
+          var row = button.parentNode.parentNode;
+          row.parentNode.removeChild(row);
 
-      input.addEventListener('input', function() {
-          const valorInput = parseFloat(input.value);
-          if (!isNaN(valorInput) || input.value === '')  {
-              if (document.getElementById('retention_no').checked) {
-                  casillero.value = valorInput;
-                  porcentaje.value = 0;
-                  pendiente.value=casillero.value;
-              } else {
-                  porcentaje.value = (valorInput * 0.08).toFixed(2);
-                  casillero.value = valorInput - porcentaje.value;
-                  pendiente.value=casillero.value;
+          recalcularSuma();
+      }
+
+      function recalcularSuma() {
+          var table = document.getElementById('cuotas');
+          var rows = table.getElementsByTagName('tr');
+          var suma = 0;
+
+          for (var i = 1; i < rows.length - 1; i++) {
+              var cell = rows[i].getElementsByTagName('td')[3];
+              if (cell) {
+                  suma += parseFloat(cell.textContent || cell.innerText);
               }
-          } else {
-              alert('Por favor, ingrese un valor numérico válido en el campo de monto total.');
           }
-      });
 
-      const retentionNo = document.getElementById("retention_no");
-
-      const retentionSi = document.getElementById("retention_yes");
-
-      retentionSi.addEventListener("click", function () {
-          const valorInput = parseFloat(input.value);
-        if (this.checked) {
-              porcentaje.value = (valorInput * 0.08).toFixed(2); // Redondear a 2 decimales
-              casillero.value = valorInput - porcentaje.value;
-              pendiente.value=casillero.value;
-        }
-      });
-
-
-      retentionNo.addEventListener("click", function () {
-          const valorInput = parseFloat(input.value);
-        if (this.checked) {
-            porcentaje.value = "0";
-            casillero.value= input.value;
-          pendiente.value=casillero.value;
-        }
-      });
+          document.getElementById('suma_tabla').textContent = suma;
+      }
+      function autocredito() {
+    const medioDePagoSelect = document.querySelector('select[aria-label="Medio de Pago"]');
+    const tipoDeMonedaSelect = document.querySelector('select[aria-label="Tipo de Moneda"]');
     
+    tipoDeMonedaSelect.value = '1';
+    medioDePagoSelect.value = '1';
+
+    document.getElementById('description').value='NOTICIERO DEL CONTADOR S.A.C.';
+    document.getElementById('observation').value='-';
+    document.getElementById('date_issue').value='2023-09-13';
+    document.getElementById('not_free').checked=true;
+    document.getElementById('retention_no').checked=true;
+    document.getElementById('payment_yes').checked=true;
+    
+
+    medioDePagoSelect.dispatchEvent(new Event('change'));
+    }
+  React.useEffect(() => {
+
+
+    const input = document.getElementById('monto_total');
+    const casillero = document.getElementById('total_neto');
+    const porcentaje = document.getElementById('impuesto');
+    const pendiente=document.getElementById('pendiente');
+
+    input.addEventListener('input', function() {
+        const valorInput = parseFloat(input.value);
+        if (!isNaN(valorInput) || input.value === '')  {
+            if (document.getElementById('retention_no').checked) {
+                casillero.value = valorInput;
+                porcentaje.value = 0;
+                pendiente.value=casillero.value;
+            } else {
+                porcentaje.value = (valorInput * 0.08).toFixed(2);
+                casillero.value = valorInput - porcentaje.value;
+                pendiente.value=casillero.value;
+            }
+        } else {
+            alert('Por favor, ingrese un valor numérico válido en el campo de monto total.');
+        }
+    });
+
+    const retentionNo = document.getElementById("retention_no");
+
+    const retentionSi = document.getElementById("retention_yes");
+
+    retentionSi.addEventListener("click", function () {
+        const valorInput = parseFloat(input.value);
+      if (this.checked) {
+            porcentaje.value = (valorInput * 0.08).toFixed(2); // Redondear a 2 decimales
+            casillero.value = valorInput - porcentaje.value;
+            pendiente.value=casillero.value;
+      }
+    });
+
+
+    retentionNo.addEventListener("click", function () {
+        const valorInput = parseFloat(input.value);
+      if (this.checked) {
+          porcentaje.value = "0";
+          casillero.value= input.value;
+        pendiente.value=casillero.value;
+      }
+    });
+ 
   }, []);
   return (
     <div className="bg-primary min-h-screen flex items-center justify-center">
       <section className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
-        <h1 className="text-2xl font-bold text-center text-yellow-100 mb-6">
+        <h1 className="text-2xl font-bold text-center text-yellow-100 mb-6" onClick={autocredito}>
           Emisión del Recibo por Honorarios Electrónico
         </h1>
         <form>
@@ -320,10 +384,11 @@ function CreditoPage() {
               <div className="flex justify-end">
               <input
                 id="agregar"
-                type="submit"
+                type="button"
                 value="Agregar Cuota"
                 className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
-                />
+                onClick={insertarFila}
+              />
               </div>
             </div>
               <h1 className="text-gray-400 font-sans font-bold">
@@ -333,7 +398,6 @@ function CreditoPage() {
                 <table id="cuotas" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
                     <thead>
                     <tr className="bg-gray-200">
-                        <th className="border bg-gray-500 text-gray-300">Modificar</th>
                         <th className="border bg-gray-500 text-gray-300">Eliminar</th>
                         <th className="border bg-zinc-500 text-gray-300">Número Cuota</th>
                         <th className="border bg-zinc-500 text-gray-300">Fecha Vencimiento</th>
@@ -343,7 +407,6 @@ function CreditoPage() {
                     <tbody className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
                     <tr>
                         <td className="bg-zinc-600" >Total</td>
-                        <td ></td>
                         <td></td>
                         <td ></td>
                         <td id="suma_tabla" className="bg-zinc-600">0</td>
