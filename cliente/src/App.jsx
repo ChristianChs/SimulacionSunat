@@ -18,7 +18,7 @@ export default function App() {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/login' element={<LoginPage />} />
-            <Route path='/regis' element={<RegistrarPage/>} />
+            <Route path='/regis' element={<RegistrarPage />} />
             <Route element={<ProtectedRoute />}>
               <Route path='menu' element={<MenuPage />} />
               <Route path='rxh' element={<ReciboxHPage />} />
