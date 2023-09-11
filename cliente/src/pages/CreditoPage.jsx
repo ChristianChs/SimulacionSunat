@@ -38,11 +38,8 @@ function insertarFila() {
     col2.innerHTML = a;
     col3.innerHTML = fechaVencimiento;
     col4.innerHTML = montoCuota;
-
-    // Establecer el atributo personalizado data-id en la fila
     newRow.setAttribute('data-id', id);
 
-    // Agregar un manejador de eventos para eliminar la fila
     col1.firstChild.addEventListener('click', function () {
         eliminarFila(id);
     });
@@ -151,7 +148,7 @@ function recalcularSuma() {
     retentionSi.addEventListener("click", function () {
         const valorInput = parseFloat(input.value);
       if (this.checked) {
-            porcentaje.value = (valorInput * 0.08).toFixed(2); // Redondear a 2 decimales
+            porcentaje.value = (valorInput * 0.08).toFixed(2);
             casillero.value = valorInput - porcentaje.value;
             pendiente.value=casillero.value;
       }
