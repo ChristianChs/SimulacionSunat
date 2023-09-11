@@ -77,13 +77,13 @@ export default function ContadoPage() {
 
   
 
-  const onSubmit = handleSubmit(async (values) => {
+  const onSubmit = handleSubmit((values) => {
     values.serv_prest = selectedServ_prest.checked
     values.inciso = selectedInciso.checked
     values.retencion = selectedRetencion.checked
     values.serv_pago = selectedServ_Pag.checked
     console.log(values)
-    await previewData(values)
+    previewData(values)
   })
 
 useEffect(()=>{

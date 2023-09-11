@@ -22,10 +22,10 @@ function LoginRUC({ signinRUC }) {
               type="text"
               placeholder="Numero de RUC"
               className="form-style w-full text-white px-4 py-2 rounded-md my-2 pl-2 font-sans font-bold" // Añadir pl-2 aquí
-              {...register("ruc", { required: true })}
+              {...register("nruc", { required: true })}
             />
           </div>
-          {errors.ruc && <p className="text-red-500 font-sans">RUC requerido</p>}
+          {errors.nruc && <p className="text-red-500 font-sans">RUC requerido</p>}
           <div className='pt-2'>
             <div className="flex items-center">
               <div className="mr-4">
@@ -49,10 +49,10 @@ function LoginRUC({ signinRUC }) {
                 type="password"
                 placeholder="Contraseña"
                 className="form-style w-full text-white px-4 py-2 rounded-md my-2 pl-2 font-sans font-bold" // Añadir pl-2 aquí
-                {...register("password", { required: true })}
+                {...register("password2", { required: true })}
               />
             </div>
-            {errors.password && <p className="text-red-500 font-sans">Contraseña requerida</p>}
+            {errors.password2 && <p className="text-red-500 font-sans">Contraseña requerida</p>}
           </div>
         </div>
         <button className='bg-yellow-200 hover:bg-yellow-400 text-black font-bold uppercase transition duration-200 ease-in-out px-8 py-2 rounded-lg inline-flex items-center font-sans' type='submit font-sans'>Ingresar</button>

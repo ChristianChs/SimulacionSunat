@@ -15,7 +15,7 @@ export const ReciboxHProvider = ({ children }) => {
     const [isDestinatario, setDestinatario] = useState(null)
     const [isContinue, setIsContinue] = useState(false)
     const [dataRecibo,setDataRecibo] = useState(null)
-
+    const [dataAPI, setDataAPI]= useState(null)
     const consultaRUC = async (ruc) => {
         try {
             const res = await validaRUC(ruc);
@@ -32,16 +32,22 @@ export const ReciboxHProvider = ({ children }) => {
         }
     }
 
-    const previewData = async(data)=>{
+    const previewData = (data)=>{
         console.log("llego",dataRecibo)
         console.log("llego",data)
-        setDataRecibo({
-            ...dataRecibo,
-            data
-        })
-        console.log("sda",dataRecibo)
+        const tmp = {
+            "ruc_dest":dataRecibo.ruc_dest,
+            "form_pago":dataRecibo.form_pago,
+            "tipo_doc_dest":dataRecibo.tipo_doc_dest,
+            "descripcion_rxh":data.descripcion_rxh
+        }
+
+        setDataAPI(tmp);
+        console.log(dataAPI)        
 
     }
+
+    
     useEffect(() => {
         if (errors.length > 0) {
             const timer = setTimeout(() => {

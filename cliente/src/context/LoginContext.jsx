@@ -35,6 +35,7 @@ export const LoginProvider = ({ children }) => {
 
   const signinRUC = async (user) => {
     try {
+      console.log(user)
       const res = await loginRequest2(user)
       console.log(res)
       setUser(res.data)
