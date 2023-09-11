@@ -67,23 +67,50 @@ retentionNo.addEventListener("click", function () {
 
 
 const fechaVencimientoInput = document.getElementById('fecha_vencimiento');
-const montoCuotaInput = document.getElementById('monto_cuota');
 const agregarBtn = document.getElementById('agregar');
 const cuotasTable = document.getElementById('cuotas');
 const totalRow = cuotasTable.insertRow(-1);
 const cuotas = [];
 
-function insertFila(){
-    let tblDatos=document.getElementById('cuotas').insertRow(0);
-    let col1=tblDatos.insertCell(0);
-    let col2=tblDatos.insertCell(1);
-    let col3=tblDatos.insertCell(2);
-    let col4=tblDatos.insertCell(3);
-    let col5=tblDatos.insertCell(4);
+let a = 1;
 
-    col1.innerHTML="hola";
-    col2.innerHTML="a";
-    col3.innerHTML="b";
-    col4.innerHTML="c";
-    col5.innerHTML="d";
+function insertFila() {
+    const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
+    const montoCuota = document.getElementById('monto_cuota').value;
+
+    if (fechaVencimiento.trim() === '' || montoCuota.trim() === '') {
+        alert('Por favor, ingrese un valor en Fecha de Vencimiento y Monto de Cuota.');
+        return;
+    }
+
+    let tblDatos = document.getElementById('cuotas');
+    let newRow = tblDatos.insertRow(tblDatos.rows.length - 1);
+
+    let col1 = newRow.insertCell(0);
+    let col2 = newRow.insertCell(1);
+    let col3 = newRow.insertCell(2);
+    let col4 = newRow.insertCell(3);
+    let col5 = newRow.insertCell(4);
+
+    col1.innerHTML = "a";
+    col2.innerHTML = "a";
+    col3.innerHTML = a;
+    a = a + 1;
+    col4.innerHTML = fechaVencimiento;
+    col5.innerHTML = montoCuota;
+
+    var table = document.getElementById('cuotas');
+
+    var rows = table.getElementsByTagName('tr');
+
+    var suma = 0;
+
+    for (var i = 1; i < rows.length - 1; i++) {
+        var cell = rows[i].getElementsByTagName('td')[4];
+        if (cell) {
+            suma += parseFloat(cell.textContent || cell.innerText);
+        }
+    }
+
+    document.getElementById('suma_tabla').textContent = suma;
 }
