@@ -118,12 +118,15 @@ function recalcularSuma() {
     }
   React.useEffect(() => {
 
-const currentDate = new Date();
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate()-3);
+    const formattedDate = currentDate.toISOString().split('T')[0];
+    document.getElementById('date_issue').setAttribute('min', formattedDate);
 
-currentDate.setDate(currentDate.getDate()-3);
-
-const formattedDate = currentDate.toISOString().split('T')[0];
-document.getElementById('date_issue').setAttribute('min', formattedDate);
+    const currentDate1 = new Date();
+    currentDate1.setDate(currentDate1.getDate()-1);
+    const formattedDate1 = currentDate1.toISOString().split('T')[0];
+    document.getElementById('fecha_vencimiento').setAttribute('min', formattedDate1);
 
     const input = document.getElementById('monto_total');
     const casillero = document.getElementById('total_neto');
