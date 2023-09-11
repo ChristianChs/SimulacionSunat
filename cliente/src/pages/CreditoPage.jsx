@@ -1,69 +1,107 @@
 import React from 'react';
 
 function CreditoPage() {
+let a = 1;
 
-  let a = 1;
-
-    function insertarFila() {
-        const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
-        const montoCuota = document.getElementById('monto_cuota').value;
-
-        if (fechaVencimiento.trim() === '' || montoCuota.trim() === '') {
-            alert('Por favor, ingrese un valor en Fecha de Vencimiento y Monto de Cuota.');
-            return;
+document.addEventListener('DOMContentLoaded', function () {
+    const table = document.getElementById('cuotas');
+    table.addEventListener('click', function (event) {
+        const target = event.target;
+        
+        if (target.tagName === 'TD' && target.cellIndex === 0) {
+            const row = target.parentNode;
+            const id = row.getAttribute('data-id');
+            eliminarFila(id);
         }
+    });
+});
 
-        let tblDatos = document.getElementById('cuotas');
-        let newRow = tblDatos.insertRow(tblDatos.rows.length - 1);
+function insertarFila() {
+    const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
+    const montoCuota = document.getElementById('monto_cuota').value;
 
-        let col1 = newRow.insertCell(0);
-        let col2 = newRow.insertCell(1);
-        let col3 = newRow.insertCell(2);
-        let col4 = newRow.insertCell(3);
+    if (fechaVencimiento.trim() === '' || montoCuota.trim() === '') {
+        alert('Por favor, ingrese un valor en Fecha de Vencimiento y Monto de Cuota.');
+        return;
+    }
 
-        col1.innerHTML = '<button id="fila'+a+'" onclick={eliminarFila("fila'+a+'"} className="text-red-900">x</button>';
-        col2.innerHTML = a;
-        a = a + 1;
-        col3.innerHTML = fechaVencimiento;
-        col4.innerHTML = montoCuota;
+    let tblDatos = document.getElementById('cuotas');
+    let newRow = tblDatos.insertRow(tblDatos.rows.length - 1);
 
-        var table = document.getElementById('cuotas');
+    let col1 = newRow.insertCell(0);
+    let col2 = newRow.insertCell(1);
+    let col3 = newRow.insertCell(2);
+    let col4 = newRow.insertCell(3);
 
-        var rows = table.getElementsByTagName('tr');
+    const id = 'fila' + a;
+    col1.innerHTML = '<button class="text-red-500">x</button>';
+    col2.innerHTML = a;
+    col3.innerHTML = fechaVencimiento;
+    col4.innerHTML = montoCuota;
 
-        var suma = 0;
+    // Establecer el atributo personalizado data-id en la fila
+    newRow.setAttribute('data-id', id);
 
-        for (var i = 1; i < rows.length - 1; i++) {
-            var cell = rows[i].getElementsByTagName('td')[3];
-            if (cell) {
-                suma += parseFloat(cell.textContent || cell.innerText);
-            }
+    // Agregar un manejador de eventos para eliminar la fila
+    col1.firstChild.addEventListener('click', function () {
+        eliminarFila(id);
+    });
+
+    a++;
+
+    var table = document.getElementById('cuotas');
+
+    var rows = table.getElementsByTagName('tr');
+
+    var suma = 0;
+
+    for (var i = 1; i < rows.length - 1; i++) {
+        var cell = rows[i].getElementsByTagName('td')[3];
+        if (cell) {
+            suma += parseFloat(cell.textContent || cell.innerText);
         }
+    }
+    actualizarNumerosConsecutivos();
+    document.getElementById('suma_tabla').textContent = suma;
+}
 
-        document.getElementById('suma_tabla').textContent = suma;
-      }
+function actualizarNumerosConsecutivos() {
+    var table = document.getElementById('cuotas');
+    var rows = table.getElementsByTagName('tr');
     
-      function eliminarFila(button) {
-          var row = button.parentNode.parentNode;
-          row.parentNode.removeChild(row);
+    for (var i = 1; i < rows.length - 1; i++) {
+        var cell = rows[i].getElementsByTagName('td')[1];
+        if (cell) {
+            cell.textContent = i;
+        }
+    }
+}
 
-          recalcularSuma();
-      }
+function eliminarFila(id) {
+    var row = document.querySelector('tr[data-id="' + id + '"]');
+    
+    if (row) {
+        row.parentNode.removeChild(row);
+        recalcularSuma();
+        actualizarNumerosConsecutivos();
+    }
+}
 
-      function recalcularSuma() {
-          var table = document.getElementById('cuotas');
-          var rows = table.getElementsByTagName('tr');
-          var suma = 0;
+function recalcularSuma() {
+    var table = document.getElementById('cuotas');
+    var rows = table.getElementsByTagName('tr');
+    var suma = 0;
 
-          for (var i = 1; i < rows.length - 1; i++) {
-              var cell = rows[i].getElementsByTagName('td')[3];
-              if (cell) {
-                  suma += parseFloat(cell.textContent || cell.innerText);
-              }
-          }
+    for (var i = 1; i < rows.length - 1; i++) {
+        var cell = rows[i].getElementsByTagName('td')[3];
+        if (cell) {
+            suma += parseFloat(cell.textContent || cell.innerText);
+        }
+    }
 
-          document.getElementById('suma_tabla').textContent = suma;
-      }
+    document.getElementById('suma_tabla').textContent = suma;
+}
+
       function autocredito() {
     const medioDePagoSelect = document.querySelector('select[aria-label="Medio de Pago"]');
     const tipoDeMonedaSelect = document.querySelector('select[aria-label="Tipo de Moneda"]');
