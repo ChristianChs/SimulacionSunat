@@ -228,7 +228,7 @@ useEffect(()=>{
           </div>
 
           <div className="col-span-2 bg-zinc-900 p-4 rounded-lg">
-            <h1 className="text-lg font-sans font-semibold text-yellow-100 mb-4">
+            <h1 className="text-lg font-semibold text-yellow-100 mb-5">
               ¿El pago total del servicio está siendo efectuado al momento de la emisión de este comprobante?
             </h1>
 

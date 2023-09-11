@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useLogin } from '../context/LoginContext'
+import { useNavigate } from 'react-router-dom'
+import Starts from '../components/Stars'
+import { useReciboxH } from '../context/ReciboxHContext'
 
-function CreditoPage() {
+export default function CreditoPage() {
 let a = 1;
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -174,6 +179,91 @@ function recalcularSuma() {
     });
  
   }, []);
+
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm()
+  const {previewData} = useReciboxH()
+  const [montoTotal, setMontoTotal] = useState(''); // Estado para "monto_total"
+  const [totalNeto, setTotalNeto] = useState('');
+  const [totalImpuesto, setTotalImpuesto] = useState('');
+
+  const [selectedServ_prest, setSelectedServ_prest] = useState({
+    checked: null
+  });
+  const [selectedInciso, setSelectedInciso] = useState({
+    checked: null
+  });
+  const [selectedRetencion, setSelectedRetencion] = useState({
+    checked: null
+  });
+  const [selectedServ_Pag, setSelectedServ_Pag] = useState({
+    checked: null
+  });
+
+  const handleRadioChange = e => {
+    setSelectedServ_prest({
+      checked: e.target.value
+    })
+  };
+  const handleRadioChange2 = e => {
+    setSelectedInciso({
+      checked: e.target.value
+    })    
+  };
+  const handleRadioChange3 = e => {
+    setSelectedRetencion({
+      checked: e.target.value
+    })
+    if(selectedRetencion.checked==="0"){
+      console.log("wasd")
+      console.log("wasd",montoTotal)
+      if(montoTotal!==''){
+        const retencion = (parseFloat(montoTotal) * 0.08).toFixed(2);
+        setTotalImpuesto(retencion)
+        setTotalNeto(montoTotal-retencion)
+      }
+    }else{
+      setTotalImpuesto('')
+      setTotalNeto(montoTotal)
+    }
+  };
+  const handleRadioChange4 = e => {
+    setSelectedServ_Pag({
+      checked: e.target.value
+    })
+  };
+
+  const handleMontoTotalChange = (event) => {
+    const newValue = event.target.value;
+    setMontoTotal(newValue)
+    setTotalNeto(newValue)    
+  }
+
+  
+
+  const onSubmit = handleSubmit((values) => {
+    values.serv_prest = selectedServ_prest.checked
+    values.inciso = selectedInciso.checked
+    values.retencion = selectedRetencion.checked
+    values.serv_pago = selectedServ_Pag.checked
+    console.log(values)
+    previewData(values)
+  })
+
+useEffect(()=>{
+  setSelectedRetencion({
+    checked:"0"
+  })
+  setSelectedServ_prest({
+    checked:"0"
+  })
+  setSelectedInciso({
+    checked:"1"
+  })
+  setSelectedServ_Pag({
+    checked:"1"
+  })
+},[])
+
   return (
     <div className="bg-primary min-h-screen flex items-center justify-center">
       <section className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
@@ -194,7 +284,7 @@ function recalcularSuma() {
                 name="description"
                 type="text"
                 aria-label="default input example"
-                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"{...register("descripcion_rxh", { required: true })}
               />
               <label htmlFor="observation" className="text-gray-400 font-sans font-semibold">
                 Observación (Opcional):
@@ -204,7 +294,7 @@ function recalcularSuma() {
                 name="observation"
                 type="text"
                 aria-label="default input example"
-                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-bold text-gray-300 focus:border-yellow-100"
+                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-bold text-gray-300 focus:border-yellow-100" {...register("obs_rxh", { required: true })}
               />
               <label htmlFor="date_issue" className="text-gray-400 font-sans font-semibold">
                 Fecha de Emisión:
@@ -213,7 +303,7 @@ function recalcularSuma() {
                 type="date"
                 id="date_issue"
                 name="date_issue"
-                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100" {...register("fecha_emision", { required: true })} 
               />
             </form>
           </div>
@@ -227,8 +317,10 @@ function recalcularSuma() {
                 type="radio"
                 id="free"
                 name="free"
-                value="si"
+                value="1"
                 className="mr-2"
+                checked={selectedInciso.checked === '1'}
+              onChange={handleRadioChange2}
               />
               <label htmlFor="free" className="text-gray-400 font-sans font-semibold">
                 Inciso A: El ejercicio individual, de acuerdo profesión, arte, ciencia, oficio o actividades no incluidas expresamente en la tercera categoría.
@@ -239,8 +331,10 @@ function recalcularSuma() {
                 type="radio"
                 id="not_free"
                 name="free"
-                value="no"
+                value="0"
                 className="mr-2"
+                checked={selectedInciso.checked === '0'}
+              onChange={handleRadioChange2}
               />
               <label htmlFor="not_free" className="text-gray-400 font-sans font-semibold">
                 Inciso B: El desempeño de funciones de funciones de director de empresas, síndico, mandatario, gestor de negocios, albacea y actividades similares, incluyendo el desempeño de las funciones del consejero regional, por las cuales perciban dietas.
@@ -258,8 +352,10 @@ function recalcularSuma() {
                 type="radio"
                 id="retention_yes"
                 name="retention"
-                value="yes"
+                value="1"
                 className="mr-2"
+                checked={selectedRetencion.checked === '1'}
+              onChange={handleRadioChange3}
               />
               <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                 SI
@@ -270,8 +366,10 @@ function recalcularSuma() {
                 type="radio"
                 id="retention_no"
                 name="retention"
-                value="no"
+                value="0"
                 className="mr-2"
+              checked={selectedRetencion.checked === '0'}
+              onChange={handleRadioChange3}
               />
               <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                 NO
@@ -289,8 +387,10 @@ function recalcularSuma() {
                 type="radio"
                 id="payment_yes"
                 name="payment"
-                value="yes"
+                value="1"
                 className="mr-2"
+                checked={selectedServ_Pag.checked === '1'}
+                onChange={handleRadioChange4}
               />
               <label htmlFor="payment_yes" className="text-gray-400 font-sans font-semibold">
                 SI
@@ -300,8 +400,10 @@ function recalcularSuma() {
                 type="radio"
                 id="payment_no"
                 name="payment"
-                value="no"
+                value="0"
                 className="mr-2"
+                checked={selectedServ_Pag.checked === '0'}
+                onChange={handleRadioChange4}
               />
               <label htmlFor="payment_no" className="text-gray-400 font-sans font-semibold">
                 NO
@@ -311,6 +413,7 @@ function recalcularSuma() {
               <select
                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 aria-label="Medio de Pago"
+                {...register("medio_pago")}
               >
                 <option selected>-- Seleccione Medio de Pago --</option>
                 <option value="1">Depósito de Cuenta</option>
@@ -340,6 +443,7 @@ function recalcularSuma() {
             <select
               className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
               aria-label="Tipo de Moneda"
+              {...register("tipo_moneda")}
             >
             <option selected>-- Tipo de cambio --</option>
               <option value="1">SOL</option>
@@ -357,7 +461,9 @@ function recalcularSuma() {
                 type="text"
                 placeholder="0.00"
                 aria-label=".form-control-lg example"
+                onChange={handleMontoTotalChange}
               />
+              {errors.monto_total && (<p className='text-red-500'>Llenar el campo</p>)}
               <div className="h-1"></div>
               <label htmlFor="retencion" className="text-gray-400 font-sans font-bold">
                 Retención (8%) Impuesto a la Renta:
@@ -369,6 +475,7 @@ function recalcularSuma() {
                 placeholder="0.00"
                 aria-label=".form-control-lg example"
                 disabled
+                value={totalImpuesto}
               />
               <label htmlFor="total_net" className="text-gray-400 font-sans font-bold">
                 Total Neto Recibido:
@@ -380,6 +487,7 @@ function recalcularSuma() {
                 placeholder="0.00"
                 aria-label=".form-control-lg example"
                 disabled
+                value={totalNeto}
               />
             </form>
           </div>
@@ -478,5 +586,3 @@ function recalcularSuma() {
     </div>
   );
 }
-
-export default CreditoPage;
