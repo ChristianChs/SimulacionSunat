@@ -6,7 +6,15 @@ import Starts from '../components/Stars'
 import { useReciboxH } from '../context/ReciboxHContext'
 
 export default function ContadoPage() {
+  React.useEffect(() => {
+    
+const currentDate = new Date();
 
+currentDate.setDate(currentDate.getDate()-3);
+
+const formattedDate = currentDate.toISOString().split('T')[0];
+document.getElementById('date_issue').setAttribute('min', formattedDate);
+    }, []);
   const precargado = () => {
     setValue('descripcion_rxh', "TEST 1")
     setValue('fecha_emision', '2023-09-09')

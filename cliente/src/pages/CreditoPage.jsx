@@ -118,6 +118,12 @@ function recalcularSuma() {
     }
   React.useEffect(() => {
 
+const currentDate = new Date();
+
+currentDate.setDate(currentDate.getDate()-3);
+
+const formattedDate = currentDate.toISOString().split('T')[0];
+document.getElementById('date_issue').setAttribute('min', formattedDate);
 
     const input = document.getElementById('monto_total');
     const casillero = document.getElementById('total_neto');
