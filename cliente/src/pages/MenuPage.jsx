@@ -20,9 +20,8 @@ function MenuPage() {
         className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center"
       >
         <li>
-          <a
+          <div
             className="card relative bg-zinc-900 text-primary border rounded-lg overflow-hidden hover:scale-125 hover:border-amber-200 transition-transform w-60 mx-auto block"
-            href="#"
           >
             <div className="card__front p-4 text-center">
               <img
@@ -35,13 +34,12 @@ function MenuPage() {
                 <p className="card__position text-sm text-bold font-mono text-white">En desarrollo</p>
               </div>
             </div>
-          </a>
+          </div>
         </li>
         <li>
           <Link to={'/rxh'}>
-            <a
+            <div
               className="card relative bg-zinc-900 text-primary border rounded-lg overflow-hidden hover:scale-125 hover:border-amber-200 transition-transform w-60 mx-auto block"
-              href="#"
             >
               <div className="card__front p-4 text-center">
                 <img
@@ -54,13 +52,12 @@ function MenuPage() {
                   <p className="card__position text-sm text-bold font-mono text-white">Recibo de pago</p>
                 </div>
               </div>
-            </a>
+            </div>
           </Link>
         </li>
         <li>
-          <a
+          <div
             className="card relative bg-zinc-900 text-primary border rounded-lg overflow-hidden hover:scale-125 hover:border-amber-200 transition-transform w-60 mx-auto block"
-            href="#"
           >
             <div className="card__front p-4 text-center">
               <img
@@ -73,19 +70,16 @@ function MenuPage() {
                 <p className="card__position text-sm text-bold font-mono text-white">En desarrollo</p>
               </div>
             </div>
-          </a>
+          </div>
         </li>
       </ul>
       <div className="flex justify-center mt-4">
-        <a href="/#">
-          <button
-            className="bg-transparent border border-ffeba7 text-ffeba7 hover:bg-ffeba7 hover:text-white hover:border-amber-200 font-bold py-2 px-4 rounded transition-transform transform hover:scale-125 text-bold font-mono"
-            onClick={handleCerrarSesion}
-          >
-            Cerrar Sesión
-          </button>
-        </a>
-        
+        <button
+          className="bg-transparent border border-ffeba7 text-ffeba7 hover:bg-ffeba7 hover:text-white hover:border-amber-200 font-bold py-2 px-4 rounded transition-transform transform hover:scale-125 text-bold font-mono"
+          onClick={handleCerrarSesion}
+        >
+          Cerrar Sesión
+        </button>
       </div>
     </section>
   );
