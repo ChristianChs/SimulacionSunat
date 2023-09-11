@@ -5,6 +5,7 @@ import ExamplePDF from './ExamplePDF'
 function MenuPage() {
   const handleCerrarSesion = () => {
     localStorage.clear();
+    window.location.reload();
   };
 
   return (
