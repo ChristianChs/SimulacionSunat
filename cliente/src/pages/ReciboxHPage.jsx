@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useReciboxH } from '../context/ReciboxHContext';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function ReciboxHPage() {
-  const { consultaRUC,isContinue,isDestinatario, errors: ValidarRUCErrors } = useReciboxH()
+  const navigate = useNavigate()
+  const { consultaRUC,isContinue,isDestinatario, errors: ValidarRUCErrors,setDataRecibo } = useReciboxH()
   const [selectedOption, setSelectedOption] = useState('4');
   const [documentNumber, setDocumentNumber] = useState('')
   const [selectedValue, setSelectedValue] = useState({
@@ -27,8 +28,25 @@ function ReciboxHPage() {
     if (selectedOption === '4') {
       await consultaRUC(documentNumber)
     }
-    
   }
+
+  const onSubmit2 = async()=>{
+    const data = {
+      "ruc_dest":documentNumber,//nro doc
+      "tipo_doc_dest":selectedOption,//ruc dni
+      "form_pago":selectedValue.checked //contado credito
+    }
+    setDataRecibo(data)
+    if(selectedValue.checked==="1"){
+      navigate('/cont')
+    }else{
+      navigate('/cre')
+    }
+  }
+
+  useEffect(()=>{
+    setDataRecibo(null)
+  })
 
   return (
     <div className="bg-primary min-h-screen flex items-center justify-center">
@@ -127,7 +145,7 @@ function ReciboxHPage() {
             
         <div className="flex justify-center mt-6">
           {
-            isContinue ? (<Link to={selectedValue.checked==='1'?'/cont':'/cre'}> <input type="submit" value="Enviar" className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7" /></Link>) : null
+            isContinue ? (<input type="submit" value="Enviar" onClick={onSubmit2} className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7" />) : null
           }
           <input type="submit" value="Cancelar" className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7" />
         </div>
