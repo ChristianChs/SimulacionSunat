@@ -14,6 +14,8 @@ export const ReciboxHProvider = ({ children }) => {
     const [errors, setErrors] = useState([])
     const [isDestinatario, setDestinatario] = useState(null)
     const [isContinue, setIsContinue] = useState(false)
+    const [dataRecibo,setDataRecibo] = useState(null)
+
     const consultaRUC = async (ruc) => {
         try {
             const res = await validaRUC(ruc);
@@ -30,6 +32,16 @@ export const ReciboxHProvider = ({ children }) => {
         }
     }
 
+    const previewData = async(data)=>{
+        console.log("llego",dataRecibo)
+        console.log("llego",data)
+        setDataRecibo({
+            ...dataRecibo,
+            data
+        })
+        console.log("sda",dataRecibo)
+
+    }
     useEffect(() => {
         if (errors.length > 0) {
             const timer = setTimeout(() => {
@@ -43,7 +55,10 @@ export const ReciboxHProvider = ({ children }) => {
             consultaRUC,
             errors,
             isDestinatario,
-            isContinue
+            isContinue,
+            dataRecibo,
+            previewData,
+            setDataRecibo
         }}>
             {children}
         </ReciboxHContext.Provider>
