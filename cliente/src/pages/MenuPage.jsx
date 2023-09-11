@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Stars from '../components/Stars';
-
+import ExamplePDF from './ExamplePDF'
 function MenuPage() {
   const handleCerrarSesion = () => {
     localStorage.clear();
@@ -80,6 +80,7 @@ function MenuPage() {
         >
           Cerrar Sesión
         </button>
+        <ExamplePDF/>
       </div>
     </section>
   );
