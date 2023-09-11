@@ -78,7 +78,7 @@ function ReciboxHPage() {
             </h1>
             {
               ValidarRUCErrors.map((error, i) => (
-                <div className='bg-red-400 text-white' key={i}>
+                <div className='w-full py-2 px-3 border border-red-300 bg-red-600 rounded-md mb-2 font-sans font-semibold text-white focus:border-yellow-100' key={i}>
                   {error}
                 </div>
               ))
@@ -91,6 +91,7 @@ function ReciboxHPage() {
               <option value="6">CED. DIPLOMÁTICA DE IDENTIDAD</option>
             </select>
             <input
+            id="documento_numero"
               onChange={handleDocumentChange}
               type="text"
               className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
