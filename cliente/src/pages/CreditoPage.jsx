@@ -124,12 +124,12 @@ function recalcularSuma() {
   React.useEffect(() => {
 
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate()-3);
+    currentDate.setDate(currentDate.getDate()-2);
     const formattedDate = currentDate.toISOString().split('T')[0];
     document.getElementById('date_issue').setAttribute('min', formattedDate);
 
     const currentDate1 = new Date();
-    currentDate1.setDate(currentDate1.getDate()-1);
+    currentDate1.setDate(currentDate1.getDate());
     const formattedDate1 = currentDate1.toISOString().split('T')[0];
     document.getElementById('fecha_vencimiento').setAttribute('min', formattedDate1);
 
