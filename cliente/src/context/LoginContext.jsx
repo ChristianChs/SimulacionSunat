@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { loginRequest, loginRequest2 } from "../api/login"
+import { loginRequest, loginRequest2, registerRequest } from "../api/login"
 const LoginContext = createContext()
 
 export const useLogin = () => {
@@ -15,6 +15,18 @@ export const LoginProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [errors, setErrors] = useState([])
   const [loading, setLoading] = useState(true)
+
+  const registrar = async (user) => {
+    try {
+      const res = await registerRequest(user)
+      return res
+    } catch (error) {
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data)
+      }
+      setErrors([error.response.data.message])
+    }
+  }
 
   const signin = async (user) => {
     try {
@@ -75,6 +87,7 @@ export const LoginProvider = ({ children }) => {
   return (
     <LoginContext.Provider value={{
       signin,
+      registrar,
       signinRUC,
       isAuthenticated,
       errors,

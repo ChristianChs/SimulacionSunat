@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useLogin } from '../context/LoginContext';
 import { useNavigate } from 'react-router-dom';
-import RegistrarDNI from '../components/RegistrarDNI';
 import Stars from '../components/Stars';
 
 function RegistrarPage() {
+  const { registrar, errors: LoginErrors } = useLogin();
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (values) => {
-    await signin(values);
+    const data= await registrar(values);
+    if(data.status===200){
+      navigate('/login')
+    }
   });
 
   const verificarDNI = async (dni) => {
@@ -73,8 +78,6 @@ function RegistrarPage() {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const navigate = useNavigate();
-
   return (
     <body className="bg-gradient-to-b from-neutral-800 via-neutral-950 to-transparent overflow-hidden h-screen">
       <Stars></Stars>
@@ -121,7 +124,7 @@ function RegistrarPage() {
                             type="text"
                             placeholder="Numero de RUC"
                             className="form-style w-full text-white px-4 py-2 rounded-md my-2 pl-2 font-sans font-bold"
-                            {...register("ruc", { required: true })}
+                            {...register("nruc", { required: true })}
                           />
                         </div>
                         <div className='pt-2'>
@@ -134,7 +137,7 @@ function RegistrarPage() {
                               type="text"
                               placeholder="Usuario"
                               className="form-style w-full text-white px-4 py-2 rounded-md my-2 pl-2 font-sans font-bold"
-                              {...register("usuario", { required: true })}
+                              {...register("user", { required: true })}
                             />
                           </div>
                         </div>
@@ -148,7 +151,7 @@ function RegistrarPage() {
                               type="password"
                               className="form-style w-full text-white px-4 py-2 rounded-md my-2 pl-2 font-sans font-bold"
                               placeholder="Contraseña"
-                              {...register("clave", { required: true })}
+                              {...register("password2", { required: true })}
                             />
                           </div>
                         </div>
