@@ -270,7 +270,7 @@ useEffect(()=>{
     values.serv_pago = selectedServ_Pag.checked;
     console.log(values);
 
-    const data= await registrarContado(values);
+    const data= await registrar(values);
       if(data.status===200){
         navigate('/previewcont')
       }

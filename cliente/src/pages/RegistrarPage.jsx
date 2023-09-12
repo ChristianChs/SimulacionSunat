@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Stars from '../components/Stars';
 
 function RegistrarPage() {
+  
   const { registrar, errors: LoginErrors } = useLogin();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
