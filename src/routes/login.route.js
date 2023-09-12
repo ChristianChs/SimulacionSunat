@@ -7,8 +7,6 @@ router.post('/login',login)
 
 router.post('/login2',login2)
 
-router.post('/register',login)
-
 router.post('/register2',register2)
 
 

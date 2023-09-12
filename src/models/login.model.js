@@ -24,17 +24,6 @@ model.findUser2=async(arg)=>{
     })
 }
 
-model.inUser=async(arg)=>{
-    return sequelize.query(`SELECT * FROM login where dni='${arg}'`,{raw:true})
-    .then(([result,metadata])=>{
-        const data= result.length===0?null:result
-        return data
-    })
-    .catch((error)=>{
-        throw error
-    })
-}
-
 model.indUser2=async(arg)=>{
     const { nruc, user, dni, password2 } = arg;
     console.log(nruc)
