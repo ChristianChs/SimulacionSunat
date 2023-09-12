@@ -46,6 +46,10 @@ function ReciboxHPage() {
     }
   }
 
+  const onSubmit3 = () => {
+    navigate('/menu')
+  };
+
   useEffect(()=>{
     setDataRecibo(null)
   })
@@ -147,9 +151,20 @@ function ReciboxHPage() {
             
         <div className="flex justify-center mt-6">
           {
-            isContinue ? (<input type="submit" value="Enviar" onClick={onSubmit2} className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7" />) : null
+            isContinue ? (
+            <input 
+              type="submit" 
+              value="Enviar" 
+              onClick={onSubmit2} 
+              className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7" 
+            />) : null
           }
-          <input type="submit" value="Cancelar" className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7" />
+          <input 
+            type="submit" 
+            value="Cancelar" 
+            className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7" 
+            onClick={onSubmit3}
+            />
         </div>
       </section>
     </div>

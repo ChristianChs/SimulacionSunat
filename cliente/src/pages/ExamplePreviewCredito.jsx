@@ -1,16 +1,28 @@
 import React, { useState } from 'react'
 import TempletePDF from '../components/TemplatePDF'
-import { PDFViewer } from '@react-pdf/renderer'
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer'
 import { Link } from 'react-router-dom';
 import Stars from '../components/Stars';
 import Modal from '../components/Modal'
 import Imagen1 from '../assets/images/flecha.png';
 import Imagen2 from '../assets/images/pdf.jpg';
 import Imagen3 from '../assets/images/xml.png';
+import { useNavigate } from 'react-router-dom'
+import ExamplePDF from './ExamplePDF';
 
 function ExamplePreviewCredito() {
 
   const [showModal, setShowModal] = useState(false)
+  const navigate=useNavigate();
+
+  const onSubmit = () => {
+    window.location.reload();
+  };
+
+  const handleCerrarSesion = () => {
+    localStorage.clear();
+    navigate('/#')
+  };
 
   return (
     <>
@@ -84,7 +96,14 @@ function ExamplePreviewCredito() {
           </div>
         </li>
         </ul>
-          
+        <div className="flex justify-center mt-4">
+        <button
+          className="bg-transparent border border-ffeba7 text-ffeba7 hover:bg-ffeba7 hover:text-white hover:border-amber-200 font-bold py-2 px-4 rounded transition-transform transform hover:scale-125 text-bold font-mono"
+          onClick={handleCerrarSesion}
+        >
+          Cerrar Sesión
+        </button>
+        </div>
 
       
         <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
@@ -92,8 +111,10 @@ function ExamplePreviewCredito() {
             <TempletePDF />
           </PDFViewer>
           <div className='flex justify-center mt-6'>
-          <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Regresar</button>
-          <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Confirmar </button>
+            <button onClick={onSubmit} className='bg-blue-400 font-semibold text-zinc-900 py-2 px-6 rounded-md mr-8 hover:bg-yellow-200 hover:font-bold hover:px-7 transition-transform transform hover:scale-125 text-bold font-mono'>Regresar</button>
+            <PDFDownloadLink document={<TempletePDF />} fileName='CryReport'>
+                {({ loading }) => (loading ? <button>Loading Document...</button> : <button className='bg-blue-400 font-semibold text-zinc-900 py-2 px-6 rounded-md mr-0 hover:bg-yellow-200 hover:font-bold hover:px-7 transition-transform transform hover:scale-125 text-bold font-mono'>Confirmar </button>)}
+            </PDFDownloadLink>
           </div>
         </Modal>
       </div>
