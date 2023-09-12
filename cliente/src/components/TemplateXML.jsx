@@ -135,7 +135,7 @@ function TempleteXML(data) {
 
           <View style={styles.section}>
             <Text style={[styles.label, { marginLeft: 40 }]}>&lt;tipo_de_inciso&gt;</Text>
-            <Text style={styles.value}>"A"</Text>
+            <Text style={styles.value}>{info.inciso==='1'? "A":"B"}</Text>
             <Text style={styles.label}>&lt;/tipo_de_inciso&gt;</Text>
           </View>
 
