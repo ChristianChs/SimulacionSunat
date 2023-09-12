@@ -38,86 +38,133 @@ function TempleteXML(data) {
   return (
     <Document>
       <Page size='A4' style={styles.page}>
-        <View style={styles.header}>
-
-          <View style={{ marginTop: 10 }}>
-            <Text style={styles.title}>{datareceptor}</Text>
-            <View style={styles.subtitle}>
-              <Text>{datareceptor2}</Text>
-              <Text>Teléfono: {info.dni} </Text>
-            </View>
-          </View>
-          <View style={styles.recuadro}>
-            <View style={styles.section}>
-              <Text style={styles.value}>R. U. C. </Text>
-              <Text style={styles.value}>{info.ruc}</Text>
-            </View>
-            <View style={styles.section}>
-              <Text style={styles.value}>RECIBO POR HONORARIOS ELECTRÓNICOS</Text>
-            </View>
-            <View style={styles.section}>
-              <Text style={styles.value}>Nro. E001 - {info.id} </Text>
-            </View>
-          </View>
-
-        </View>
-
         <View style={{ marginTop: 10 }}>
           <View style={styles.section}>
-            <Text style={styles.label}>Recibi de: </Text>
-            <Text style={styles.value}>{datareceptor3}</Text>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.label}>Identificado con </Text>
-            <Text style={styles.value}>RUC </Text>
-            <Text style={styles.label}>número </Text>
-            <Text style={styles.value}>{info.nrodoc_destinatario}</Text>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.label}>Domiciliado en </Text>
-            <Text style={styles.value}>{datareceptor4}</Text>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.label}>Forma de pago: </Text>
-            <Text style={styles.value}>AL CONTADO</Text>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.label}>La suma de: </Text>
-            <Text style={styles.value}>UN MIL DOSCIENTOS Y 00/100 SOLES</Text>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.label}>Por concepto </Text>
-            <Text style={styles.value}>{info.descripcion_rxh} </Text>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.label}>Observación </Text>
-            <Text style={styles.value}>{info.obs_rxh}</Text>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.label}>Inciso </Text>
-            <Text style={styles.value}>"A" </Text>
-            <Text style={styles.label}>DEL ARTÍCULO 33 DE LA LEY DEL IMPUESTO A LA RENTA</Text>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.label}>Fecha de emisión </Text>
-            <Text style={styles.value}>{info.fecha_emision}</Text>
+            <Text style={styles.label}>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</Text>
           </View>
 
-          <View style={styles.sectionMonto}>
-            <View style={{ ...styles.section, justifyContent: 'space-between' }}>
-              <Text style={{ ...styles.label, textAlign: 'right', flex: 1 / 2, marginRight: 5 }}>Total por honorarios: </Text>
-              <Text style={{ ...styles.label, textAlign: 'left', flex: 1 / 2 }}>{info.monto_total} </Text>
-            </View>
-            <View style={{ ...styles.section, justifyContent: 'space-between' }}>
-              <Text style={{ ...styles.label, textAlign: 'right', flex: 1 / 2, marginRight: 5 }}>Retención (8 %) IR: </Text>
-              <Text style={{ ...styles.label, textAlign: 'left', flex: 1 / 2 }}>({info.retencion_monto})</Text>
-            </View>
-            <View style={{ ...styles.section, justifyContent: 'space-between' }}>
-              <Text style={{ ...styles.label, textAlign: 'right', flex: 1 / 2, marginRight: 5 }}>Total Neto Recibido: </Text>
-              <Text style={{ ...styles.value, textAlign: 'left', flex: 1 / 2 }}> {info.total_neto} SOLES</Text>
-            </View>
+          <View style={styles.section}>
+            <Text style={styles.label}>&lt;recibo_por_honorarios&gt;</Text>
           </View>
-          <View style={styles.linea}></View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;emisor&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;nombre&gt;</Text>
+            <Text style={styles.value}>{datareceptor}</Text>
+            <Text style={styles.label}>&lt;/nombre&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;direccion&gt;</Text>
+            <Text style={styles.value}>{datareceptor2}</Text>
+            <Text style={styles.label}>&lt;/direccion&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;telefono&gt;</Text>
+            <Text style={styles.value}>{datareceptor2}</Text>
+            <Text style={styles.label}>&lt;/telefono&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;ruc&gt;</Text>
+            <Text style={styles.value}>{info.ruc}</Text>
+            <Text style={styles.label}>&lt;/ruc&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;/emisor&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;cliente&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;nombre&gt;</Text>
+            <Text style={styles.value}>{datareceptor3}</Text>
+            <Text style={styles.label}>&lt;/nombre&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;ruc&gt;</Text>
+            <Text style={styles.value}>{info.nrodoc_destinatario}</Text>
+            <Text style={styles.label}>&lt;/ruc&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;direccion&gt;</Text>
+            <Text style={styles.value}>{datareceptor4}</Text>
+            <Text style={styles.label}>&lt;/direccion&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;/cliente&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;transaccion&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;forma_de_pago&gt;</Text>
+            <Text style={styles.value}>AL CONTADO</Text>
+            <Text style={styles.label}>&lt;/forma_de_pago&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;monto_total&gt;</Text>
+            <Text style={styles.value}>MIL DOSCIENTOS Y 00/100 SOLES</Text>
+            <Text style={styles.label}>&lt;/monto_total&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;concepto&gt;</Text>
+            <Text style={styles.value}>{info.descripcion_rxh}</Text>
+            <Text style={styles.label}>&lt;/concepto&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;observacion&gt;</Text>
+            <Text style={styles.value}>{info.obs_rxh}</Text>
+            <Text style={styles.label}>&lt;/observacion&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;tipo_de_inciso&gt;</Text>
+            <Text style={styles.value}>"A"</Text>
+            <Text style={styles.label}>&lt;/tipo_de_inciso&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;fecha&gt;</Text>
+            <Text style={styles.value}>{info.fecha_emision}</Text>
+            <Text style={styles.label}>&lt;/fecha&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;retencion&gt;</Text>
+            <Text style={styles.value}>{info.retencion_monto}</Text>
+            <Text style={styles.label}>&lt;/retencion&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;total_neto&gt;</Text>
+            <Text style={styles.value}>{info.total_neto}</Text>
+            <Text style={styles.label}>&lt;/total_neto&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;/transaccion&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={styles.label}>&lt;/recibo_por_honorarios&gt;</Text>
+          </View>
+
         </View>
       </Page>
     </Document>
@@ -135,11 +182,11 @@ const styles = StyleSheet.create({
     marginBottom: 9
   },
   label: {
-    fontFamily: 'Helvetica-Bold',
+    fontFamily: 'Roboto',
   },
   value: {
     color: '#707070',
-    fontFamily: 'Helvetica'
+    fontFamily: 'Roboto'
   },
   sectionMonto: {
     marginTop: 20,
@@ -147,7 +194,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 12,
     fontWeight: 'bold',
-    fontFamily: 'Helvetica-Bold'
+    fontFamily: 'Roboto'
   },
   subtitle: {
     color: '#707070',

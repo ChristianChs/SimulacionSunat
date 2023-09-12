@@ -83,7 +83,7 @@ function TempletePDF(data) {
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>La suma de: </Text>
-            <Text style={styles.value}>UN MIL DOSCIENTOS Y 00/100 SOLES</Text>
+            <Text style={styles.value}>MIL DOSCIENTOS Y 00/100 SOLES</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>Por concepto </Text>
