@@ -4,6 +4,7 @@ import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 
 function TempleteXML(data) {
   const info=data.data
+  const [resultado, setResultado] = useState("");
   const [datareceptor,setDataReceptor]=useState(null)
   const [datareceptor2,setDataReceptor2]=useState(null)
   const [datareceptor3,setDataReceptor3]=useState(null)
@@ -34,6 +35,71 @@ function TempleteXML(data) {
   }
   getinfoRUCdd(info.nrodoc_destinatario)
   
+  function numeroAtexto(numero) {
+      const unidades = ["", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE"];
+      const decenas = ["", "DIEZ", "VEINTE", "TREINTA", "CUARENTA", "CINCUENTA", "SESENTA", "SETENTA", "OCHENTA", "NOVENTA"];
+      const especiales = ["DIEZ", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "DIECISÉIS", "DIECISIETE", "DIECIOCHO", "DIECINUEVE"];
+      const centenas = ["", "CIENTO", "DOSCIENTOS", "TRESCIENTOS", "CUATROCIENTOS", "QUINIENTOS", "SEISCIENTOS", "SETECIENTOS", "OCHOCIENTOS", "NOVECIENTOS"];
+
+      if (numero >= 0 && numero < 10) {
+        return unidades[numero];
+      } else if (numero >= 10 && numero < 20) {
+        return especiales[numero - 10];
+      } else if (numero >= 20 && numero < 100) {
+        const unidad = numero % 10;
+        const decena = Math.floor(numero / 10);
+        if (unidad === 0) {
+          return decenas[decena];
+        } else {
+          return decenas[decena] + " Y " + unidades[unidad];
+        }
+      } else if (numero >= 100 && numero < 1000) {
+        const centena = Math.floor(numero / 100);
+        const resto = numero % 100;
+        if (resto === 0) {
+          return centenas[centena];
+        } else {
+          return centenas[centena] + " " + numeroAtexto(resto);
+        }
+      } else if (numero < 1000000) {
+        const miles = Math.floor(numero / 1000);
+        const resto = numero % 1000;
+        if (resto === 0) {
+          return numeroAtexto(miles) + " MIL";
+        } else {
+          return numeroAtexto(miles) + " MIL " + numeroAtexto(resto);
+        }
+      } else if (numero < 1000000000) {
+        const millones = Math.floor(numero / 1000000);
+        const resto = numero % 1000000;
+        if (resto === 0) {
+          return numeroAtexto(millones) + " MILLONES";
+        } else {
+          return numeroAtexto(millones) + " MILLONES " + numeroAtexto(resto);
+        }
+      } else {
+        return "Número fuera de rango";
+      }
+    }
+
+function convertirNumeroALetras(numeroInput) {
+  if (!isNaN(numeroInput)) {
+    const numero = parseInt(numeroInput);
+    if (numero >= 0 && numero <= 999999999) {
+      const texto = numeroAtexto(numero);
+      setResultado(texto);
+    } else {
+      setResultado("El número debe estar entre 0 y 999,999,999.");
+    }
+  } else {
+    setResultado("Por favor, ingrese un número válido.");
+  }
+}
+
+
+useEffect(() => {
+  convertirNumeroALetras(info.total_neto); 
+}, []);
 
   return (
     <Document>
@@ -117,8 +183,8 @@ function TempleteXML(data) {
 
           <View style={styles.section}>
             <Text style={[styles.label, { marginLeft: 40 }]}>&lt;monto_total&gt;</Text>
-            <Text style={styles.value}>MIL DOSCIENTOS Y 00/100 SOLES</Text>
-            <Text style={styles.label}>&lt;/monto_total&gt;</Text>
+            <Text style={styles.value}>{resultado}</Text>
+            <Text style={styles.label}> Y 00/100 SOLES&lt;/monto_total&gt;</Text>
           </View>
 
           <View style={styles.section}>
