@@ -87,6 +87,7 @@ function ExamplePreviewContado() {
           <li>
           <div
             className="card relative bg-zinc-900 text-primary border rounded-lg overflow-hidden hover:scale-125 hover:border-amber-200 transition-transform w-60 mx-auto block"
+            onClick={() => {getData()} }
           >
             <div className="card__front p-4 text-center">
               <img

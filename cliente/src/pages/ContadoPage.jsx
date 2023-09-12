@@ -6,6 +6,18 @@ import Starts from '../components/Stars';
 import { useReciboxH } from '../context/ReciboxHContext';
 
 export default function ContadoPage() {
+  React.useEffect(() => {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate()-2);
+    const formattedDate = currentDate.toISOString().split('T')[0];
+    document.getElementById('date_issue').setAttribute('min', formattedDate);
+
+    const currentDate1 = new Date();
+    currentDate1.setDate(currentDate1.getDate());
+    const formattedDate1 = currentDate1.toISOString().split('T')[0];
+    document.getElementById('date_expiration').setAttribute('min', formattedDate1);
+      }, []);
+      
   const { registrarContado, errors: LoginErrors } = useLogin();
   const navigate=useNavigate();
   const { previewData } = useReciboxH();
