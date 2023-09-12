@@ -40,7 +40,7 @@ model.inUser=async(arg)=>{
     console.log(id_medio_pago)
     console.log(id_login)
     console.log(tipo_doc)
-    return sequelize.query(`INSERT INTO login(serv_prestado, descripcion_rxh, obs_rxh, fecha_emision, fecha_vencimiento, inciso_cat, retencion_ir, pago_efectuado, tipo_moneda, monto_total, retencion_monto, total_neto, id_medio_pago, id_login, tipo_doc) VALUES ('${serv_prestado}','${descripcion_rxh}','${obs_rxh}','${fecha_emision}','${fecha_vencimiento}','${inciso_cat}','${retencion_ir}','${pago_efectuado}','${tipo_moneda}','${monto_total}','${retencion_monto}','${total_neto}','${id_medio_pago}','${id_login}','${tipo_doc}')`,{raw:true})
+    return sequelize.query(`INSERT INTO recibohonorario(serv_prestado, descripcion_rxh, obs_rxh, fecha_emision, fecha_vencimiento, inciso_cat, retencion_ir, pago_efectuado, tipo_moneda, monto_total, retencion_monto, total_neto, id_medio_pago, id_login, tipo_doc) VALUES ('${serv_prestado}','${descripcion_rxh}','${obs_rxh}','${fecha_emision}','${fecha_vencimiento}','${inciso_cat}','${retencion_ir}','${pago_efectuado}','${tipo_moneda}','${monto_total}','${retencion_monto}','${total_neto}','${id_medio_pago}','${id_login}','${tipo_doc}')`,{raw:true})
     .then(([result,metadata])=>{
         const data= result.length===0?null:result
         return data

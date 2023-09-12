@@ -28,6 +28,18 @@ export const LoginProvider = ({ children }) => {
     }
   }
 
+  const registrarContado = async (user) => {
+    try {
+      const res = await registerRequest2(user)
+      return res
+    } catch (error) {
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data)
+      }
+      setErrors([error.response.data.message])
+    }
+  }
+
   const signin = async (user) => {
     try {
       const res = await loginRequest(user);
@@ -91,7 +103,8 @@ export const LoginProvider = ({ children }) => {
       signinRUC,
       isAuthenticated,
       errors,
-      loading
+      loading,
+      registrarContado
     }}>
       {children}
     </LoginContext.Provider>
