@@ -5,6 +5,16 @@ import Starts from '../components/Stars';
 import { useLogin } from '../context/LoginContext';
 
 function ReciboxHPage() {
+
+  const verificarDNI = async (dni) => {
+    const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImxzbmY3NzcyMjJAZ21haWwuY29tIn0.nlKDxpLEedcz6cmQRbAz1xVGlrBjwolKc5DvPk5SWJo`;
+    const response = await fetch(apiUrl);
+    return await response.json();
+  };
+
+
+
+
   const navigate = useNavigate()
   const { consultaRUC,isContinue,isDestinatario, errors: ValidarRUCErrors} = useReciboxH()
   const { setDataRecibo} = useLogin()
@@ -30,6 +40,29 @@ function ReciboxHPage() {
   const onSubmit = async() => {
     if (selectedOption === '4') {
       await consultaRUC(documentNumber)
+    }
+    else if(selectedOption==='2'){
+      const dniPattern = /^\d{8}$/;
+      const dni = document.getElementById('documento_numero').value;
+    
+      if (!dniPattern.test(dni)) {
+        console.log('El DNI debe tener exactamente 8 números.');
+        return;
+      }
+      try {
+        const datosDNI = await verificarDNI(dni);
+    
+        if (datosDNI.success === true) {
+          console.log('DNI válido, redirigiendo...');
+          console.log('bien hecho');
+          document.getElementById('nombre_destinatario').value=datosDNI.nombres+" "+datosDNI.apellidoPaterno+" "+datosDNI.apellidoMaterno
+          document.getElementById('domicilio_destinatario').value="No identificado"
+        } else {
+          console.log('El DNI proporcionado no es válido.');
+        }
+      } catch (error) {
+        console.log('Error al conectar con la API o el servidor.');
+      }
     }
   }
 
@@ -132,6 +165,7 @@ function ReciboxHPage() {
                 className=" bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-6 hover:bg-yellow-200 hover:font-bold hover:px-6" />
             </div>
             <input
+              id="nombre_destinatario"
               type="text"
               className="w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
               placeholder="Nombre o Razón Social del Usuario"
@@ -141,6 +175,7 @@ function ReciboxHPage() {
             {
 
               selectedValue.checked === '0' ? (<input
+                id="domicilio_destinatario"
                 type="text"
                 className="w-full py-2 px-3 border border-gray-900 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 placeholder="Domicilio del Usuario"
