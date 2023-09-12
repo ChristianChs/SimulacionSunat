@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import TempletePDF from '../components/TemplatePDF'
+import TempleteXML from '../components/TemplateXML'
 import { PDFViewer } from '@react-pdf/renderer'
 import { Link } from 'react-router-dom';
 import Stars from '../components/Stars';
@@ -16,7 +17,9 @@ function ExamplePreviewContado() {
     window.location.reload();
   };
   
+  const [user2,setUser2]=useState(null)
   const [showModal, setShowModal] = useState(false)
+  const [showModal2, setShowModal2] = useState(false)
   const [user,setUser]=useState(null)
   const getData = async()=>{
     const id_login=JSON.parse(localStorage.getItem('loggindata'))
@@ -26,9 +29,15 @@ function ExamplePreviewContado() {
     /*setUser(datos.data)
     return datos.data*/
   }
-  useEffect(()=>{
 
-  },[])
+  const getData2 = async()=>{
+    const id_login=JSON.parse(localStorage.getItem('loggindata'))
+    const datos=await dataLogRequest({"id_login":id_login.id})
+    setUser2(datos.data)
+    setShowModal2(true)
+    /*setUser(datos.data)
+    return datos.data*/
+  }
 
   return (
     <><Stars className="stars-behind"/>
@@ -87,7 +96,11 @@ function ExamplePreviewContado() {
           <li>
           <div
             className="card relative bg-zinc-900 text-primary border rounded-lg overflow-hidden hover:scale-125 hover:border-amber-200 transition-transform w-60 mx-auto block"
+<<<<<<< HEAD
             onClick={() => {getData()} }
+=======
+            onClick={() => {getData2()} }
+>>>>>>> 9ef3ea46f362c3b2b232fc81ea1d96c16c08b161
           >
             <div className="card__front p-4 text-center">
               <img
@@ -116,6 +129,16 @@ function ExamplePreviewContado() {
         <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
           <PDFViewer style={{ width: '100%', height: '70vh' }}>
             <TempletePDF data={user} />
+          </PDFViewer>
+          <div className='flex justify-center mt-6'>
+          <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Regresar</button>
+          <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Confirmar </button>
+          </div>
+        </Modal>
+
+        <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
+          <PDFViewer style={{ width: '100%', height: '70vh' }}>
+            <TempletePDF data={user2} />
           </PDFViewer>
           <div className='flex justify-center mt-6'>
           <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Regresar</button>
