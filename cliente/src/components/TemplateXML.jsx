@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { validaRUC } from '../api/validarDocs'
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 
 function TempleteXML(data) {

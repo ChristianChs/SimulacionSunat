@@ -74,7 +74,7 @@ function ExamplePreviewContado() {
           </li>
 
           <li className='justify-center'>
-            <Link to={'/cont'}>
+            <Link to={'/rxh'}>
               <div
                 className="card relative bg-zinc-900 text-primary border rounded-lg overflow-hidden hover:scale-125 hover:border-amber-200 transition-transform w-60 mx-auto block"
               >
@@ -128,8 +128,7 @@ function ExamplePreviewContado() {
             <TempletePDF data={user} />
           </PDFViewer>
           <div className='flex justify-center mt-6'>
-          <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Regresar</button>
-          <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Confirmar </button>
+        
           </div>
         </Modal>
 
@@ -138,8 +137,6 @@ function ExamplePreviewContado() {
             <TempleteXML data={user2} />
           </PDFViewer>
           <div className='flex justify-center mt-6'>
-          <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Regresar</button>
-          <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Confirmar </button>
           </div>
         </Modal>
      </section>
