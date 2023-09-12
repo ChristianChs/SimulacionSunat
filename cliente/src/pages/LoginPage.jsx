@@ -48,11 +48,12 @@ export default function LoginPage() {
 
                     <div className="center-wrap">
                       <LoginDNI signin={signin} />
+                      <br></br>
+                      <a href="http://localhost:5173/regis" class="font-sans font-bold underline decoration-solid hover:animate-pulse">Regístrate</a>
                     </div>
 
                   </div>
                   <div className="card-back">
-                    
                     <div className="center-wrap">
                       
                       <LoginRUC signinRUC={signinRUC}/>
