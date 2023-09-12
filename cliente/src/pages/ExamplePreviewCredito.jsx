@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import TempletePDF from '../components/TemplatePDF'
+import TempleteXML from '../components/TemplateXML'
 import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer'
 import { Link } from 'react-router-dom';
 import Stars from '../components/Stars';
