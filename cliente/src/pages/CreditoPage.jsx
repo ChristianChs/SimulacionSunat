@@ -272,9 +272,10 @@ useEffect(()=>{
 
   return (
     <div>
-       <Starts/>
-    <div className="bg-primary min-h-screen flex items-center justify-center ">
-      <section id="div_fundamental" className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
+    <Starts className="stars-behind" />
+    <div className="bg-primary min-h-screen flex items-center justify-center relative">
+      
+      <section id="div_fundamental" className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md relative">
        
         <h1 className="text-2xl font-bold text-center text-yellow-100 mb-6" onClick={autocredito}>
           Emisión del Recibo por Honorarios Electrónico

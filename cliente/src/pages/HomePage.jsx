@@ -25,7 +25,7 @@ function HomePage() {
   }, []);
 
   return (
-    <div>
+    <div className='min-h-screen flex flex-col  justify-start'>
       <div>
         <div className='container mx-auto px-4 md:px-10 py-5 relative'>
           <nav className='flex items-center justify-between'>

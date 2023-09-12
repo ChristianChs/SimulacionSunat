@@ -25,9 +25,9 @@ function ExamplePreviewCredito() {
   };
 
   return (
-    <>
-      <div className='m-10'>
-        <Stars></Stars>
+    <><Stars className="stars-behind"/>
+      <div className='min-h-screen flex flex-col items-center justify-start'>
+        <section className="p-10 mt-8">
         <div className="container mx-auto mb-8 text-center">
           <h1 className="text-6xl md:text-6xl font-bold text-ffeba7 mb-4 animate-pulse shadow-md text-red text-bold font-mono">
             VISTA PREVIA DE RECIBOS POR HONORARIOS
@@ -117,7 +117,9 @@ function ExamplePreviewCredito() {
             </PDFDownloadLink>
           </div>
         </Modal>
+        </section>
       </div>
+      
     </>
   )
 }
