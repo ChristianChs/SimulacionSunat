@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useReciboxH } from '../context/ReciboxHContext';
 import { Link, useNavigate } from 'react-router-dom'
+import { useLogin } from '../context/LoginContext';
 
 function ReciboxHPage() {
   const navigate = useNavigate()
-  const { consultaRUC,isContinue,isDestinatario, errors: ValidarRUCErrors,setDataRecibo } = useReciboxH()
+  const { consultaRUC,isContinue,isDestinatario, errors: ValidarRUCErrors} = useReciboxH()
+  const { setDataRecibo} = useLogin()
   const [selectedOption, setSelectedOption] = useState('4');
   const [documentNumber, setDocumentNumber] = useState('')
   const [selectedValue, setSelectedValue] = useState({

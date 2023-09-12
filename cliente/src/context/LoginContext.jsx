@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { loginRequest, loginRequest2, registerRequest } from "../api/login"
+import { loginRequest, loginRequest2, registerRequest, registerRequest2 } from "../api/login"
 const LoginContext = createContext()
 
 export const useLogin = () => {
@@ -15,6 +15,7 @@ export const LoginProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [errors, setErrors] = useState([])
   const [loading, setLoading] = useState(true)
+  const [dataRecibo,setDataRecibo] = useState(null)
 
   const registrar = async (user) => {
     try {
@@ -30,6 +31,11 @@ export const LoginProvider = ({ children }) => {
 
   const registrarContado = async (user) => {
     try {
+      const id_login=JSON.parse(localStorage.getItem('loggindata'))
+      user.tipo_serv=dataRecibo.form_pago
+      user.nrodoc_destinatario=dataRecibo.ruc_dest
+      user.tipo_doc_destinatario=dataRecibo.tipo_doc_dest
+      user.id_login=id_login.id
       const res = await registerRequest2(user)
       return res
     } catch (error) {
@@ -104,6 +110,7 @@ export const LoginProvider = ({ children }) => {
       isAuthenticated,
       errors,
       loading,
+      setDataRecibo,
       registrarContado
     }}>
       {children}

@@ -6,7 +6,7 @@ import Starts from '../components/Stars';
 import { useReciboxH } from '../context/ReciboxHContext';
 
 export default function ContadoPage() {
-  const { registrar, errors: LoginErrors } = useLogin();
+  const { registrarContado, errors: LoginErrors } = useLogin();
   const navigate=useNavigate();
   const { previewData } = useReciboxH();
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -93,16 +93,19 @@ export default function ContadoPage() {
   };
 
   const onSubmit = handleSubmit(async(values) => {
+    values.totalImpuesto=totalImpuesto;
+    values.totalNeto=totalNeto;
     values.serv_prest = selectedServ_prest.checked;
     values.inciso = selectedInciso.checked;
     values.retencion = selectedRetencion.checked;
     values.serv_pago = selectedServ_Pag.checked;
     console.log(values);
 
-    const data= await registrar(values);
+    const data= await registrarContado(values);
       if(data.status===200){
         navigate('/previewcont')
-  }});
+      }
+  });
 
   return (
     

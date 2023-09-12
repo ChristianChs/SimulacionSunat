@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
+import { validaRUC } from '../api/validarDocs'
 
-function TempletePDF() {
+function TempletePDF(data) {
+  console.log(data.data)
+  const info=data.data
+  const [datareceptor,setDataReceptor]=useState(null)
+  const getinfoRUCrs = async(ruc)=>{
+    const data= await validaRUC(ruc)
+    setDataReceptor(data.data.razonSocial)
+  }
+  getinfoRUCrs(info.nrodoc_destinatario)
   return (
     <Document>
       <Page size='A4' style={styles.page}>
         <View style={styles.header}>
 
           <View style={{ marginTop: 10 }}>
-            <Text style={styles.title}>CHOQUE SURCO CHRISTIAN ALVARO</Text>
+            <Text style={styles.title}>{datareceptor}</Text>
             <View style={styles.subtitle}>
               <Text>MZA. 323 LOTE 20 ASC. EL TRIUNFO TACNA TACNA CIUDAD NUEVA</Text>
               <Text>Teléfono: -</Text>
