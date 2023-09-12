@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useLogin } from '../context/LoginContext';
 import { useNavigate } from 'react-router-dom';
 import RegistrarDNI from '../components/RegistrarDNI';
 import Stars from '../components/Stars';
@@ -49,21 +48,21 @@ function RegistrarPage() {
         if (datosDNI.success === true) {
           console.log('DNI válido, redirigiendo...');
           console.log('bien hecho');
+
+          verificarRUC(ruc)
+            .then((datosRUC) => {
+                if (datosRUC.estado === 'ACTIVO') {
+                console.log('RUC válido, redirigiendo...');
+                console.log('bien hecho');
+                } else {
+                showAlertDanger('El RUC proporcionado no es válido.');
+                }
+            })
+            .catch((error) => {
+                showAlertDanger('Error al conectar con la API o el servidor.');
+            });
         } else {
           showAlertDanger('El DNI proporcionado no es válido.');
-        }
-      })
-      .catch((error) => {
-        showAlertDanger('Error al conectar con la API o el servidor.');
-      });
-
-    verificarRUC(ruc)
-      .then((datosRUC) => {
-        if (datosRUC.estado === 'ACTIVO') {
-          console.log('RUC válido, redirigiendo...');
-          console.log('bien hecho');
-        } else {
-          showAlertDanger('El RUC proporcionado no es válido.');
         }
       })
       .catch((error) => {
@@ -74,7 +73,6 @@ function RegistrarPage() {
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const { signin, signinRUC, isAuthenticated, errors: LoginErrors } = useLogin();
   const navigate = useNavigate();
 
   return (
@@ -96,7 +94,7 @@ function RegistrarPage() {
                   </div>
                 )}
               </div>
-              <div className="card-3d-wrap mx-auto ">
+              <div className="card-3d-wrap mx-auto " id="cambio">
                 <div className="card-3d-wrapper ">
                   <div className="card-front ">
                     <form onSubmit={onSubmit}>
