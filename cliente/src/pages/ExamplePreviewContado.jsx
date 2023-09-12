@@ -13,7 +13,7 @@ function ExamplePreviewContado() {
 
     const handleCerrarSesion = () => {
     localStorage.clear();
-    navigate('/#')
+    window.location.reload();
   };
   
   const [showModal, setShowModal] = useState(false)

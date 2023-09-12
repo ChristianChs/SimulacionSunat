@@ -22,14 +22,14 @@ export default function App() {
             <Route path='/' element={<HomePage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/regis' element={<RegistrarPage />} />
-            <Route path='/previewcont' element={<ExamplePreviewContado />} />
-            <Route path='/previewcre' element={<ExamplePreviewCredito />} />
             <Route element={<ProtectedRoute />}>
               <Route path='menu' element={<MenuPage />} />
               <Route path='rxh' element={<ReciboxHPage />} />
               <Route path='cont' element={<ContadoPage />} />
               <Route path='cre' element={<CreditoPage/>} />
               <Route path='prev' element={<PreviPage />} />
+              <Route path='previewcont' element={<ExamplePreviewContado />} />
+              <Route path='previewcre' element={<ExamplePreviewCredito />} />
             </Route>
           </Routes>
         </BrowserRouter>
