@@ -92,8 +92,8 @@ function ExamplePreviewContado() {
             <TempletePDF />
           </PDFViewer>
           <div className='flex justify-center mt-6'>
-          <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Regresar</button>
-          <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Confirmar </button>
+            <button className='bg-blue-400 font-semibold text-zinc-900 py-2 px-6 rounded-md mr-8 hover:bg-yellow-200 hover:font-bold hover:px-7 transition-transform transform hover:scale-125 text-bold font-mono'>Regresar</button>
+            <button className='bg-blue-400 font-semibold text-zinc-900 py-2 px-6 rounded-md mr-0 hover:bg-yellow-200 hover:font-bold hover:px-7 transition-transform transform hover:scale-125 text-bold font-mono'>Confirmar </button>
           </div>
         </Modal>
       </div>
