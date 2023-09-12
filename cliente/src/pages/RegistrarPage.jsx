@@ -10,6 +10,7 @@ function RegistrarPage() {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (values) => {
+    let b=false;
     const rucPattern = /^\d{11}$/;
     const dniPattern = /^\d{8}$/;
     const dni = document.getElementById('dni_regis').value;
@@ -40,23 +41,30 @@ function RegistrarPage() {
                 if (datosRUC.estado === 'ACTIVO') {
                 console.log('RUC válido, redirigiendo...');
                 console.log('bien hecho');
+                b=true;
                 } else {
                 showAlertDanger('El RUC proporcionado no es válido.');
+                return
                 }
             })
             .catch((error) => {
                 showAlertDanger('Error al conectar con la API o el servidor.');
+                return
             });
         } else {
           showAlertDanger('El DNI proporcionado no es válido.');
+          return
         }
       })
       .catch((error) => {
         showAlertDanger('Error al conectar con la API o el servidor.');
+        return
       });
-    const data= await registrar(values);
-    if(data.status===200){
-      navigate('/login')
+    if(b){
+      const data= await registrar(values);
+      if(data.status===200){
+        navigate('/login')
+      }
     }
   });
 
