@@ -6,6 +6,8 @@ import Starts from '../components/Stars';
 import { useReciboxH } from '../context/ReciboxHContext';
 
 export default function ContadoPage() {
+  const { registrar, errors: LoginErrors } = useLogin();
+  const navigate=useNavigate();
   const { previewData } = useReciboxH();
   const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const [montoTotal, setMontoTotal] = useState('');
@@ -90,16 +92,20 @@ export default function ContadoPage() {
     setValue('tipo_moneda', '2');
   };
 
-  const onSubmit = handleSubmit((values) => {
+  const onSubmit = handleSubmit(async(values) => {
     values.serv_prest = selectedServ_prest.checked;
     values.inciso = selectedInciso.checked;
     values.retencion = selectedRetencion.checked;
     values.serv_pago = selectedServ_Pag.checked;
     console.log(values);
-    previewData(values);
-  });
+
+    const data= await registrar(values);
+      if(data.status===200){
+        navigate('/previewcont')
+  }});
 
   return (
+    
     <div className="bg-primary min-h-screen flex items-center justify-center">
       <section className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
         <h2 className="text-2xl font-bold text-center text-yellow-100 mb-6" onClick={precargado}>
@@ -359,13 +365,12 @@ export default function ContadoPage() {
           <input
             type="submit"
             value="Continuar"
-            href="\previewcont"
+            onClick={onSubmit}
             className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-extrabold hover:px-7 hover:bg-ffeba7 hover:text-zinc-900 hover:border-amber-200"
           />
           <input
             type="submit"
             value="Cancelar"
-            href="\rxh"
             className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-extrabold hover:px-7 hover:bg-ffeba7 hover:text-white hover:border-gray-400"
           />
         </form>
