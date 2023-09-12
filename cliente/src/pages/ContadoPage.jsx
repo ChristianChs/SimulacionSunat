@@ -108,6 +108,11 @@ export default function ContadoPage() {
       }
   });
 
+  const onSubmit1 = () => {
+    navigate('/rxh')
+  };
+
+
   return (
     
     <div className="bg-primary min-h-screen flex items-center justify-center">
@@ -375,6 +380,7 @@ export default function ContadoPage() {
           <input
             type="submit"
             value="Cancelar"
+            onClick={onSubmit1}
             className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-extrabold hover:px-7 hover:bg-ffeba7 hover:text-white hover:border-gray-400"
           />
         </form>
