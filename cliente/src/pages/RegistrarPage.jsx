@@ -10,17 +10,16 @@ function RegistrarPage() {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (values) => {
-    let b=false;
     const rucPattern = /^\d{11}$/;
     const dniPattern = /^\d{8}$/;
     const dni = document.getElementById('dni_regis').value;
     const ruc = document.getElementById('ruc_regis').value;
-
+  
     const showAlertDanger = (msg) => {
       setIsAlertVisible(true);
       setErrorMessage(msg);
     };
-
+  
     if (!dniPattern.test(dni)) {
       showAlertDanger('El DNI debe tener exactamente 8 números.');
       return;
@@ -29,44 +28,40 @@ function RegistrarPage() {
       showAlertDanger('El RUC debe tener exactamente 11 números.');
       return;
     }
-
-    verificarDNI(dni)
-      .then((datosDNI) => {
-        if (datosDNI.success === true) {
-          console.log('DNI válido, redirigiendo...');
-          console.log('bien hecho');
-
-          verificarRUC(ruc)
-            .then((datosRUC) => {
-                if (datosRUC.estado === 'ACTIVO') {
-                console.log('RUC válido, redirigiendo...');
-                console.log('bien hecho');
-                b=true;
-                } else {
-                showAlertDanger('El RUC proporcionado no es válido.');
-                return
-                }
-            })
-            .catch((error) => {
-                showAlertDanger('Error al conectar con la API o el servidor.');
-                return
-            });
-        } else {
-          showAlertDanger('El DNI proporcionado no es válido.');
-          return
+  
+    try {
+      const datosDNI = await verificarDNI(dni);
+  
+      if (datosDNI.success === true) {
+        console.log('DNI válido, redirigiendo...');
+        console.log('bien hecho');
+  
+        try {
+          const datosRUC = await verificarRUC(ruc);
+  
+          if (datosRUC.estado === 'ACTIVO') {
+            console.log('RUC válido, redirigiendo...');
+            console.log('bien hecho');
+  
+            const data = await registrar(values);
+  
+            if (data.status === 200) {
+              navigate('/login');
+            }
+          } else {
+            showAlertDanger('El RUC proporcionado no es válido.');
+          }
+        } catch (error) {
+          showAlertDanger('Error al conectar con la API o el servidor.');
         }
-      })
-      .catch((error) => {
-        showAlertDanger('Error al conectar con la API o el servidor.');
-        return
-      });
-    if(b){
-      const data= await registrar(values);
-      if(data.status===200){
-        navigate('/login')
+      } else {
+        showAlertDanger('El DNI proporcionado no es válido.');
       }
+    } catch (error) {
+      showAlertDanger('Error al conectar con la API o el servidor.');
     }
   });
+  
 
   const verificarDNI = async (dni) => {
     const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InNlYmFzdGlhbmxpbmFyZXMyNDA5QGdtYWlsLmNvbSJ9.-pBXpe7CsILms3WRi5GRieQY2THliDn1gwIweC2Fkco`;

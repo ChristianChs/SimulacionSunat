@@ -39,6 +39,16 @@ export const login2 = async (req, res) => {
     }
 }
 
+export const register = async (req, res) => {
+    try {
+        const userFound = await model.inUser(req.body)
+        console.log("asdjsa",userFound)
+        return res.status(200).json({ message: "Información Recopilada" })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
 export const register2 = async (req, res) => {
     try {
         const userFound = await model.indUser2(req.body)
