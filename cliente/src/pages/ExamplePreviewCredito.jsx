@@ -14,11 +14,9 @@ import ExamplePDF from './ExamplePDF';
 
 function ExamplePreviewCredito() {
 
-  const navigate=useNavigate();
-
   const handleCerrarSesion = () => {
     localStorage.clear();
-    navigate('/#')
+    window.location.reload();
   };
 
   const [user2,setUser2]=useState(null)

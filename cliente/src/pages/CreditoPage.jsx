@@ -201,60 +201,6 @@ function recalcularSuma() {
     checked: null
   });
 
-  const handleRadioChange = e => {
-    setSelectedServ_prest({
-      checked: e.target.value
-    })
-  };
-  const handleRadioChange2 = e => {
-    setSelectedInciso({
-      checked: e.target.value
-    })    
-  };
-  const handleRadioChange3 = e => {
-    setSelectedRetencion({
-      checked: e.target.value
-    })
-    if(selectedRetencion.checked==="0"){
-      console.log("wasd")
-      console.log("wasd",montoTotal)
-      if(montoTotal!==''){
-        const retencion = (parseFloat(montoTotal) * 0.08).toFixed(2);
-        setTotalImpuesto(retencion)
-        setTotalNeto(montoTotal-retencion)
-      }
-    }else{
-      setTotalImpuesto('')
-      setTotalNeto(montoTotal)
-    }
-  };
-  const handleRadioChange4 = e => {
-    setSelectedServ_Pag({
-      checked: e.target.value
-    })
-  };
-
-  const handleMontoTotalChange = (event) => {
-    const newValue = event.target.value;
-    setMontoTotal(newValue)
-    setTotalNeto(newValue)    
-  }
-
-  
-  const onSubmit = handleSubmit(async(values) => {
-    values.serv_prest = selectedServ_prest.checked
-    values.inciso = selectedInciso.checked
-    values.retencion = selectedRetencion.checked
-    values.serv_pago = selectedServ_Pag.checked
-    console.log(values)
-    navigate('/previewcont')
-    previewData(values)
-  });
-
-  const onSubmit1 = () => {
-    navigate('/rxh')
-  };
-
 useEffect(()=>{
   setSelectedRetencion({
     checked:"0"
@@ -269,6 +215,71 @@ useEffect(()=>{
     checked:"1"
   })
 },[])
+
+  const handleRadioChange2 = e => {
+    setSelectedInciso({
+      checked: e.target.value
+    });
+  };
+
+  const handleRadioChange3 = e => {
+    setSelectedRetencion({
+      checked: e.target.value
+    });
+    if (selectedRetencion.checked === "0") {
+      if (montoTotal !== '') {
+        const retencion = (parseFloat(montoTotal) * 0.08).toFixed(2);
+        setTotalImpuesto(retencion);
+        setTotalNeto(montoTotal - retencion);
+      }
+    } else {
+      setTotalImpuesto('');
+      setTotalNeto(montoTotal);
+    }
+  };
+
+  const handleRadioChange4 = e => {
+    setSelectedServ_Pag({
+      checked: e.target.value
+    });
+  };
+
+  const handleMontoTotalChange = (event) => {
+    const newValue = event.target.value;
+    setMontoTotal(newValue);
+    setTotalNeto(newValue);
+  };
+
+  const precargado = () => {
+    setValue('descripcion_rxh', "TEST 1");
+    setValue('fecha_emision', '2023-09-09');
+    setValue('fecha_vencimiento', '2023-09-09');
+    setValue('medio_pago', '2');
+    setValue('monto_total', '1500');
+    setValue('obs_rxh', 'SIN OBS');
+    setValue('tipo_moneda', '2');
+  };
+
+  const onSubmit = handleSubmit(async(values) => {
+    values.montoTotal=montoTotal;
+    values.totalImpuesto=totalImpuesto;
+    values.totalNeto=totalNeto;
+    values.serv_prest = selectedServ_prest.checked;
+    values.inciso = selectedInciso.checked;
+    values.retencion = selectedRetencion.checked;
+    values.serv_pago = selectedServ_Pag.checked;
+    console.log(values);
+
+    const data= await registrarContado(values);
+      if(data.status===200){
+        navigate('/previewcont')
+      }
+  });
+
+  const onSubmit1 = () => {
+    navigate('/rxh')
+  };
+
 
   return (
     <div>
