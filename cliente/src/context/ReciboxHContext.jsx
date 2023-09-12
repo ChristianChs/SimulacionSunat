@@ -14,7 +14,6 @@ export const ReciboxHProvider = ({ children }) => {
     const [errors, setErrors] = useState([])
     const [isDestinatario, setDestinatario] = useState(null)
     const [isContinue, setIsContinue] = useState(false)
-    const [dataRecibo,setDataRecibo] = useState(null)
     const [dataAPI, setDataAPI]= useState(null)
     const consultaRUC = async (ruc) => {
         try {
@@ -32,7 +31,7 @@ export const ReciboxHProvider = ({ children }) => {
         }
     }
 
-    const previewData = (data)=>{
+    /*const previewData = (data)=>{
         console.log("llego",dataRecibo)
         console.log("llego",data)
         const tmp = {
@@ -45,7 +44,7 @@ export const ReciboxHProvider = ({ children }) => {
         setDataAPI(tmp);
         console.log(dataAPI)        
 
-    }
+    }*/
 
     
     useEffect(() => {
@@ -61,10 +60,7 @@ export const ReciboxHProvider = ({ children }) => {
             consultaRUC,
             errors,
             isDestinatario,
-            isContinue,
-            dataRecibo,
-            previewData,
-            setDataRecibo
+            isContinue
         }}>
             {children}
         </ReciboxHContext.Provider>

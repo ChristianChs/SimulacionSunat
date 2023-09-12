@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useReciboxH } from '../context/ReciboxHContext';
 import { Link, useNavigate } from 'react-router-dom'
 import Stars from '../components/Stars';
+import { useLogin } from '../context/LoginContext';
 
 function ReciboxHPage() {
   const navigate = useNavigate()
-  const { consultaRUC,isContinue,isDestinatario, errors: ValidarRUCErrors,setDataRecibo } = useReciboxH()
+  const { consultaRUC,isContinue,isDestinatario, errors: ValidarRUCErrors} = useReciboxH()
+  const { setDataRecibo} = useLogin()
   const [selectedOption, setSelectedOption] = useState('4');
   const [documentNumber, setDocumentNumber] = useState('')
   const [selectedValue, setSelectedValue] = useState({
@@ -44,6 +46,10 @@ function ReciboxHPage() {
       navigate('/cre')
     }
   }
+
+  const onSubmit3 = () => {
+    navigate('/menu')
+  };
 
   useEffect(()=>{
     setDataRecibo(null)
@@ -148,9 +154,20 @@ function ReciboxHPage() {
             
         <div className="flex justify-center mt-6">
           {
-            isContinue ? (<input type="submit" value="Enviar" onClick={onSubmit2} className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7" />) : null
+            isContinue ? (
+            <input 
+              type="submit" 
+              value="Enviar" 
+              onClick={onSubmit2} 
+              className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7" 
+            />) : null
           }
-          <input type="submit" value="Cancelar" className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7" />
+          <input 
+            type="submit" 
+            value="Cancelar" 
+            className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7" 
+            onClick={onSubmit3}
+            />
         </div>
       </section>
     </div>

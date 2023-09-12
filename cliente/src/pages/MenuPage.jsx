@@ -84,7 +84,6 @@ function MenuPage() {
         >
           Cerrar Sesión
         </button>
-        <ExamplePDF/>
       </div>
     </section>
     </div>

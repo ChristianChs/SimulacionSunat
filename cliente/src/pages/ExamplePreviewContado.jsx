@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TempletePDF from '../components/TemplatePDF'
 import { PDFViewer } from '@react-pdf/renderer'
 import { Link } from 'react-router-dom';
@@ -7,10 +7,24 @@ import Modal from '../components/Modal'
 import Imagen1 from '../assets/images/flecha.png';
 import Imagen2 from '../assets/images/pdf.jpg';
 import Imagen3 from '../assets/images/xml.png';
+import { dataRequest } from '../api/login';
 
 function ExamplePreviewContado() {
 
   const [showModal, setShowModal] = useState(false)
+  const [user,setUser]=useState(null)
+  const getData = async()=>{
+    const id_login=JSON.parse(localStorage.getItem('loggindata'))
+    const datos=await dataRequest({"id_login":id_login.id})
+    setUser(datos.data)
+    console.log(user)
+    setShowModal(true)
+    /*setUser(datos.data)
+    return datos.data*/
+  }
+  useEffect(()=>{
+
+  },[])
 
   return (
     <>
@@ -30,7 +44,7 @@ function ExamplePreviewContado() {
           <li className='justify-center'>
             <div
               className="card relative bg-zinc-900 text-primary border rounded-lg overflow-hidden hover:scale-125 hover:border-amber-200 transition-transform w-60 mx-auto block"
-              onClick={() => setShowModal(true)}
+              onClick={() => getData()}
             >
               <div className="card__front p-4 text-center">
                 <img
@@ -85,11 +99,9 @@ function ExamplePreviewContado() {
         </li>
         </ul>
           
-
-      
         <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
           <PDFViewer style={{ width: '100%', height: '70vh' }}>
-            <TempletePDF />
+            <TempletePDF data={user} />
           </PDFViewer>
           <div className='flex justify-center mt-6'>
           <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Regresar</button>
