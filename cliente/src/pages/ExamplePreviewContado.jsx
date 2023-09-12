@@ -7,17 +7,13 @@ import Modal from '../components/Modal'
 import Imagen1 from '../assets/images/flecha.png';
 import Imagen2 from '../assets/images/pdf.jpg';
 import Imagen3 from '../assets/images/xml.png';
-<<<<<<< HEAD
 import { dataRequest } from '../api/login';
-=======
 import { useNavigate } from 'react-router-dom'
 import ExamplePDF from './ExamplePDF';
->>>>>>> 273de2e9034582862996c820c2549e9f2d5a0ce4
 
 function ExamplePreviewContado() {
 
   const [showModal, setShowModal] = useState(false)
-<<<<<<< HEAD
   const [user,setUser]=useState(null)
   const getData = async()=>{
     const id_login=JSON.parse(localStorage.getItem('loggindata'))
@@ -31,7 +27,6 @@ function ExamplePreviewContado() {
   useEffect(()=>{
 
   },[])
-=======
   const navigate=useNavigate();
 
   const onSubmit = () => {
@@ -42,7 +37,6 @@ function ExamplePreviewContado() {
     localStorage.clear();
     navigate('/#')
   };
->>>>>>> 273de2e9034582862996c820c2549e9f2d5a0ce4
 
   return (
     <>
@@ -116,9 +110,7 @@ function ExamplePreviewContado() {
           </div>
         </li>
         </ul>
-<<<<<<< HEAD
           
-=======
         <div className="flex justify-center mt-4">
         <button
           className="bg-transparent border border-ffeba7 text-ffeba7 hover:bg-ffeba7 hover:text-white hover:border-amber-200 font-bold py-2 px-4 rounded transition-transform transform hover:scale-125 text-bold font-mono"
@@ -129,7 +121,6 @@ function ExamplePreviewContado() {
         </div>
 
       
->>>>>>> 273de2e9034582862996c820c2549e9f2d5a0ce4
         <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
           <PDFViewer style={{ width: '100%', height: '70vh' }}>
             <TempletePDF data={user} />
