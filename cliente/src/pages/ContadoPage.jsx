@@ -6,18 +6,6 @@ import Starts from '../components/Stars';
 import { useReciboxH } from '../context/ReciboxHContext';
 
 export default function ContadoPage() {
-React.useEffect(() => {
-    const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate()-2);
-    const formattedDate = currentDate.toISOString().split('T')[0];
-    document.getElementById('date_issue').setAttribute('min', formattedDate);
-
-    const currentDate1 = new Date();
-    currentDate1.setDate(currentDate1.getDate());
-    const formattedDate1 = currentDate1.toISOString().split('T')[0];
-    document.getElementById('date_expiration').setAttribute('min', formattedDate1);
-      }, []);
-
   const { registrarContado, errors: LoginErrors } = useLogin();
   const navigate=useNavigate();
   const { previewData } = useReciboxH();
@@ -105,6 +93,7 @@ React.useEffect(() => {
   };
 
   const onSubmit = handleSubmit(async(values) => {
+    values.montoTotal=montoTotal;
     values.totalImpuesto=totalImpuesto;
     values.totalNeto=totalNeto;
     values.serv_prest = selectedServ_prest.checked;
@@ -120,11 +109,10 @@ React.useEffect(() => {
   });
 
   return (
-    <div>
-    <Starts className="stars-behind" />
-    <div className="bg-primary min-h-screen flex items-center justify-center relative">
+    
+    <div className="bg-primary min-h-screen flex items-center justify-center">
       <section className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
-        <h2 className="text-2xl font-bold text-center text-yellow-100 mb-6" >
+        <h2 className="text-2xl font-bold text-center text-yellow-100 mb-6" onClick={precargado}>
           Emisión del Recibo por Honorarios Electrónico
         </h2>
         <form className="grid grid-cols-2 gap-4" onSubmit={onSubmit}>
@@ -391,7 +379,6 @@ React.useEffect(() => {
           />
         </form>
       </section>
-    </div>
     </div>
   );
 }

@@ -33,9 +33,7 @@ function TempletePDF(data) {
     setDataReceptor4(data.data.direccion)
   }
   getinfoRUCdd(info.nrodoc_destinatario)
-  
-  var fechaCadena = info.fecha_emision;
-  var fecha = new Date(fechaCadena);
+
   
 
   return (
@@ -103,7 +101,7 @@ function TempletePDF(data) {
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>Fecha de emisión </Text>
-            <Text style={styles.value}>{fecha}</Text>
+            <Text style={styles.value}>{info.fecha_emision}</Text>
           </View>
 
           <View style={styles.sectionMonto}>
