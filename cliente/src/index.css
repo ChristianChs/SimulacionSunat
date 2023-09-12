@@ -114,6 +114,18 @@ display: none;
   perspective: 800px;
   margin-top: 60px;
 }
+
+#cambio{
+  position: relative;
+  width: 440px;
+  max-width: 100%;
+  height: 440px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  margin-top: 60px;
+}
+
 .card-3d-wrapper {
   width: 100%;
   height: 100%;

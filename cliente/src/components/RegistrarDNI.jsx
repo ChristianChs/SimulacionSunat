@@ -63,7 +63,6 @@ function RegistrarDNI({ signin }) {
             .catch((error) => {
                 showAlertDanger('alert-container', 'Error al conectar con la API o el servidor.');
             })    
-
     };
 
 const showAlertDanger = (id, msg) => {
@@ -135,7 +134,7 @@ const showAlertDanger = (id, msg) => {
                         </div>
                         
                     </div>
-                    <button id="regis_boton" type='submit' className='bg-yellow-200 hover:bg-yellow-400 text-black font-bold uppercase transition duration-200 ease-in-out px-8 py-2 rounded-lg inline-flex items-center font-sans' onClick={identificarse}>Registrar</button>
+                    <button id="regis_boton" type='submit' href="/login" className='bg-yellow-200 hover:bg-yellow-400 text-black font-bold uppercase transition duration-200 ease-in-out px-8 py-2 rounded-lg inline-flex items-center font-sans' onClick={identificarse}>Registrar</button>
                 
             </div>
         </form>
