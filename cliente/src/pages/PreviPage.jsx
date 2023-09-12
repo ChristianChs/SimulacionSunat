@@ -1,6 +1,6 @@
 import React from 'react';
 import ExamplePDF from './ExamplePDF'
-import ExamplePreview from './ExamplePreview';
+import ExamplePreviewContado from './ExamplePreviewContado';
 
 function PreviPage() {
     return(
@@ -87,7 +87,7 @@ function PreviPage() {
       </div>
       </div>
       <center>
-        <ExamplePreview/>
+        <ExamplePreviewContado/>
         <ExamplePDF/>
         <button className='bg-red-900 hover:bg-red-500 text-white font-bold p-2'>Cancelar</button>
       </center>

@@ -10,7 +10,8 @@ import CreditoPage from './pages/CreditoPage'
 import RegistrarPage from './pages/RegistrarPage'
 import PreviPage from './pages/PreviPage'
 import { ReciboxHProvider } from './context/ReciboxHContext'
-import ExamplePreview from './pages/ExamplePreview'
+import ExamplePreviewContado from './pages/ExamplePreviewContado'
+import ExamplePreviewCredito from './pages/ExamplePreviewCredito'
 
 export default function App() {
   return (
@@ -21,7 +22,8 @@ export default function App() {
             <Route path='/' element={<HomePage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/regis' element={<RegistrarPage />} />
-            <Route path='/preview' element={<ExamplePreview />} />
+            <Route path='/previewcont' element={<ExamplePreviewContado />} />
+            <Route path='/previewcre' element={<ExamplePreviewCredito />} />
             <Route element={<ProtectedRoute />}>
               <Route path='menu' element={<MenuPage />} />
               <Route path='rxh' element={<ReciboxHPage />} />
