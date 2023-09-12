@@ -10,25 +10,6 @@ function RegistrarPage() {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (values) => {
-    const data= await registrar(values);
-    if(data.status===200){
-      navigate('/login')
-    }
-  });
-
-  const verificarDNI = async (dni) => {
-    const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InNlYmFzdGlhbmxpbmFyZXMyNDA5QGdtYWlsLmNvbSJ9.-pBXpe7CsILms3WRi5GRieQY2THliDn1gwIweC2Fkco`;
-    const response = await fetch(apiUrl);
-    return await response.json();
-  };
-
-  const verificarRUC = async (ruc) => {
-    const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InNlYmFzdGlhbmxpbmFyZXMyNDA5QGdtYWlsLmNvbSJ9.-pBXpe7CsILms3WRi5GRieQY2THliDn1gwIweC2Fkco`;
-    const response = await fetch(apiUrl);
-    return await response.json();
-  };
-
-  const identificarse = () => {
     const rucPattern = /^\d{11}$/;
     const dniPattern = /^\d{8}$/;
     const dni = document.getElementById('dni_regis').value;
@@ -73,6 +54,22 @@ function RegistrarPage() {
       .catch((error) => {
         showAlertDanger('Error al conectar con la API o el servidor.');
       });
+    const data= await registrar(values);
+    if(data.status===200){
+      navigate('/login')
+    }
+  });
+
+  const verificarDNI = async (dni) => {
+    const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InNlYmFzdGlhbmxpbmFyZXMyNDA5QGdtYWlsLmNvbSJ9.-pBXpe7CsILms3WRi5GRieQY2THliDn1gwIweC2Fkco`;
+    const response = await fetch(apiUrl);
+    return await response.json();
+  };
+
+  const verificarRUC = async (ruc) => {
+    const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InNlYmFzdGlhbmxpbmFyZXMyNDA5QGdtYWlsLmNvbSJ9.-pBXpe7CsILms3WRi5GRieQY2THliDn1gwIweC2Fkco`;
+    const response = await fetch(apiUrl);
+    return await response.json();
   };
 
   const [isAlertVisible, setIsAlertVisible] = useState(false);
@@ -155,7 +152,7 @@ function RegistrarPage() {
                             />
                           </div>
                         </div>
-                        <button id="regis_boton" type='submit' className='bg-yellow-200 hover:bg-yellow-400 text-black font-bold uppercase transition duration-200 ease-in-out px-8 py-2 rounded-lg inline-flex items-center font-sans' onClick={identificarse}>Registrar</button>
+                        <button id="regis_boton" type='submit' className='bg-yellow-200 hover:bg-yellow-400 text-black font-bold uppercase transition duration-200 ease-in-out px-8 py-2 rounded-lg inline-flex items-center font-sans'>Registrar</button>
                       </div>
                     </form>
                   </div>
