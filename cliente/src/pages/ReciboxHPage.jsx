@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useReciboxH } from '../context/ReciboxHContext';
 import { Link, useNavigate } from 'react-router-dom'
+import Stars from '../components/Stars';
 
 function ReciboxHPage() {
   const navigate = useNavigate()
@@ -49,6 +50,8 @@ function ReciboxHPage() {
   })
 
   return (
+    <div>
+      <Stars/>
     <div className="bg-primary min-h-screen flex items-center justify-center">
       <section className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
         <h2 className="text-2xl font-bold text-center text-yellow-100 mb-6">
@@ -150,6 +153,7 @@ function ReciboxHPage() {
           <input type="submit" value="Cancelar" className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7" />
         </div>
       </section>
+    </div>
     </div>
   )
 }

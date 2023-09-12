@@ -9,10 +9,13 @@ function MenuPage() {
   };
 
   return (
+    <div>
+    <Stars/>
+    <div className='min-h-screen flex flex-col items-center justify-start'>
     <section className="p-10 mt-8">
-      <Stars></Stars>
+      
       <div className="container mx-auto mb-8 text-center">
-        <h1 className="text-6xl md:text-6xl font-bold text-ffeba7 mb-4 animate-pulse shadow-md text-red text-bold font-mono">
+        <h1 className="text-6xl md:text-6xl font-bold text-ffeba7 mb-4 animate-pulse text-red text-bold font-mono">
           TIPO DE DOCUMENTO FUENTE
         </h1>
       </div>
@@ -84,6 +87,8 @@ function MenuPage() {
         <ExamplePDF/>
       </div>
     </section>
+    </div>
+    </div>
   );
 }
 

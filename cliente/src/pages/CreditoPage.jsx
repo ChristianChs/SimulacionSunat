@@ -265,12 +265,16 @@ useEffect(()=>{
 },[])
 
   return (
-    <div className="bg-primary min-h-screen flex items-center justify-center">
-      <section className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
+    <div>
+       <Starts/>
+    <div className="bg-primary min-h-screen flex items-center justify-center ">
+      <section id="div_fundamental" className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
+       
         <h1 className="text-2xl font-bold text-center text-yellow-100 mb-6" onClick={autocredito}>
           Emisión del Recibo por Honorarios Electrónico
         </h1>
         <form>
+          
           <div className="bg-zinc-900 p-4 rounded-lg mb-4">
             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
               Indique los datos del servicio prestado
@@ -583,6 +587,7 @@ useEffect(()=>{
           </div>
         </form>
       </section>
+    </div>
     </div>
   );
 }
