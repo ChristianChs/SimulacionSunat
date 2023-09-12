@@ -123,7 +123,7 @@ function RegistrarPage() {
                             type="text"
                             placeholder="Numero de RUC"
                             className="form-style w-full text-white px-4 py-2 rounded-md my-2 pl-2 font-sans font-bold"
-                            {...register("nruc", { required: true })}
+                            {...register("ruc", { required: true })}
                           />
                         </div>
                         <div className='pt-2'>
@@ -136,7 +136,7 @@ function RegistrarPage() {
                               type="text"
                               placeholder="Usuario"
                               className="form-style w-full text-white px-4 py-2 rounded-md my-2 pl-2 font-sans font-bold"
-                              {...register("user", { required: true })}
+                              {...register("usuario", { required: true })}
                             />
                           </div>
                         </div>
@@ -150,7 +150,7 @@ function RegistrarPage() {
                               type="password"
                               className="form-style w-full text-white px-4 py-2 rounded-md my-2 pl-2 font-sans font-bold"
                               placeholder="Contraseña"
-                              {...register("password", { required: true })}
+                              {...register("clave", { required: true })}
                             />
                           </div>
                         </div>
