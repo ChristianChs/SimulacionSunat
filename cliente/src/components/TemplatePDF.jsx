@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 import { validaRUC } from '../api/validarDocs'
+import { dataLogFecha } from '../api/login';
 
 function TempletePDF(data) {
   const info=data.data
@@ -8,7 +9,6 @@ function TempletePDF(data) {
   const [datareceptor2,setDataReceptor2]=useState(null)
   const [datareceptor3,setDataReceptor3]=useState(null)
   const [datareceptor4,setDataReceptor4]=useState(null)
-  const [datareceptor5,setDataReceptor5]=useState(null)
   
   const getinfoRUCrs = async(ruc)=>{
     const data= await validaRUC(ruc)
@@ -33,6 +33,9 @@ function TempletePDF(data) {
     setDataReceptor4(data.data.direccion)
   }
   getinfoRUCdd(info.nrodoc_destinatario)
+  
+  var fechaCadena = info.fecha_emision;
+  var fecha = new Date(fechaCadena);
   
 
   return (
@@ -95,12 +98,12 @@ function TempletePDF(data) {
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>Inciso </Text>
-            <Text style={styles.value}>"A" </Text>
+            <Text style={styles.value}>{info.inciso==='1'? "A":"B"} </Text>
             <Text style={styles.label}>DEL ARTÍCULO 33 DE LA LEY DEL IMPUESTO A LA RENTA</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>Fecha de emisión </Text>
-            <Text style={styles.value}>{info.fecha_emision}</Text>
+            <Text style={styles.value}>{fecha}</Text>
           </View>
 
           <View style={styles.sectionMonto}>

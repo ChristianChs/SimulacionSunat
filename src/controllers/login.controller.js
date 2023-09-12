@@ -82,3 +82,14 @@ export const ExtraerDataLog = async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 }
+
+export const ExtraerFecha = async (req, res) => {
+    try {
+        const { id_login } = req.body;
+        const userFound = await model.ExtraerFecha(id_login)
+        console.log("asdjsa",userFound)
+        res.json(userFound[0])
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}

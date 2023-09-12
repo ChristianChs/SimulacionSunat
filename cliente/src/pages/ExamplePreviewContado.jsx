@@ -7,7 +7,7 @@ import Modal from '../components/Modal'
 import Imagen1 from '../assets/images/flecha.png';
 import Imagen2 from '../assets/images/pdf.jpg';
 import Imagen3 from '../assets/images/xml.png';
-import { dataRequest,dataLogRequest } from '../api/login';
+import { dataLogRequest } from '../api/login';
 
 function ExamplePreviewContado() {
 

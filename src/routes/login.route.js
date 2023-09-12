@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ExtraerData, ExtraerDataLog,  login, login2, register,register2 } from "../controllers/login.controller.js";
+import { ExtraerData, ExtraerDataLog,  ExtraerFecha,  login, login2, register,register2 } from "../controllers/login.controller.js";
 
 const router = Router()
 
@@ -14,6 +14,8 @@ router.post('/register2',register2)
 router.post('/getData',ExtraerData)
 
 router.post('/getLogin',ExtraerDataLog)
+
+router.post('/getFecha',ExtraerFecha)
 
 
 export default router
