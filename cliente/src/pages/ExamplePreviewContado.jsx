@@ -96,11 +96,8 @@ function ExamplePreviewContado() {
           <li>
           <div
             className="card relative bg-zinc-900 text-primary border rounded-lg overflow-hidden hover:scale-125 hover:border-amber-200 transition-transform w-60 mx-auto block"
-<<<<<<< HEAD
-            onClick={() => {getData()} }
-=======
+
             onClick={() => {getData2()} }
->>>>>>> 9ef3ea46f362c3b2b232fc81ea1d96c16c08b161
           >
             <div className="card__front p-4 text-center">
               <img
@@ -138,7 +135,7 @@ function ExamplePreviewContado() {
 
         <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
           <PDFViewer style={{ width: '100%', height: '70vh' }}>
-            <TempletePDF data={user2} />
+            <TempleteXML data={user2} />
           </PDFViewer>
           <div className='flex justify-center mt-6'>
           <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Regresar</button>

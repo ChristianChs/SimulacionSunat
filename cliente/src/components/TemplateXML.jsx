@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
-import { validaRUC } from '../api/validarDocs'
 
 function TempleteXML(data) {
   const info=data.data
@@ -182,11 +181,11 @@ const styles = StyleSheet.create({
     marginBottom: 9
   },
   label: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Helvetica-Bold',
   },
   value: {
     color: '#707070',
-    fontFamily: 'Roboto'
+    fontFamily: 'Helvetica'
   },
   sectionMonto: {
     marginTop: 20,
@@ -194,7 +193,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 12,
     fontWeight: 'bold',
-    fontFamily: 'Roboto'
+    fontFamily: 'Helvetica-Bold'
   },
   subtitle: {
     color: '#707070',
