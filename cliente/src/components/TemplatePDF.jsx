@@ -6,8 +6,10 @@ function TempletePDF(data) {
   console.log(data.data)
   const info=data.data
   const [datareceptor,setDataReceptor]=useState(null)
+  
   const getinfoRUCrs = async(ruc)=>{
     const data= await validaRUC(ruc)
+    console.log(data)
     setDataReceptor(data.data.razonSocial)
   }
   getinfoRUCrs(info.nrodoc_destinatario)
