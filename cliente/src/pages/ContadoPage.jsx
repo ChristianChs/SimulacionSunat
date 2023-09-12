@@ -111,7 +111,7 @@ export default function ContadoPage() {
     
     <div className="bg-primary min-h-screen flex items-center justify-center">
       <section className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
-        <h2 className="text-2xl font-bold text-center text-yellow-100 mb-6" onClick={precargado}>
+        <h2 className="text-2xl font-bold text-center text-yellow-100 mb-6" >
           Emisión del Recibo por Honorarios Electrónico
         </h2>
         <form className="grid grid-cols-2 gap-4" onSubmit={onSubmit}>

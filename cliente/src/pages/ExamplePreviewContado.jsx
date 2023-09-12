@@ -7,7 +7,7 @@ import Modal from '../components/Modal'
 import Imagen1 from '../assets/images/flecha.png';
 import Imagen2 from '../assets/images/pdf.jpg';
 import Imagen3 from '../assets/images/xml.png';
-import { dataRequest } from '../api/login';
+import { dataRequest,dataLogRequest } from '../api/login';
 
 function ExamplePreviewContado() {
 
@@ -15,9 +15,8 @@ function ExamplePreviewContado() {
   const [user,setUser]=useState(null)
   const getData = async()=>{
     const id_login=JSON.parse(localStorage.getItem('loggindata'))
-    const datos=await dataRequest({"id_login":id_login.id})
+    const datos=await dataLogRequest({"id_login":id_login.id})
     setUser(datos.data)
-    console.log(user)
     setShowModal(true)
     /*setUser(datos.data)
     return datos.data*/
@@ -44,7 +43,7 @@ function ExamplePreviewContado() {
           <li className='justify-center'>
             <div
               className="card relative bg-zinc-900 text-primary border rounded-lg overflow-hidden hover:scale-125 hover:border-amber-200 transition-transform w-60 mx-auto block"
-              onClick={() => getData()}
+              onClick={() => {getData()} }
             >
               <div className="card__front p-4 text-center">
                 <img

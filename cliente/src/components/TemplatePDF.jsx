@@ -3,16 +3,38 @@ import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 import { validaRUC } from '../api/validarDocs'
 
 function TempletePDF(data) {
-  console.log(data.data)
   const info=data.data
   const [datareceptor,setDataReceptor]=useState(null)
+  const [datareceptor2,setDataReceptor2]=useState(null)
+  const [datareceptor3,setDataReceptor3]=useState(null)
+  const [datareceptor4,setDataReceptor4]=useState(null)
+  const [datareceptor5,setDataReceptor5]=useState(null)
   
   const getinfoRUCrs = async(ruc)=>{
     const data= await validaRUC(ruc)
-    console.log(data)
     setDataReceptor(data.data.razonSocial)
   }
-  getinfoRUCrs(info.nrodoc_destinatario)
+  getinfoRUCrs(info.ruc)
+
+  const getinfoRUCrsd = async(ruc)=>{
+    const data= await validaRUC(ruc)
+    setDataReceptor3(data.data.razonSocial)
+  }
+  getinfoRUCrsd(info.nrodoc_destinatario)
+
+  const getinfoRUCd = async(ruc)=>{
+    const data= await validaRUC(ruc)
+    setDataReceptor2(data.data.direccion)
+  }
+  getinfoRUCd(info.ruc)
+
+  const getinfoRUCdd = async(ruc)=>{
+    const data= await validaRUC(ruc)
+    setDataReceptor4(data.data.direccion)
+  }
+  getinfoRUCdd(info.nrodoc_destinatario)
+  
+
   return (
     <Document>
       <Page size='A4' style={styles.page}>
@@ -21,20 +43,20 @@ function TempletePDF(data) {
           <View style={{ marginTop: 10 }}>
             <Text style={styles.title}>{datareceptor}</Text>
             <View style={styles.subtitle}>
-              <Text>MZA. 323 LOTE 20 ASC. EL TRIUNFO TACNA TACNA CIUDAD NUEVA</Text>
-              <Text>Teléfono: -</Text>
+              <Text>{datareceptor2}</Text>
+              <Text>Teléfono: {info.dni} </Text>
             </View>
           </View>
           <View style={styles.recuadro}>
             <View style={styles.section}>
               <Text style={styles.value}>R. U. C. </Text>
-              <Text style={styles.value}>10714602107</Text>
+              <Text style={styles.value}>{info.ruc}</Text>
             </View>
             <View style={styles.section}>
               <Text style={styles.value}>RECIBO POR HONORARIOS ELECTRÓNICOS</Text>
             </View>
             <View style={styles.section}>
-              <Text style={styles.value}>Nro. E001 - 17</Text>
+              <Text style={styles.value}>Nro. E001 - {info.id} </Text>
             </View>
           </View>
 
@@ -43,17 +65,17 @@ function TempletePDF(data) {
         <View style={{ marginTop: 10 }}>
           <View style={styles.section}>
             <Text style={styles.label}>Recibi de: </Text>
-            <Text style={styles.value}>IMPULSORES SOCIEDAD ANONIMA CERRADA - IMPULSORES S.A.C.</Text>
+            <Text style={styles.value}>{datareceptor3}</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>Identificado con </Text>
             <Text style={styles.value}>RUC </Text>
             <Text style={styles.label}>número </Text>
-            <Text style={styles.value}>20600445881</Text>
+            <Text style={styles.value}>{info.nrodoc_destinatario}</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>Domiciliado en </Text>
-            <Text style={styles.value}>MZA. D 4 LOTE 20 A. H. PASAJE 3AA HH</Text>
+            <Text style={styles.value}>{datareceptor4}</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>Forma de pago: </Text>
@@ -65,11 +87,11 @@ function TempletePDF(data) {
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>Por concepto </Text>
-            <Text style={styles.value}>SERVICIO DE ASESORÍA EN INFORMATICA E IMPLEMENTACION</Text>
+            <Text style={styles.value}>{info.descripcion_rxh} </Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>Observación </Text>
-            <Text style={styles.value}>-</Text>
+            <Text style={styles.value}>{info.obs_rxh}</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>Inciso </Text>
@@ -78,21 +100,21 @@ function TempletePDF(data) {
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>Fecha de emisión </Text>
-            <Text style={styles.value}>07 de Junio de 2023</Text>
+            <Text style={styles.value}>{info.fecha_emision}</Text>
           </View>
 
           <View style={styles.sectionMonto}>
             <View style={{ ...styles.section, justifyContent: 'space-between' }}>
               <Text style={{ ...styles.label, textAlign: 'right', flex: 1 / 2, marginRight: 5 }}>Total por honorarios: </Text>
-              <Text style={{ ...styles.label, textAlign: 'left', flex: 1 / 2 }}> 1200.00</Text>
+              <Text style={{ ...styles.label, textAlign: 'left', flex: 1 / 2 }}>{info.monto_total} </Text>
             </View>
             <View style={{ ...styles.section, justifyContent: 'space-between' }}>
               <Text style={{ ...styles.label, textAlign: 'right', flex: 1 / 2, marginRight: 5 }}>Retención (8 %) IR: </Text>
-              <Text style={{ ...styles.label, textAlign: 'left', flex: 1 / 2 }}> 0.00</Text>
+              <Text style={{ ...styles.label, textAlign: 'left', flex: 1 / 2 }}>({info.retencion_monto})</Text>
             </View>
             <View style={{ ...styles.section, justifyContent: 'space-between' }}>
               <Text style={{ ...styles.label, textAlign: 'right', flex: 1 / 2, marginRight: 5 }}>Total Neto Recibido: </Text>
-              <Text style={{ ...styles.value, textAlign: 'left', flex: 1 / 2 }}> 1200.00 SOLES</Text>
+              <Text style={{ ...styles.value, textAlign: 'left', flex: 1 / 2 }}> {info.total_neto} SOLES</Text>
             </View>
           </View>
           <View style={styles.linea}></View>
