@@ -3,6 +3,7 @@ import Imagen from '../assets/images/sunat.png';
 import Imagen1 from '../assets/images/fondo.jpg';
 import Imagen2 from '../assets/images/unjbg.png';
 import Imagen3 from '../assets/images/atencion.png';
+import Starts from '../components/Stars';
 
 function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,7 +26,9 @@ function HomePage() {
   }, []);
 
   return (
-    <div className='min-h-screen flex flex-col  justify-start'>
+    <div>
+    <Starts className="stars-behind" />
+    <div className='min-h-screen flex flex-col  justify-start relative'>
       <div>
         <div className='container mx-auto px-4 md:px-10 py-5 relative'>
           <nav className='flex items-center justify-between'>
@@ -89,7 +92,13 @@ function HomePage() {
                 </h1>
                 <br></br>  
                 <p className='text-sm font-mono'>
-                  Administramos los tributos del Gobierno Nacional Peruano<br></br>Acceso a trámites y consultas virtuales para Entidades de Comercio.
+                  Esta es una herramienta como extensión de la Sunat que permite <br></br>  la emisión y almacenamiento de comprobantes de pago
+                  <br></br><br></br>Realizado por los estudiantes:<br></br>
+                  ✅Sebastian Tomas Linares Liendo 2022-119010<br></br>
+                  ✅Cesar Alberto Huayta Callisaya 2022-119032<br></br>
+                  ✅Luis Sebastian Nuñez Fuentes 2022-119035<br></br>
+                  ✅Alexis Daniel Limache Villegas 2022-119033
+
                 </p>
 
                 <div className='mt-6 md:mt-10'>
@@ -105,6 +114,7 @@ function HomePage() {
             </div>
           </div>
       </div>
+    </div>
     </div>
   );
 }

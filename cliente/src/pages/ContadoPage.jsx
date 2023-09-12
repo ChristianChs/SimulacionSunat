@@ -108,8 +108,9 @@ export default function ContadoPage() {
   });
 
   return (
-    
-    <div className="bg-primary min-h-screen flex items-center justify-center">
+    <div>
+    <Starts className="stars-behind" />
+    <div className="bg-primary min-h-screen flex items-center justify-center relative">
       <section className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
         <h2 className="text-2xl font-bold text-center text-yellow-100 mb-6" >
           Emisión del Recibo por Honorarios Electrónico
@@ -378,6 +379,7 @@ export default function ContadoPage() {
           />
         </form>
       </section>
+    </div>
     </div>
   );
 }

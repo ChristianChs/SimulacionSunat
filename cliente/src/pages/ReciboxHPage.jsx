@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useReciboxH } from '../context/ReciboxHContext';
 import { Link, useNavigate } from 'react-router-dom'
-import Stars from '../components/Stars';
+import Starts from '../components/Stars';
 import { useLogin } from '../context/LoginContext';
 
 function ReciboxHPage() {
@@ -57,8 +57,8 @@ function ReciboxHPage() {
 
   return (
     <div>
-      <Stars/>
-    <div className="bg-primary min-h-screen flex items-center justify-center">
+    <Starts className="stars-behind" />
+    <div className="bg-primary min-h-screen flex items-center justify-center relative">
       <section className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md">
         <h2 className="text-2xl font-bold text-center text-yellow-100 mb-6">
           Emisión del Recibo por Honorarios Electrónico

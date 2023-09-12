@@ -11,6 +11,11 @@ import { dataRequest,dataLogRequest } from '../api/login';
 
 function ExamplePreviewContado() {
 
+    const handleCerrarSesion = () => {
+    localStorage.clear();
+    navigate('/#')
+  };
+  
   const [showModal, setShowModal] = useState(false)
   const [user,setUser]=useState(null)
   const getData = async()=>{
@@ -26,9 +31,9 @@ function ExamplePreviewContado() {
   },[])
 
   return (
-    <>
-      <div className='m-10'>
-        <Stars></Stars>
+    <><Stars className="stars-behind"/>
+      <div className='min-h-screen flex flex-col items-center justify-start'>
+        <section className="p-10 mt-8">
         <div className="container mx-auto mb-8 text-center">
           <h1 className="text-6xl md:text-6xl font-bold text-ffeba7 mb-4 animate-pulse shadow-md text-red text-bold font-mono">
             VISTA PREVIA DE RECIBOS POR HONORARIOS
@@ -97,6 +102,15 @@ function ExamplePreviewContado() {
           </div>
         </li>
         </ul>
+
+        <div className="flex justify-center mt-4">
+        <button
+          className="bg-transparent border border-ffeba7 text-ffeba7 hover:bg-ffeba7 hover:text-white hover:border-amber-200 font-bold py-2 px-4 rounded transition-transform transform hover:scale-125 text-bold font-mono"
+          onClick={handleCerrarSesion}
+        >
+          Cerrar Sesión
+        </button>
+        </div>
           
         <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
           <PDFViewer style={{ width: '100%', height: '70vh' }}>
@@ -107,7 +121,9 @@ function ExamplePreviewContado() {
           <button className='bg-blue-400 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-bold hover:px-7"'>Confirmar </button>
           </div>
         </Modal>
+     </section>
       </div>
+      
     </>
   )
 }
