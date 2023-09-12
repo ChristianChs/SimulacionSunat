@@ -3,10 +3,11 @@ import { useForm } from 'react-hook-form'
 import { useLogin } from '../context/LoginContext'
 import { useNavigate } from 'react-router-dom'
 import Starts from '../components/Stars'
-import { Link } from 'react-router-dom';
 import { useReciboxH } from '../context/ReciboxHContext'
 
 export default function CreditoPage() {
+  const { registrar, errors: LoginErrors } = useLogin();
+  const navigate=useNavigate();
 let a = 1;
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -240,15 +241,19 @@ function recalcularSuma() {
   }
 
   
-
-  const onSubmit = handleSubmit((values) => {
+  const onSubmit = handleSubmit(async(values) => {
     values.serv_prest = selectedServ_prest.checked
     values.inciso = selectedInciso.checked
     values.retencion = selectedRetencion.checked
     values.serv_pago = selectedServ_Pag.checked
     console.log(values)
+    navigate('/previewcont')
     previewData(values)
-  })
+  });
+
+  const onSubmit1 = () => {
+    navigate('/rxh')
+  };
 
 useEffect(()=>{
   setSelectedRetencion({
@@ -271,12 +276,11 @@ useEffect(()=>{
         <h1 className="text-2xl font-bold text-center text-yellow-100 mb-6" onClick={autocredito}>
           Emisión del Recibo por Honorarios Electrónico
         </h1>
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="bg-zinc-900 p-4 rounded-lg mb-4">
             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
               Indique los datos del servicio prestado
             </h1>
-            <form action="submit.php" method="post">
               <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                 Descripción o Título de Servicio Prestado:
               </label>
@@ -285,8 +289,10 @@ useEffect(()=>{
                 name="description"
                 type="text"
                 aria-label="default input example"
-                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"{...register("descripcion_rxh", { required: true })}
+                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                {...register("descripcion_rxh", { required: true })}
               />
+              {errors.descripcion_rxh && (<p className='text-red-500'>Llenar el campo</p>)}
               <label htmlFor="observation" className="text-gray-400 font-sans font-semibold">
                 Observación (Opcional):
               </label>
@@ -295,8 +301,10 @@ useEffect(()=>{
                 name="observation"
                 type="text"
                 aria-label="default input example"
-                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-bold text-gray-300 focus:border-yellow-100" {...register("obs_rxh", { required: true })}
+                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-bold text-gray-300 focus:border-yellow-100" 
+                {...register("obs_rxh", { required: true })}
               />
+              {errors.obs_rxh && (<p className='text-red-500'>Llenar el campo</p>)}
               <label htmlFor="date_issue" className="text-gray-400 font-sans font-semibold">
                 Fecha de Emisión:
               </label>
@@ -304,16 +312,16 @@ useEffect(()=>{
                 type="date"
                 id="date_issue"
                 name="date_issue"
-                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100" {...register("fecha_emision", { required: true })} 
+                className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100" 
+                {...register("fecha_emision", { required: true })}
               />
-            </form>
+              {errors.fecha_emision && (<p className='text-red-500'>Llenar el campo</p>)}
           </div>
 
           <div className="bg-zinc-900 p-4 rounded-lg mb-4">
             <h1 className="text-lg font-semibold text-yellow-100 mb-5">
               Indique el tipo de Renta de Cuarta Categoría, de acuerdo al inciso aplicable del artículo 33 LIR
             </h1>
-            <form action="submit.php" method="post">
               <input
                 type="radio"
                 id="free"
@@ -341,14 +349,12 @@ useEffect(()=>{
                 Inciso B: El desempeño de funciones de funciones de director de empresas, síndico, mandatario, gestor de negocios, albacea y actividades similares, incluyendo el desempeño de las funciones del consejero regional, por las cuales perciban dietas.
               </label>
               <br />
-            </form>
           </div>
 
           <div className="bg-zinc-900 p-4 rounded-lg mb-4">
             <h1 className="text-lg font-semibold text-yellow-100 mb-5">
               Retención del Impuesto a la Renta
             </h1>
-            <form action="submit.php" method="post">
               <input
                 type="radio"
                 id="retention_yes"
@@ -376,14 +382,12 @@ useEffect(()=>{
                 NO
               </label>
               <br />
-            </form>
           </div>
 
           <div className="bg-zinc-900 p-4 rounded-lg mb-4">
             <h1 className="text-lg font-semibold text-yellow-100 mb-5">
               ¿El pago total del servicio está siendo efectuado al momento de la emisión de este comprobante?
             </h1>
-            <form action="submit.php" method="post">
               <input
                 type="radio"
                 id="payment_yes"
@@ -431,7 +435,6 @@ useEffect(()=>{
                 <option value="12">Tarjeta de Crédito emitida o no en el país por entes ajenos al Sistema F.</option>
                 <option value="13">Tarjetas de Crédito emitidas en el exterior por bancos o F. no domiciliadas</option>
               </select>
-            </form>
           </div>
 
           <div className="bg-zinc-900 p-4 rounded-lg mb-4">
@@ -452,7 +455,6 @@ useEffect(()=>{
               <option value="3">EURO</option>
             </select>
             <div className="h-1"></div>
-            <form action="submit.php" method="post">
               <label htmlFor="honorarios" className="text-gray-400 font-sans font-bold">
                 Monto total de los honorarios:
               </label>
@@ -490,14 +492,12 @@ useEffect(()=>{
                 disabled
                 value={totalNeto}
               />
-            </form>
           </div>
 
           <div className="bg-zinc-900 p-4 rounded-lg mb-4">
             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
               Indique Información del Crédito
             </h1>
-            <form action="submit.php" method="post">
               <label htmlFor="monto_pendiente" className="text-gray-400 font-sans font-bold">
                 Monto Neto Pendiente de Pago:
               </label>
@@ -567,19 +567,19 @@ useEffect(()=>{
                     </tbody>
                 </table>
                 </div>
-            </form>
           </div>
           <div className="h-3"></div>
           <div className="grid grid-cols-2 gap-4">
           <input
             type="submit"
             value="Continuar"
+            onClick={onSubmit}
             className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-extrabold hover:px-7 hover:bg-ffeba7 hover:text-zinc-900 hover:border-amber-200"
           />
           <input
             type="submit"
             value="Cancelar"
-            href="/rxh"
+            onClick={onSubmit1}
             className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-extrabold hover:px-7 hover:bg-ffeba7 hover:text-white hover:border-gray-400"
           />
           </div>
