@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { validaRUC } from '../api/validarDocs'
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
+import { dataCuota } from '../api/login';
 
 function TempleteXML(data) {
   const info=data.data
@@ -11,6 +12,12 @@ function TempleteXML(data) {
   const [datareceptor4,setDataReceptor4]=useState(null)
   const [datareceptor5,setDataReceptor5]=useState(null)
   
+  const getinfoC = async(ruc)=>{
+    const data= await dataCuota(ruc)
+    setDataReceptor5(data.data)
+  }
+  getinfoC()
+
   const getinfoRUCrs = async(ruc)=>{
     const data= await validaRUC(ruc)
     setDataReceptor(data.data.razonSocial)

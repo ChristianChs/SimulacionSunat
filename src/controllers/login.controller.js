@@ -104,10 +104,9 @@ export const ExtraerDataLog = async (req, res) => {
     }
 }
 
-export const ExtraerCuota = async (req, res) => {
+export const ExtraerCuota = async () => {
     try {
-        const { id_login } = req.body;
-        const userFound = await model.ExtraerCuota(id_login)
+        const userFound = await model.ExtraerCuota()
         console.log("asdjsa",userFound)
         res.json(userFound[0])
     } catch (error) {
