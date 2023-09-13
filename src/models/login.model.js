@@ -48,18 +48,6 @@ model.inUser3=async(arg)=>{
     })
 }
 
-model.inCuota=async(arg)=>{
-    const { numero, monto_cuota, fecha_vencimiento } = arg;
-    return sequelize.query(`INSERT INTO cuota(id_recibo,fehca_vencimient,monto_cuota,numero) VALUES ('${fecha_vencimiento}','${monto_cuota}','${numero}')`,{raw:true})
-    .then(([result,metadata])=>{
-        const data= result.length===0?null:result
-        return data
-    })
-    .catch((error)=>{
-        throw error
-    })
-}
-
 model.Extraer=async(arg)=>{
     return sequelize.query(`SELECT * FROM recibohonorario WHERE id_login='${arg}' ORDER BY id DESC LIMIT 1`,{raw:true})
     .then(([result,metadata])=>{
@@ -84,17 +72,6 @@ model.Extraer2=async(arg)=>{
 
 model.ExtraerFecha=async(arg)=>{
     return sequelize.query(`SELECT date(recibohonorario.fecha_emision) FROM recibohonorario INNER JOIN login ON recibohonorario.id_login=login.id WHERE recibohonorario.id_login=='${arg}' ORDER BY recibohonorario.id DESC LIMIT 1 `,{raw:true})
-    .then(([result,metadata])=>{
-        const data= result.length===0?null:result
-        return data
-    })
-    .catch((error)=>{
-        throw error
-    })
-}
-
-model.ExtraerCuota=async()=>{
-    return sequelize.query(`SELECT*FROM cuota `,{raw:true})
     .then(([result,metadata])=>{
         const data= result.length===0?null:result
         return data

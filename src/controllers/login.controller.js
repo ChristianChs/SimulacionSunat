@@ -61,17 +61,6 @@ export const register3 = async (req, res) => {
     }
 }
 
-export const registerCuotas = async (req, res) => {
-    try {
-        const userFound = await model.inCuota(req.body)
-        console.log("asdjsa",userFound)
-        return res.status(200).json({ message: "Información Recopilada" })
-    } catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-}
-
-
 export const register2 = async (req, res) => {
     try {
         const userFound = await model.indUser2(req.body)
@@ -97,16 +86,6 @@ export const ExtraerDataLog = async (req, res) => {
     try {
         const { id_login } = req.body;
         const userFound = await model.Extraer2(id_login)
-        console.log("asdjsa",userFound)
-        res.json(userFound[0])
-    } catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-}
-
-export const ExtraerCuota = async () => {
-    try {
-        const userFound = await model.ExtraerCuota()
         console.log("asdjsa",userFound)
         res.json(userFound[0])
     } catch (error) {
