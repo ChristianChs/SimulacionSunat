@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 import { validaRUC } from '../api/validarDocs'
-import { dataLogFecha } from '../api/login';
+import { dataCuota } from '../api/login';
 
 function TempletePDF(data) {
   const info=data.data

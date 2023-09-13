@@ -93,7 +93,7 @@ model.ExtraerFecha=async(arg)=>{
     })
 }
 
-model.ExtraerCuota=async(arg)=>{
+model.ExtraerCuota=async()=>{
     return sequelize.query(`SELECT*FROM cuota `,{raw:true})
     .then(([result,metadata])=>{
         const data= result.length===0?null:result
