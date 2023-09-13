@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 import { validaRUC } from '../api/validarDocs'
-import { dataLogFecha } from '../api/login';
+
 
 function TempletePDF(data) {
   const info=data.data
@@ -102,6 +102,62 @@ useEffect(() => {
   convertirNumeroALetras(info.total_neto); 
 }, []);
 
+
+const styles1 = StyleSheet.create({
+  table: {
+    display: 'table',
+    width: 'auto',
+  },
+  tableRow: {
+    margin: 'auto',
+    flexDirection: 'row',
+  },
+  tableCellWithBorder: {
+    borderRight: '1pt solid #000',
+    borderLeft: '1pt solid #000',
+    borderBottom: '1pt solid #000',
+    borderTop: '1pt solid #000',
+    padding: 5,
+    flexGrow: 1,
+  },
+  tableCell: {
+    padding: 5,
+    paddingLeft: 15,
+    paddingRight: 15,
+    flexGrow: 1,
+  },
+  text: {
+    fontSize: 8,
+    color: '#707070',
+    fontFamily: 'Helvetica',
+    justifyContent: 'center',
+    paddingTop: 1,
+    paddingBottom: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+
+  text1: {
+    fontSize: 8,
+    color: '#707070',
+    fontFamily: 'Helvetica-Bold',
+    justifyContent: 'center',
+    padding: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+
+  recuadro: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#000000',
+    borderWidth: 2,
+    paddingTop: 9,
+    width: 570,
+  },
+});
+
+
   return (
     <Document>
       <Page size='A4' style={styles.page}>
@@ -185,6 +241,89 @@ useEffect(() => {
               <Text id="numeroInput" style={{ ...styles.value, textAlign: 'left', flex: 1 / 2 }}> {info.total_neto} SOLES</Text>
             </View>
           </View>
+
+          <View style={styles1.recuadro}>
+          <Text style={styles1.text1}>CUOTAS</Text>
+            <View style={styles1.section}>
+              <View style={styles1.table}>
+                <View style={styles1.tableRow}>
+                  <View style={styles1.tableCellWithBorder}>
+                    <Text style={styles1.text1}>Columna 1</Text>
+                  </View>
+                  <View style={styles1.tableCellWithBorder}>
+                    <Text style={styles1.text1}>Columna 2</Text>
+                  </View>
+                  <View style={styles1.tableCellWithBorder}>
+                    <Text style={styles1.text1}>Columna 3</Text>
+                  </View>
+                </View>
+
+                <View style={styles1.tableRow}>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 1</Text>
+                  </View>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 2</Text>
+                  </View>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 3</Text>
+                  </View>
+                </View>
+
+                <View style={styles1.tableRow}>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 4</Text>
+                  </View>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 5</Text>
+                  </View>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 6</Text>
+                  </View>
+                </View>
+
+                <View style={styles1.tableRow}>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 7</Text>
+                  </View>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 8</Text>
+                  </View>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 9</Text>
+                  </View>
+                </View>
+
+                <View style={styles1.tableRow}>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 10</Text>
+                  </View>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 11</Text>
+                  </View>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 12</Text>
+                  </View>
+                </View>
+
+                <View style={styles1.tableRow}>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 13</Text>
+                  </View>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 14</Text>
+                  </View>
+                  <View style={styles1.tableCell}>
+                    <Text style={styles1.text}>Dato 15</Text>
+                  </View>
+                </View>
+
+                {/* Puedes agregar más filas de datos aquí */}
+              </View>
+            </View>
+
+          </View>
+
           <View style={styles.linea}></View>
         </View>
       </Page>
