@@ -12,8 +12,12 @@ export const registerRequest = (user) => axios.post(`${API}/register2`, user)
 
 export const registerRequest3 = (user) => axios.post(`${API}/register3`, user)
 
+export const registerCuotas = (user) => axios.post(`${API}/registerCuotas`, user)
+
 export const dataRequest = (user) => axios.post(`${API}/getData`, user)
 
 export const dataLogRequest = (user) => axios.post(`${API}/getLogin`, user)
 
 export const dataLogFecha = (user) => axios.post(`${API}/getFecha`, user)
+
+export const dataCuota = (user) => axios.post(`${API}/getCuota`, user)

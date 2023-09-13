@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { loginRequest, loginRequest2, registerRequest, registerRequest2 } from "../api/login"
+import { loginRequest, loginRequest2, registerCuotas, registerRequest, registerRequest2 } from "../api/login"
 const LoginContext = createContext()
 
 export const useLogin = () => {
@@ -20,6 +20,18 @@ export const LoginProvider = ({ children }) => {
   const registrar = async (user) => {
     try {
       const res = await registerRequest(user)
+      return res
+    } catch (error) {
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data)
+      }
+      setErrors([error.response.data.message])
+    }
+  }
+
+  const registrarCuota = async (user) => {
+    try {
+      const res = await registerCuotas(user)
       return res
     } catch (error) {
       if (Array.isArray(error.response.data)) {
@@ -111,6 +123,7 @@ export const LoginProvider = ({ children }) => {
       errors,
       loading,
       setDataRecibo,
+      registrarCuota,
       registrarContado
     }}>
       {children}
