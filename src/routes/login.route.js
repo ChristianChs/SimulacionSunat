@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ExtraerData, ExtraerDataLog,  ExtraerFecha,  login, login2, register,register2 } from "../controllers/login.controller.js";
+import { ExtraerData, ExtraerDataLog,  ExtraerFecha,  login, login2, register,register2,register3 } from "../controllers/login.controller.js";
 
 const router = Router()
 
@@ -10,6 +10,8 @@ router.post('/login2',login2)
 router.post('/register',register)
 
 router.post('/register2',register2)
+
+router.post('/register3',register3)
 
 router.post('/getData',ExtraerData)
 

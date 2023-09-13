@@ -36,6 +36,18 @@ model.inUser=async(arg)=>{
     })
 }
 
+model.inUser3=async(arg)=>{
+    const { tipo_serv,nrodoc_destinatario,tipo_doc_destinatario,serv_prest, descripcion_rxh, obs_rxh, fecha_emision, inciso, retencion, serv_pago, tipo_moneda, montoTotal, totalImpuesto, totalNeto, medio_pago, id_login} = arg;
+    return sequelize.query(`INSERT INTO recibohonorario(tipo_servicio,tipo_doc_destinatario, nrodoc_destinatario, serv_prestado, descripcion_rxh, obs_rxh, fecha_emision, inciso_cat, retencion_ir, pago_efectuado, tipo_moneda, monto_total, retencion_monto, total_neto, id_medio_pago, id_login) VALUES ('${tipo_serv}','${tipo_doc_destinatario}','${nrodoc_destinatario}','${serv_prest}','${descripcion_rxh}','${obs_rxh}','${fecha_emision}','${inciso}','${retencion}','${serv_pago}','${tipo_moneda}','${montoTotal}','${totalImpuesto}','${totalNeto}','${medio_pago}','${id_login}')`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
 model.Extraer=async(arg)=>{
     return sequelize.query(`SELECT * FROM recibohonorario WHERE id_login='${arg}' ORDER BY id DESC LIMIT 1`,{raw:true})
     .then(([result,metadata])=>{

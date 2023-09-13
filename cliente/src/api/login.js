@@ -10,6 +10,8 @@ export const registerRequest2 = (user) => axios.post(`${API}/register`, user)
 
 export const registerRequest = (user) => axios.post(`${API}/register2`, user)
 
+export const registerRequest3 = (user) => axios.post(`${API}/register3`, user)
+
 export const dataRequest = (user) => axios.post(`${API}/getData`, user)
 
 export const dataLogRequest = (user) => axios.post(`${API}/getLogin`, user)

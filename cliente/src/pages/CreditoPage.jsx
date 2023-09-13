@@ -6,7 +6,7 @@ import Starts from '../components/Stars'
 import { useReciboxH } from '../context/ReciboxHContext'
 
 export default function CreditoPage() {
-  const { registrar, errors: LoginErrors } = useLogin();
+  const { registrarContado, errors: LoginErrors } = useLogin();
   const navigate=useNavigate();
 let a = 1;
 
@@ -270,7 +270,7 @@ useEffect(()=>{
     values.serv_pago = selectedServ_Pag.checked;
     console.log(values);
 
-    const data= await registrar(values);
+    const data= await registrarContado(values);
       if(data.status===200){
         navigate('/previewcont')
       }
