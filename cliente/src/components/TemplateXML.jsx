@@ -231,6 +231,156 @@ useEffect(() => {
             <Text style={styles.label}>&lt;/recibo_por_honorarios&gt;</Text>
           </View>
 
+          {
+            // CUOTAAAAAAAAAAAAAA
+          }
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;cuota1&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;n_recibo&gt;</Text>
+            <Text style={styles.value}>{datareceptor3}</Text>
+            <Text style={styles.label}>&lt;/n_recibo&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;fecha_vencimiento&gt;</Text>
+            <Text style={styles.value}>{info.nrodoc_destinatario}</Text>
+            <Text style={styles.label}>&lt;/fecha_vencimiento&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;monto_cuota&gt;</Text>
+            <Text style={styles.value}>{datareceptor4}</Text>
+            <Text style={styles.label}>&lt;/monto_cuota&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;/cuota1&gt;</Text>
+          </View>
+
+          {
+            // CUOTAAAAAAAAAAAAAA
+          }
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;cuota1&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;n_recibo&gt;</Text>
+            <Text style={styles.value}>{datareceptor3}</Text>
+            <Text style={styles.label}>&lt;/n_recibo&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;fecha_vencimiento&gt;</Text>
+            <Text style={styles.value}>{info.nrodoc_destinatario}</Text>
+            <Text style={styles.label}>&lt;/fecha_vencimiento&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;monto_cuota&gt;</Text>
+            <Text style={styles.value}>{datareceptor4}</Text>
+            <Text style={styles.label}>&lt;/monto_cuota&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;/cuota1&gt;</Text>
+          </View>
+
+          {
+            // CUOTAAAAAAAAAAAAAA
+          }
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;cuota1&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;n_recibo&gt;</Text>
+            <Text style={styles.value}>{datareceptor3}</Text>
+            <Text style={styles.label}>&lt;/n_recibo&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;fecha_vencimiento&gt;</Text>
+            <Text style={styles.value}>{info.nrodoc_destinatario}</Text>
+            <Text style={styles.label}>&lt;/fecha_vencimiento&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;monto_cuota&gt;</Text>
+            <Text style={styles.value}>{datareceptor4}</Text>
+            <Text style={styles.label}>&lt;/monto_cuota&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;/cuota1&gt;</Text>
+          </View>
+
+          {
+            // CUOTAAAAAAAAAAAAAA
+          }
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;cuota1&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;n_recibo&gt;</Text>
+            <Text style={styles.value}>{datareceptor3}</Text>
+            <Text style={styles.label}>&lt;/n_recibo&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;fecha_vencimiento&gt;</Text>
+            <Text style={styles.value}>{info.nrodoc_destinatario}</Text>
+            <Text style={styles.label}>&lt;/fecha_vencimiento&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;monto_cuota&gt;</Text>
+            <Text style={styles.value}>{datareceptor4}</Text>
+            <Text style={styles.label}>&lt;/monto_cuota&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;/cuota1&gt;</Text>
+          </View>
+
+          {
+            // CUOTAAAAAAAAAAAAAA
+          }
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;cuota1&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;n_recibo&gt;</Text>
+            <Text style={styles.value}>{datareceptor3}</Text>
+            <Text style={styles.label}>&lt;/n_recibo&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;fecha_vencimiento&gt;</Text>
+            <Text style={styles.value}>{info.nrodoc_destinatario}</Text>
+            <Text style={styles.label}>&lt;/fecha_vencimiento&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 40 }]}>&lt;monto_cuota&gt;</Text>
+            <Text style={styles.value}>{datareceptor4}</Text>
+            <Text style={styles.label}>&lt;/monto_cuota&gt;</Text>
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { marginLeft: 20 }]}>&lt;/cuota1&gt;</Text>
+          </View>
+
         </View>
       </Page>
     </Document>
