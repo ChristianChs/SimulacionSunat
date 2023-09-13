@@ -272,7 +272,7 @@ useEffect(()=>{
 
     const data= await registrarContado(values);
       if(data.status===200){
-        navigate('/previewcont')
+        navigate('/previewcre')
       }
   });
 

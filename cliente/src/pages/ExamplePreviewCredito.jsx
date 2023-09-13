@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import TempletePDF from '../components/TemplatePDF'
-import TempleteXML from '../components/TemplateXML'
+import TempletePDFc from '../components/TemplatePDFc'
+import TempleteXMLc from '../components/TemplateXMLc'
 import { PDFViewer } from '@react-pdf/renderer'
 import { Link } from 'react-router-dom';
 import Stars from '../components/Stars';
@@ -8,9 +8,8 @@ import Modal from '../components/Modal'
 import Imagen1 from '../assets/images/flecha.png';
 import Imagen2 from '../assets/images/pdf.jpg';
 import Imagen3 from '../assets/images/xml.png';
-import { useNavigate } from 'react-router-dom'
 import { dataLogRequest } from '../api/login';
-import ExamplePDF from './ExamplePDF';
+
 
 function ExamplePreviewCredito() {
 
@@ -126,7 +125,7 @@ function ExamplePreviewCredito() {
 
         <Modal isVisible={showModal} onClose={() => setShowModal(false)}>
           <PDFViewer style={{ width: '100%', height: '70vh' }}>
-            <TempletePDF data={user} />
+            <TempletePDFc data={user} />
           </PDFViewer>
           <div className='flex justify-center mt-6'>
         
@@ -135,7 +134,7 @@ function ExamplePreviewCredito() {
 
         <Modal isVisible={showModal2} onClose={() => setShowModal2(false)}>
           <PDFViewer style={{ width: '100%', height: '70vh' }}>
-            <TempleteXML data={user2} />
+            <TempleteXMLc data={user2} />
           </PDFViewer>
           <div className='flex justify-center mt-6'>
           </div>
