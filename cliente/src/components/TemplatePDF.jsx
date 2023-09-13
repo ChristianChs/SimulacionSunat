@@ -233,7 +233,7 @@ const styles1 = StyleSheet.create({
               <Text style={{ ...styles.label, textAlign: 'left', flex: 1 / 2 }}>{info.monto_total} </Text>
             </View>
             <View style={{ ...styles.section, justifyContent: 'space-between' }}>
-              <Text style={{ ...styles.label, textAlign: 'right', flex: 1 / 2, marginRight: 5 }}>Retención (8 %) IR: </Text>
+              <Text style={{ ...styles.label, textAlign: 'right', flex: 1 / 2, marginRight: 5 }}>Retención (18 %) IR: </Text>
               <Text style={{ ...styles.label, textAlign: 'left', flex: 1 / 2 }}>({info.retencion_monto})</Text>
             </View>
             <View style={{ ...styles.section, justifyContent: 'space-between' }}>
