@@ -12,6 +12,7 @@ import PreviPage from './pages/PreviPage'
 import { ReciboxHProvider } from './context/ReciboxHContext'
 import ExamplePreviewContado from './pages/ExamplePreviewContado'
 import ExamplePreviewCredito from './pages/ExamplePreviewCredito'
+import Factura from './pages/Factura'
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
               <Route path='prev' element={<PreviPage />} />
               <Route path='previewcont' element={<ExamplePreviewContado />} />
               <Route path='previewcre' element={<ExamplePreviewCredito />} />
+              <Route path='fact' element={<Factura />} />
             </Route>
           </Routes>
         </BrowserRouter>
