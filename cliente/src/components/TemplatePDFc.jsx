@@ -146,7 +146,7 @@ useEffect(() => {
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>Forma de pago: </Text>
-            <Text style={styles.value}>AL CONTADO</Text>
+            <Text style={styles.value}>AL CREDITO</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.label}>La suma de: </Text>
