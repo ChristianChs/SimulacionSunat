@@ -270,6 +270,21 @@ useEffect(()=>{
     values.serv_pago = selectedServ_Pag.checked;
     console.log(values);
 
+    var table = document.getElementById('cuotas');
+    var rows = table.getElementsByTagName('tr');
+
+
+    for (var i = 1; i < rows.length - 1; i++) {
+        vaCuota.numCuota=rows[i].getElementsByTagName('td')[1];
+        vaCuota.feCuota=rows[i].getElementsByTagName('td')[2];
+        vaCuota.monCuota=rows[i].getElementsByTagName('td')[3];
+        
+        const dataCuota= await registrarContado(vaCuota);
+        if(dataCuota.status===200){
+          console.log("Fila: "+i)
+        }
+    }
+
     const data= await registrarContado(values);
       if(data.status===200){
         navigate('/previewcre')
@@ -572,7 +587,7 @@ useEffect(()=>{
                         <th className="border bg-zinc-500 text-gray-300">Monto Cuota</th>
                     </tr>
                     </thead>
-                    <tbody className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
+                    <tbody id="cuerpo_cuotas" className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
                     <tr>
                         <td className="bg-zinc-600" >Total</td>
                         <td></td>
