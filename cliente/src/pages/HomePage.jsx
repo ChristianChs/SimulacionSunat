@@ -6,6 +6,7 @@ import Imagen3 from '../assets/images/atencion.png';
 import Starts from '../components/Stars';
 
 function HomePage() {
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1200);
 
@@ -27,94 +28,96 @@ function HomePage() {
 
   return (
     <div>
-    <Starts className="stars-behind" />
-    <div className='min-h-screen flex flex-col  justify-start relative'>
-      <div>
-        <div className='container mx-auto px-4 md:px-10 py-5 relative'>
-          <nav className='flex items-center justify-between'>
-                      <img
-              src={Imagen}
-              className={`w-32 md:w-40 cursor-pointer ${isLargeScreen ? 'md:flex' : 'hidden'}`}
-              alt='Logo'
-            />
+        <div>
+        <Starts className="stars-behind" />
+          <div className='min-h-screen flex flex-col  justify-start relative'>
+            <div>
+              <div className='container mx-auto px-4 md:px-10 py-5 relative'>
+                <nav className='flex items-center justify-between'>
+                            <img
+                    src={Imagen}
+                    className={`w-32 md:w-40 cursor-pointer ${isLargeScreen ? 'md:flex' : 'hidden'}`}
+                    alt='Logo'
+                  />
 
-            {isLargeScreen ? (
-              <ul className='flex-1 text-center space-x-4 md:space-x-8'>
-                <li className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent hover:scale-105">
-                  <a href="https://ww1.sunat.gob.pe/index.html#tramites-y-servicios" className='no-underline text-white px-2'>Trámites y Servicios</a>
-                </li>
-                <li className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent hover:scale-105">
-                  <a href="https://ww1.sunat.gob.pe/index.html#campanas" className='no-underline text-white px-2'>Campañas</a>
-                </li>
-                <li className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent hover:scale-105">
-                  <a href="https://ww1.sunat.gob.pe/index.html#contacto" className='no-underline text-white px-2'>Contactos y Redes Sociales</a>
-                </li>
-                <li className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent hover:scale-105">
-                  <a href="https://ww1.sunat.gob.pe/index.html#informacion-institucional" className='no-underline text-white px-2'>Información Institucional</a>
-                </li>
-              </ul>
-            ) : (
-              <div className="md:hidden">
-                <button onClick={toggleMenu} className={`text-white ${menuOpen ? 'open' : ''}`}>
-                  ☰ {/* Icono de hamburguesa */}
-                </button>
-                {menuOpen && (
-                  <ul className='text-center'>
-                    <li>
-                      <a href="https://ww1.sunat.gob.pe/index.html#tramites-y-servicios" className='list-none text-white inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-yellow duration-300 hover:border border border-transparent transform hover:scale-105 transition-transform'>Trámites y Servicios</a>
-                    </li>
-                    <li>
-                      <a href="https://ww1.sunat.gob.pe/index.html#campanas" className='list-none text-white inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-yellow duration-300 hover:border border border-transparent transform hover:scale-105 transition-transform'>Campañas</a>
-                    </li>
-                    <li>
-                      <a href="https://ww1.sunat.gob.pe/index.html#contacto" className='list-none text-white inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-yellow duration-300 hover:border border border-transparent transform hover:scale-105 transition-transform'>Contactos y Redes Sociales</a>
-                    </li>
-                    <li>
-                      <a href="https://ww1.sunat.gob.pe/index.html#informacion-institucional" className='list-none text-white inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-yellow duration-300 hover:border border border-transparent transform hover:scale-105 transition-transform'>Información Institucional</a>
-                    </li>
-                  </ul>
-                )}
-              </div>
-            )}
-            <img src={Imagen2} className='w-10 md:w-14 cursor-pointer' alt='Image 2' />
-          </nav>
-        </div>
-      </div>
-      <div>
-          <div>
-            <div className='container mx-auto px-4 md:px-10 py-5 relative'>
-              <div className='text-white mt-8 md:mt-24 max-w-3xl'>
-                <h1 className='text-6xl md:text-6xl font-semibold leading-normal text-white'>
-                  SUNAT
-                </h1>
-                <h1 className='font-normal font-mono text-yellow text-4xl text-bold'>
-                  Operaciones en línea
-                </h1>
-                <br></br>  
-                <p className='text-sm font-mono'>
-                  Esta es una herramienta como extensión de la Sunat que permite <br></br>  la emisión y almacenamiento de comprobantes de pago
-                  <br></br><br></br>Realizado por los estudiantes:<br></br>
-                  ✅Sebastian Tomas Linares Liendo 2022-119010<br></br>
-                  ✅Cesar Alberto Huayta Callisaya 2022-119032<br></br>
-                  ✅Luis Sebastian Nuñez Fuentes 2022-119035<br></br>
-                  ✅Alexis Daniel Limache Villegas 2022-119033
-
-                </p>
-
-                <div className='mt-6 md:mt-10'>
-                  <a href="/login" className='bg-primary rounded-3xl py-3 px-8 font-medium inline-block mr-4 object-cover border-1 hover:scale-0.75 hover:bg-zinc-900 border-white hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent'>Ingresar</a>
-                  <a href="/regis">Registrarse <span className='text-lg inline-block rotate-90'>&#10148;</span></a>
-                </div>
+                  {isLargeScreen ? (
+                    <ul className='flex-1 text-center space-x-4 md:space-x-8'>
+                      <li className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent hover:scale-105">
+                        <a href="https://ww1.sunat.gob.pe/index.html#tramites-y-servicios" className='no-underline text-white px-2'>Trámites y Servicios</a>
+                      </li>
+                      <li className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent hover:scale-105">
+                        <a href="https://ww1.sunat.gob.pe/index.html#campanas" className='no-underline text-white px-2'>Campañas</a>
+                      </li>
+                      <li className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent hover:scale-105">
+                        <a href="https://ww1.sunat.gob.pe/index.html#contacto" className='no-underline text-white px-2'>Contactos y Redes Sociales</a>
+                      </li>
+                      <li className="list-none inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent hover:scale-105">
+                        <a href="https://ww1.sunat.gob.pe/index.html#informacion-institucional" className='no-underline text-white px-2'>Información Institucional</a>
+                      </li>
+                    </ul>
+                  ) : (
+                    <div className="md:hidden">
+                      <button onClick={toggleMenu} className={`text-white ${menuOpen ? 'transform rotate-90 transition-transform duration-300 ease-in-out' : ''}`}>
+                        ☰ {/* Icono de hamburguesa */}
+                      </button>
+                      {menuOpen && (
+                        <ul className='text-center'>
+                          <li>
+                            <a href="https://ww1.sunat.gob.pe/index.html#tramites-y-servicios" className='list-none text-white inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-yellow duration-300 hover:border border border-transparent transform hover:scale-105 transition-transform'>Trámites y Servicios</a>
+                          </li>
+                          <li>
+                            <a href="https://ww1.sunat.gob.pe/index.html#campanas" className='list-none text-white inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-yellow duration-300 hover:border border border-transparent transform hover:scale-105 transition-transform'>Campañas</a>
+                          </li>
+                          <li>
+                            <a href="https://ww1.sunat.gob.pe/index.html#contacto" className='list-none text-white inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-yellow duration-300 hover:border border border-transparent transform hover:scale-105 transition-transform'>Contactos y Redes Sociales</a>
+                          </li>
+                          <li>
+                            <a href="https://ww1.sunat.gob.pe/index.html#informacion-institucional" className='list-none text-white inline-block px-5 hover:bg-transparent hover:border-yellow-300 hover:text-yellow duration-300 hover:border border border-transparent transform hover:scale-105 transition-transform'>Información Institucional</a>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+                  )}
+                  <img src={Imagen2} className='w-10 md:w-14 cursor-pointer' alt='Image 2' />
+                </nav>
               </div>
             </div>
             <div>
-              {isLargeScreen ? (
-                <img src={Imagen3} className='hidden md:block w-1/3 xl:w-1/3 absolute top-20 right-20' alt='Image 3' />
-              ) : null}
+                <div>
+                  <div className='container mx-auto px-4 md:px-10 py-5 relative'>
+                    <div className='text-white mt-8 md:mt-24 max-w-3xl'>
+                      <h1 className='text-5xl md:text-5xl font-semibold leading-normal text-white hover:text-5xl hover:scale-105 transform transition-transform duration-300'>
+                        SUNAT
+                      </h1>
+                      <h1 className='font-normal font-mono text-yellow text-4xl text-bold hover:text-4xl hover:scale-105 transform transition-transform duration-300'>
+                        Operaciones en línea
+                      </h1>
+                      <br></br>  
+                      <p className='text-sm font-mono'>
+                        Esta es una herramienta como extensión de la Sunat que permite <br></br>  la emisión y almacenamiento de comprobantes de pago
+                        <br></br><br></br>Realizado por los estudiantes:<br></br>
+                        ✅Sebastian Tomas Linares Liendo 2022-119010<br></br>
+                        ✅Cesar Alberto Huayta Callisaya 2022-119032<br></br>
+                        ✅Luis Sebastian Nuñez Fuentes 2022-119035<br></br>
+                        ✅Alexis Daniel Limache Villegas 2022-119033
+
+                      </p>
+
+                      <div className='mt-6 md:mt-10'>
+                        <a href="/login" className='bg-primary rounded-3xl py-3 px-8 font-medium inline-block mr-4 object-cover border-1 hover:scale-0.75 hover:bg-zinc-900 border-white hover:bg-transparent hover:border-yellow-300 hover:text-white duration-300 hover:border border border-transparent'>Ingresar</a>
+                        <a href="/regis">Registrarse <span className='text-lg inline-block rotate-90'>&#10148;</span></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    {isLargeScreen ? (
+                      <img src={Imagen3} className='hidden md:block w-1/3 xl:w-1/3 absolute top-20 right-20' alt='Image 3' />
+                    ) : null}
+                  </div>
+                </div>
             </div>
           </div>
-      </div>
-    </div>
+          </div>
     </div>
   );
 }
