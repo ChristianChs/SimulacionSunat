@@ -184,7 +184,7 @@ useEffect(() => {
 
           <View style={styles.section}>
             <Text style={[styles.label, { marginLeft: 40 }]}>&lt;forma_de_pago&gt;</Text>
-            <Text style={styles.value}>AL CONTADO</Text>
+            <Text style={styles.value}>AL CREDITO</Text>
             <Text style={styles.label}>&lt;/forma_de_pago&gt;</Text>
           </View>
 

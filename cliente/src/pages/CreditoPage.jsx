@@ -278,7 +278,7 @@ useEffect(()=>{
         vaCuota.numCuota=rows[i].getElementsByTagName('td')[1];
         vaCuota.feCuota=rows[i].getElementsByTagName('td')[2];
         vaCuota.monCuota=rows[i].getElementsByTagName('td')[3];
-        
+
         const dataCuota= await registrarContado(vaCuota);
         if(dataCuota.status===200){
           console.log("Fila: "+i)
@@ -414,7 +414,7 @@ useEffect(()=>{
               <br />
           </div>
 
-          <div className="bg-zinc-900 p-4 rounded-lg mb-4">
+          <div className="hidden bg-zinc-900 p-4 rounded-lg mb-4">
             <h1 className="text-lg font-semibold text-yellow-100 mb-5">
               ¿El pago total del servicio está siendo efectuado al momento de la emisión de este comprobante?
             </h1>
@@ -448,6 +448,7 @@ useEffect(()=>{
               <select
                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                 aria-label="Medio de Pago"
+                value="1"
                 {...register("medio_pago")}
               >
                 <option selected>-- Seleccione Medio de Pago --</option>
