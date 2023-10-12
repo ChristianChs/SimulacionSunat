@@ -82,6 +82,27 @@ export const ExtraerData = async (req, res) => {
     }
 }
 
+export const registerCuotas = async (req, res) => {
+    try {
+        const userFound = await model.inCuota(req.body)
+        console.log("XDDD",userFound)
+        return res.status(200).json({ message: "Cuota Registrada" })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const ExtraerCuotas = async (req, res) => {
+    try {
+        const userFound = await model.ExtraerC()
+        console.log("Extraccion de cuotas",userFound)
+        res.json(userFound)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+
 export const ExtraerDataLog = async (req, res) => {
     try {
         const { id_login } = req.body;

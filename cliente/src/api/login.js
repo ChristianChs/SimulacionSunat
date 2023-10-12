@@ -20,4 +20,4 @@ export const dataLogRequest = (user) => axios.post(`${API}/getLogin`, user)
 
 export const dataLogFecha = (user) => axios.post(`${API}/getFecha`, user)
 
-export const dataCuota = (user) => axios.post(`${API}/getCuota`, user)
+export const dataCuota = (user) => axios.post(`${API}/getCuotas`, user)

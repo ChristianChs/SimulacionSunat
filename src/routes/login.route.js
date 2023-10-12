@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ExtraerData, ExtraerDataLog,  ExtraerFecha,  login, login2, register,register2,register3 } from "../controllers/login.controller.js";
+import { ExtraerData, ExtraerDataLog, ExtraerCuotas, ExtraerFecha,registerCuotas,  login, login2, register,register2,register3 } from "../controllers/login.controller.js";
 
 const router = Router()
 
@@ -19,5 +19,8 @@ router.post('/getLogin',ExtraerDataLog)
 
 router.post('/getFecha',ExtraerFecha)
 
+router.post('/registerCuotas',registerCuotas)
+
+router.post('/getCuotas',ExtraerCuotas)
 
 export default router

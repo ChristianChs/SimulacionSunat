@@ -29,11 +29,12 @@ export const LoginProvider = ({ children }) => {
     }
   }
 
-  const registrarCuota = async (user) => {
+  const registrarCuotas = async (user) => {
     try {
       const res = await registerCuotas(user)
       return res
     } catch (error) {
+      console.log("hola",error)
       if (Array.isArray(error.response.data)) {
         return setErrors(error.response.data)
       }
@@ -51,6 +52,7 @@ export const LoginProvider = ({ children }) => {
       const res = await registerRequest2(user)
       return res
     } catch (error) {
+      console.log(error)
       if (Array.isArray(error.response.data)) {
         return setErrors(error.response.data)
       }
@@ -123,7 +125,7 @@ export const LoginProvider = ({ children }) => {
       errors,
       loading,
       setDataRecibo,
-      registrarCuota,
+      registrarCuotas,
       registrarContado
     }}>
       {children}
