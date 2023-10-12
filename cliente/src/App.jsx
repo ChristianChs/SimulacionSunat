@@ -17,6 +17,7 @@ import Ejemplo from './components/ejemplo'
 import Consentimiento from './pages/Consentimiento'
 import Boleta from './pages/Boleta'
 import FacturaInfAdd from './pages/FacturaInfAdd'
+import PreFractura from './pages/PreFactura'
 
 export default function App() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
               <Route path='cons' element={<Consentimiento />} />
               <Route path='bol' element={<Boleta />} />
               <Route path='factinf' element={<FacturaInfAdd />} />
+              <Route path='prefact' element={<PreFractura />} />
             </Route>
           </Routes>
         </BrowserRouter>
