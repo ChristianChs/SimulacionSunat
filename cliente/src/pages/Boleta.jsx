@@ -569,38 +569,8 @@ function BoletaForm() {
                             </div>
 
                             <h1 className="mb-3 text-gray-400 font-sans font-bold">
-                            IGV:
+                            IGV (18%):
                             </h1>
-                            <div className="flex justify-center">
-                                <div className="mx-7">
-                                    <input
-                                        type="radio"
-                                        id="retention_yes"
-                                        name="igvporcentaje"
-                                        value="1"
-                                        className="mr-2"
-                                    />
-                                    <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
-                                        18 %
-                                    </label>
-                                    <br />
-                                </div>
-                                
-                                <div className="mx-7">
-                                    <div className="h-1"></div>
-                                    <input
-                                        type="radio"
-                                        id="retention_no"
-                                        name="igvporcentaje"
-                                        value="0"
-                                        className="mr-2"
-                                    />
-                                    <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
-                                        10 %
-                                    </label>
-                                    <br />
-                                </div>
-                            </div>
                             <div className="flex justify-center">
                                 <div className="mx-7">
                                     <input
@@ -714,7 +684,7 @@ function BoletaForm() {
                                 />
                             </div>
                         </div>
-                        <div className="mx-auto bg-text-zinc-900 p-6 dark:text-white">
+                        <div className="mx-auto bg-text-zinc-900 dark:text-white">
                             <table id="cuotas" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
                                 <thead>
                                     <tr className="bg-gray-200">
