@@ -11,6 +11,18 @@ function TempletePDF(data) {
   const [datareceptor3,setDataReceptor3]=useState(null)
   const [datareceptor4,setDataReceptor4]=useState(null)
   const [dataReceptor5,setDataReceptor5]=useState(null)
+const [cuotas, setCuotas] = useState([]);
+
+  const cargarCuotas = async () => {
+    try {
+      const response = await model.inCuota({ numCuota: '...', feCuota: '...', monCuota: '...' });
+      if (response) {
+        setCuotas([...cuotas, response]);
+      }
+    } catch (error) {
+      console.error('Error al cargar datos:', error);
+    }
+  };
   
   const getinfoRUCrs = async(ruc)=>{
     const data= await validaRUC(ruc)
@@ -41,6 +53,9 @@ function TempletePDF(data) {
     console.log(TablaCuota.data[0].numero_cuota)
     setDataReceptor5(TablaCuota)
   }
+  useEffect(() => {
+    cargarCuotas(); // Llama a cargarCuotas al cargar el componente
+  }, []);
 
   
     function numeroAtexto(numero) {
@@ -193,7 +208,34 @@ useEffect(() => {
               <Text id="numeroInput" style={{ ...styles.value, textAlign: 'left', flex: 1 / 2 }}> {info.total_neto} SOLES</Text>
             </View>
           </View>
+          
+          <View style={styles.table}>
+          <View style={styles.row}>
+            <View style={styles.cell}>
+              <Text>Número de Cuota</Text>
+            </View>
+            <View style={styles.cell}>
+              <Text>Fecha de Vencimiento</Text>
+            </View>
+            <View style={styles.cell}>
+              <Text>Monto de Cuota</Text>
+            </View>
+          </View>
+          {cuotas.map((cuota, index) => (
+            <View key={index} style={styles.row}>
+              <View style={styles.cell}>
+                <Text>{cuota.numero_cuota}</Text>
+              </View>
+              <View style={styles.cell}>
+                <Text>{cuota.fecha_vencimiento}</Text>
+              </View>
+              <View style={styles.cell}>
+                <Text>{cuota.monto_cuota}</Text>
+              </View>
+            </View>
+          ))}
 
+        </View>
 
           <View style={styles.linea}></View>
         </View>
