@@ -36,6 +36,15 @@ function ExamplePreviewCredito() {
     const datos=await dataLogRequest({"id_login":id_login.id})
     setUser2(datos.data)
     setShowModal2(true)
+        downloadTxtFile = () => {
+        const { content } = this.state;
+        const element = document.createElement('a');
+        const file = new Blob([content], { type: 'text/plain' });
+        element.href = URL.createObjectURL(file);
+        element.download = 'mi-archivo.txt';
+        document.body.appendChild(element);
+        element.click();
+    };
     /*setUser(datos.data)
     return datos.data*/
   }

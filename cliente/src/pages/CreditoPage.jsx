@@ -250,6 +250,8 @@ useEffect(()=>{
     setTotalNeto(newValue);
   };
 
+  
+
   const precargado = () => {
     setValue('descripcion_rxh', "TEST 1");
     setValue('fecha_emision', '2023-09-09');
