@@ -62,6 +62,7 @@ function MenuPage() {
           </Link>
         </li>
         <li>
+        <Link to={'/cons'}>
           <div
             className="card relative bg-zinc-900 text-primary border rounded-lg overflow-hidden hover:scale-125 hover:border-amber-200 transition-transform w-60 mx-auto block"
           >
@@ -77,6 +78,7 @@ function MenuPage() {
               </div>
             </div>
           </div>
+          </Link>
         </li>
       </ul>
       <div className="flex justify-center mt-4">
