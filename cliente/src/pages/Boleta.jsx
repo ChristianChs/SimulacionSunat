@@ -16,7 +16,7 @@ function BoletaForm() {
                 </h1>
                 <form>
 
-                    /*CUANDO LA FACTURA ES DE EXPORTACIÓN, SE DEBEN QUITAR LOS CAMPOS: "Indique si consignara la dirección", "ISC", "Cargos u Otros Atributos"*/
+                    /*CUANDO LA BOLETA DE VENTA ES DE EXPORTACIÓN, SE DEBEN QUITAR LOS CAMPOS: "Indique si consignara la dirección", "ISC", "Cargos u Otros Atributos"*/
 
                     <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                         <h1 className="text-lg font-semibold text-yellow-100 mb-5">
