@@ -16,6 +16,41 @@ const [selectedIgvTipo, setSelectedIgvTipo] = useState("2");
 const [selectedImpBols, setSelectedImpBols] = useState("0");
 const [selectedYear, setSelectedYear] = useState("nada");
 
+ const yearToValueMap = {
+    '2019': 0.1,
+    '2020': 0.2,
+    '2021': 0.3,
+    '2022': 0.4,
+    '2023': 0.5,
+  };
+
+const handleYearChange = (e) => {
+    const selectedValue = yearToValueMap[e.target.value];
+    setSelectedYear(e.target.value);
+
+    document.getElementById('imp_Bols').value = selectedValue;
+
+
+    const bols_total = selectedValue * document.getElementById('cant').value;
+    document.getElementById('bols_tot').value=bols_total
+    console.log("bols_total:", bols_total);
+
+    const cantValue = parseFloat(document.getElementById('cant').value);
+    console.log("cantValue:", cantValue);
+    
+    const uniValue = parseFloat(document.getElementById('uni').value);
+    console.log("uniValue:", uniValue);
+    
+    const montoCuotaValue = parseFloat(document.getElementById('igvParcial').value);
+    console.log("montoCuotaValue:", montoCuotaValue);
+
+    const montoTotalValue = (cantValue * uniValue) + montoCuotaValue + bols_total;
+    console.log("montoTotalValue:", montoTotalValue);
+    setITotal(montoTotalValue);
+};
+
+
+
 const handleIgvTipoChange = (e) => {
   const newValue = e.target.value;
   setSelectedIgvTipo(newValue);
@@ -54,19 +89,25 @@ const updateMFinal = (newCantidad, newValorUnitario) => {
   const porcentajeText = porcentajeValue === "1" ? 0.18 : porcentajeValue === "0" ? 0.10 : "";
 
   let res = 0;
-  
+
   if (tipoValue === "1" || tipoValue === "0") {
-    res = 0; // Set res to 0 when igvtipo is 1 or 0
+    res = 0;
   } else {
     res = newValorUnitario * newCantidad * porcentajeText;
   }
 
+  const total_bolsas = document.getElementById('imp_Bols').value * newCantidad;
+  document.getElementById('bols_tot').value = total_bolsas.toFixed(2);
+
   const resRedondeado = res.toFixed(2);
   const i = res + newValorUnitario * newCantidad;
-  const impTotal = i.toFixed(2);
+  let impTotal = i.toFixed(2); // Convierte impTotal en una cadena
+  const bolsTot = parseFloat(document.getElementById('bols_tot').value); // Convierte bols_tot en un número
+  impTotal = (parseFloat(impTotal) + bolsTot).toFixed(2); // Suma bolsTot a impTotal y redondea a 2 decimales
   setITotal(impTotal);
   setMFinal(resRedondeado);
 };
+
 
 
 const [mostrarRucReceptor, setMostrarRucReceptor] = useState(false);
@@ -947,7 +988,7 @@ function eliminarFila(id) {
                                 disabled
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="number"
-                                id="monto_cuota"
+                                id="igvParcial"
                                 placeholder="0.00"
                                 aria-label=".form-control-lg example"
                                 value={mfinal}
@@ -958,27 +999,31 @@ function eliminarFila(id) {
                             </h1>
                             <div className='flex'>
                                 
-                            <select
-                            disabled={selectedImpBols !== "1"} // Habilita el select solo si selectedImpBols es "1"
-                            value={selectedYear} // Establece el valor seleccionado
-                            onChange={(e) => setSelectedYear(e.target.value)} // Maneja los cambios en el select
-                            className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 mr-3 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                            aria-label="ISC"
-                            >
-                            <option value="nada">-</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                            <option value="2022">2022</option>
-                            <option value="2023">2023</option>
-                            </select>
+      <select
+        disabled={selectedImpBols !== "1"}
+        value={selectedYear}
+        onChange={(e) => {
+          setSelectedYear(e.target.value);
+          handleYearChange(e);
+        }}
+        className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 mr-3 font-sans font-semibold text-gray-300 focus-border-yellow-100"
+        aria-label="ISC"
+      >
+        <option value="nada">-</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+      </select>
+
 
 
                                 <input
                                     disabled
                                     className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 ml-3 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                     type="text"
-                                    id="monto_cuota"
+                                    id="imp_Bols"
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
                                 />
@@ -991,7 +1036,7 @@ function eliminarFila(id) {
                                 disabled
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="number"
-                                id="bols"
+                                id="bols_tot"
                                 placeholder="0.00"
                                 aria-label=".form-control-lg example"
                             />
@@ -1004,7 +1049,7 @@ function eliminarFila(id) {
                                 value={iTotal}
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="number"
-                                id="monto_cuota"
+                                id="monto_Total"
                                 placeholder="0.00"
                                 aria-label=".form-control-lg example"
                             />
