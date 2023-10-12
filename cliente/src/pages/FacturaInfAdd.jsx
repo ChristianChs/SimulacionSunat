@@ -42,7 +42,7 @@ function FacturaForm() {
                         Consigne las observaciones de la factura
                         </h1>
                         <input
-                            id="description"
+                            
                             name="description"
                             type="text"
                             aria-label="default input example"
@@ -57,7 +57,7 @@ function FacturaForm() {
                         </h1>
                         <div className="flex justify-center">
                             <input
-                                id="agregar"
+                                
                                 type="button"
                                 value="Documentos Relacionados"
                                 className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
@@ -98,7 +98,7 @@ function FacturaForm() {
                                     Serie Documento
                                 </label>
                                     <input
-                                    id="description"
+                                    
                                     name="description"
                                     type="text"
                                     aria-label="default input example"
@@ -109,7 +109,7 @@ function FacturaForm() {
                                     Número Documento
                                 </label>
                                 <input
-                                    id="description"
+                                    
                                     name="description"
                                     type="text"
                                     aria-label="default input example"
@@ -118,7 +118,7 @@ function FacturaForm() {
                                 
                                 <div className="flex justify-end">
                                     <input
-                                        id="agregar"
+                                        
                                         type="button"
                                         value="Adicionar Item"
                                         className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
@@ -155,7 +155,7 @@ function FacturaForm() {
                         </h1>
                         <div className="flex justify-center">
                             <input
-                                id="agregar"
+                                
                                 type="button"
                                 value="Información al Crédito"
                                 className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
@@ -168,7 +168,7 @@ function FacturaForm() {
                                     Monto Neto Pendiente de Pago
                                 </label>
                                     <input
-                                    id="description"
+                                    
                                     name="description"
                                     type="number"
                                     aria-label="default input example"
@@ -204,7 +204,7 @@ function FacturaForm() {
 
                                     <div className="flex justify-end">
                                         <input
-                                            id="agregar"
+                                            
                                             type="button"
                                             value="Agregar Cuota"
                                             className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
@@ -244,7 +244,7 @@ function FacturaForm() {
                         </h1>
                         <div className="flex justify-center">
                             <input
-                                id="agregar"
+                                
                                 type="button"
                                 value="Información Relacionada"
                                 className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
@@ -261,7 +261,7 @@ function FacturaForm() {
                                     Número de Expediente:
                                 </label>
                                     <input
-                                    id="description"
+                                    
                                     name="description"
                                     type="text"
                                     aria-label="default input example"
@@ -272,7 +272,7 @@ function FacturaForm() {
                                     Orden de Compra:
                                 </label>
                                 <input
-                                    id="description"
+                                    
                                     name="description"
                                     type="text"
                                     aria-label="default input example"
@@ -283,7 +283,7 @@ function FacturaForm() {
                                     Código Unidad Ejecutora:
                                 </label>
                                 <input
-                                    id="description"
+                                    
                                     name="description"
                                     type="text"
                                     aria-label="default input example"
@@ -294,7 +294,7 @@ function FacturaForm() {
                                     Número de Proceso de Selección:
                                 </label>
                                 <input
-                                    id="description"
+                                    
                                     name="description"
                                     type="text"
                                     aria-label="default input example"
@@ -305,7 +305,7 @@ function FacturaForm() {
                                     Número de Contrato:
                                 </label>
                                 <input
-                                    id="description"
+                                    
                                     name="description"
                                     type="text"
                                     aria-label="default input example"
@@ -322,7 +322,7 @@ function FacturaForm() {
                         </h1>
                         <div className="flex justify-center">
                             <input
-                                id="agregar"
+                                
                                 type="button"
                                 value="Información de la Detracción"
                                 className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
@@ -396,7 +396,7 @@ function FacturaForm() {
                                     Nro. Cta. Banco de la Nación
                                 </label>
                                     <input
-                                    id="description"
+                                    
                                     name="description"
                                     type="text"
                                     aria-label="default input example"
@@ -431,7 +431,7 @@ function FacturaForm() {
                                     Porcentaje de detracción
                                 </label>
                                 <input
-                                    id="description"
+                                    
                                     name="description"
                                     type="number"
                                     aria-label="default input example"
@@ -442,7 +442,7 @@ function FacturaForm() {
                                     Monto de la detracción (S/)
                                 </label>
                                 <input
-                                    id="description"
+                                    
                                     name="description"
                                     type="number"
                                     aria-label="default input example"
