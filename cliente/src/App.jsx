@@ -14,6 +14,9 @@ import ExamplePreviewContado from './pages/ExamplePreviewContado'
 import ExamplePreviewCredito from './pages/ExamplePreviewCredito'
 import Factura from './pages/Factura'
 import Ejemplo from './components/ejemplo'
+import Consentimiento from './pages/Consentimiento'
+import Boleta from './pages/Boleta'
+import FacturaInfAdd from './pages/FacturaInfAdd'
 
 export default function App() {
   return (
@@ -34,6 +37,9 @@ export default function App() {
               <Route path='previewcre' element={<ExamplePreviewCredito />} />
               <Route path='fact' element={<Factura />} />
               <Route path='eje' element={<Ejemplo />} />
+              <Route path='cons' element={<Consentimiento />} />
+              <Route path='bol' element={<Boleta />} />
+              <Route path='factinf' element={<FacturaInfAdd />} />
             </Route>
           </Routes>
         </BrowserRouter>

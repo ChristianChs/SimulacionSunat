@@ -24,6 +24,7 @@ function MenuPage() {
         className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center"
       >
         <li>
+        <Link to={'/fact'}>
           <div
             className="card relative bg-zinc-900 text-primary border rounded-lg overflow-hidden hover:scale-125 hover:border-amber-200 transition-transform w-60 mx-auto block"
           >
@@ -39,6 +40,7 @@ function MenuPage() {
               </div>
             </div>
           </div>
+          </Link>
         </li>
         <li>
           <Link to={'/rxh'}>
@@ -60,6 +62,7 @@ function MenuPage() {
           </Link>
         </li>
         <li>
+        <Link to={'/cons'}>
           <div
             className="card relative bg-zinc-900 text-primary border rounded-lg overflow-hidden hover:scale-125 hover:border-amber-200 transition-transform w-60 mx-auto block"
           >
@@ -75,6 +78,7 @@ function MenuPage() {
               </div>
             </div>
           </div>
+          </Link>
         </li>
       </ul>
       <div className="flex justify-center mt-4">

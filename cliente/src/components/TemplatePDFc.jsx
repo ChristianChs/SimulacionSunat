@@ -10,6 +10,7 @@ function TempletePDF(data) {
   const [datareceptor2,setDataReceptor2]=useState(null)
   const [datareceptor3,setDataReceptor3]=useState(null)
   const [datareceptor4,setDataReceptor4]=useState(null)
+  const [dataReceptor5,setDataReceptor5]=useState(null)
   
   const getinfoRUCrs = async(ruc)=>{
     const data= await validaRUC(ruc)
@@ -34,6 +35,12 @@ function TempletePDF(data) {
     setDataReceptor4(data.data.direccion)
   }
   getinfoRUCdd(info.nrodoc_destinatario)
+
+  const getinfoCuota = async()=>{
+    const TablaCuota= await dataCuota()
+    console.log(TablaCuota.data[0].numero_cuota)
+    setDataReceptor5(TablaCuota)
+  }
 
   
     function numeroAtexto(numero) {
@@ -100,6 +107,7 @@ function convertirNumeroALetras(numeroInput) {
 
 useEffect(() => {
   convertirNumeroALetras(info.total_neto); 
+  getinfoCuota()
 }, []);
 
   return (

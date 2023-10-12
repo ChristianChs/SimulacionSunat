@@ -7,6 +7,7 @@ import { useReciboxH } from '../context/ReciboxHContext'
 
 export default function CreditoPage() {
   const { registrarContado, errors: LoginErrors } = useLogin();
+  const { registrarCuotas, errors: LoginErrors2 } = useLogin();
   const navigate=useNavigate();
 let a = 1;
 
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
 
 function insertarFila() {
     const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
@@ -262,7 +264,7 @@ useEffect(()=>{
     setValue('tipo_moneda', '2');
   };
 
-  const onSubmit = handleSubmit(async(values) => {
+  const onSubmit = handleSubmit(async(values,vaCuota) => {
     values.montoTotal=montoTotal;
     values.totalImpuesto=totalImpuesto;
     values.totalNeto=totalNeto;
@@ -277,16 +279,18 @@ useEffect(()=>{
 
 
     for (var i = 1; i < rows.length - 1; i++) {
-        vaCuota.numCuota=rows[i].getElementsByTagName('td')[1];
-        vaCuota.feCuota=rows[i].getElementsByTagName('td')[2];
-        vaCuota.monCuota=rows[i].getElementsByTagName('td')[3];
-
-        const dataCuota= await registrarContado(vaCuota);
-        if(dataCuota.status===200){
-          console.log("Fila: "+i)
+        vaCuota.numCuota=rows[i].getElementsByTagName('td')[1].textContent;
+        vaCuota.feCuota=rows[i].getElementsByTagName('td')[2].textContent;
+        vaCuota.monCuota=rows[i].getElementsByTagName('td')[3].textContent;
+        const dataCuota = {
+          numCuota:vaCuota.numCuota,
+          feCuota:vaCuota.feCuota,
+          monCuota:vaCuota.monCuota
         }
+        console.log(dataCuota)
+        await registrarCuotas(dataCuota);
     }
-
+    console.log(values)
     const data= await registrarContado(values);
       if(data.status===200){
         navigate('/previewcre')
