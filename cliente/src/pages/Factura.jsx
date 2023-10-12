@@ -1,9 +1,181 @@
 import React, { useEffect, useState } from 'react'
 import Starts from '../components/Stars'
+import { resolvePath } from 'react-router-dom';
 
 function FacturaForm() {
-  // Puedes agregar aquí el estado y funciones necesarias para manejar los datos del formulario
+    let a = 1;
 
+
+const [igvNeto, setigvNeto] = useState('');
+const [cantidad, setCantidad] = useState(0);
+const [valorUnitario, setValorUnitario] = useState(0);
+const [mfinal, setMFinal] = useState(0);
+const [iTotal,setITotal]=useState(0);
+const [selectedValue, setSelectedValue] = useState("1");
+const [selectedIgvTipo, setSelectedIgvTipo] = useState("2");
+const [selectedImpBols, setSelectedImpBols] = useState("0");
+const [selectedYear, setSelectedYear] = useState("nada");
+
+const handleIgvTipoChange = (e) => {
+  const newValue = e.target.value;
+  setSelectedIgvTipo(newValue);
+  updateMFinal(cantidad, valorUnitario, newValue);
+};
+
+const handleImpBolsChange = (e) => {
+  const newValue = e.target.value;
+  setSelectedImpBols(newValue);
+
+  if (newValue === "0") {
+    setSelectedYear("nada");
+  }
+};
+
+const handle = (event) => {
+  const newValue = event.target.value;
+  setCantidad(newValue);
+  updateMFinal(newValue, valorUnitario);
+};
+
+const handleRadioChange = (e) => {
+  setSelectedValue(e.target.value);
+  updateMFinal(cantidad, valorUnitario);
+};
+
+const onChangeMonto = (e) => {
+  const value = e.target.value;
+  setValorUnitario(value);
+  updateMFinal(cantidad, value);
+};
+
+const updateMFinal = (newCantidad, newValorUnitario) => {
+  const porcentajeValue = document.querySelector('input[name="igvporcentaje"]:checked').value;
+  const tipoValue = document.querySelector('input[name="igvtipo"]:checked') ? document.querySelector('input[name="igvtipo"]:checked').value : null;
+  const porcentajeText = porcentajeValue === "1" ? 0.18 : porcentajeValue === "0" ? 0.10 : "";
+
+  let res = 0;
+  
+  if (tipoValue === "1" || tipoValue === "0") {
+    res = 0; // Set res to 0 when igvtipo is 1 or 0
+  } else {
+    res = newValorUnitario * newCantidad * porcentajeText;
+  }
+
+  const resRedondeado = res.toFixed(2);
+  const i = res + newValorUnitario * newCantidad;
+  const impTotal = i.toFixed(2);
+  setITotal(impTotal);
+  setMFinal(resRedondeado);
+};
+
+
+const [mostrarRucReceptor, setMostrarRucReceptor] = useState(false);
+
+document.addEventListener('DOMContentLoaded', function () {
+    const table = document.getElementById('cuotas');
+    table.addEventListener('click', function (event) {
+        const target = event.target;
+        
+        if (target.tagName === 'TD' && target.cellIndex === 0) {
+            const row = target.parentNode;
+            const id = row.getAttribute('data-id');
+            eliminarFila(id);
+        }
+    });
+});
+
+function insertarFila() {
+    let tblDatos = document.getElementById('cuotas');
+    let newRow = tblDatos.insertRow(tblDatos.rows.length - 1);
+    const cantidad=document.getElementById('cant').value;
+    const medida=document.getElementById('medida').value;
+
+    const bosValue = document.querySelector('input[name="item"]:checked').value;
+    const bosText = bosValue === "1" ? "Bien" : bosValue === "0" ? "Servicio" : "";
+
+
+    const igvTipoValue = document.querySelector('input[name="igvtipo"]:checked').value;
+    let igvTipoText = "";
+        switch (igvTipoValue) {
+        case "2":
+            igvTipoText = "Gravado";
+            break;
+        case "1":
+            igvTipoText = "Exonerado";
+            break;
+        case "0":
+            igvTipoText = "Inafecto";
+            break;
+        default:
+            igvTipoText = "";
+    }
+
+    let col1 = newRow.insertCell(0);
+    let col2 = newRow.insertCell(1);
+    let col3 = newRow.insertCell(2);
+    let col4 = newRow.insertCell(3);
+    let col5 = newRow.insertCell(4);
+    let col6 = newRow.insertCell(5);
+    let col7 = newRow.insertCell(6);
+    let col8 = newRow.insertCell(7);
+    let col9 = newRow.insertCell(8);
+     const id = 'fila' + a;
+
+    col1.innerHTML = '<button class="text-red-500">x</button>';
+
+    col2.innerHTML = bosText;
+    col3.innerHTML = igvTipoText;
+    
+    col4.innerHTML = medida;
+
+
+    col5.innerHTML=cantidad;
+    col6.innerHTML=document.getElementById('cod').value;
+    col7.innerHTML=document.getElementById('des').value;
+    col8.innerHTML=document.getElementById('uni').value;
+    col9.innerHTML=document.getElementById('bols').value;
+    newRow.setAttribute('data-id', id);
+    col1.firstChild.addEventListener('click', function () {
+        eliminarFila(id);
+    });
+
+    a++;
+    actualizarNumerosConsecutivos();
+}
+
+function actualizarNumerosConsecutivos() {
+    var table = document.getElementById('cuotas');
+    var rows = table.getElementsByTagName('tr');
+    
+    for (var i = 1; i < rows.length - 1; i++) {
+        var cell = rows[i].getElementsByTagName('td')[1];
+        if (cell) {
+            
+        }
+    }
+}
+
+function eliminarFila(id) {
+    var row = document.querySelector('tr[data-id="' + id + '"]');
+    
+    if (row) {
+        row.parentNode.removeChild(row);
+    }
+}
+
+
+  const handleOptionChange = (event) => {
+    const isExportacion = event.target.value === "1";
+    setMostrarRucReceptor(isExportacion);
+  };
+
+  React.useEffect(() => {
+
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate()-2);
+    const formattedDate = currentDate.toISOString().split('T')[0];
+    document.getElementById('date_issue').setAttribute('min', formattedDate);
+  });
   return (
     <div>
         <Starts className="stars-behind" />
@@ -74,8 +246,6 @@ function FacturaForm() {
                         <br />
                     </div>
 
-                    /*AQUI SE DEBE USAR JAVA, EN CASO EL USUARIO APRIETE SI en "DETRACCIÓN", NO MOSTRAR EL CUADRO SIGUIENTE Y PARA LOS DEMÁS CUADROS, TOMARLO COMO SI "INDIQUE SI ES UNA FACTURA DE EXPORTACIÓN" HUBIERAN MARCADO QUE NO*/
-
                     <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                         <h1 className="text-lg font-semibold text-yellow-100 mb-5">
                         Indique si es una Factura de Exportación
@@ -86,6 +256,7 @@ function FacturaForm() {
                             name="exportacion"
                             value="1"
                             className="mr-2"
+                            onChange={handleOptionChange}
                         />
                         <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                             SI
@@ -98,16 +269,14 @@ function FacturaForm() {
                             name="exportacion"
                             value="0"
                             className="mr-2"
+                            onChange={handleOptionChange}
                         />
                         <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                             NO
                         </label>
                         <br />
                     </div>
-
-                    /*AQUI SE DEBE USAR JAVA, EN CASO EL USUARIO APRIETE NO en "INDIQUE SI ES UNA FACTURA DE EXPORTACIÓN", MOSTRAR ESTE CUADRO SIGUIENTE*/
-
-                    <div className="bg-zinc-900 p-4 rounded-lg mb-4">
+                    <div id="rucReceptor" style={{ display: mostrarRucReceptor ? 'none' : 'block' }} className="bg-zinc-900 p-4 rounded-lg mb-4">
                         <h1 className="text-lg font-semibold text-yellow-100 mb-4">
                         Consigne el RUC del Contribuyente Receptor de la Factura
                         </h1>
@@ -135,9 +304,7 @@ function FacturaForm() {
                     </div>
                     
                     
-                    /*AQUI SE DEBE USAR JAVA, EN CASO EL USUARIO APRIETE SI en "INDIQUE SI ES UNA FACTURA DE EXPORTACIÓN", MOSTRAR ESTE CUADRO SIGUIENTE*/
-                    
-                    <div className="bg-zinc-900 p-4 rounded-lg mb-4">
+                    <div id="tipoDoc" style={{ display: mostrarRucReceptor ? 'block' : 'none' }} className="bg-zinc-900 p-4 rounded-lg mb-4">
                         <h1 className="text-lg font-semibold text-yellow-100 mb-4">
                         Seleccione el Tipo de documento de la Factura de Venta
                         </h1>
@@ -365,10 +532,8 @@ function FacturaForm() {
                         </label>
                         <br />
                     </div>
-                    
-                    /*AQUI SE DEBE USAR JAVA, EN CASO EL USUARIO APRIETE SI EN "INDIQUE SI ES UNA FACTURA DE EXPORTACIÓN", NO SE DEBE MOSTRAR ESTE CUADRO SIGUIENTE*/
 
-                    <div className="bg-zinc-900 p-4 rounded-lg mb-4">
+                    <div style={{ display: mostrarRucReceptor ? 'none' : 'block' }} className="bg-zinc-900 p-4 rounded-lg mb-4">
                         <h1 className="text-lg font-semibold text-yellow-100 mb-5">
                         Indique si la Factura tiene ISC
                         </h1>
@@ -522,7 +687,7 @@ function FacturaForm() {
                             <h1 className="text-base font-bold mb-3 text-white">
                                 Agregue los bienes o servicios:
                             </h1>
-                            <div className="flex justify-center">
+                            <div id="BoS" className="flex justify-center">
                                 <div className="mx-7">
                                     <input
                                         type="radio"
@@ -557,10 +722,12 @@ function FacturaForm() {
                                 Cantidad:
                             </label>
                             <input
+                            
                                 className="monto-cuota w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="number"
-                                id="monto_cuota"
+                                id="cant"
                                 aria-label=".form-control-lg example"
+                                onChange={handle}
                             />
 
                             <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
@@ -569,7 +736,7 @@ function FacturaForm() {
                             <input
                                 className="monto-cuota w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
-                                id="monto_cuota"
+                                id="medida"
                                 aria-label=".form-control-lg example"
                             />
 
@@ -579,7 +746,7 @@ function FacturaForm() {
                             <input
                                 className="monto-cuota w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
-                                id="monto_cuota"
+                                id="cod"
                                 aria-label=".form-control-lg example"
                             />
 
@@ -588,39 +755,43 @@ function FacturaForm() {
                             </label>
                             <textarea className="monto-cuota w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
-                                id="monto_cuota"
+                                id="des"
                                 aria-label=".form-control-lg example">
                             </textarea>
 
                             <h1 className="mb-3 text-gray-400 font-sans font-bold">
                             Impuesto Bolsas Plásticas:
                             </h1>
-                            <div className="flex justify-center">
+                            <div id="ImpBols" className="flex justify-center">
                                 <div className="mx-7">
                                     <input
-                                        type="radio"
-                                        id="retention_yes"
-                                        name="impuestobolsas"
-                                        value="1"
-                                        className="mr-2"
+                                    type="radio"
+                                    id="retention_yes"
+                                    name="impuestobolsas"
+                                    value="1"
+                                    className="mr-2"
+                                    onChange={handleImpBolsChange}
+                                    checked={selectedImpBols === "1"}
                                     />
                                     <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
-                                        SI
+                                    SI
                                     </label>
                                     <br />
                                 </div>
-                                
+
                                 <div className="mx-7">
                                     <div className="h-1"></div>
                                     <input
-                                        type="radio"
-                                        id="retention_no"
-                                        name="impuestobolsas"
-                                        value="0"
-                                        className="mr-2"
+                                    type="radio"
+                                    id="retention_no"
+                                    name="impuestobolsas"
+                                    value="0"
+                                    className="mr-2"
+                                    onChange={handleImpBolsChange}
+                                    checked={selectedImpBols === "0"}
                                     />
                                     <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
-                                        NO
+                                    NO
                                     </label>
                                     <br />
                                 </div>
@@ -630,11 +801,13 @@ function FacturaForm() {
                                 Valor Unitario:
                             </label>
                             <input
+                           
                                 className="monto-cuota w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="number"
-                                id="monto_cuota"
+                                id="uni"
                                 placeholder="0.00"
                                 aria-label=".form-control-lg example"
+                                onChange={onChangeMonto}
                             />
 
                             <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
@@ -653,14 +826,16 @@ function FacturaForm() {
                             ISC:
                             </h1>
                             <select
+                            disabled
                             className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                             aria-label="ISC"
                             >
                                 <option selected="NADA"></option>
-                                <option selected="NADA">NO SE VE EN EL VIDEO</option>
+                                <option selected="NADA"></option>
                             </select>
                             <div className='flex'>
                                 <input
+                                disabled
                                     className="monto-cuota w-1/6 py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                     type="number"
                                     id="monto_cuota"
@@ -684,44 +859,50 @@ function FacturaForm() {
                             <h1 className="mb-3 text-gray-400 font-sans font-bold">
                             IGV:
                             </h1>
-                            <div className="flex justify-center">
+                            <div id="porce" className="flex justify-center">
                                 <div className="mx-7">
-                                    <input
-                                        type="radio"
-                                        id="retention_yes"
-                                        name="igvporcentaje"
-                                        value="1"
-                                        className="mr-2"
-                                    />
-                                    <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
-                                        18 %
-                                    </label>
-                                    <br />
+                                <input
+                                    type="radio"
+                                    id="retention_yes"
+                                    name="igvporcentaje"
+                                    value="1"
+                                    className="mr-2"
+                                    onChange={handleRadioChange}
+                                    checked={selectedValue === "1"}
+                                />
+                                <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
+                                    18 %
+                                </label>
+                                <br />
                                 </div>
-                                
+
                                 <div className="mx-7">
-                                    <div className="h-1"></div>
-                                    <input
-                                        type="radio"
-                                        id="retention_no"
-                                        name="igvporcentaje"
-                                        value="0"
-                                        className="mr-2"
-                                    />
-                                    <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
-                                        10 %
-                                    </label>
-                                    <br />
+                                <div className="h-1"></div>
+                                <input
+                                    type="radio"
+                                    id="retention_no"
+                                    name="igvporcentaje"
+                                    value="0"
+                                    className="mr-2"
+                                    onChange={handleRadioChange}
+                                    checked={selectedValue === "0"}
+                                />
+                                <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
+                                    10 %
+                                </label>
+                                <br />
                                 </div>
                             </div>
-                            <div className="flex justify-center">
+                            <div id="igvT" className="flex justify-center">
                                 <div className="mx-7">
                                     <input
                                         type="radio"
                                         id="retention_yes"
                                         name="igvtipo"
-                                        value="1"
+                                        value="2"
                                         className="mr-2"
+                                        onChange={handleIgvTipoChange}
+                                        checked={selectedIgvTipo === "2"}
                                     />
                                     <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                         Gravado
@@ -735,8 +916,10 @@ function FacturaForm() {
                                         type="radio"
                                         id="retention_no"
                                         name="igvtipo"
-                                        value="0"
+                                        value="1"
                                         className="mr-2"
+                                        onChange={handleIgvTipoChange}
+                                        checked={selectedIgvTipo === "1"}
                                     />
                                     <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                         Exonerado
@@ -749,8 +932,10 @@ function FacturaForm() {
                                         type="radio"
                                         id="retention_yes"
                                         name="igvtipo"
-                                        value="1"
+                                        value="0"
                                         className="mr-2"
+                                        onChange={handleIgvTipoChange}
+                                        checked={selectedIgvTipo === "0"}
                                     />
                                     <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                         Inafecto
@@ -765,19 +950,29 @@ function FacturaForm() {
                                 id="monto_cuota"
                                 placeholder="0.00"
                                 aria-label=".form-control-lg example"
+                                value={mfinal}
                             />
 
                             <h1 className="text-gray-400 font-sans font-bold">
                             ICBPER:
                             </h1>
                             <div className='flex'>
-                                <select
-                                className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 mr-3 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                aria-label="ISC"
-                                >
-                                    <option selected="NADA"> </option>
-                                    <option selected="NADA">NO SE VE EN EL VIDEO</option>
-                                </select>
+                                
+                            <select
+                            disabled={selectedImpBols !== "1"} // Habilita el select solo si selectedImpBols es "1"
+                            value={selectedYear} // Establece el valor seleccionado
+                            onChange={(e) => setSelectedYear(e.target.value)} // Maneja los cambios en el select
+                            className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 mr-3 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                            aria-label="ISC"
+                            >
+                            <option value="nada">-</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            </select>
+
 
                                 <input
                                     disabled
@@ -796,7 +991,7 @@ function FacturaForm() {
                                 disabled
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="number"
-                                id="monto_cuota"
+                                id="bols"
                                 placeholder="0.00"
                                 aria-label=".form-control-lg example"
                             />
@@ -806,6 +1001,7 @@ function FacturaForm() {
                             </label>
                             <input
                                 disabled
+                                value={iTotal}
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="number"
                                 id="monto_cuota"
@@ -824,6 +1020,7 @@ function FacturaForm() {
                                     type="button"
                                     value="Adicionar Item"
                                     className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
+                                    onClick={insertarFila}
                                 />
                             </div>
                         </div>
@@ -838,17 +1035,21 @@ function FacturaForm() {
                                         <th className="border bg-zinc-500 text-gray-300">Cantidad</th>
                                         <th className="border bg-zinc-500 text-gray-300">Código</th>
                                         <th className="border bg-zinc-500 text-gray-300">Descripción</th>
+                                        <th className="border bg-zinc-500 text-gray-300">Valor unitario</th>
+                                        <th className="border bg-zinc-500 text-gray-300">ICBPER</th>
                                     </tr>
                                 </thead>
                                 <tbody id="cuerpo_cuotas" className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
                                     <tr>
-                                        <td className="bg-zinc-600" >Total</td>
                                         <td></td>
                                         <td ></td>
                                         <td ></td>
                                         <td ></td>
                                         <td ></td>
-                                        <td id="suma_tabla" className="bg-zinc-600">0</td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td ></td>
                                     </tr>
                                 </tbody>
                             </table>
