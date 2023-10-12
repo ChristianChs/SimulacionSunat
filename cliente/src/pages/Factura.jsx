@@ -12,7 +12,7 @@ function FacturaForm() {
             <section id="div_fundamental" className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md relative">
             
                 <h1 className="text-2xl font-bold text-center text-yellow-100 mb-6">
-                Emisión del Recibo por Honorarios Electrónico
+                Emisión de Factura Electronica
                 </h1>
                 <form>
 
