@@ -48,6 +48,16 @@ function Consent() {
       </button>
     </Link>
     </div>
+    <div style={{ marginBottom: '20px' }}></div>
+
+    
+    <Link to={'/menu'}>
+      <button className="bg-cyan-900 hover:bg-cyan-950 text-white font-bold py-2 px-4 rounded">
+        Cancelar
+      </button>
+    </Link>
+    <div style={{ marginBottom: '20px' }}></div>
+    
   </div>
 </div>
   );

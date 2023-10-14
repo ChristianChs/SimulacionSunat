@@ -13,67 +13,67 @@ import { dataLogRequest } from '../api/login';
 function PreFactura() {
 
   return (
-    <div>
-        <div className="container" style={{ border: '2px solid #42a8e6', padding: '20px', width: '80%', maxWidth: '1000px', margin: '0 auto' }}>
-      <div className="preliminar" style={{ fontSize: '18px', fontWeight: 'bolder', fontFamily: 'Helvetica-Bold', textAlign: 'center', borderTop: '2px solid #ccc', borderLeft: '2px solid #ccc', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px' }}>
-        <h1 className="titulo" style={{ fontSize: '14px', fontWeight: 'bolder', fontFamily: 'Arial, Helvetica, sans-serif' }}>PRELIMINAR DE FACTURA ELECTRÓNICA</h1>
+    <div className="containerprin" style={{paddingTop: '15px', paddingBottom: '15px'}}>
+        <div className="container" style={{ border: '2px solid #000000', padding: '20px', width: '80%', maxWidth: '1000px', margin: '0 auto', backgroundColor: '#FFFFFF' }}>
+      <div className="preliminar" style={{ fontSize: '18px', fontWeight: 'bolder', fontFamily: 'Helvetica-Bold', textAlign: 'center', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px' }}>
+        <h1 className="titulo" style={{ border: '2px solid #000000', color: 'black', fontSize: '14px', fontWeight: 'bolder', fontFamily: 'Arial, Helvetica, sans-serif' }}>PRELIMINAR DE FACTURA ELECTRÓNICA</h1>
       </div>
 
-      <div className="separador1" style={{ borderTop: '2px solid #ccc', borderLeft: '2px solid #ccc', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginTop: '3px', paddingTop: '0px' }}>
+      <div className="separador1" style={{ border: '2px solid #000000', borderTop: '2px solid #000000', borderLeft: '2px solid #000000', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginTop: '3px', paddingTop: '0px' }}>
         <div className="empresa" style={{ paddingRight: '20px', paddingLeft: '10px' }}>
-          <h1 className="subtitulo" style={{ marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>INVERSIONES PEREZ</h1>
-          <h1 className="subtitulo" style={{ marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>PEREZ SALAZAR WILDER ABRAHAN</h1>
-          <h1 className="contenido" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>AV. NUEVO CAJAMARCA 793 BAR. MOLLEPAMPA BAJA INTERSEC. CON HEROES DEL CENEPA</h1>
-          <h1 className="contenido" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>CAJAMARCA - CAJAMARCA - CAJAMARCA</h1>
+          <h1 className="subtitulo" style={{ color: '#707070', marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>INVERSIONES PEREZ</h1>
+          <h1 className="subtitulo" style={{ color: '#707070', marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>PEREZ SALAZAR WILDER ABRAHAN</h1>
+          <h1 className="contenido" style={{ fontWeight: 'bold', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>AV. NUEVO CAJAMARCA 793 BAR. MOLLEPAMPA BAJA INTERSEC. CON HEROES DEL CENEPA</h1>
+          <h1 className="contenido" style={{ fontWeight: 'bold', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>CAJAMARCA - CAJAMARCA - CAJAMARCA</h1>
         </div>
-        <div className="factura" style={{ alignItems: 'right', border: '2px solid #42a8e6', paddingTop: '0px', paddingLeft: '10px', paddingRight: '10px', paddingBottom: '0px', width: '20%', marginRight: '10px' }}>
-          <h1 className="titulo" style={{ textAlign: 'center', fontWeight: 'bolder' }}>FACTURA ELECTRÓNICA</h1>
-          <h1 className="titulo" style={{ textAlign: 'center', fontWeight: 'bolder' }}>RUC: 10403401272</h1>
+        <div className="factura" style={{ alignItems: 'right', border: '2px solid #000000', paddingTop: '0px', paddingLeft: '10px', paddingRight: '10px', paddingBottom: '0px', width: '20%', marginRight: '10px' }}>
+          <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>FACTURA ELECTRÓNICA</h1>
+          <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>RUC: 10403401272</h1>
         </div>
       </div>
 
-      <div className="separador2" style={{ borderTop: '3px solid #ccc', borderLeft: '3px solid #ccc', boxShadow: '2px 2px 2px #d7d5d5', paddingBottom: '1px', display: 'flex', justifyContent: 'space-between', marginTop: '5px', paddingTop: '2px' }}>
+      <div className="separador2" style={{ border: '2px solid #000000', paddingBottom: '1px', display: 'flex', justifyContent: 'space-between', marginTop: '5px', paddingTop: '2px' }}>
         <div>
           <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
-            <h1 className="contenido1" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Fecha de Emisión</h1>
-            <h1 className="contenido2" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-            <h1 className="contenido3" style={{ color: '#000000', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>03/03/2023</h1>
+            <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Fecha de Emisión</h1>
+            <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+            <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>03/03/2023</h1>
           </div>
           <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
-            <h1 className="contenido1" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Señor(es)</h1>
-            <h1 className="contenido2" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-            <h1 className="contenido3" style={{ color: '#000000', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>SEBASTIAN LINARES CHUPAGANPIS123</h1>
+            <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Señor(es)</h1>
+            <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+            <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>SEBASTIAN LINARES CHUPAGANPIS123</h1>
           </div>
           <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
-            <h1 className="contenido1" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>RUC</h1>
-            <h1 className="contenido2" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-            <h1 className="contenido3" style={{ color: '#000000', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>10468022481</h1>
+            <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>RUC</h1>
+            <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold',marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+            <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>10468022481</h1>
           </div>
           <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
-            <h1 className="contenido1" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Dirección del Cliente</h1>
-            <h1 className="contenido2" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-            <h1 className="contenido3" style={{ color: '#000000', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>JR. S. C. JESUS 416 A 2 CUADRAS DEL IE SAGRADO CORAZON CAJAMARCA-CHOTA-CHOTA</h1>
+            <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Dirección del Cliente</h1>
+            <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+            <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>JR. S. C. JESUS 416 A 2 CUADRAS DEL IE SAGRADO CORAZON CAJAMARCA-CHOTA-CHOTA</h1>
           </div>
           <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
-            <h1 className="contenido1" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Tipo de Moneda</h1>
-            <h1 className="contenido2" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-            <h1 className="contenido3" style={{ color: '#000000', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>SOLES</h1>
+            <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Tipo de Moneda</h1>
+            <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+            <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>SOLES</h1>
           </div>
           <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
-            <h1 className="contenido1" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Observación</h1>
-            <h1 className="contenido2" style={{ color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-            <h1 className="contenido3" style={{ color: '#000000', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>OPERACIÓN SUJETA AL SISTEMA DE PAGO DE OBLIGACIONES TRIBUTARIAS</h1>
+            <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Observación</h1>
+            <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+            <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>OPERACIÓN SUJETA AL SISTEMA DE PAGO DE OBLIGACIONES TRIBUTARIAS</h1>
           </div>
         </div>
         <div className="subseparador" style={{ alignItems: 'right', textAlign: 'right', display: 'flex', width: '30%', margin: '7px auto' }}>
-          <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>Forma de Pago</h1>
-          <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>:</h1>
-          <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>Contado</h1>
+          <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>Forma de Pago</h1>
+          <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>:</h1>
+          <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>Contado</h1>
         </div>
       </div>
 
-      <div className="separador3" style={{ borderTop: '2px solid #ccc', borderLeft: '2px solid #ccc', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px', marginTop: '5px', paddingTop: '2px', height: '150px', maxHeight: '500px', paddingRight: '7px', paddingLeft: '7px' }}>
-        <table className="tabla" style={{ borderCollapse: 'collapse', width: '100%' }} border="1">
+      <div className="separador3" style={{ border: '2px solid #000000', borderLeft: '2px solid #000000', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px', marginTop: '5px', paddingTop: '2px', height: '150px', maxHeight: '500px', paddingRight: '7px', paddingLeft: '7px' }}>
+        <table className="tabla" style={{color: 'black',borderCollapse: 'collapse', width: '100%' }} border="1">
           <tr>
             <th>Cantidad</th>
             <th>Unidad Medida</th>
@@ -91,7 +91,7 @@ function PreFactura() {
         </table>
       </div>
 
-      <div className="separador4" style={{ textAlign: 'right', borderTop: '2px solid #ccc', borderLeft: '2px solid #ccc', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px', marginTop: '5px', paddingTop: '2px' }}>
+      <div className="separador4" style={{ border: '2px solid #000000', textAlign: 'right', borderTop: '2px solid #000000', borderLeft: '2px solid #000000', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px', marginTop: '5px', paddingTop: '2px' }}>
         <div className="monto" style={{ display: 'flex', flexDirection: 'row-reverse', textAlign: 'right', margin: '0 0', paddingRight: '20px', paddingLeft: '10px' }}>
           <h1 className="mcontenido3" style={{ color: '#aea9a9', border: '1px solid #ccc', backgroundColor: '#d7d5d5', textAlign: 'left', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>S/ 440.68</h1>
           <h1 className="mcontenido2" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '5px', paddingRight: '5px' }}>:</h1>
@@ -150,12 +150,13 @@ function PreFactura() {
       </div>
 
       <div className="buttons" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
-        <button className="action-button" style={{ margin: '0 10px', padding: '8px 16px', background: 'linear-gradient(to bottom, #f5f5f5, #d0d0d0)', color: '#000', border: '1px solid #9d9c9c', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>Descargar PDF</button>
-        <button className="action-button" style={{ margin: '0 10px', padding: '8px 16px', background: 'linear-gradient(to bottom, #f5f5f5, #d0d0d0)', color: '#000', border: '1px solid #9d9c9c', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>Descargar XML</button>
-        <button className="action-button" style={{ margin: '0 10px', padding: '8px 16px', background: 'linear-gradient(to bottom, #f5f5f5, #d0d0d0)', color: '#000', border: '1px solid #9d9c9c', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>Imprimir</button>
-        <button className="action-button" style={{ margin: '0 10px', padding: '8px 16px', background: 'linear-gradient(to bottom, #f5f5f5, #d0d0d0)', color: '#000', border: '1px solid #9d9c9c', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>Cerrar</button>
+      <button className="bg-indigo-950 bg-indigo-950 text-white shadow-md shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px'}}>Descargar PDF</button>
+      <button className="bg-indigo-950 bg-indigo-950 text-white shadow-md shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px'}} >Descargar XML</button>
+      <button className="bg-indigo-950 bg-indigo-950 text-white shadow-md shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px'}} >Imprimir</button>
+      <button className="bg-indigo-950 bg-indigo-950 text-white shadow-md shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px'}}>Cerrar</button>
       </div>
     </div>
+    
     </div>
   )
 }
