@@ -11,7 +11,7 @@ function TempletePDF(data) {
   const [datareceptor3,setDataReceptor3]=useState(null)
   const [datareceptor4,setDataReceptor4]=useState(null)
   const [dataReceptor5,setDataReceptor5]=useState(null)
-const [cuotas, setCuotas] = useState([]);
+  const [cuotas, setCuotas] = useState([]);
 
   const cargarCuotas = async () => {
     try {

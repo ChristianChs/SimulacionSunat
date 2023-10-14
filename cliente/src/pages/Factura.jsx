@@ -15,8 +15,16 @@ const [selectedValue, setSelectedValue] = useState("1");
 const [selectedIgvTipo, setSelectedIgvTipo] = useState("2");
 const [selectedImpBols, setSelectedImpBols] = useState("0");
 const [selectedYear, setSelectedYear] = useState("nada");
+const [mostrarIsc, setMostrarIsc] = useState(false);
+const [tipoIsc, setTipoIsc] = useState("valor");
+const [montoIsc, setMontoIsc] = useState(0);
+
+  const handleTipoIscChange = (event) => {
+    setTipoIsc(event.target.value);
+  };
 
  const yearToValueMap = {
+    'nada':0,
     '2019': 0.1,
     '2020': 0.2,
     '2021': 0.3,
@@ -49,6 +57,14 @@ const handleYearChange = (e) => {
     setITotal(montoTotalValue);
 };
 
+
+  const handleIscChange = (event) => {
+    const isISC = event.target.value === "1";
+    if(isISC=='1'){
+        setMontoIsc(document.getElementById('introducedIsc'))
+    }
+    setMostrarIsc(isISC);
+  };
 
 
 const handleIgvTipoChange = (e) => {
@@ -584,6 +600,7 @@ function eliminarFila(id) {
                             name="isc"
                             value="1"
                             className="mr-2"
+                            onChange={handleIscChange}
                         />
                         <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                             SI
@@ -596,6 +613,7 @@ function eliminarFila(id) {
                             name="isc"
                             value="0"
                             className="mr-2"
+                            onChange={handleIscChange}
                         />
                         <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                             NO
@@ -862,29 +880,30 @@ function eliminarFila(id) {
                                 placeholder="0.00"
                                 aria-label=".form-control-lg example"
                             />
-
+                            <div  style={{ display: mostrarIsc ? 'block' : 'none' }}>
                             <h1 className="text-gray-400 font-sans font-bold">
                             ISC:
                             </h1>
                             <select
-                            disabled
+                            id="tipoIsc"
                             className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                             aria-label="ISC"
+                            value={tipoIsc}
+                            onChange={handleTipoIscChange}
                             >
-                                <option selected="NADA"></option>
-                                <option selected="NADA"></option>
+                                <option selected="valor">Al valor</option>
+                                <option value="monto">Monto Fijo</option>
                             </select>
                             <div className='flex'>
                                 <input
-                                disabled
                                     className="monto-cuota w-1/6 py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                     type="number"
-                                    id="monto_cuota"
+                                    id="introducedIsc"
                                     placeholder="0"
                                     aria-label=".form-control-lg example"
                                 />
                                 <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold text-lg ml-2 mr-6 mt-2">
-                                    %
+                                   <div style={{ display: tipoIsc === 'monto' ? 'none' : 'block' }}>%</div>
                                 </label>
 
                                 <input
@@ -894,9 +913,10 @@ function eliminarFila(id) {
                                     id="monto_cuota"
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
+                                    value={montoIsc}
                                 />
                             </div>
-
+                            </div>
                             <h1 className="mb-3 text-gray-400 font-sans font-bold">
                             IGV:
                             </h1>
@@ -999,23 +1019,23 @@ function eliminarFila(id) {
                             </h1>
                             <div className='flex'>
                                 
-      <select
-        disabled={selectedImpBols !== "1"}
-        value={selectedYear}
-        onChange={(e) => {
-          setSelectedYear(e.target.value);
-          handleYearChange(e);
-        }}
-        className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 mr-3 font-sans font-semibold text-gray-300 focus-border-yellow-100"
-        aria-label="ISC"
-      >
-        <option value="nada">-</option>
-        <option value="2019">2019</option>
-        <option value="2020">2020</option>
-        <option value="2021">2021</option>
-        <option value="2022">2022</option>
-        <option value="2023">2023</option>
-      </select>
+                                <select
+                                    disabled={selectedImpBols !== "1"}
+                                    value={selectedYear}
+                                    onChange={(e) => {
+                                    setSelectedYear(e.target.value);
+                                    handleYearChange(e);
+                                    }}
+                                    className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 mr-3 font-sans font-semibold text-gray-300 focus-border-yellow-100"
+                                    aria-label="ISC"
+                                >
+                                    <option value="nada">-</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                </select>
 
 
 
