@@ -26,7 +26,6 @@
 }
 
 .subtitulo {
-    margin-bottom: 10px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
@@ -58,7 +57,6 @@
     box-shadow: 2px 2px 2px #d7d5d5;
     padding-bottom: 1px;
     display: flex;
-    justify-content: space-between;
     margin-top: 5px;
     padding-top: 2px;
 }
@@ -83,6 +81,27 @@
     border-left: 2px solid #ccc;
     box-shadow: 1px 1px 1px #f2f1f1;
     padding-bottom: 1px;
+    margin-top: 5px;
+    padding-top: 2px;
+}
+
+.separador5{
+    border-top: 2px solid #ccc;
+    border-left: 2px solid #ccc;
+    box-shadow: 1px 1px 1px #f2f1f1;
+    padding-bottom: 1px;
+    align-items: center;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.separador6 {
+    border-top: 3px solid #ccc;
+    border-left: 3px solid #ccc;
+    box-shadow: 2px 2px 2px #d7d5d5;
+    padding-bottom: 1px;
+    justify-content: center;
+    display: flex;
     margin-top: 5px;
     padding-top: 2px;
 }
@@ -140,7 +159,7 @@
     font-size: 12px;
 }
 
-.subseparador{
+.subseparador2{
     align-items: right;
     text-align: right;
     display: flex;
@@ -167,7 +186,7 @@
 
 .tabla th, .tabla td {
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 3px 10px;
     text-align: center;
     color: #707070;
     font-family: Arial, Helvetica, sans-serif;
@@ -201,14 +220,12 @@
 
 .mcontenido1{
     color: #000000;
-    margin-bottom: 10px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     width: 120px;
 }
 .mcontenido2{
     color: #000000;
-    margin-bottom: 10px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     padding-left: 5px;
@@ -220,10 +237,49 @@
     text-align: left;
     color: #aea9a9;
     font-weight: bold;
-    margin-bottom: 10px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     width: 100px;
+}
+
+.subseparador5{
+    padding-bottom: 1px;
+    display: flex;
+    align-items: end;
+    width: 100%;
+}
+
+.detraccion{
+    padding-right: 20px;
+    padding-left: 10px;
+}
+
+.detraccion1{
+    padding-right: 20px;
+    display: flex;
+}
+
+.punto{
+    padding-right: 20px;
+    padding-left: 70px;
+}
+
+.table1 {
+    border-collapse: collapse;
+}
+  
+.table1 td {
+    padding: 3px 12px;
+    text-align: center;
+}
+  
+.first-row {
+    border: 2px solid black;
+}
+
+.cuotas{
+    padding-right: 40px;
+    padding-left: 40px;
 }
 
 .buttons {
