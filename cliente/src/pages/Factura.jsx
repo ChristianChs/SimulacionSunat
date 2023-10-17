@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Starts from '../components/Stars'
 import { resolvePath } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function FacturaForm() {
     let a = 1;
@@ -140,6 +141,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+const navigate=useNavigate();
+const onSubmit = () => {
+    navigate('/factinf')
+}
+
+const onSubmit1 = () => {
+    navigate('/menu')
+};
 
 function insertarFila() {
     let tblDatos = document.getElementById('cuotas');
@@ -1073,11 +1083,6 @@ function eliminarFila(id) {
                                 placeholder="0.00"
                                 aria-label=".form-control-lg example"
                             />
-
-
-
-
-
                             <div className="h-1"></div>
                             <div className="flex justify-end">
                                 <input
@@ -1089,7 +1094,7 @@ function eliminarFila(id) {
                                 />
                             </div>
                         </div>
-                        <div className="mx-auto bg-text-zinc-900 p-6 dark:text-white">
+                        <div className="mx-auto bg-text-zinc-900 dark:text-white">
                             <table id="cuotas" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
                                 <thead>
                                     <tr className="bg-gray-200">
@@ -1100,27 +1105,22 @@ function eliminarFila(id) {
                                         <th className="border bg-zinc-500 text-gray-300">Cantidad</th>
                                         <th className="border bg-zinc-500 text-gray-300">Código</th>
                                         <th className="border bg-zinc-500 text-gray-300">Descripción</th>
-                                        <th className="border bg-zinc-500 text-gray-300">Valor unitario</th>
-                                        <th className="border bg-zinc-500 text-gray-300">ICBPER</th>
                                     </tr>
                                 </thead>
                                 <tbody id="cuerpo_cuotas" className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
                                     <tr>
+                                        <td className="bg-zinc-600" >Total</td>
                                         <td></td>
                                         <td ></td>
                                         <td ></td>
                                         <td ></td>
                                         <td ></td>
-                                        <td ></td>
-                                        <td ></td>
-                                        <td ></td>
-                                        <td ></td>
+                                        <td id="suma_tabla" className="bg-zinc-600">0</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
 
 
                     <div className="h-3"></div>
@@ -1129,11 +1129,13 @@ function eliminarFila(id) {
                             type="submit"
                             value="Continuar"
                             className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-extrabold hover:px-7 hover:bg-ffeba7 hover:text-zinc-900 hover:border-amber-200"
+                            onClick={onSubmit}
                         />
                         <input
                             type="submit"
                             value="Cancelar"
                             className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-extrabold hover:px-7 hover:bg-ffeba7 hover:text-white hover:border-gray-400"
+                            onClick={onSubmit1}
                         />
                     </div>
                 </form>
