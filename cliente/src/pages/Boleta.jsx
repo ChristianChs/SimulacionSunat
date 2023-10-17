@@ -6,12 +6,17 @@ function BoletaForm() {
   const [selectedDoc, setSelectedDoc] = useState("SIN DOCUMENTO");
 
   const handleOptionChange = (e) => {
+    setMostrarIsc(false);
+    document.getElementById('valorISC').value =0;
+    
     const selectedValue = e.target.value;
     setMostrarRucReceptor(selectedValue === "1");
+    updateMFinal(cantidad, valorUnitario);
   };
 
   const handleDocChange = (e) => {
     const selectedValue = e.target.value;
+    document.getElementById('description').value='';
     setSelectedDoc(selectedValue);
     console.log(selectedValue)
   };
@@ -30,9 +35,12 @@ const [selectedImpBols, setSelectedImpBols] = useState("0");
 const [selectedYear, setSelectedYear] = useState("nada");
 const [mostrarIsc, setMostrarIsc] = useState(false);
 const [tipoIsc, setTipoIsc] = useState("valor");
+const [valorISC,setValorIsc]=useState(0);
 
   const handleTipoIscChange = (event) => {
+  setValorIsc(document.getElementById('valorISC').value);
     setTipoIsc(event.target.value);
+    updateMFinal(cantidad, valorUnitario);
   };
 
  const yearToValueMap = {
@@ -47,7 +55,9 @@ const [tipoIsc, setTipoIsc] = useState("valor");
 
     const handleIscChange = (event) => {
     const isISC = event.target.value === "1";
+    document.getElementById('valorISC').value =0;
     setMostrarIsc(isISC);
+    updateMFinal(cantidad, valorUnitario);
   };
 
 
@@ -61,18 +71,24 @@ const handleYearChange = (e) => {
 
     const bols_total = selectedValue * document.getElementById('cant').value;
     document.getElementById('bols_tot').value=bols_total
-    console.log("bols_total:", bols_total);
 
     const cantValue = parseFloat(document.getElementById('cant').value);
-    console.log("cantValue:", cantValue);
     
     const uniValue = parseFloat(document.getElementById('uni').value);
-    console.log("uniValue:", uniValue);
     
     const montoCuotaValue = parseFloat(document.getElementById('igvParcial').value);
-    console.log("montoCuotaValue:", montoCuotaValue);
 
-    const montoTotalValue = (cantValue * uniValue) + montoCuotaValue + bols_total;
+     if (tipoIsc === 'monto') {
+    let valorIntroducidoIsc = document.getElementById('valorISC').value;
+    document.getElementById('valorParcialIsc').value = valorIntroducidoIsc;
+  } else {
+    let valorIntroducidoIsc = document.getElementById('valorISC').value;
+    valorIntroducidoIsc = valorIntroducidoIsc * valorUnitario * cantidad / 100;
+    document.getElementById('valorParcialIsc').value = valorIntroducidoIsc;
+  }
+  const igvPar=parseFloat(document.getElementById('valorParcialIsc').value);
+
+    const montoTotalValue = (cantValue * uniValue) + montoCuotaValue + bols_total+igvPar;
     console.log("montoTotalValue:", montoTotalValue);
     setITotal(montoTotalValue);
 };
@@ -82,16 +98,20 @@ const handleYearChange = (e) => {
 const handleIgvTipoChange = (e) => {
   const newValue = e.target.value;
   setSelectedIgvTipo(newValue);
-  updateMFinal(cantidad, valorUnitario, newValue);
+
+  updateMFinal(cantidad, valorUnitario);
 };
 
 const handleImpBolsChange = (e) => {
   const newValue = e.target.value;
+
   setSelectedImpBols(newValue);
 
   if (newValue === "0") {
+    document.getElementById('imp_Bols').value = yearToValueMap["nada"];
     setSelectedYear("nada");
   }
+  updateMFinal(cantidad, valorUnitario);
 };
 
 const handle = (event) => {
@@ -100,6 +120,11 @@ const handle = (event) => {
   updateMFinal(newValue, valorUnitario);
 };
 
+const onChangeValorIsc = (e) => {
+  let value = e.target.value;
+  setValorIsc(value);
+  updateMFinal(cantidad, valorUnitario);
+};
 
 const onChangeMonto = (e) => {
   const value = e.target.value;
@@ -109,7 +134,7 @@ const onChangeMonto = (e) => {
 
 const updateMFinal = (newCantidad, newValorUnitario) => {
   const tipoValue = document.querySelector('input[name="igvtipo"]:checked') ? document.querySelector('input[name="igvtipo"]:checked').value : null;
-  const porcentajeText = 0.18
+  const porcentajeText = 0.18;
 
   let res = 0;
 
@@ -119,19 +144,33 @@ const updateMFinal = (newCantidad, newValorUnitario) => {
     res = newValorUnitario * newCantidad * porcentajeText;
   }
 
+  if (tipoIsc === 'monto') {
+    let valorIntroducidoIsc = document.getElementById('valorISC').value;
+    document.getElementById('valorParcialIsc').value = valorIntroducidoIsc;
+  } else {
+    let valorIntroducidoIsc = document.getElementById('valorISC').value;
+    valorIntroducidoIsc = valorIntroducidoIsc * valorUnitario * cantidad / 100;
+    document.getElementById('valorParcialIsc').value = valorIntroducidoIsc;
+  }
+
+  console.log(res)
+
+  document.getElementById('igvParcial').value=res;
+
+  const valorIsc1 = parseFloat(document.getElementById('valorParcialIsc').value);
   const total_bolsas = document.getElementById('imp_Bols').value * newCantidad;
   document.getElementById('bols_tot').value = total_bolsas.toFixed(2);
 
   const resRedondeado = res.toFixed(2);
-  const i = res + newValorUnitario * newCantidad;
-  let impTotal = i.toFixed(2); // Convierte impTotal en una cadena
-  const bolsTot = parseFloat(document.getElementById('bols_tot').value); // Convierte bols_tot en un número
-  impTotal = (parseFloat(impTotal) + bolsTot).toFixed(2); // Suma bolsTot a impTotal y redondea a 2 decimales
-  setITotal(impTotal);
+  const i = valorIsc1 + res + newValorUnitario * newCantidad;
+
+  // Convert impTotalFinal to a number (remove .toFixed)
+  const impTotalFinal = parseFloat(i) + parseFloat(total_bolsas);
+
+  // Now, impTotalFinal is a number, and you can use it for calculations or display.
+  setITotal(impTotalFinal.toFixed(2));
   setMFinal(resRedondeado);
 };
-
-
 
 
   React.useEffect(() => {
@@ -189,8 +228,6 @@ const updateMFinal = (newCantidad, newValorUnitario) => {
                         </label>
                         <br />
                     </div>
-                    
-                    /*SI ES SIN DOCUMENTO, NO SE CONSIGNA EL NUMERO DEL DOCUMENTO, O SEA BLOQUEA ESA PARTE*/
                     
                     <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                         <h1 className="text-lg font-semibold text-yellow-100 mb-4">
@@ -636,7 +673,7 @@ const updateMFinal = (newCantidad, newValorUnitario) => {
                                 <div className="mx-7">
                                     <input
                                     type="radio"
-                                    id="retention_yes"
+                                    id="siImpuestoBolsas"
                                     name="impuestobolsas"
                                     value="1"
                                     className="mr-2"
@@ -653,7 +690,7 @@ const updateMFinal = (newCantidad, newValorUnitario) => {
                                     <div className="h-1"></div>
                                     <input
                                     type="radio"
-                                    id="retention_no"
+                                    id="noImpuestoBolsas"
                                     name="impuestobolsas"
                                     value="0"
                                     className="mr-2"
@@ -706,12 +743,12 @@ const updateMFinal = (newCantidad, newValorUnitario) => {
                             </select>
                             <div className='flex'>
                                 <input
-                                disabled
+                                    id="valorISC"
                                     className="monto-cuota w-1/6 py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                     type="number"
-                                    id="monto_cuota"
                                     placeholder="0"
                                     aria-label=".form-control-lg example"
+                                    onChange={onChangeValorIsc}
                                 />
                                 <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold text-lg ml-2 mr-6 mt-2">
                                     <div style={{ display: tipoIsc === 'monto' ? 'none' : 'block' }}>%</div>
@@ -721,7 +758,7 @@ const updateMFinal = (newCantidad, newValorUnitario) => {
                                     disabled
                                     className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                     type="number"
-                                    id="monto_cuota"
+                                    id="valorParcialIsc"
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
                                 />
@@ -736,8 +773,9 @@ const updateMFinal = (newCantidad, newValorUnitario) => {
                                         type="radio"
                                         id="retention_yes"
                                         name="igvtipo"
-                                        value="1"
+                                        value="2"
                                         className="mr-2"
+                                        onChange={handleIgvTipoChange}
                                     />
                                     <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                         Gravado
@@ -753,6 +791,7 @@ const updateMFinal = (newCantidad, newValorUnitario) => {
                                         name="igvtipo"
                                         value="0"
                                         className="mr-2"
+                                        onChange={handleIgvTipoChange}
                                     />
                                     <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                         Exonerado
@@ -767,6 +806,7 @@ const updateMFinal = (newCantidad, newValorUnitario) => {
                                         name="igvtipo"
                                         value="1"
                                         className="mr-2"
+                                        onChange={handleIgvTipoChange}
                                     />
                                     <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                         Inafecto
@@ -783,8 +823,8 @@ const updateMFinal = (newCantidad, newValorUnitario) => {
                                 aria-label=".form-control-lg example"
                                 value={mfinal}
                             />
-
- <h1 className="text-gray-400 font-sans font-bold">
+                            <div style={{ display: selectedImpBols === '1' ? 'none' : 'block' }}>
+                            <h1 className="text-gray-400 font-sans font-bold">
                             ICBPER:
                             </h1>
                             <div className='flex'>
@@ -830,7 +870,7 @@ const updateMFinal = (newCantidad, newValorUnitario) => {
                                 placeholder="0.00"
                                 aria-label=".form-control-lg example"
                             />
-
+                            </div>
                             <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
                                 Importe Total del Item:
                             </label>
