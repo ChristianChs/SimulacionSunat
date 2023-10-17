@@ -75,18 +75,18 @@ function PreFactura() {
       <div className="separador3" style={{ border: '2px solid #000000', borderLeft: '2px solid #000000', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px', marginTop: '5px', paddingTop: '2px', height: '150px', maxHeight: '500px', paddingRight: '7px', paddingLeft: '7px' }}>
         <table className="tabla" style={{color: 'black',borderCollapse: 'collapse', width: '100%' }} border="1">
           <tr>
-            <th>Cantidad</th>
-            <th>Unidad Medida</th>
-            <th>Descripción</th>
-            <th>Valor Unitario</th>
-            <th>ICBPER</th>
+            <th class="text-white border bg-black">Cantidad</th>
+            <th class="text-white border bg-black">Unidad Medida</th>
+            <th class="text-white border bg-black">Descripción</th>
+            <th class="text-white border bg-black">Valor Unitario</th>
+            <th class="text-white border bg-black">ICBPER</th>
           </tr>
           <tr>
-            <td>1.00</td>
-            <td>UNIDAD</td>
-            <td>TRANSPORTE DE CARGA DE LIMA A CHICLAYO</td>
-            <td>1594.915</td>
-            <td>0.00</td>
+            <td class="text-center text-black font-medium border">1.00</td>
+            <td class="text-center text-black font-medium border">UNIDAD</td>
+            <td class="text-center text-black font-medium border">TRANSPORTE DE CARGA DE LIMA A CHICLAYO</td>
+            <td class="text-center text-black font-medium border">1594.915</td>
+            <td class="text-center text-black font-medium border">0.00</td>
           </tr>
         </table>
       </div>
@@ -148,6 +148,80 @@ function PreFactura() {
           <h1 className="mcontenido1" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '120px' }}>Importe Total</h1>
         </div>
       </div>
+
+      <div className="separador2" style={{ border: '2px solid #000000', paddingBottom: '1px', display: 'flex', justifyContent: 'space-between', marginTop: '5px', paddingTop: '2px' }}>
+        <div>
+        <h1 className="subtitulo" style={{ color: '#000000', paddingLeft: '10px', paddingTop: '5px', marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>Información de la detracción</h1>
+          <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>                             
+          <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Tipo de Operación</h1>
+            <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+            <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>1001 Operación Sujeta a Detracción</h1>
+          </div>
+          <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
+            <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Bien o Servicio</h1>
+            <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+            <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>Otros servicios empresariales</h1>
+          </div>
+          <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
+            <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Medio de Pago</h1>
+            <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold',marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+            <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>003 Transferencia de fondos</h1>
+          </div>
+          <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
+            <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Nro. Cta. Banco de la Nación</h1>
+            <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+            <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>02352652142</h1>
+          </div>
+        </div>
+        <div className="subseparador" style={{ paddingTop: '130px', alignItems: 'right', textAlign: 'right', display: 'flex', width: '30%', margin: '7px auto' }}>
+          <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>Porcentaje de detracción</h1>
+          <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>:</h1>
+          <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>12.00</h1>
+        </div>
+        <div className="subseparador" style={{ paddingTop: '130px', alignItems: 'right', textAlign: 'right', display: 'flex', width: '30%', margin: '7px auto' }}>
+          <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>Monto de detracción</h1>
+          <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>:</h1>
+          <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>S/ 311.52</h1>
+        </div>
+      </div>
+
+      <div className="separador2" style={{ border: '2px solid #000000', paddingBottom: '1px', display: 'flex', justifyContent: 'space-between', marginTop: '5px', paddingTop: '2px' }}>
+        <div>
+          <h1 className="subtitulo" style={{ color: '#000000', paddingLeft: '10px', paddingTop: '5px', marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>Información de Crédito</h1>
+          <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
+            <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Monto neto pendiente de pago</h1>
+            <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+            <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>S/2,284.48</h1>
+          </div>
+          <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
+            <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Total de Cuotas</h1>
+            <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold',marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+            <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>1</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-2 border-t-3 border-l-3 shadow-md mt-5" style={{ border: '2px solid #000000', borderTop: '2px solid #000000', borderLeft: '2px solid #000000', boxShadow: '1px 1px 1px #f2f1f1'}}>
+        <div class="cuotas">
+          <table class="table-auto w-full">
+            <thead>
+              <tr>
+                <th class="text-white border bg-black">N° Cuota</th>
+                <th class="text-white border bg-black">Fec. Venc.</th>
+                <th class="text-white border bg-black">Monto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center text-black font-semibold border">1</td>
+                <td class="text-center text-black font-semibold border">15/03/2023</td>
+                <td class="text-center text-black font-semibold border">2,284.48</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
 
       <div className="buttons" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
       <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px'}}>Descargar PDF</button>
