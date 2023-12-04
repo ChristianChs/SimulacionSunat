@@ -48,6 +48,30 @@ model.inUser3=async(arg)=>{
     })
 }
 
+model.inFact=async(arg)=>{
+    const { tipo_trans, detr,exp,RUC,ant,itn,est,dir,com,tipo_mon,desc_ant,isc,opg,cyt,fecha_emision,total} = arg;
+    return sequelize.query(`INSERT INTO factura(tipo_trans, detr,exp,RUC,ant,itn,est,dir,com,tipo_mon,desc_ant,isc,opg,cyt,fecha_emision,total) VALUES ('${tipo_trans}','${detr}','${exp}','${RUC}','${ant}','${itn}','${est}','${dir}','${com}','${tipo_mon}','${desc_ant}','${isc}','${opg}','${cyt}','${fecha_emision}','${total}')`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
+model.inPFact=async(arg)=>{
+    const { bos,cantidad,medida,codigo,descripcion,bolsas,valor,descuento,ISC,ICBPER,IGV,Importe_total} = arg;
+    return sequelize.query(`INSERT INTO prod_fact(bos,cantidad,medida,codigo,descripcion,bolsas,valor,descuento,ISC,ICBPER,IGV,Importe_total) VALUES ('${bos}','${cantidad}','${medida}','${codigo}','${descripcion}','${bolsas}','${valor}','${descuento}','${ISC}','${ICBPER}','${IGV}','${Importe_total}')`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
 model.Extraer=async(arg)=>{
     return sequelize.query(`SELECT * FROM recibohonorario WHERE id_login='${arg}' ORDER BY id DESC LIMIT 1`,{raw:true})
     .then(([result,metadata])=>{

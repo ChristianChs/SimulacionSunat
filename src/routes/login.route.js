@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ExtraerData, ExtraerDataLog, ExtraerCuotas, ExtraerFecha,registerCuotas,  login, login2, register,register2,register3 } from "../controllers/login.controller.js";
+import { ExtraerData, ExtraerDataLog, ExtraerCuotas, ExtraerFecha,registerCuotas,registerfact,registerPfact,  login, login2, register,register2,register3 } from "../controllers/login.controller.js";
 
 const router = Router()
 
@@ -12,6 +12,10 @@ router.post('/register',register)
 router.post('/register2',register2)
 
 router.post('/register3',register3)
+
+router.post('/registerfact',registerfact)
+
+router.post('/registerPfact',registerPfact)
 
 router.post('/getData',ExtraerData)
 

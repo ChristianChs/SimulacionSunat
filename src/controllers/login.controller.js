@@ -71,6 +71,26 @@ export const register2 = async (req, res) => {
     }
 }
 
+export const registerfact = async (req, res) => {
+    try {
+        const userFound = await model.inFact(req.body)
+        console.log("asdjsa",userFound)
+        return res.status(200).json({ message: "Usuario Registrado" })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const registerPfact = async (req, res) => {
+    try {
+        const userFound = await model.inPFact(req.body)
+        console.log("asdjsa",userFound)
+        return res.status(200).json({ message: "Usuario Registrado" })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
 export const ExtraerData = async (req, res) => {
     try {
         const { id_login } = req.body;
