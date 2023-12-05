@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Starts from '../components/Stars'
 import { resolvePath } from 'react-router-dom';
+import { useLogin } from '../context/LoginContext'
 import { useNavigate } from 'react-router-dom';
 
 function FacturaForm() {
     let a = 1;
+    const { registrarFactura, errors: LoginErrors } = useLogin();
+    const { registrarPFactura, errors: LoginErrors2 } = useLogin();
     function insertarFila() {
         /*const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
         const montoCuota = document.getElementById('monto_cuota').value;*/
@@ -376,7 +379,6 @@ function FacturaForm() {
         checked: null
     });
 
-
     const handleRadioChange1 = e => {
         setSelectedtipo_trans({
             checked: e.target.value
@@ -458,8 +460,10 @@ function FacturaForm() {
         values.opg = selectedopg.checked;
         values.cyt = selectedcyt.checked;
         console.log(values);
-
-        navigate('/factinf')
+        const data= await registrarFactura(values); 
+        if(data.status===200){
+            navigate('/factinf')
+        }
     })
 
     const onSubmit1 = () => {
