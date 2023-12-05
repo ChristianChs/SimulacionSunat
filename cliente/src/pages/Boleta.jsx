@@ -4,6 +4,8 @@ import Starts from '../components/Stars'
 function BoletaForm() {
     const [mostrarRucReceptor, setMostrarRucReceptor] = useState(false);
     const [selectedDoc, setSelectedDoc] = useState("SIN DOCUMENTO");
+    const { registrarBoleta, errors: LoginErrors } = useLogin();
+    const { registrarPBoleta, errors: LoginErrors2 } = useLogin();
     function insertarFila() {
         /*const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
         const montoCuota = document.getElementById('monto_cuota').value;*/

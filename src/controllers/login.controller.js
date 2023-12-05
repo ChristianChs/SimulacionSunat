@@ -101,6 +101,26 @@ export const registerPfact = async (req, res) => {
     }
 }
 
+export const registerfactcu = async (req, res) => {
+    try {
+        const userFound = await model.inFactcu(req.body)
+        console.log("asdjsa",userFound)
+        return res.status(200).json({ message: "Usuario Registrado" })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const registerfactde = async (req, res) => {
+    try {
+        const userFound = await model.inFactde(req.body)
+        console.log("asdjsa",userFound)
+        return res.status(200).json({ message: "Usuario Registrado" })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
 export const registerPBol = async (req, res) => {
     try {
         const userFound = await model.inPBol(req.body)

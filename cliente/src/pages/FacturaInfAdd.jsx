@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Starts from '../components/Stars'
 import { useNavigate } from 'react-router-dom';
+import { useLogin } from '../context/LoginContext'
 
 function FacturaForm() {
     let a = 0;
@@ -9,6 +10,8 @@ function FacturaForm() {
     const [mostrarInformacionCredito, setMostrarInformacionCredito] = useState(false);
     const [mostrarInformacionFactura, setMostrarInformacionFactura] = useState(false);
     const [mostrarInfoDetraccion, setMostrarInfoDetraccion] = useState(false);
+    const { registrarFacturaCu, errors: LoginErrors } = useLogin();
+    const { registrarFacturaDe, errors: LoginErrors2 } = useLogin();
 
 
     /*////////////////////////
