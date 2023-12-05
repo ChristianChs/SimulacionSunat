@@ -81,7 +81,7 @@ export const registerfact = async (req, res) => {
     }
 }
 
-export const registerbol = async (req, res) => {
+export const registerBol = async (req, res) => {
     try {
         const userFound = await model.inBol(req.body)
         console.log("asdjsa",userFound)
