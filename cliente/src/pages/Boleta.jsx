@@ -4,6 +4,167 @@ import Starts from '../components/Stars'
 function BoletaForm() {
     const [mostrarRucReceptor, setMostrarRucReceptor] = useState(false);
     const [selectedDoc, setSelectedDoc] = useState("SIN DOCUMENTO");
+    function insertarFila() {
+        /*const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
+        const montoCuota = document.getElementById('monto_cuota').value;*/
+
+
+        let tblDatos = document.getElementById('bienesServicios');
+        let newRow = tblDatos.insertRow(tblDatos.rows.length - 4);
+
+        let col1 = newRow.insertCell(0);
+        let col2 = newRow.insertCell(1);
+        let col3 = newRow.insertCell(2);
+        let col4 = newRow.insertCell(3);
+        let col5 = newRow.insertCell(4);
+        let col6 = newRow.insertCell(5);
+        let col7 = newRow.insertCell(6);
+        let col8 = newRow.insertCell(7);
+        let col9 = newRow.insertCell(8);
+        let col10 = newRow.insertCell(9);
+
+
+        const id = 'fila' + a;
+        col1.innerHTML = '<button class="text-red-500">x</button>';
+        col2.innerHTML = document.getElementById('cant').value;
+        col3.innerHTML = document.getElementById('medida').value;
+        col4.innerHTML = document.getElementById('cod').value;
+        col5.innerHTML = document.getElementById('des').value;
+        col6.innerHTML = document.getElementById('uni').value;
+        col7.innerHTML = document.getElementById('bols_tot').value;
+        col8.innerHTML = iTotal;
+        col9.innerHTML = document.getElementById('valorParcialIsc').value;
+        col10.innerHTML = document.getElementById('igvParcial').value;
+        newRow.setAttribute('data-id', id);
+        col8.style.display = 'none';
+        col9.style.display = 'none';
+        col10.style.display = 'none';
+
+        col1.firstChild.addEventListener('click', function () {
+            eliminarFila(id);
+        });
+
+        a++;
+
+        var table = document.getElementById('bienesServicios');
+
+        var rows = table.getElementsByTagName('tr');
+
+        var sumaImporte = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[7];
+            if (cell) {
+                sumaImporte += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_importeTotal').textContent = sumaImporte.toFixed(2);
+
+        var sumaISC = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[8];
+            if (cell) {
+                sumaISC += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_isc').textContent = sumaISC.toFixed(2);
+
+        var sumaIGV = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[9];
+            if (cell) {
+                sumaIGV += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_igv').textContent = sumaIGV.toFixed(2);
+
+        var sumaICBPER = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[6];
+            if (cell) {
+                sumaICBPER += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_icbper').textContent = sumaICBPER.toFixed(2);
+
+        actualizarNumerosConsecutivos();
+    }
+
+    function eliminarFila(id) {
+        var row = document.querySelector('tr[data-id="' + id + '"]');
+
+        if (row) {
+            row.parentNode.removeChild(row);
+            recalcularSuma();
+            actualizarNumerosConsecutivos();
+        }
+    }
+
+    function actualizarNumerosConsecutivos() {
+        var table = document.getElementById('bienesServicios');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 1; i < rows.length - 1; i++) {
+            var cell = rows[i].getElementsByTagName('td')[1];
+        }
+    }
+
+    function recalcularSuma() {
+        var table = document.getElementById('bienesServicios');
+
+        var rows = table.getElementsByTagName('tr');
+
+        var sumaImporte = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[7];
+            if (cell) {
+                sumaImporte += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_importeTotal').textContent = sumaImporte.toFixed(2);
+
+        var sumaISC = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[8];
+            if (cell) {
+                sumaISC += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_isc').textContent = sumaISC.toFixed(2);
+
+        var sumaIGV = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[9];
+            if (cell) {
+                sumaIGV += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_igv').textContent = sumaIGV.toFixed(2);
+
+        var sumaICBPER = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[6];
+            if (cell) {
+                sumaICBPER += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_icbper').textContent = sumaICBPER.toFixed(2);
+    }
 
     const handleOptionChange = (e) => {
         setMostrarIsc(false);
@@ -19,6 +180,11 @@ function BoletaForm() {
         document.getElementById('description').value = '';
         setSelectedDoc(selectedValue);
         console.log(selectedValue)
+    };
+    const [monedaSeleccionada, setMonedaSeleccionada] = useState('SOLES');
+
+    const handleMonedaChange = (event) => {
+        setMonedaSeleccionada(event.target.value);
     };
 
     let a = 1;
@@ -70,7 +236,7 @@ function BoletaForm() {
 
 
         const bols_total = selectedValue * document.getElementById('cant').value;
-        document.getElementById('bols_tot').value = bols_total
+        document.getElementById('bols_tot').value = bols_total.toFixed(2)
 
         const cantValue = parseFloat(document.getElementById('cant').value);
 
@@ -88,7 +254,8 @@ function BoletaForm() {
         }
         const igvPar = parseFloat(document.getElementById('valorParcialIsc').value);
 
-        const montoTotalValue = (cantValue * uniValue) + montoCuotaValue + bols_total + igvPar;
+        let montoTotalValue = (cantValue * uniValue) + montoCuotaValue + bols_total + igvPar;
+        montoTotalValue = montoTotalValue.toFixed(2);
         console.log("montoTotalValue:", montoTotalValue);
         setITotal(montoTotalValue);
     };
@@ -410,6 +577,8 @@ function BoletaForm() {
                             <select
                                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 aria-label="Tipo de Moneda"
+                                value={monedaSeleccionada}
+                                onChange={handleMonedaChange}
                             >
                                 <option selected="SOLES">SOLES</option>
                                 <option value="EURO">EURO</option>
@@ -566,6 +735,7 @@ function BoletaForm() {
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
+                                value={monedaSeleccionada}
                             />
 
                             <label htmlFor="date_issue" className="text-gray-400 font-sans font-semibold">
@@ -891,31 +1061,74 @@ function BoletaForm() {
                                         type="button"
                                         value="Adicionar Item"
                                         className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
+                                        onClick={insertarFila}
                                     />
                                 </div>
                             </div>
                             <div className="mx-auto bg-text-zinc-900 dark:text-white">
-                                <table id="cuotas" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
+                                <table id="bienesServicios" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
                                     <thead>
                                         <tr className="bg-gray-200">
                                             <th className="border bg-gray-500 text-gray-300">Eliminar</th>
-                                            <th className="border bg-zinc-500 text-gray-300">Bien/Servicio</th>
-                                            <th className="border bg-zinc-500 text-gray-300">Gravado/Exonerado/Inafecto</th>
-                                            <th className="border bg-zinc-500 text-gray-300">Unidad Medida</th>
                                             <th className="border bg-zinc-500 text-gray-300">Cantidad</th>
+                                            <th className="border bg-zinc-500 text-gray-300">Unidad de medida</th>
                                             <th className="border bg-zinc-500 text-gray-300">Código</th>
                                             <th className="border bg-zinc-500 text-gray-300">Descripción</th>
+                                            <th className="border bg-zinc-500 text-gray-300">Valor unitario</th>
+                                            <th className="border bg-zinc-500 text-gray-300">ICBPER</th>
+                                            <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">ImporteTotal(c/u)</th>
+                                            <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">ISC(c/u)</th>
+                                            <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">IGV(c/u)</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cuerpo_cuotas" className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
                                         <tr>
-                                            <td className="bg-zinc-600" >Total</td>
+                                            <td className="bg-zinc-600" >Importe total</td>
                                             <td></td>
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
-                                            <td id="suma_tabla" className="bg-zinc-600">0</td>
+                                            <td className="bg-zinc-600" id="tb_importeTotal">0</td>
+                                            <td style={{ display: 'none' }} ></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="bg-zinc-600" >ISC</td>
+                                            <td></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td className="bg-zinc-600" id="tb_isc">0</td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="bg-zinc-600" >IGV</td>
+                                            <td></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td className="bg-zinc-600" id="tb_igv">0</td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="bg-zinc-600" >ICBPER</td>
+                                            <td></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td id="tb_icbper" className="bg-zinc-600">0</td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -940,7 +1153,7 @@ function BoletaForm() {
                     </form>
                 </section>
             </div>
-        </div>
+        </div >
     );
 }
 
