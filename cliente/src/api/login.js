@@ -14,6 +14,10 @@ export const registerRequest3 = (user) => axios.post(`${API}/register3`, user)
 
 export const registerfact = (user) => axios.post(`${API}/registerfact`, user)
 
+export const registerBol = (user) => axios.post(`${API}/registerBol`, user)
+
+export const registerPBol = (user) => axios.post(`${API}/registerPBol`, user)
+
 export const registerPfact = (user) => axios.post(`${API}/registerPfact`, user)
 
 export const registerCuotas = (user) => axios.post(`${API}/registerCuotas`, user)
