@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Starts from '../components/Stars'
+import { useLogin } from '../context/LoginContext'
 
 function BoletaForm() {
     const [mostrarRucReceptor, setMostrarRucReceptor] = useState(false);
