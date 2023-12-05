@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Starts from '../components/Stars'
 import { resolvePath } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -65,6 +66,10 @@ function FacturaForm() {
             setMontoIsc(document.getElementById('introducedIsc'))
         }
         setMostrarIsc(isISC);
+
+        setSelectedisc({
+            checked: e.target.value
+        });
     };
 
 
@@ -145,9 +150,130 @@ function FacturaForm() {
     });
 
     const navigate = useNavigate();
-    const onSubmit = () => {
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm()
+    const [selectedtipo_trans, setSelectedtipo_trans] = useState({
+        checked: null
+    });
+    const [selecteddetr, setSelecteddetr] = useState({
+        checked: null
+    });
+    const [selectedexp, setSelectedexp] = useState({
+        checked: null
+    });
+    const [RUC, setRUC] = useState('');
+    const [selectedant, setSelectedant] = useState({
+        checked: null
+    });
+    const [selecteditn, setSelecteditn] = useState({
+        checked: null
+    });
+    const [selectedest, setSelectedest] = useState({
+        checked: null
+    });
+    const [selecteddir, setSelecteddir] = useState({
+        checked: null
+    });
+    const [selectedcom, setSelectedcom] = useState({
+        checked: null
+    });
+    const [selecteddesc_ant, setSelecteddesc_ant] = useState({
+        checked: null
+    });
+    const [selectedisc, setSelectedisc] = useState({
+        checked: null
+    });
+    const [selectedopg, setSelectedopg] = useState({
+        checked: null
+    });
+    const [selectedcyt, setSelectedcyt] = useState({
+        checked: null
+    });
+
+
+    const handleRadioChange1 = e => {
+        setSelectedtipo_trans({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange2 = e => {
+        setSelecteddetr({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange4 = e => {
+        setSelectedant({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange5 = e => {
+        setSelecteditn({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange6 = e => {
+        setSelectedest({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange7 = e => {
+        setSelecteddir({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange8 = e => {
+        setSelectedcom({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange9 = e => {
+        setSelecteddesc_ant({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange11 = e => {
+        setSelectedopg({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange12 = e => {
+        setSelectedcyt({
+        checked: e.target.value
+        });
+    };
+
+    const handleRUCChange = (event) => {
+        const newValue = event.target.value;
+        setRUC(newValue);
+    };
+    
+
+    const onSubmit = handleSubmit(async(values) => {
+        values.tipo_trans = selectedtipo_trans.checked;
+        values.detr = selecteddetr.checked;
+        values.exp = selectedexp.checked;
+        values.ruc=RUC;
+        values.ant = selectedant.checked;
+        values.itn = selecteditn.checked;
+        values.est = selectedest.checked;
+        values.dir = selecteddir.checked;
+        values.com = selectedcom.checked;
+        values.desc_ant = selecteddesc_ant.checked;
+        values.isc = selectedisc.checked;
+        values.opg = selectedopg.checked;
+        values.cyt = selectedcyt.checked;
+        console.log(values);
+
         navigate('/factinf')
-    }
+    })
 
     const onSubmit1 = () => {
         navigate('/menu')
@@ -236,6 +362,10 @@ function FacturaForm() {
     const handleOptionChange = (event) => {
         const isExportacion = event.target.value === "1";
         setMostrarRucReceptor(isExportacion);
+
+        setSelectedexp({
+            checked: event.target.value
+        });
     };
 
     React.useEffect(() => {
@@ -255,7 +385,7 @@ function FacturaForm() {
                     <h1 className="text-2xl font-bold text-center text-yellow-100 mb-6">
                         Emisión de Factura Electronica
                     </h1>
-                    <form>
+                    <form onSubmit={onSubmit}>
 
                         <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                             <h1 className="text-lg font-semibold text-yellow-100 mb-5">
@@ -267,6 +397,8 @@ function FacturaForm() {
                                 name="tipo"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedtipo_trans.checked === '1'}
+                                onChange={handleRadioChange1}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 Al contado
@@ -279,6 +411,8 @@ function FacturaForm() {
                                 name="tipo"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedtipo_trans.checked === '0'}
+                                onChange={handleRadioChange1}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 Al crédito
@@ -296,6 +430,8 @@ function FacturaForm() {
                                 name="detraccion"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelecteddetr.checked === '1'}
+                                onChange={handleRadioChange2}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -308,6 +444,8 @@ function FacturaForm() {
                                 name="detraccion"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelecteddetr.checked === '0'}
+                                onChange={handleRadioChange2}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -325,6 +463,7 @@ function FacturaForm() {
                                 name="exportacion"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedexp.checked === '1'}
                                 onChange={handleOptionChange}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -338,6 +477,7 @@ function FacturaForm() {
                                 name="exportacion"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedexp.checked === '0'}
                                 onChange={handleOptionChange}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -358,7 +498,7 @@ function FacturaForm() {
                                 type="text"
                                 aria-label="default input example"
                                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-
+                                onChange={handleRUCChange}
                             />
                             <label htmlFor="observation" className="text-gray-400 font-sans font-semibold">
                                 Razon Social:
@@ -415,6 +555,8 @@ function FacturaForm() {
                                 name="anticipado"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedant.checked === '1'}
+                                onChange={handleRadioChange4}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -427,6 +569,8 @@ function FacturaForm() {
                                 name="anticipado"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedant.checked === '0'}
+                                onChange={handleRadioChange4}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -444,6 +588,8 @@ function FacturaForm() {
                                 name="itinerante"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelecteditn.checked === '1'}
+                                onChange={handleRadioChange5}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -456,6 +602,8 @@ function FacturaForm() {
                                 name="itinerante"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelecteditn.checked === '0'}
+                                onChange={handleRadioChange5}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -473,6 +621,8 @@ function FacturaForm() {
                                 name="establecimiento"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedest.checked === '1'}
+                                onChange={handleRadioChange6}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -485,6 +635,8 @@ function FacturaForm() {
                                 name="establecimiento"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedest.checked === '0'}
+                                onChange={handleRadioChange6}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -502,6 +654,8 @@ function FacturaForm() {
                                 name="direccion"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelecteddir.checked === '1'}
+                                onChange={handleRadioChange7}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -514,6 +668,8 @@ function FacturaForm() {
                                 name="direccion"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelecteddir.checked === '0'}
+                                onChange={handleRadioChange7}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -531,6 +687,8 @@ function FacturaForm() {
                                 name="combustible"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedcom.checked === '1'}
+                                onChange={handleRadioChange8}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -543,6 +701,8 @@ function FacturaForm() {
                                 name="combustible"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedcom.checked === '0'}
+                                onChange={handleRadioChange8}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -560,6 +720,8 @@ function FacturaForm() {
                             <select
                                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 aria-label="Tipo de Moneda"
+                                value="1"
+                                {...register("tipo_mon")}
                             >
                                 <option selected="SOLES">SOLES</option>
                                 <option value="EURO">EURO</option>
@@ -583,6 +745,8 @@ function FacturaForm() {
                                 name="descuentos"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelecteddesc_ant.checked === '1'}
+                                onChange={handleRadioChange9}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -595,6 +759,8 @@ function FacturaForm() {
                                 name="descuentos"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelecteddesc_ant.checked === '0'}
+                                onChange={handleRadioChange9}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -612,6 +778,7 @@ function FacturaForm() {
                                 name="isc"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedisc.checked === '1'}
                                 onChange={handleIscChange}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -625,6 +792,7 @@ function FacturaForm() {
                                 name="isc"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedisc.checked === '0'}
                                 onChange={handleIscChange}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -643,6 +811,8 @@ function FacturaForm() {
                                 name="operacionesg"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedopg.checked === '1'}
+                                onChange={handleRadioChange11}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -655,6 +825,8 @@ function FacturaForm() {
                                 name="operacionesg"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedopg.checked === '0'}
+                                onChange={handleRadioChange11}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -672,6 +844,8 @@ function FacturaForm() {
                                 name="cargos"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedcyt.checked === '1'}
+                                onChange={handleRadioChange12}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -684,6 +858,8 @@ function FacturaForm() {
                                 name="cargos"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedcyt.checked === '0'}
+                                onChange={handleRadioChange12}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -750,6 +926,7 @@ function FacturaForm() {
                                 id="date_issue"
                                 name="date_issue"
                                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                {...register("fecha_emision", { required: true })}
                             />
 
                             <div className="h-4"></div>
@@ -1117,7 +1294,7 @@ function FacturaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
-                                            <td id="suma_tabla" className="bg-zinc-600">0</td>
+                                            <td id="suma_tabla" className="bg-zinc-600" {...register("total", { required: true })}>0</td>
                                         </tr>
                                     </tbody>
                                 </table>

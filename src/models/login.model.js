@@ -49,8 +49,20 @@ model.inUser3=async(arg)=>{
 }
 
 model.inFact=async(arg)=>{
-    const { tipo_trans, detr,exp,RUC,ant,itn,est,dir,com,tipo_mon,desc_ant,isc,opg,cyt,fecha_emision,total} = arg;
-    return sequelize.query(`INSERT INTO factura(tipo_trans, detr,exp,RUC,ant,itn,est,dir,com,tipo_mon,desc_ant,isc,opg,cyt,fecha_emision,total) VALUES ('${tipo_trans}','${detr}','${exp}','${RUC}','${ant}','${itn}','${est}','${dir}','${com}','${tipo_mon}','${desc_ant}','${isc}','${opg}','${cyt}','${fecha_emision}','${total}')`,{raw:true})
+    const { tipo_trans, detr,exp,RUC,ant,itn,est,dir,com,tipo_mon,desc_ant,isc,opg,cyt,fecha_emision,total,total_igv,total_isc,total_icbper} = arg;
+    return sequelize.query(`INSERT INTO factura(tipo_trans, detr,exp,RUC,ant,itn,est,dir,com,tipo_mon,desc_ant,isc,opg,cyt,fecha_emision,total,total_igv,total_isc,total_icbper) VALUES ('${tipo_trans}','${detr}','${exp}','${RUC}','${ant}','${itn}','${est}','${dir}','${com}','${tipo_mon}','${desc_ant}','${isc}','${opg}','${cyt}','${fecha_emision}','${total}','${total_igv}','${total_isc}','${total_icbper}')`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
+model.inBol=async(arg)=>{
+    const { expo,td,rs,pa,itin,esta,direc,tm,da,ISC_sel,og,cyot,nombre,fecha_emision,fecha_vencimiento,total,total_igv,total_icbper,total_isc} = arg;
+    return sequelize.query(`INSERT INTO boleta(expo,td,rs,pa,itin,esta,direc,tm,da,ISC_sel,og,cyot,nombre,fecha_emision,fecha_vencimiento,total,total_igv,total_icbper,total_isc) VALUES ('${expo}','${td}','${rs}','${pa}','${itin}','${esta}','${direc}','${tm}','${da}','${ISC_sel}','${og}','${cyot}','${nombre}','${fecha_emision}','${fecha_vencimiento}','${total}','${total_igv}','${total_icbper}','${total_isc}')`,{raw:true})
     .then(([result,metadata])=>{
         const data= result.length===0?null:result
         return data
@@ -61,6 +73,18 @@ model.inFact=async(arg)=>{
 }
 
 model.inPFact=async(arg)=>{
+    const { bos,cantidad,medida,codigo,descripcion,bolsas,valor,descuento,ISC,ICBPER,IGV,Importe_total} = arg;
+    return sequelize.query(`INSERT INTO prod_fact(bos,cantidad,medida,codigo,descripcion,bolsas,valor,descuento,ISC,ICBPER,IGV,Importe_total) VALUES ('${bos}','${cantidad}','${medida}','${codigo}','${descripcion}','${bolsas}','${valor}','${descuento}','${ISC}','${ICBPER}','${IGV}','${Importe_total}')`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
+model.inPBol=async(arg)=>{
     const { bos,cantidad,medida,codigo,descripcion,bolsas,valor,descuento,ISC,ICBPER,IGV,Importe_total} = arg;
     return sequelize.query(`INSERT INTO prod_fact(bos,cantidad,medida,codigo,descripcion,bolsas,valor,descuento,ISC,ICBPER,IGV,Importe_total) VALUES ('${bos}','${cantidad}','${medida}','${codigo}','${descripcion}','${bolsas}','${valor}','${descuento}','${ISC}','${ICBPER}','${IGV}','${Importe_total}')`,{raw:true})
     .then(([result,metadata])=>{
