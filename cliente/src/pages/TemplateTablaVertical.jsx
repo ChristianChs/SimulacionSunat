@@ -1,7 +1,7 @@
 
 
 const TemplateTablaVertical = ({ dato }) => {
-    
+
     return (
         <div>
             <table className='w-full text-center bg-black text-white border border-white'>

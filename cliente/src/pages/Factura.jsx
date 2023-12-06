@@ -542,18 +542,18 @@ function FacturaForm() {
         setImporte_total(newValue);
     };
 
-    const onSubmit1 = handleSubmit(async(values1) => {
+    const onSubmit1 = handleSubmit(async (values1) => {
         values1.bos = selectedbos.checked;
-        values1.cantidad=cantidad;
-        values1.codigo=codigo;
-        values1.descripcion=descripcion;
-        values1.selectedbolsas=selectedbolsas.checked;
-        values1.valor=valor;
-        values1.descuento=descuento;
-        values1.ISC=ISC;
-        values1.ICBPER=ICBPER;
-        values1.IGV=IGV;
-        values1.Importe_total=Importe_total;
+        values1.cantidad = cantidad;
+        values1.codigo = codigo;
+        values1.descripcion = descripcion;
+        values1.selectedbolsas = selectedbolsas.checked;
+        values1.valor = valor;
+        values1.descuento = descuento;
+        values1.ISC = ISC;
+        values1.ICBPER = ICBPER;
+        values1.IGV = IGV;
+        values1.Importe_total = Importe_total;
 
         console.log(values);
     })
@@ -1143,7 +1143,7 @@ function FacturaForm() {
                                             name="item"
                                             value="1"
                                             className="mr-2"
-                                            checked={setSelectedbos.checked === '1'}
+                                            //checked={setSelectedbos.checked === '1'}
                                             onChange={handlersChange13}
                                         />
                                         <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -1160,7 +1160,7 @@ function FacturaForm() {
                                             name="item"
                                             value="0"
                                             className="mr-2"
-                                            checked={setSelectedbos.checked === '0'}
+                                            //checked={setSelectedbos.checked === '0'}
                                             onChange={handlersChange13}
                                         />
                                         <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
