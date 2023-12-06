@@ -11,6 +11,7 @@ import Imagen3 from '../assets/images/xml.png';
 import { dataLogRequest } from '../api/login';
 import { dataCuota } from '../api/login';
 import TemplateTablaVertical from './TemplateTablaVertical';
+import TemplateTablaVerticalp from './TemplateTablaVertical';
 
 function PreFactura() {
 
@@ -95,23 +96,10 @@ function PreFactura() {
         </div>
       </div>
 
-      <div className="separador3" style={{ border: '2px solid #000000', borderLeft: '2px solid #000000', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px', marginTop: '5px', paddingTop: '2px', height: '150px', maxHeight: '500px', paddingRight: '7px', paddingLeft: '7px' }}>
-        <table className="tabla" style={{color: 'black',borderCollapse: 'collapse', width: '100%' }} border="1">
-          <tr>
-            <th class="text-white border bg-black">Cantidad</th>
-            <th class="text-white border bg-black">Unidad Medida</th>
-            <th class="text-white border bg-black">Descripción</th>
-            <th class="text-white border bg-black">Valor Unitario</th>
-            <th class="text-white border bg-black">ICBPER</th>
-          </tr>
-          <tr>
-            <td class="text-center text-black font-medium border">1.00</td>
-            <td class="text-center text-black font-medium border">UNIDAD</td>
-            <td class="text-center text-black font-medium border">TRANSPORTE DE CARGA DE LIMA A CHICLAYO</td>
-            <td class="text-center text-black font-medium border">1594.915</td>
-            <td class="text-center text-black font-medium border">0.00</td>
-          </tr>
-        </table>
+      <div class="p-2 border-t-3 border-l-3 shadow-md mt-5" style={{ border: '2px solid #000000', borderTop: '2px solid #000000', borderLeft: '2px solid #000000', boxShadow: '1px 1px 1px #f2f1f1'}}>
+        <div class="productos">
+          <TemplateTablaVerticalp dato={data}/>
+        </div>
       </div>
 
       <div className="separador4" style={{ border: '2px solid #000000', textAlign: 'right', borderTop: '2px solid #000000', borderLeft: '2px solid #000000', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px', marginTop: '5px', paddingTop: '2px' }}>
@@ -226,7 +214,7 @@ function PreFactura() {
 
       <div class="p-2 border-t-3 border-l-3 shadow-md mt-5" style={{ border: '2px solid #000000', borderTop: '2px solid #000000', borderLeft: '2px solid #000000', boxShadow: '1px 1px 1px #f2f1f1'}}>
         <div class="cuotas">
-          <TemplateTablaVertical dato={dataReceptor5}/>
+          <TemplateTablaVertical dato={data}/>
         </div>
       </div>
 
