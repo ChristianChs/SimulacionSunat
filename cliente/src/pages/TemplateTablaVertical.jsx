@@ -4,7 +4,7 @@ const TemplateTablaVertical = ({ dato }) => {
     
     return (
         <div>
-            <table className='w-full text-center border border-white'>
+            <table className='w-full text-center bg-black text-white border border-white'>
                 <thead>
                     <tr>
                         <th>Item</th>
@@ -16,9 +16,9 @@ const TemplateTablaVertical = ({ dato }) => {
                     {
                         dato.map((item => (
                             <tr>
-                                <td className="border border-slate-300">{item.nroCuota}</td>
-                                <td className="border border-slate-300">{item.fechaCuota}</td>
-                                <td className="border border-slate-300">{item.montoCuota}</td>
+                                <td className="border bg-white text-black border-slate-300">{item.numero_cuota}</td>
+                                <td className="border bg-white text-black border-slate-300">{item.fecha_vencimiento}</td>
+                                <td className="border bg-white text-black border-slate-300">{item.monto_cuota}</td>
                             </tr>
                         )))
                     }
