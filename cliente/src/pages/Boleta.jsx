@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Starts from '../components/Stars'
 import { useLogin } from '../context/LoginContext'
+import { useNavigate } from 'react-router-dom';
 
 function BoletaForm() {
     const [mostrarRucReceptor, setMostrarRucReceptor] = useState(false);
     const [selectedDoc, setSelectedDoc] = useState("SIN DOCUMENTO");
     const { registrarBoleta, errors: LoginErrors } = useLogin();
     const { registrarPBoleta, errors: LoginErrors2 } = useLogin();
+    const navigate = useNavigate();
     function insertarFila() {
         /*const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
         const montoCuota = document.getElementById('monto_cuota').value;*/
@@ -476,7 +478,10 @@ function BoletaForm() {
 
         console.log(values);
 
-        navigate('/factinf')
+        const data= await registrarBoleta(values); 
+        if(data.status===200){
+            navigate('/factinf')
+        }
     })
 
     const [selectedbos, setSelectedbos] = useState({

@@ -33,3 +33,15 @@ export const dataLogRequest = (user) => axios.post(`${API}/getLogin`, user)
 export const dataLogFecha = (user) => axios.post(`${API}/getFecha`, user)
 
 export const dataCuota = (user) => axios.post(`${API}/getCuotas`, user)
+
+export const dataFactura = (user) => axios.post(`${API}/getfact`, user)
+
+export const dataBoleta = (user) => axios.post(`${API}/getbol`, user)
+
+export const dataFacturaC = (user) => axios.post(`${API}/getfactc`, user)
+
+export const dataFacturaD = (user) => axios.post(`${API}/getfactd`, user)
+
+export const dataPFactura= (user) => axios.post(`${API}/getpfact`, user)
+
+export const dataPBoleta= (user) => axios.post(`${API}/getpbol`, user)

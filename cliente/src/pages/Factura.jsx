@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Starts from '../components/Stars'
-import { resolvePath } from 'react-router-dom';
 import { useLogin } from '../context/LoginContext'
 import { useNavigate } from 'react-router-dom';
 

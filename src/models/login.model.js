@@ -142,6 +142,74 @@ model.ExtraerC=async()=>{
     })
 }
 
+model.ExtraerFC=async()=>{
+    return sequelize.query(`SELECT * FROM cuota_factura WHERE 1`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
+model.ExtraerFD=async()=>{
+    return sequelize.query(`SELECT * FROM detraccion_factura WHERE 1`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
+model.ExtraerPF=async()=>{
+    return sequelize.query(`SELECT * FROM prod_fact WHERE 1`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
+model.ExtraerPB=async()=>{
+    return sequelize.query(`SELECT * FROM prod_bol WHERE 1`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
+
+model.ExtraerF=async()=>{
+    return sequelize.query(`SELECT * FROM factura WHERE 1 ORDER BY id DESC LIMIT 1`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
+model.ExtraerB=async()=>{
+    return sequelize.query(`SELECT * FROM boleta WHERE 1 ORDER BY id DESC LIMIT 1`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
+
 model.Extraer2=async(arg)=>{
     return sequelize.query(`SELECT * FROM recibohonorario INNER JOIN login ON recibohonorario.id_login =login.id WHERE recibohonorario.id_login='${arg}' ORDER BY recibohonorario.id DESC LIMIT 1 `,{raw:true})
     .then(([result,metadata])=>{
