@@ -16,9 +16,9 @@ const TemplateTablaVertical = ({ dato }) => {
                     {
                         dato.map((item => (
                             <tr>
-                                <td className="border border-slate-300">{item.nroCuota}</td>
-                                <td className="border border-slate-300">{item.fechaCuota}</td>
-                                <td className="border border-slate-300">{item.montoCuota}</td>
+                                <td className="border border-slate-300">{item.numero_cuota}</td>
+                                <td className="border border-slate-300">{item.fecha_vencimiento}</td>
+                                <td className="border border-slate-300">{item.monto_cuota}</td>
                             </tr>
                         )))
                     }
