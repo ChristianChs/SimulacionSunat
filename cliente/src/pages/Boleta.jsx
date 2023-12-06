@@ -1081,8 +1081,9 @@ function BoletaForm() {
                                 <textarea className="monto-cuota w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                     type="text"
                                     id="des"
-                                    aria-label=".form-control-lg example">
+                                    aria-label=".form-control-lg example"
                                     onChange={handleDescripcionChange}
+                                >
                                 </textarea>
 
                                 <h1 className="mb-3 text-gray-400 font-sans font-bold">

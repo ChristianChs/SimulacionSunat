@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import FacturaPDF from '../components/FacturaPDF'
 import TempleteXML from '../components/TemplateXML'
 import { PDFViewer } from '@react-pdf/renderer'
@@ -9,8 +9,18 @@ import Imagen1 from '../assets/images/flecha.png';
 import Imagen2 from '../assets/images/pdf.jpg';
 import Imagen3 from '../assets/images/xml.png';
 import { dataLogRequest } from '../api/login';
+import TemplateTablaVertical from './TemplateTablaVertical';
 
 function PreFactura() {
+
+  const [data, setData] = useState([
+    { nroCuota: "1", fechaCuota: "15/25/2023", montoCuota: "5000" },
+    { nroCuota: "2", fechaCuota: "16/25/2023", montoCuota: "8000" },
+    { nroCuota: "1", fechaCuota: "15/25/2023", montoCuota: "5000" },
+    { nroCuota: "2", fechaCuota: "16/25/2023", montoCuota: "8000" },
+    { nroCuota: "1", fechaCuota: "15/25/2023", montoCuota: "5000" },
+    { nroCuota: "2", fechaCuota: "16/25/2023", montoCuota: "8000" },
+])
 
   return (
     <div className="containerprin" style={{paddingTop: '15px', paddingBottom: '15px'}}>
@@ -203,22 +213,7 @@ function PreFactura() {
 
       <div class="p-2 border-t-3 border-l-3 shadow-md mt-5" style={{ border: '2px solid #000000', borderTop: '2px solid #000000', borderLeft: '2px solid #000000', boxShadow: '1px 1px 1px #f2f1f1'}}>
         <div class="cuotas">
-          <table class="table-auto w-full">
-            <thead>
-              <tr>
-                <th class="text-white border bg-black">N° Cuota</th>
-                <th class="text-white border bg-black">Fec. Venc.</th>
-                <th class="text-white border bg-black">Monto</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="text-center text-black font-semibold border">1</td>
-                <td class="text-center text-black font-semibold border">15/03/2023</td>
-                <td class="text-center text-black font-semibold border">2,284.48</td>
-              </tr>
-            </tbody>
-          </table>
+          <TemplateTablaVertical dato={data}/>
         </div>
       </div>
 
@@ -230,7 +225,7 @@ function PreFactura() {
       <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px'}}>Cerrar</button>
       </div>
     </div>
-    
+
     </div>
   )
 }
