@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Starts from '../components/Stars'
 import { useLogin } from '../context/LoginContext'
+import { useNavigate } from 'react-router-dom';
 
 function BoletaForm() {
     const [mostrarRucReceptor, setMostrarRucReceptor] = useState(false);
     const [selectedDoc, setSelectedDoc] = useState("SIN DOCUMENTO");
     const { registrarBoleta, errors: LoginErrors } = useLogin();
     const { registrarPBoleta, errors: LoginErrors2 } = useLogin();
+    const navigate = useNavigate();
     function insertarFila() {
         /*const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
         const montoCuota = document.getElementById('monto_cuota').value;*/
@@ -221,16 +224,6 @@ function BoletaForm() {
         '2023': 0.5,
     };
 
-
-    const handleIscChange = (event) => {
-        const isISC = event.target.value === "1";
-        document.getElementById('valorISC').value = 0;
-        setMostrarIsc(isISC);
-        updateMFinal(cantidad, valorUnitario);
-    };
-
-
-
     const handleYearChange = (e) => {
         const selectedValue = yearToValueMap[e.target.value];
         setSelectedYear(e.target.value);
@@ -277,6 +270,10 @@ function BoletaForm() {
 
         setSelectedImpBols(newValue);
 
+        setSelectedbolsas({
+            checked: e.target.value
+        });
+
         if (newValue === "0") {
             document.getElementById('imp_Bols').value = yearToValueMap["nada"];
             setSelectedYear("nada");
@@ -298,6 +295,8 @@ function BoletaForm() {
 
     const onChangeMonto = (e) => {
         const value = e.target.value;
+
+        setValor(value);
         setValorUnitario(value);
         updateMFinal(cantidad, value);
     };
@@ -357,6 +356,212 @@ function BoletaForm() {
 
     });
 
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm()
+    const [selectedexpo, setSelectedexpo] = useState({
+        checked: null
+    });
+    const [rs, setrs] = useState('');
+    const [selectedpa, setSelectedpa] = useState({
+        checked: null
+    });
+    const [selecteditin, setSelecteditin] = useState({
+        checked: null
+    });
+    const [selectedesta, setSelectedesta] = useState({
+        checked: null
+    });
+    const [selecteddirec, setSelecteddirec] = useState({
+        checked: null
+    });
+    const [selectedda, setSelectedda] = useState({
+        checked: null
+    });
+    const [selectedISC_sel, setSelectedISC_sel] = useState({
+        checked: null
+    });
+    const [selectedog, setSelectedog] = useState({
+        checked: null
+    });
+    const [selectedcyot, setSelectedcyot] = useState({
+        checked: null
+    });
+    const [nombre, setNombre] = useState('');
+
+    const handleRadioChange1 = e => {
+        setMostrarIsc(false);
+        document.getElementById('valorISC').value = 0;
+
+        const selectedValue = e.target.value;
+        setMostrarRucReceptor(selectedValue === "1");
+        updateMFinal(cantidad, valorUnitario);
+        
+        setSelectedexpo({
+        checked: e.target.value
+        });
+    };
+
+    const handlersChange = (event) => {
+        const newValue = event.target.value;
+        setrs(newValue);
+    };
+
+    const handleRadioChange2 = e => {
+        setSelectedpa({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange3 = e => {
+        setSelecteditin({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange4 = e => {
+        setSelectedesta({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange5 = e => {
+        setSelecteddirec({
+        checked: e.target.value
+        });
+    };
+    
+    const handleRadioChange6 = e => {
+        setSelectedda({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange7 = e => {
+        const isISC = e.target.value === "1";
+        document.getElementById('valorISC').value = 0;
+        setMostrarIsc(isISC);
+        updateMFinal(cantidad, valorUnitario);
+
+        setSelectedISC_sel({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange8 = e => {
+        setSelectedog({
+        checked: e.target.value
+        });
+    };
+
+    const handleRadioChange9 = e => {
+        setSelectedcyot({
+        checked: e.target.value
+        });
+    };
+
+    const handleNombrehange = (event) => {
+        const newValue = event.target.value;
+        setNombre(newValue);
+    };
+
+    const onSubmit = handleSubmit(async(values) => {
+        values.expo = selectedexpo.checked;
+        values.rs=rs;
+        values.pa = selectedpa.checked;
+        values.itin = selecteditin.checked;
+        values.esta = selectedesta.checked;
+        values.direc = selecteddirec.checked;
+        values.da = selectedda.checked;
+        values.ISC_sel = selectedISC_sel.checked;
+        values.nombre=nombre;
+        values.og=selectedog;
+        values.cyot=selectedcyot;
+
+        console.log(values);
+
+        const data= await registrarBoleta(values); 
+        if(data.status===200){
+            navigate('/factinf')
+        }
+    })
+
+    const [selectedbos, setSelectedbos] = useState({
+        checked: null
+    });
+    const [medida, setMedida] = useState('');
+    const [codigo, setCodigo] = useState('');
+    const [descripcion, setDescripcion] = useState('');
+    const [selectedbolsas, setSelectedbolsas] = useState({
+        checked: null
+    });
+    const [valor, setValor] = useState('');
+    const [descuento, setDescuento] = useState('');
+    const [ISC, setISC] = useState('');
+    const [ICBPER, setICBPER] = useState('');
+    const [IGV, setIGV] = useState('');
+    const [Importe_total, setImporte_total] = useState('');
+
+    const handlersChange10 = (event) => {
+        const newValue = event.target.value;
+        setSelectedbos(newValue);
+    };
+    const handleMedidaChange = (event) => {
+        const newValue = event.target.value;
+        setMedida(newValue);
+    };
+    const handleCodigoChange = (event) => {
+        const newValue = event.target.value;
+        setCodigo(newValue);
+    };
+    const handleDescripcionChange = (event) => {
+        const newValue = event.target.value;
+        setDescripcion(newValue);
+    };
+    const handleRadioChange11 = e => {
+        setSelectedbolsas({
+            checked: e.target.value
+        });
+    };
+    const handleValorChange = (event) => {
+        const newValue = event.target.value;
+        setValor(newValue);
+    };
+    const handleDescuentoChange = (event) => {
+        const newValue = event.target.value;
+        setDescuento(newValue);
+    };
+    const handleISCChange = (event) => {
+        const newValue = event.target.value;
+        setISC(newValue);
+    };
+    const handleICBPERChange = (event) => {
+        const newValue = event.target.value;
+        setICBPER(newValue);
+    };
+    const handleIGVChange = (event) => {
+        const newValue = event.target.value;
+        setIGV(newValue);
+    };
+    const handleImporte_totalChange = (event) => {
+        const newValue = event.target.value;
+        setImporte_total(newValue);
+    };
+
+    const onSubmit1 = handleSubmit(async(values1) => {
+        values1.bos = selectedbos.checked;
+        values1.cantidad=cantidad;
+        values1.codigo=codigo;
+        values1.descripcion=descripcion;
+        values1.selectedbolsas=selectedbolsas.checked;
+        values1.valor=valor;
+        values1.descuento=descuento;
+        values1.ISC=ISC;
+        values1.ICBPER=ICBPER;
+        values1.IGV=IGV;
+        values1.Importe_total=Importe_total;
+
+        console.log(values);
+    })
+
     return (
         <div>
             <Starts className="stars-behind" />
@@ -367,7 +572,7 @@ function BoletaForm() {
                     <h1 className="text-2xl font-bold text-center text-yellow-100 mb-6">
                         Emisión de Boleta de Venta Electronica
                     </h1>
-                    <form>
+                    <form onSubmit={onSubmit}>
                         <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                             <h1 className="text-lg font-semibold text-yellow-100 mb-5">
                                 Indique si es una Boleta de Venta de Exportación
@@ -378,7 +583,8 @@ function BoletaForm() {
                                 name="exportacion"
                                 value="1"
                                 className="mr-2"
-                                onChange={handleOptionChange}
+                                checked={setSelectedexpo.checked === '1'}
+                                onChange={handleRadioChange1}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -391,7 +597,8 @@ function BoletaForm() {
                                 name="exportacion"
                                 value="0"
                                 className="mr-2"
-                                onChange={handleOptionChange}
+                                checked={setSelectedexpo.checked === '0'}
+                                onChange={handleRadioChange1}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -411,6 +618,7 @@ function BoletaForm() {
                                 aria-label="Tipo de Moneda"
                                 value={selectedDoc}
                                 onChange={handleDocChange}
+                                {...register("td")}
                             >
                                 <option selected="SIN DOCUMENTO">SIN DOCUMENTO</option>
                                 <option value="DOCT">DOC. TRIB. NO DOM. SIN RUC</option>
@@ -450,7 +658,7 @@ function BoletaForm() {
                                 type="text"
                                 aria-label="default input example"
                                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-
+                                onChange={handlersChange}
                             />
                         </div>
 
@@ -464,6 +672,8 @@ function BoletaForm() {
                                 name="anticipado"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedpa.checked === '1'}
+                                onChange={handleRadioChange2}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -476,6 +686,8 @@ function BoletaForm() {
                                 name="anticipado"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedpa.checked === '0'}
+                                onChange={handleRadioChange2}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -493,6 +705,8 @@ function BoletaForm() {
                                 name="itinerante"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelecteditin.checked === '1'}
+                                onChange={handleRadioChange3}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -505,6 +719,8 @@ function BoletaForm() {
                                 name="itinerante"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelecteditin.checked === '0'}
+                                onChange={handleRadioChange3}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -522,6 +738,8 @@ function BoletaForm() {
                                 name="establecimiento"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedesta.checked === '1'}
+                                onChange={handleRadioChange4}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -534,6 +752,8 @@ function BoletaForm() {
                                 name="establecimiento"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedesta.checked === '0'}
+                                onChange={handleRadioChange4}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -551,6 +771,8 @@ function BoletaForm() {
                                 name="direccion"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelecteddirec.checked === '1'}
+                                onChange={handleRadioChange5}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -563,6 +785,8 @@ function BoletaForm() {
                                 name="direccion"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelecteddirec.checked === '0'}
+                                onChange={handleRadioChange5}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -580,8 +804,6 @@ function BoletaForm() {
                             <select
                                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 aria-label="Tipo de Moneda"
-                                value={monedaSeleccionada}
-                                onChange={handleMonedaChange}
                             >
                                 <option selected="SOLES">SOLES</option>
                                 <option value="EURO">EURO</option>
@@ -605,6 +827,8 @@ function BoletaForm() {
                                 name="descuentos"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedda.checked === '1'}
+                                onChange={handleRadioChange6}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -617,6 +841,8 @@ function BoletaForm() {
                                 name="descuentos"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedda.checked === '0'}
+                                onChange={handleRadioChange6}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -634,7 +860,8 @@ function BoletaForm() {
                                 name="isc"
                                 value="1"
                                 className="mr-2"
-                                onChange={handleIscChange}
+                                checked={setSelectedISC_sel.checked === '1'}
+                                onChange={handleRadioChange7}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -647,7 +874,8 @@ function BoletaForm() {
                                 name="isc"
                                 value="0"
                                 className="mr-2"
-                                onChange={handleIscChange}
+                                checked={setSelectedISC_sel.checked === '0'}
+                                onChange={handleRadioChange7}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -665,6 +893,8 @@ function BoletaForm() {
                                 name="operacionesg"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedog.checked === '1'}
+                                onChange={handleRadioChange8}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -677,6 +907,8 @@ function BoletaForm() {
                                 name="operacionesg"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedog.checked === '0'}
+                                onChange={handleRadioChange8}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -694,6 +926,8 @@ function BoletaForm() {
                                 name="cargos"
                                 value="1"
                                 className="mr-2"
+                                checked={setSelectedcyot.checked === '1'}
+                                onChange={handleRadioChange9}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                 SI
@@ -706,6 +940,8 @@ function BoletaForm() {
                                 name="cargos"
                                 value="0"
                                 className="mr-2"
+                                checked={setSelectedcyot.checked === '0'}
+                                onChange={handleRadioChange9}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                 NO
@@ -727,6 +963,7 @@ function BoletaForm() {
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
+                                onChange={handleNombrehange}
                             />
 
                             <label htmlFor="tipo_m" className="text-gray-400 font-sans font-bold">
@@ -749,6 +986,7 @@ function BoletaForm() {
                                 type="date"
                                 name="date_issue"
                                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                {...register("fecha_emision")}
                             />
 
                             <label htmlFor="date_issue" className="text-gray-400 font-sans font-semibold">
@@ -759,10 +997,11 @@ function BoletaForm() {
                                 id="fechaVencimiento"
                                 name="date_issue"
                                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                {...register("fecha_vencimiento")}
                             />
 
                             <div className="h-4"></div>
-                            <div className="bg-zinc-800 p-4 rounded-lg mb-4">
+                            <div className="bg-zinc-800 p-4 rounded-lg mb-4" onSubmit={onSubmit1}>
 
                                 <h1 className="text-base font-bold mb-3 text-white">
                                     Agregue los bienes o servicios:
@@ -775,6 +1014,8 @@ function BoletaForm() {
                                             name="item"
                                             value="1"
                                             className="mr-2"
+                                            checked={setSelectedbos.checked === '1'}
+                                            onChange={handlersChange10}
                                         />
                                         <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                             Bien
@@ -790,6 +1031,8 @@ function BoletaForm() {
                                             name="item"
                                             value="0"
                                             className="mr-2"
+                                            checked={setSelectedbos.checked === '0'}
+                                            onChange={handlersChange10}
                                         />
                                         <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                             Servicio
@@ -818,6 +1061,7 @@ function BoletaForm() {
                                     type="text"
                                     id="medida"
                                     aria-label=".form-control-lg example"
+                                    onChange={handleMedidaChange}
                                 />
 
                                 <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
@@ -828,6 +1072,7 @@ function BoletaForm() {
                                     type="text"
                                     id="cod"
                                     aria-label=".form-control-lg example"
+                                    onChange={handleCodigoChange}
                                 />
 
                                 <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
@@ -837,6 +1082,7 @@ function BoletaForm() {
                                     type="text"
                                     id="des"
                                     aria-label=".form-control-lg example">
+                                    onChange={handleDescripcionChange}
                                 </textarea>
 
                                 <h1 className="mb-3 text-gray-400 font-sans font-bold">
@@ -900,6 +1146,7 @@ function BoletaForm() {
                                     id="monto_cuota"
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
+                                    onChange={handleDescuentoChange}
                                 />
                                 <div style={{ display: mostrarIsc ? mostrarRucReceptor ? 'none' : 'block' : 'none' }}>
                                     <h1 className="text-gray-400 font-sans font-bold">
@@ -934,6 +1181,7 @@ function BoletaForm() {
                                             id="valorParcialIsc"
                                             placeholder="0.00"
                                             aria-label=".form-control-lg example"
+                                            onChange={handleISCChange}
                                         />
                                     </div>
                                 </div>
@@ -995,6 +1243,7 @@ function BoletaForm() {
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
                                     value={mfinal}
+                                    onChange={handleIGVChange}
                                 />
                                 <div style={{ display: selectedImpBols === '0' ? 'none' : 'block' }}>
                                     <h1 className="text-gray-400 font-sans font-bold">
@@ -1042,6 +1291,7 @@ function BoletaForm() {
                                         id="bols_tot"
                                         placeholder="0.00"
                                         aria-label=".form-control-lg example"
+                                        onChange={handleICBPERChange}
                                     />
                                 </div>
                                 <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
@@ -1055,6 +1305,7 @@ function BoletaForm() {
                                     id="monto_Total"
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
+                                    onChange={handleImporte_totalChange}
                                 />
 
                                 <div className="h-1"></div>
@@ -1092,7 +1343,7 @@ function BoletaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
-                                            <td className="bg-zinc-600" id="tb_importeTotal">0</td>
+                                            <td className="bg-zinc-600" id="tb_importeTotal" {...register("total")}>0</td>
                                             <td style={{ display: 'none' }} ></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
@@ -1104,7 +1355,7 @@ function BoletaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
-                                            <td className="bg-zinc-600" id="tb_isc">0</td>
+                                            <td className="bg-zinc-600" id="tb_isc" {...register("total_isc")}>0</td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
@@ -1116,7 +1367,7 @@ function BoletaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
-                                            <td className="bg-zinc-600" id="tb_igv">0</td>
+                                            <td className="bg-zinc-600" id="tb_igv" {...register("total_igv")}>0</td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
@@ -1128,7 +1379,7 @@ function BoletaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
-                                            <td id="tb_icbper" className="bg-zinc-600">0</td>
+                                            <td id="tb_icbper" className="bg-zinc-600" {...register("total_icbper")}>0</td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>

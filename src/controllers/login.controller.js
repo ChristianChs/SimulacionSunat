@@ -162,6 +162,65 @@ export const ExtraerCuotas = async (req, res) => {
     }
 }
 
+export const ExtraerFactura = async (req, res) => {
+    try {
+        const userFound = await model.ExtraerF()
+        console.log("Extraccion de cuotas",userFound)
+        res.json(userFound)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const ExtraerFacturaC = async (req, res) => {
+    try {
+        const userFound = await model.ExtraerFC()
+        console.log("Extraccion de cuotas",userFound)
+        res.json(userFound)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const ExtraerFacturaD = async (req, res) => {
+    try {
+        const userFound = await model.ExtraerFD()
+        console.log("Extraccion de cuotas",userFound)
+        res.json(userFound)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const ExtraerBoleta = async (req, res) => {
+    try {
+        const userFound = await model.ExtraerB()
+        console.log("Extraccion de cuotas",userFound)
+        res.json(userFound)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const ExtraerPBoleta = async (req, res) => {
+    try {
+        const userFound = await model.ExtraerPB()
+        console.log("Extraccion de cuotas",userFound)
+        res.json(userFound)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const ExtraerPFactura = async (req, res) => {
+    try {
+        const userFound = await model.ExtraerPF()
+        console.log("Extraccion de cuotas",userFound)
+        res.json(userFound)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
 
 export const ExtraerDataLog = async (req, res) => {
     try {
