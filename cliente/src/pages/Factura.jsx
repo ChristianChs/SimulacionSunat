@@ -379,6 +379,13 @@ function FacturaForm() {
         checked: null
     });
 
+    useEffect(() => {
+        setSelectedtipo_trans({
+            checked: "0"
+        })
+
+    }, [])
+
     const handleRadioChange1 = e => {
         setSelectedtipo_trans({
             checked: e.target.value
@@ -460,8 +467,8 @@ function FacturaForm() {
         values.opg = selectedopg.checked;
         values.cyt = selectedcyt.checked;
         console.log(values);
-        const data= await registrarFactura(values); 
-        if(data.status===200){
+        const data = await registrarFactura(values);
+        if (data.status === 200) {
             navigate('/factinf')
         }
     })
@@ -508,7 +515,7 @@ function FacturaForm() {
                                 name="tipo"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedtipo_trans.checked === '1'}
+                                //checked={setSelectedtipo_trans.checked === '1'}
                                 onChange={handleRadioChange1}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -522,7 +529,7 @@ function FacturaForm() {
                                 name="tipo"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedtipo_trans.checked === '0'}
+                                //checked={setSelectedtipo_trans.checked === '0'}
                                 onChange={handleRadioChange1}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -541,7 +548,7 @@ function FacturaForm() {
                                 name="detraccion"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelecteddetr.checked === '1'}
+                                //checked={setSelecteddetr.checked === '1'}
                                 onChange={handleRadioChange2}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -555,7 +562,7 @@ function FacturaForm() {
                                 name="detraccion"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelecteddetr.checked === '0'}
+                                //checked={setSelecteddetr.checked === '0'}
                                 onChange={handleRadioChange2}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -574,7 +581,7 @@ function FacturaForm() {
                                 name="exportacion"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedexp.checked === '1'}
+                                //checked={setSelectedexp.checked === '1'}
                                 onChange={handleOptionChange}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -588,7 +595,7 @@ function FacturaForm() {
                                 name="exportacion"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedexp.checked === '0'}
+                                //checked={setSelectedexp.checked === '0'}
                                 onChange={handleOptionChange}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -666,7 +673,7 @@ function FacturaForm() {
                                 name="anticipado"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedant.checked === '1'}
+                                //checked={setSelectedant.checked === '1'}
                                 onChange={handleRadioChange4}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -680,7 +687,7 @@ function FacturaForm() {
                                 name="anticipado"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedant.checked === '0'}
+                                //checked={setSelectedant.checked === '0'}
                                 onChange={handleRadioChange4}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -699,7 +706,7 @@ function FacturaForm() {
                                 name="itinerante"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelecteditn.checked === '1'}
+                                //checked={setSelecteditn.checked === '1'}
                                 onChange={handleRadioChange5}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -713,7 +720,7 @@ function FacturaForm() {
                                 name="itinerante"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelecteditn.checked === '0'}
+                                //checked={setSelecteditn.checked === '0'}
                                 onChange={handleRadioChange5}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -732,7 +739,7 @@ function FacturaForm() {
                                 name="establecimiento"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedest.checked === '1'}
+                                //checked={setSelectedest.checked === '1'}
                                 onChange={handleRadioChange6}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -746,7 +753,7 @@ function FacturaForm() {
                                 name="establecimiento"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedest.checked === '0'}
+                                //checked={setSelectedest.checked === '0'}
                                 onChange={handleRadioChange6}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -765,7 +772,7 @@ function FacturaForm() {
                                 name="direccion"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelecteddir.checked === '1'}
+                                //checked={setSelecteddir.checked === '1'}
                                 onChange={handleRadioChange7}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -779,7 +786,7 @@ function FacturaForm() {
                                 name="direccion"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelecteddir.checked === '0'}
+                                //checked={setSelecteddir.checked === '0'}
                                 onChange={handleRadioChange7}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -798,7 +805,7 @@ function FacturaForm() {
                                 name="combustible"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedcom.checked === '1'}
+                                //checked={setSelectedcom.checked === '1'}
                                 onChange={handleRadioChange8}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -812,7 +819,7 @@ function FacturaForm() {
                                 name="combustible"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedcom.checked === '0'}
+                                //checked={setSelectedcom.checked === '0'}
                                 onChange={handleRadioChange8}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -856,7 +863,7 @@ function FacturaForm() {
                                 name="descuentos"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelecteddesc_ant.checked === '1'}
+                                //checked={setSelecteddesc_ant.checked === '1'}
                                 onChange={handleRadioChange9}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -870,7 +877,7 @@ function FacturaForm() {
                                 name="descuentos"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelecteddesc_ant.checked === '0'}
+                                //checked={setSelecteddesc_ant.checked === '0'}
                                 onChange={handleRadioChange9}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -889,7 +896,7 @@ function FacturaForm() {
                                 name="isc"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedisc.checked === '1'}
+                                //checked={setSelectedisc.checked === '1'}
                                 onChange={handleIscChange}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -903,7 +910,7 @@ function FacturaForm() {
                                 name="isc"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedisc.checked === '0'}
+                                //checked={setSelectedisc.checked === '0'}
                                 onChange={handleIscChange}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -922,7 +929,7 @@ function FacturaForm() {
                                 name="operacionesg"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedopg.checked === '1'}
+                                //checked={setSelectedopg.checked === '1'}
                                 onChange={handleRadioChange11}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -936,7 +943,7 @@ function FacturaForm() {
                                 name="operacionesg"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedopg.checked === '0'}
+                                //checked={setSelectedopg.checked === '0'}
                                 onChange={handleRadioChange11}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -955,7 +962,7 @@ function FacturaForm() {
                                 name="cargos"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedcyt.checked === '1'}
+                                //checked={setSelectedcyt.checked === '1'}
                                 onChange={handleRadioChange12}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -969,7 +976,7 @@ function FacturaForm() {
                                 name="cargos"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedcyt.checked === '0'}
+                                //checked={setSelectedcyt.checked === '0'}
                                 onChange={handleRadioChange12}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -1130,7 +1137,7 @@ function FacturaForm() {
                                             value="1"
                                             className="mr-2"
                                             onChange={handleImpBolsChange}
-                                            checked={selectedImpBols === "1"}
+                                        //checked={selectedImpBols === "1"}
                                         />
                                         <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                             SI
@@ -1147,7 +1154,7 @@ function FacturaForm() {
                                             value="0"
                                             className="mr-2"
                                             onChange={handleImpBolsChange}
-                                            checked={selectedImpBols === "0"}
+                                        //checked={selectedImpBols === "0"}
                                         />
                                         <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                             NO
