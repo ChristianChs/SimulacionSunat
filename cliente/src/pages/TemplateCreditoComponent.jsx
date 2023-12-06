@@ -2,17 +2,10 @@ const FormatoTabla = ({ dato }) => {
     const { nroCuota, fechaCuota, montoCuota } = dato
     return (
         <div>
-            <table className=' m-4 w-48 border border-collapse border-white'>
+            <table className='w-full text-center border border-white'>
                 <thead>
                     <tr>
-                        <th colSpan={3} className='border border-slate-300'>
-                            Resumen
-                        </th>
-                    </tr>
-                    <tr>
-                        <th className="border border-slate-300">Nro Cuota</th>
-                        <th className="border border-slate-300">Fecha</th>
-                        <th className="border border-slate-300">Monto</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
