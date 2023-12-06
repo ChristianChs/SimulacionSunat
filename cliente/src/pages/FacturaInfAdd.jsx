@@ -1,11 +1,178 @@
 import React, { useEffect, useState } from 'react'
 import Starts from '../components/Stars'
 import { useNavigate } from 'react-router-dom';
+import { useLogin } from '../context/LoginContext'
 
 function FacturaForm() {
-  // Puedes agregar aquí el estado y funciones necesarias para manejar los datos del formulario
-    
-    const navigate=useNavigate();
+    let a = 0;
+    // Puedes agregar aquí el estado y funciones necesarias para manejar los datos del formulario
+    const [mostrarDocumentosRelacionados, setMostrarDocumentosRelacionados] = useState(false);
+    const [mostrarInformacionCredito, setMostrarInformacionCredito] = useState(false);
+    const [mostrarInformacionFactura, setMostrarInformacionFactura] = useState(false);
+    const [mostrarInfoDetraccion, setMostrarInfoDetraccion] = useState(false);
+    const { registrarFacturaCu, errors: LoginErrors } = useLogin();
+    const { registrarFacturaDe, errors: LoginErrors2 } = useLogin();
+
+
+    /*////////////////////////
+    DOCUMENTOS RELACIONADOS*/
+
+    function insertarFilaDocumentos() {
+
+        let tblDatos = document.getElementById('tb_documetosRelacionados');
+        let newRow = tblDatos.insertRow(tblDatos.rows.length);
+
+        // Obtener el elemento select
+        const tipoDocumentoSelect = document.getElementById('tipoDocumento');
+
+        // Obtener el texto seleccionado
+        const tipoDocumentoSeleccionado = tipoDocumentoSelect.options[tipoDocumentoSelect.selectedIndex].text;
+
+        let col1 = newRow.insertCell(0);
+        let col2 = newRow.insertCell(1);
+        let col3 = newRow.insertCell(2);
+        let col4 = newRow.insertCell(3);
+
+        const id = 'fila' + a;
+        col1.innerHTML = '<button class="text-red-500">x</button>';
+        col2.innerHTML = tipoDocumentoSeleccionado;
+        col3.innerHTML = document.getElementById('serieDocumento').value;
+        col4.innerHTML = document.getElementById('numeroDocumento').value;
+        newRow.setAttribute('data-id', id);
+
+        col1.firstChild.addEventListener('click', function () {
+            eliminarFilaDocuementos(id);
+        });
+
+        a++;
+
+        actualizarNumerosConsecutivosDocumentos();
+    }
+
+    function actualizarNumerosConsecutivosDocumentos() {
+        var table = document.getElementById('cuotas');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 1; i < rows.length - 1; i++) {
+            var cell = rows[i].getElementsByTagName('td')[1];
+            if (cell) {
+
+            }
+        }
+    }
+
+    function eliminarFilaDocuementos(id) {
+        var row = document.querySelector('tr[data-id="' + id + '"]');
+
+        if (row) {
+            row.parentNode.removeChild(row);
+            recalcularSuma();
+            actualizarNumerosConsecutivosDocumentos();
+        }
+    }
+
+    function recalcularSuma() {
+        var table = document.getElementById('cuotas');
+        var rows = table.getElementsByTagName('tr');
+        var suma = 0;
+
+        for (var i = 1; i < rows.length - 1; i++) {
+            var cell = rows[i].getElementsByTagName('td')[3];
+            if (cell) {
+                suma += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+    }
+
+    let b = 0
+    /*////////////////////////
+    INFORMACION AL CREDITO*/
+
+    function insertarFilaCredito() {
+        const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
+        const montoCuota = document.getElementById('monto_cuota').value;
+
+        if (fechaVencimiento.trim() === '' || montoCuota.trim() === '') {
+            alert('Por favor, ingrese un valor en Fecha de Vencimiento y Monto de Cuota.');
+            return;
+        }
+
+        let tblDatos = document.getElementById('cuotas');
+        let newRow = tblDatos.insertRow(tblDatos.rows.length - 1);
+
+        let col1 = newRow.insertCell(0);
+        let col2 = newRow.insertCell(1);
+        let col3 = newRow.insertCell(2);
+        let col4 = newRow.insertCell(3);
+
+        const id = 'fila' + b;
+        col1.innerHTML = '<button class="text-red-500">x</button>';
+        col2.innerHTML = b;
+        col3.innerHTML = fechaVencimiento;
+        col4.innerHTML = montoCuota;
+        newRow.setAttribute('data-id', id);
+
+        col1.firstChild.addEventListener('click', function () {
+            eliminarFilaCredito(id);
+        });
+
+        b++;
+
+        var table = document.getElementById('cuotas');
+
+        var rows = table.getElementsByTagName('tr');
+
+        var suma = 0;
+
+        for (var i = 1; i < rows.length - 1; i++) {
+            var cell = rows[i].getElementsByTagName('td')[3];
+            if (cell) {
+                suma += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+        actualizarNumerosConsecutivosCredito();
+        document.getElementById('suma_tabla').textContent = suma;
+    }
+
+    function actualizarNumerosConsecutivosCredito() {
+        var table = document.getElementById('cuotas');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 1; i < rows.length - 1; i++) {
+            var cell = rows[i].getElementsByTagName('td')[1];
+            if (cell) {
+                cell.textContent = i;
+            }
+        }
+    }
+
+    function eliminarFilaCredito(id) {
+        var row = document.querySelector('tr[data-id="' + id + '"]');
+
+        if (row) {
+            row.parentNode.removeChild(row);
+            recalcularSumaCredito();
+            actualizarNumerosConsecutivosCredito();
+        }
+    }
+
+    function recalcularSumaCredito() {
+        var table = document.getElementById('cuotas');
+        var rows = table.getElementsByTagName('tr');
+        var suma = 0;
+
+        for (var i = 1; i < rows.length - 1; i++) {
+            var cell = rows[i].getElementsByTagName('td')[3];
+            if (cell) {
+                suma += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('suma_tabla').textContent = suma;
+    }
+    /////////
+
+    const navigate = useNavigate();
     const onSubmit = () => {
         navigate('/fact')
     }
@@ -17,16 +184,24 @@ function FacturaForm() {
     const onSubmit2 = () => {
         navigate('/menu')
     };
-    
+
+    React.useEffect(() => {
+
+        const currentDate = new Date();
+        currentDate.setDate(currentDate.getDate());
+        const formattedDate = currentDate.toISOString().split('T')[0];
+        document.getElementById('fecha_vencimiento').setAttribute('min', formattedDate);
+
+    }, []);
     return (
         <div>
             <Starts className="stars-behind" />
             <div className="bg-primary min-h-screen flex items-center justify-center relative">
-            
+
                 <section id="div_fundamental" className="bg-zinc-800 rounded-lg shadow-md p-8 w-full max-w-screen-md relative">
-                
+
                     <h1 className="text-2xl font-bold text-center text-yellow-100 mb-6">
-                    INFORMACIÓN ADICIONAL
+                        INFORMACIÓN ADICIONAL
                     </h1>
                     <form>
 
@@ -53,42 +228,44 @@ function FacturaForm() {
 
                         <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
-                            Consigne las observaciones de la factura
+                                Consigne las observaciones de la factura
                             </h1>
                             <input
-                                
+
                                 name="description"
                                 type="text"
                                 aria-label="default input example"
                                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                
+
                             />
                         </div>
 
                         <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
-                            Consigne los documentos relacionados de la factura
+                                Consigne los documentos relacionados de la factura
                             </h1>
                             <div className="flex justify-center">
                                 <input
-                                    
+                                    value={mostrarDocumentosRelacionados ? "Ocultar Documentos Relacionados" : "Mostrar Documentos Relacionados"}
+                                    id="btnDocumentosRelacionados"
                                     type="button"
-                                    value="Documentos Relacionados"
+                                    onClick={() => setMostrarDocumentosRelacionados(!mostrarDocumentosRelacionados)}
                                     className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
                                 />
                             </div>
 
-                            <div>
+                            <div id="documentosRelacionados" style={{ display: mostrarDocumentosRelacionados ? 'block' : 'none' }}>
                                 <div className="bg-zinc-800 p-4 rounded-lg mb-4">
                                     <h1 className="text-lg font-semibold text-yellow-100 mb-4">
-                                    Ingrese los documentos relacionados a la factura electrónica:
+                                        Ingrese los documentos relacionados a la factura electrónica:
                                     </h1>
                                     <h1 className="text-base font-bold text-gray-400 mb-3">
-                                    Tipo de Documento
+                                        Tipo de Documento
                                     </h1>
                                     <select
-                                    className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                    aria-label="Tipo de Documento"
+                                        className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                        aria-label="Tipo de Documento"
+                                        id="tipoDocumento"
                                     >
                                         <option selected="SIN"></option>
                                         <option value="GUIAR">GUÍA DE REMISIÓN REMITENTE</option>
@@ -111,28 +288,28 @@ function FacturaForm() {
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                                         Serie Documento
                                     </label>
-                                        <input
-                                        
-                                        name="description"
-                                        type="text"
-                                        aria-label="default input example"
-                                        className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                        />
-                                    
-                                    <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
-                                        Número Documento
-                                    </label>
                                     <input
-                                        
+                                        id="serieDocumento"
                                         name="description"
                                         type="text"
                                         aria-label="default input example"
                                         className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                     />
-                                    
+
+                                    <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
+                                        Número Documento
+                                    </label>
+                                    <input
+                                        id="numeroDocumento"
+                                        name="description"
+                                        type="text"
+                                        aria-label="default input example"
+                                        className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                    />
+
                                     <div className="flex justify-end">
                                         <input
-                                            
+                                            onClick={insertarFilaDocumentos}
                                             type="button"
                                             value="Adicionar Item"
                                             className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
@@ -141,22 +318,22 @@ function FacturaForm() {
                                 </div>
 
                                 <div className="mx-auto bg-text-zinc-900 px-6 pt-6 pb-3 dark:text-white">
-                                    <table id="cuotas" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
+                                    <table id="tb_documetosRelacionados" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
                                         <thead>
-                                        <tr className="bg-gray-200">
-                                            <th className="border bg-gray-500 text-gray-300 px-2">-</th>
-                                            <th className="border bg-zinc-500 text-gray-300">Tipo de Documento</th>
-                                            <th className="border bg-zinc-500 text-gray-300 px-5">Serie</th>
-                                            <th className="border bg-zinc-500 text-gray-300">Número Inicial</th>
-                                        </tr>
+                                            <tr className="bg-gray-200">
+                                                <th className="border bg-gray-500 text-gray-300 px-2">-</th>
+                                                <th className="border bg-zinc-500 text-gray-300">Tipo de Documento</th>
+                                                <th className="border bg-zinc-500 text-gray-300 px-5">Serie</th>
+                                                <th className="border bg-zinc-500 text-gray-300">Número Inicial</th>
+                                            </tr>
                                         </thead>
                                         <tbody id="cuerpo_cuotas" className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -165,24 +342,25 @@ function FacturaForm() {
 
                         <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
-                            Consigne los datos de transaccion
+                                Consigne los datos de transaccion
                             </h1>
                             <div className="flex justify-center">
                                 <input
-                                    
+                                    id="btnInformacionCredito"
                                     type="button"
-                                    value="Información al Crédito"
+                                    value={mostrarInformacionCredito ? "Ocultar Información al Crédito" : "Mostrar Información al Crédito"}
                                     className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
+                                    onClick={() => setMostrarInformacionCredito(!mostrarInformacionCredito)}
                                 />
                             </div>
 
-                            <div>
+                            <div style={{ display: mostrarInformacionCredito ? 'block' : 'none' }}>
                                 <div className="bg-zinc-800 p-4 rounded-lg mb-4">
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                                         Monto Neto Pendiente de Pago
                                     </label>
-                                        <input
-                                        
+                                    <input
+
                                         name="description"
                                         type="number"
                                         aria-label="default input example"
@@ -218,7 +396,7 @@ function FacturaForm() {
 
                                         <div className="flex justify-end">
                                             <input
-                                                
+                                                onClick={insertarFilaCredito}
                                                 type="button"
                                                 value="Agregar Cuota"
                                                 className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
@@ -231,20 +409,20 @@ function FacturaForm() {
                                     <div className="mx-auto bg-text-zinc-900 p-6 dark:text-white">
                                         <table id="cuotas" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
                                             <thead>
-                                            <tr className="bg-gray-200">
-                                                <th className="border bg-gray-500 text-gray-300">Eliminar</th>
-                                                <th className="border bg-zinc-500 text-gray-300">Número Cuota</th>
-                                                <th className="border bg-zinc-500 text-gray-300">Fecha Vencimiento</th>
-                                                <th className="border bg-zinc-500 text-gray-300">Monto Cuota</th>
-                                            </tr>
+                                                <tr className="bg-gray-200">
+                                                    <th className="border bg-gray-500 text-gray-300">Eliminar</th>
+                                                    <th className="border bg-zinc-500 text-gray-300">Número Cuota</th>
+                                                    <th className="border bg-zinc-500 text-gray-300">Fecha Vencimiento</th>
+                                                    <th className="border bg-zinc-500 text-gray-300">Monto Cuota</th>
+                                                </tr>
                                             </thead>
                                             <tbody id="cuerpo_cuotas" className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
-                                            <tr>
-                                                <td className="bg-zinc-600" >Total</td>
-                                                <td></td>
-                                                <td ></td>
-                                                <td id="suma_tabla" className="bg-zinc-600">0</td>
-                                            </tr>
+                                                <tr>
+                                                    <td className="bg-zinc-600" >Total</td>
+                                                    <td></td>
+                                                    <td ></td>
+                                                    <td id="suma_tabla" className="bg-zinc-600">0</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -254,72 +432,73 @@ function FacturaForm() {
 
                         <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
-                            Consigne información relacionada a la factura
+                                Consigne información relacionada a la factura
                             </h1>
                             <div className="flex justify-center">
                                 <input
-                                    
+                                    id="btnInformacionFactura"
                                     type="button"
-                                    value="Información Relacionada"
+                                    value={mostrarInformacionFactura ? "Ocultar Información Relacionada" : "Mostrar Información Relacionada"}
                                     className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
+                                    onClick={() => setMostrarInformacionFactura(!mostrarInformacionFactura)}
                                 />
                             </div>
 
-                            <div>
+                            <div style={{ display: mostrarInformacionFactura ? 'block' : 'none' }}>
                                 <div className="bg-zinc-800 p-4 rounded-lg mb-4">
                                     <h1 className="text-lg font-semibold text-yellow-100 mb-4">
-                                    Ingrese la información adicional de la factura electrónica:
+                                        Ingrese la información adicional de la factura electrónica:
                                     </h1>
 
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                                         Número de Expediente:
                                     </label>
-                                        <input
-                                        
+                                    <input
+
                                         name="description"
                                         type="text"
                                         aria-label="default input example"
                                         className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                        />
-                                    
+                                    />
+
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                                         Orden de Compra:
                                     </label>
                                     <input
-                                        
+
                                         name="description"
                                         type="text"
                                         aria-label="default input example"
                                         className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                     />
-                                    
+
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                                         Código Unidad Ejecutora:
                                     </label>
                                     <input
-                                        
+
                                         name="description"
                                         type="text"
                                         aria-label="default input example"
                                         className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                     />
-                                    
+
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                                         Número de Proceso de Selección:
                                     </label>
                                     <input
-                                        
+
                                         name="description"
                                         type="text"
                                         aria-label="default input example"
                                         className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                     />
-                                    
+
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                                         Número de Contrato:
                                     </label>
                                     <input
-                                        
+
                                         name="description"
                                         type="text"
                                         aria-label="default input example"
@@ -332,28 +511,29 @@ function FacturaForm() {
 
                         <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
-                            Consigne los datos de la detracción
+                                Consigne los datos de la detracción
                             </h1>
                             <div className="flex justify-center">
                                 <input
-                                    
+                                    id="btnDetraccion"
                                     type="button"
-                                    value="Información de la Detracción"
+                                    value={mostrarInfoDetraccion ? "Ocultar Información de Detracción" : "Mostrar Información de Detracción"}
                                     className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
+                                    onClick={() => setMostrarInfoDetraccion(!mostrarInfoDetraccion)}
                                 />
                             </div>
 
-                            <div>
+                            <div style={{ display: mostrarInfoDetraccion ? 'block' : 'none' }}>
                                 <div className="bg-zinc-800 p-4 rounded-lg mb-4">
                                     <h1 className="text-base font-semibold text-yellow-100 mb-4">
-                                    La información de detracción siempre se registrará en moneda nacional "SOL" independiente de la moneda del comprobante.
+                                        La información de detracción siempre se registrará en moneda nacional "SOL" independiente de la moneda del comprobante.
                                     </h1>
                                     <h1 className="text-base font-bold text-gray-400 mb-3">
-                                    Tipo de Operación
+                                        Tipo de Operación
                                     </h1>
                                     <select
-                                    className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                    aria-label="Tipo de Operación"
+                                        className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                        aria-label="Tipo de Operación"
                                     >
                                         <option selected="SIN"></option>
                                         <option value="GUIAR">OPERACIÓN SUJETA A DETRACCIÓN</option>
@@ -363,11 +543,11 @@ function FacturaForm() {
                                     </select>
 
                                     <h1 className="text-base font-bold text-gray-400 mb-3">
-                                    Código de bien/servicio sujeto a detracción
+                                        Código de bien/servicio sujeto a detracción
                                     </h1>
                                     <select
-                                    className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                    aria-label="Código de bien"
+                                        className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                        aria-label="Código de bien"
                                     >
                                         <option selected="SIN"></option>
                                         <option value="001">001-Azúcar y melaza de caña</option>
@@ -409,20 +589,20 @@ function FacturaForm() {
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                                         Nro. Cta. Banco de la Nación
                                     </label>
-                                        <input
-                                        
+                                    <input
+
                                         name="description"
                                         type="text"
                                         aria-label="default input example"
                                         className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                     />
-                                    
+
                                     <h1 className="text-base font-bold text-gray-400 mb-3">
-                                    Medio de pago
+                                        Medio de pago
                                     </h1>
                                     <select
-                                    className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                    aria-label="Medio de pago"
+                                        className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                        aria-label="Medio de pago"
                                     >
                                         <option selected="SIN"></option>
                                         <option value="001">001-Depósito en cuenta</option>
@@ -440,12 +620,12 @@ function FacturaForm() {
                                         <option value="013">013-Tarjetas de crédito emitidas en el exterior por empresas bancarias o financieras no domiciliada</option>
                                         <option value="101">101-Transferencias - Comercio exterior</option>
                                     </select>
-                                    
+
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                                         Porcentaje de detracción
                                     </label>
                                     <input
-                                        
+
                                         name="description"
                                         type="number"
                                         aria-label="default input example"
@@ -456,7 +636,7 @@ function FacturaForm() {
                                         Monto de la detracción (S/)
                                     </label>
                                     <input
-                                        
+
                                         name="description"
                                         type="number"
                                         aria-label="default input example"

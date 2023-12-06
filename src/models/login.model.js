@@ -60,6 +60,30 @@ model.inFact=async(arg)=>{
     })
 }
 
+model.inFactcu=async(arg)=>{
+    const { numero_cuota,monto_cuota,fecha_vencimiento,monto_neto} = arg;
+    return sequelize.query(`INSERT INTO cuota_factura(numero_cuota,monto_cuota,fecha_vencimiento,monto_neto) VALUES ('${numero_cuota}','${monto_cuota}','${fecha_vencimiento}','${monto_neto}')`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
+model.inFactde=async(arg)=>{
+    const { tipo_op,cod,cta,medio,porcentaje,monto_detraccion} = arg;
+    return sequelize.query(`INSERT INTO detraccion_factura(tipo_op,cod,cta,medio,porcentaje,monto_detraccion) VALUES ('${tipo_op}','${cod}','${cta}','${medio}','${porcentaje}','${monto_detraccion}')`,{raw:true})
+    .then(([result,metadata])=>{
+        const data= result.length===0?null:result
+        return data
+    })
+    .catch((error)=>{
+        throw error
+    })
+}
+
 model.inBol=async(arg)=>{
     const { expo,td,rs,pa,itin,esta,direc,tm,da,ISC_sel,og,cyot,nombre,fecha_emision,fecha_vencimiento,total,total_igv,total_icbper,total_isc} = arg;
     return sequelize.query(`INSERT INTO boleta(expo,td,rs,pa,itin,esta,direc,tm,da,ISC_sel,og,cyot,nombre,fecha_emision,fecha_vencimiento,total,total_igv,total_icbper,total_isc) VALUES ('${expo}','${td}','${rs}','${pa}','${itin}','${esta}','${direc}','${tm}','${da}','${ISC_sel}','${og}','${cyot}','${nombre}','${fecha_emision}','${fecha_vencimiento}','${total}','${total_igv}','${total_icbper}','${total_isc}')`,{raw:true})

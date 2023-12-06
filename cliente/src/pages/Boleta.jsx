@@ -1,16 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Starts from '../components/Stars'
+import { useLogin } from '../context/LoginContext'
 
 function BoletaForm() {
     const [mostrarRucReceptor, setMostrarRucReceptor] = useState(false);
     const [selectedDoc, setSelectedDoc] = useState("SIN DOCUMENTO");
+
+    const handleOptionChange = (e) => {
+        setMostrarIsc(false);
+        document.getElementById('valorISC').value = 0;
+
+        const selectedValue = e.target.value;
+        setMostrarRucReceptor(selectedValue === "1");
+        updateMFinal(cantidad, valorUnitario);
+    };
 
     const handleDocChange = (e) => {
         const selectedValue = e.target.value;
         document.getElementById('description').value = '';
         setSelectedDoc(selectedValue);
         console.log(selectedValue)
+    };
+    const [monedaSeleccionada, setMonedaSeleccionada] = useState('SOLES');
+
+    const handleMonedaChange = (event) => {
+        setMonedaSeleccionada(event.target.value);
     };
 
     let a = 1;
@@ -54,7 +69,7 @@ function BoletaForm() {
 
 
         const bols_total = selectedValue * document.getElementById('cant').value;
-        document.getElementById('bols_tot').value = bols_total
+        document.getElementById('bols_tot').value = bols_total.toFixed(2)
 
         const cantValue = parseFloat(document.getElementById('cant').value);
 
@@ -72,7 +87,8 @@ function BoletaForm() {
         }
         const igvPar = parseFloat(document.getElementById('valorParcialIsc').value);
 
-        const montoTotalValue = (cantValue * uniValue) + montoCuotaValue + bols_total + igvPar;
+        let montoTotalValue = (cantValue * uniValue) + montoCuotaValue + bols_total + igvPar;
+        montoTotalValue = montoTotalValue.toFixed(2);
         console.log("montoTotalValue:", montoTotalValue);
         setITotal(montoTotalValue);
     };
@@ -539,7 +555,6 @@ function BoletaForm() {
                             <select
                                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 aria-label="Tipo de Moneda"
-                                {...register("tm")}
                             >
                                 <option selected="SOLES">SOLES</option>
                                 <option value="EURO">EURO</option>
@@ -711,6 +726,7 @@ function BoletaForm() {
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
+                                value={monedaSeleccionada}
                             />
 
                             <label htmlFor="date_issue" className="text-gray-400 font-sans font-semibold">
@@ -1041,31 +1057,74 @@ function BoletaForm() {
                                         type="button"
                                         value="Adicionar Item"
                                         className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
+                                        onClick={insertarFila}
                                     />
                                 </div>
                             </div>
                             <div className="mx-auto bg-text-zinc-900 dark:text-white">
-                                <table id="cuotas" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
+                                <table id="bienesServicios" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
                                     <thead>
                                         <tr className="bg-gray-200">
                                             <th className="border bg-gray-500 text-gray-300">Eliminar</th>
-                                            <th className="border bg-zinc-500 text-gray-300">Bien/Servicio</th>
-                                            <th className="border bg-zinc-500 text-gray-300">Gravado/Exonerado/Inafecto</th>
-                                            <th className="border bg-zinc-500 text-gray-300">Unidad Medida</th>
                                             <th className="border bg-zinc-500 text-gray-300">Cantidad</th>
+                                            <th className="border bg-zinc-500 text-gray-300">Unidad de medida</th>
                                             <th className="border bg-zinc-500 text-gray-300">Código</th>
                                             <th className="border bg-zinc-500 text-gray-300">Descripción</th>
+                                            <th className="border bg-zinc-500 text-gray-300">Valor unitario</th>
+                                            <th className="border bg-zinc-500 text-gray-300">ICBPER</th>
+                                            <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">ImporteTotal(c/u)</th>
+                                            <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">ISC(c/u)</th>
+                                            <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">IGV(c/u)</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cuerpo_cuotas" className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
                                         <tr>
-                                            <td className="bg-zinc-600" >Total</td>
+                                            <td className="bg-zinc-600" >Importe total</td>
                                             <td></td>
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
-                                            <td id="suma_tabla" className="bg-zinc-600">0</td>
+                                            <td className="bg-zinc-600" id="tb_importeTotal">0</td>
+                                            <td style={{ display: 'none' }} ></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="bg-zinc-600" >ISC</td>
+                                            <td></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td className="bg-zinc-600" id="tb_isc">0</td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="bg-zinc-600" >IGV</td>
+                                            <td></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td className="bg-zinc-600" id="tb_igv">0</td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="bg-zinc-600" >ICBPER</td>
+                                            <td></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td id="tb_icbper" className="bg-zinc-600">0</td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1090,7 +1149,7 @@ function BoletaForm() {
                     </form>
                 </section>
             </div>
-        </div>
+        </div >
     );
 }
 

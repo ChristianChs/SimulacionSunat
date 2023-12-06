@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { loginRequest, loginRequest2, registerCuotas, registerRequest, registerRequest2 } from "../api/login"
+import { loginRequest, loginRequest2, registerCuotas,registerfact,registerfactcu,registerfactde, registerRequest,registerPBol,registerBol, registerRequest2 } from "../api/login"
 const LoginContext = createContext()
 
 export const useLogin = () => {
@@ -20,6 +20,84 @@ export const LoginProvider = ({ children }) => {
   const registrar = async (user) => {
     try {
       const res = await registerRequest(user)
+      return res
+    } catch (error) {
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data)
+      }
+      setErrors([error.response.data.message])
+    }
+  }
+
+  const registrarFactura = async (user) => {
+    try {
+      console.log(user);
+      const res = await registerfact(user)
+      return res
+    } catch (error) {
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data)
+      }
+      setErrors([error.response.data.message])
+    }
+  }
+
+  const registrarFacturaCu = async (user) => {
+    try {
+      console.log(user);
+      const res = await registerfactcu(user)
+      return res
+    } catch (error) {
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data)
+      }
+      setErrors([error.response.data.message])
+    }
+  }
+
+  const registrarFacturaDe = async (user) => {
+    try {
+      console.log(user);
+      const res = await registerfactde(user)
+      return res
+    } catch (error) {
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data)
+      }
+      setErrors([error.response.data.message])
+    }
+  }
+
+  const registrarBoleta = async (user) => {
+    try {
+      console.log(user);
+      const res = await registerBol(user)
+      return res
+    } catch (error) {
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data)
+      }
+      setErrors([error.response.data.message])
+    }
+  }
+
+  const registrarPfactura = async (user) => {
+    try {
+      console.log(user);
+      const res = await registerPfact(user)
+      return res
+    } catch (error) {
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data)
+      }
+      setErrors([error.response.data.message])
+    }
+  }
+
+  const registrarPBoleta = async (user) => {
+    try {
+      console.log(user);
+      const res = await registerPBol(user)
       return res
     } catch (error) {
       if (Array.isArray(error.response.data)) {
@@ -126,6 +204,12 @@ export const LoginProvider = ({ children }) => {
       loading,
       setDataRecibo,
       registrarCuotas,
+      registrarFactura,
+      registrarBoleta,
+      registrarPfactura,
+      registrarPBoleta,
+      registrarFacturaDe,
+      registrarFacturaCu,
       registrarContado
     }}>
       {children}

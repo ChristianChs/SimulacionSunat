@@ -12,6 +12,7 @@ function TempletePDF(data) {
   const [datareceptor4,setDataReceptor4]=useState(null)
   const [dataReceptor5,setDataReceptor5]=useState(null)
   const [cuotas, setCuotas] = useState([]);
+  const [datosTabla, setDatosTabla] = useState([]);
 
   const cargarCuotas = async () => {
     try {
@@ -23,6 +24,19 @@ function TempletePDF(data) {
       console.error('Error al cargar datos:', error);
     }
   };
+
+  const cargarDatosTabla = async () => {
+    try {
+      // Lógica para cargar los datos de la tabla desde la base de datos
+      const response = await tuFuncionParaCargarDatosDeTabla(); // Ajusta esto con tu lógica real
+      if (response) {
+        setDatosTabla(response);
+      }
+    } catch (error) {
+      console.error('Error al cargar datos de la tabla:', error);
+    }
+  };
+
   
   const getinfoRUCrs = async(ruc)=>{
     const data= await validaRUC(ruc)
@@ -57,6 +71,10 @@ function TempletePDF(data) {
     cargarCuotas(); // Llama a cargarCuotas al cargar el componente
   }, []);
 
+  useEffect(() => {
+    cargarDatosTabla();
+  }, []);
+  
   
     function numeroAtexto(numero) {
       const unidades = ["", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE"];
@@ -221,6 +239,46 @@ useEffect(() => {
               <Text>Monto de Cuota</Text>
             </View>
           </View>
+
+          <View style={styles.table}>
+          <View style={styles.row}>
+            <View style={styles.cell}>
+              <Text>Cantidad</Text>
+            </View>
+            <View style={styles.cell}>
+              <Text>Unidad Medida</Text>
+            </View>
+            <View style={styles.cell}>
+              <Text>Descripción</Text>
+            </View>
+            <View style={styles.cell}>
+              <Text>Valor Unitario</Text>
+            </View>
+            <View style={styles.cell}>
+              <Text>ICBPER</Text>
+            </View>
+          </View>
+          {datosTabla.map((fila, index) => (
+            <View key={index} style={styles.row}>
+              <View style={styles.cell}>
+                <Text>{fila.cantidad}</Text>
+              </View>
+              <View style={styles.cell}>
+                <Text>{fila.unidadMedida}</Text>
+              </View>
+              <View style={styles.cell}>
+                <Text>{fila.descripcion}</Text>
+              </View>
+              <View style={styles.cell}>
+                <Text>{fila.valorUnitario}</Text>
+              </View>
+              <View style={styles.cell}>
+                <Text>{fila.icbper}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+
           {cuotas.map((cuota, index) => (
             <View key={index} style={styles.row}>
               <View style={styles.cell}>

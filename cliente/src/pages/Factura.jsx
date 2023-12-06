@@ -2,11 +2,174 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Starts from '../components/Stars'
 import { resolvePath } from 'react-router-dom';
+import { useLogin } from '../context/LoginContext'
 import { useNavigate } from 'react-router-dom';
 
 function FacturaForm() {
     let a = 1;
+    const { registrarFactura, errors: LoginErrors } = useLogin();
+    const { registrarPFactura, errors: LoginErrors2 } = useLogin();
+    function insertarFila() {
+        /*const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
+        const montoCuota = document.getElementById('monto_cuota').value;*/
 
+
+        let tblDatos = document.getElementById('bienesServicios');
+        let newRow = tblDatos.insertRow(tblDatos.rows.length - 4);
+
+        let col1 = newRow.insertCell(0);
+        let col2 = newRow.insertCell(1);
+        let col3 = newRow.insertCell(2);
+        let col4 = newRow.insertCell(3);
+        let col5 = newRow.insertCell(4);
+        let col6 = newRow.insertCell(5);
+        let col7 = newRow.insertCell(6);
+        let col8 = newRow.insertCell(7);
+        let col9 = newRow.insertCell(8);
+        let col10 = newRow.insertCell(9);
+
+
+        const id = 'fila' + a;
+        col1.innerHTML = '<button class="text-red-500">x</button>';
+        col2.innerHTML = document.getElementById('cant').value;
+        col3.innerHTML = document.getElementById('medida').value;
+        col4.innerHTML = document.getElementById('cod').value;
+        col5.innerHTML = document.getElementById('des').value;
+        col6.innerHTML = document.getElementById('uni').value;
+        col7.innerHTML = document.getElementById('bols_tot').value;
+        col8.innerHTML = iTotal;
+        col9.innerHTML = document.getElementById('valorParcialIsc').value;
+        col10.innerHTML = document.getElementById('igvParcial').value;
+        newRow.setAttribute('data-id', id);
+        col8.style.display = 'none';
+        col9.style.display = 'none';
+        col10.style.display = 'none';
+
+        col1.firstChild.addEventListener('click', function () {
+            eliminarFila(id);
+        });
+
+        a++;
+
+        var table = document.getElementById('bienesServicios');
+
+        var rows = table.getElementsByTagName('tr');
+
+        var sumaImporte = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[7];
+            if (cell) {
+                sumaImporte += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_importeTotal').textContent = sumaImporte.toFixed(2);
+
+        var sumaISC = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[8];
+            if (cell) {
+                sumaISC += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_isc').textContent = sumaISC.toFixed(2);
+
+        var sumaIGV = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[9];
+            if (cell) {
+                sumaIGV += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_igv').textContent = sumaIGV.toFixed(2);
+
+        var sumaICBPER = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[6];
+            if (cell) {
+                sumaICBPER += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_icbper').textContent = sumaICBPER.toFixed(2);
+
+        actualizarNumerosConsecutivos();
+    }
+
+    function eliminarFila(id) {
+        var row = document.querySelector('tr[data-id="' + id + '"]');
+
+        if (row) {
+            row.parentNode.removeChild(row);
+            recalcularSuma();
+            actualizarNumerosConsecutivos();
+        }
+    }
+
+    function actualizarNumerosConsecutivos() {
+        var table = document.getElementById('bienesServicios');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 1; i < rows.length - 1; i++) {
+            var cell = rows[i].getElementsByTagName('td')[1];
+        }
+    }
+
+    function recalcularSuma() {
+        var table = document.getElementById('bienesServicios');
+
+        var rows = table.getElementsByTagName('tr');
+
+        var sumaImporte = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[7];
+            if (cell) {
+                sumaImporte += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_importeTotal').textContent = sumaImporte.toFixed(2);
+
+        var sumaISC = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[8];
+            if (cell) {
+                sumaISC += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_isc').textContent = sumaISC.toFixed(2);
+
+        var sumaIGV = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[9];
+            if (cell) {
+                sumaIGV += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_igv').textContent = sumaIGV.toFixed(2);
+
+        var sumaICBPER = 0;
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            var cell = rows[i].getElementsByTagName('td')[6];
+            if (cell) {
+                sumaICBPER += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_icbper').textContent = sumaICBPER.toFixed(2);
+    }
 
     const [igvNeto, setigvNeto] = useState('');
     const [cantidad, setCantidad] = useState(0);
@@ -20,9 +183,12 @@ function FacturaForm() {
     const [mostrarIsc, setMostrarIsc] = useState(false);
     const [tipoIsc, setTipoIsc] = useState("valor");
     const [montoIsc, setMontoIsc] = useState(0);
+    const [valorISC, setValorIsc] = useState(0);
 
     const handleTipoIscChange = (event) => {
+        setValorIsc(document.getElementById('valorISC').value);
         setTipoIsc(event.target.value);
+        updateMFinal(cantidad, valorUnitario);
     };
 
     const yearToValueMap = {
@@ -42,41 +208,43 @@ function FacturaForm() {
 
 
         const bols_total = selectedValue * document.getElementById('cant').value;
-        document.getElementById('bols_tot').value = bols_total
-        console.log("bols_total:", bols_total);
+        document.getElementById('bols_tot').value = bols_total.toFixed(2)
 
         const cantValue = parseFloat(document.getElementById('cant').value);
-        console.log("cantValue:", cantValue);
 
         const uniValue = parseFloat(document.getElementById('uni').value);
-        console.log("uniValue:", uniValue);
 
         const montoCuotaValue = parseFloat(document.getElementById('igvParcial').value);
-        console.log("montoCuotaValue:", montoCuotaValue);
 
-        const montoTotalValue = (cantValue * uniValue) + montoCuotaValue + bols_total;
+        if (tipoIsc === 'monto') {
+            let valorIntroducidoIsc = document.getElementById('valorISC').value;
+            document.getElementById('valorParcialIsc').value = valorIntroducidoIsc;
+        } else {
+            let valorIntroducidoIsc = document.getElementById('valorISC').value;
+            valorIntroducidoIsc = valorIntroducidoIsc * valorUnitario * cantidad / 100;
+            document.getElementById('valorParcialIsc').value = valorIntroducidoIsc;
+        }
+        const igvPar = parseFloat(document.getElementById('valorParcialIsc').value);
+
+        let montoTotalValue = (cantValue * uniValue) + montoCuotaValue + bols_total + igvPar;
+        montoTotalValue = montoTotalValue.toFixed(2);
         console.log("montoTotalValue:", montoTotalValue);
         setITotal(montoTotalValue);
     };
 
-
     const handleIscChange = (event) => {
         const isISC = event.target.value === "1";
-        if (isISC == '1') {
-            setMontoIsc(document.getElementById('introducedIsc'))
-        }
+        document.getElementById('valorISC').value = 0;
         setMostrarIsc(isISC);
-
-        setSelectedisc({
-            checked: e.target.value
-        });
+        updateMFinal(cantidad, valorUnitario);
     };
 
 
     const handleIgvTipoChange = (e) => {
         const newValue = e.target.value;
         setSelectedIgvTipo(newValue);
-        updateMFinal(cantidad, valorUnitario, newValue);
+
+        updateMFinal(cantidad, valorUnitario);
     };
 
     const handleImpBolsChange = (e) => {
@@ -88,6 +256,7 @@ function FacturaForm() {
             handleYearChange(e)
             document.getElementById('imp_Bols').value = 0;
         }
+        updateMFinal(cantidad, valorUnitario);
     };
 
     const handle = (event) => {
@@ -108,9 +277,8 @@ function FacturaForm() {
     };
 
     const updateMFinal = (newCantidad, newValorUnitario) => {
-        const porcentajeValue = document.querySelector('input[name="igvporcentaje"]:checked').value;
         const tipoValue = document.querySelector('input[name="igvtipo"]:checked') ? document.querySelector('input[name="igvtipo"]:checked').value : null;
-        const porcentajeText = porcentajeValue === "1" ? 0.18 : porcentajeValue === "0" ? 0.10 : "";
+        const porcentajeText = 0.18;
 
         let res = 0;
 
@@ -120,18 +288,40 @@ function FacturaForm() {
             res = newValorUnitario * newCantidad * porcentajeText;
         }
 
+        if (tipoIsc === 'monto') {
+            let valorIntroducidoIsc = document.getElementById('valorISC').value;
+            document.getElementById('valorParcialIsc').value = valorIntroducidoIsc;
+        } else {
+            let valorIntroducidoIsc = document.getElementById('valorISC').value;
+            valorIntroducidoIsc = valorIntroducidoIsc * valorUnitario * cantidad / 100;
+            document.getElementById('valorParcialIsc').value = valorIntroducidoIsc;
+        }
+
+        console.log(res)
+
+        document.getElementById('igvParcial').value = res;
+
+        const valorIsc1 = parseFloat(document.getElementById('valorParcialIsc').value);
         const total_bolsas = document.getElementById('imp_Bols').value * newCantidad;
         document.getElementById('bols_tot').value = total_bolsas.toFixed(2);
 
         const resRedondeado = res.toFixed(2);
-        const i = res + newValorUnitario * newCantidad;
-        let impTotal = i.toFixed(2); // Convierte impTotal en una cadena
-        const bolsTot = parseFloat(document.getElementById('bols_tot').value); // Convierte bols_tot en un número
-        impTotal = (parseFloat(impTotal) + bolsTot).toFixed(2); // Suma bolsTot a impTotal y redondea a 2 decimales
-        setITotal(impTotal);
+        const i = valorIsc1 + res + newValorUnitario * newCantidad;
+
+        // Convert impTotalFinal to a number (remove .toFixed)
+        const impTotalFinal = parseFloat(i) + parseFloat(total_bolsas);
+
+        // Now, impTotalFinal is a number, and you can use it for calculations or display.
+        setITotal(impTotalFinal.toFixed(2));
         setMFinal(resRedondeado);
     };
 
+
+    const onChangeValorIsc = (e) => {
+        let value = e.target.value;
+        setValorIsc(value);
+        updateMFinal(cantidad, valorUnitario);
+    };
 
 
     const [mostrarRucReceptor, setMostrarRucReceptor] = useState(false);
@@ -189,64 +379,63 @@ function FacturaForm() {
         checked: null
     });
 
-
     const handleRadioChange1 = e => {
         setSelectedtipo_trans({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange2 = e => {
         setSelecteddetr({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange4 = e => {
         setSelectedant({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange5 = e => {
         setSelecteditn({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange6 = e => {
         setSelectedest({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange7 = e => {
         setSelecteddir({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange8 = e => {
         setSelectedcom({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange9 = e => {
         setSelecteddesc_ant({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange11 = e => {
         setSelectedopg({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange12 = e => {
         setSelectedcyt({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
@@ -254,13 +443,13 @@ function FacturaForm() {
         const newValue = event.target.value;
         setRUC(newValue);
     };
-    
 
-    const onSubmit = handleSubmit(async(values) => {
+
+    const onSubmit = handleSubmit(async (values) => {
         values.tipo_trans = selectedtipo_trans.checked;
         values.detr = selecteddetr.checked;
         values.exp = selectedexp.checked;
-        values.ruc=RUC;
+        values.ruc = RUC;
         values.ant = selectedant.checked;
         values.itn = selecteditn.checked;
         values.est = selectedest.checked;
@@ -271,92 +460,15 @@ function FacturaForm() {
         values.opg = selectedopg.checked;
         values.cyt = selectedcyt.checked;
         console.log(values);
-
-        navigate('/factinf')
+        const data= await registrarFactura(values); 
+        if(data.status===200){
+            navigate('/factinf')
+        }
     })
 
     const onSubmit1 = () => {
         navigate('/menu')
     };
-
-    function insertarFila() {
-        let tblDatos = document.getElementById('cuotas');
-        let newRow = tblDatos.insertRow(tblDatos.rows.length - 1);
-        const cantidad = document.getElementById('cant').value;
-        const medida = document.getElementById('medida').value;
-
-        const bosValue = document.querySelector('input[name="item"]:checked').value;
-        const bosText = bosValue === "1" ? "Bien" : bosValue === "0" ? "Servicio" : "";
-
-
-        const igvTipoValue = document.querySelector('input[name="igvtipo"]:checked').value;
-        let igvTipoText = "";
-        switch (igvTipoValue) {
-            case "2":
-                igvTipoText = "Gravado";
-                break;
-            case "1":
-                igvTipoText = "Exonerado";
-                break;
-            case "0":
-                igvTipoText = "Inafecto";
-                break;
-            default:
-                igvTipoText = "";
-        }
-
-        let col1 = newRow.insertCell(0);
-        let col2 = newRow.insertCell(1);
-        let col3 = newRow.insertCell(2);
-        let col4 = newRow.insertCell(3);
-        let col5 = newRow.insertCell(4);
-        let col6 = newRow.insertCell(5);
-        let col7 = newRow.insertCell(6);
-        let col8 = newRow.insertCell(7);
-        let col9 = newRow.insertCell(8);
-        const id = 'fila' + a;
-
-        col1.innerHTML = '<button class="text-red-500">x</button>';
-
-        col2.innerHTML = bosText;
-        col3.innerHTML = igvTipoText;
-
-        col4.innerHTML = medida;
-
-
-        col5.innerHTML = cantidad;
-        col6.innerHTML = document.getElementById('cod').value;
-        col7.innerHTML = document.getElementById('des').value;
-        col8.innerHTML = document.getElementById('uni').value;
-        col9.innerHTML = document.getElementById('bols').value;
-        newRow.setAttribute('data-id', id);
-        col1.firstChild.addEventListener('click', function () {
-            eliminarFila(id);
-        });
-
-        a++;
-        actualizarNumerosConsecutivos();
-    }
-
-    function actualizarNumerosConsecutivos() {
-        var table = document.getElementById('cuotas');
-        var rows = table.getElementsByTagName('tr');
-
-        for (var i = 1; i < rows.length - 1; i++) {
-            var cell = rows[i].getElementsByTagName('td')[1];
-            if (cell) {
-
-            }
-        }
-    }
-
-    function eliminarFila(id) {
-        var row = document.querySelector('tr[data-id="' + id + '"]');
-
-        if (row) {
-            row.parentNode.removeChild(row);
-        }
-    }
 
 
     const handleOptionChange = (event) => {
@@ -369,7 +481,6 @@ function FacturaForm() {
     };
 
     React.useEffect(() => {
-
         const currentDate = new Date();
         currentDate.setDate(currentDate.getDate() - 2);
         const formattedDate = currentDate.toISOString().split('T')[0];
@@ -1014,7 +1125,7 @@ function FacturaForm() {
                                     <div className="mx-7">
                                         <input
                                             type="radio"
-                                            id="retention_yes"
+                                            id="siImpuestoBolsas"
                                             name="impuestobolsas"
                                             value="1"
                                             className="mr-2"
@@ -1031,7 +1142,7 @@ function FacturaForm() {
                                         <div className="h-1"></div>
                                         <input
                                             type="radio"
-                                            id="retention_no"
+                                            id="noImpuestoBolsas"
                                             name="impuestobolsas"
                                             value="0"
                                             className="mr-2"
@@ -1069,27 +1180,27 @@ function FacturaForm() {
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
                                 />
-                                <div style={{ display: mostrarIsc ? 'block' : 'none' }}>
+                                <div style={{ display: mostrarIsc ? mostrarRucReceptor ? 'none' : 'block' : 'none' }}>
                                     <h1 className="text-gray-400 font-sans font-bold">
                                         ISC:
                                     </h1>
                                     <select
-                                        id="tipoIsc"
-                                        className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                        aria-label="ISC"
                                         value={tipoIsc}
                                         onChange={handleTipoIscChange}
+                                        className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                        aria-label="ISC"
                                     >
                                         <option selected="valor">Al valor</option>
                                         <option value="monto">Monto Fijo</option>
                                     </select>
                                     <div className='flex'>
                                         <input
+                                            id="valorISC"
                                             className="monto-cuota w-1/6 py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                             type="number"
-                                            id="introducedIsc"
                                             placeholder="0"
                                             aria-label=".form-control-lg example"
+                                            onChange={onChangeValorIsc}
                                         />
                                         <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold text-lg ml-2 mr-6 mt-2">
                                             <div style={{ display: tipoIsc === 'monto' ? 'none' : 'block' }}>%</div>
@@ -1099,51 +1210,16 @@ function FacturaForm() {
                                             disabled
                                             className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                             type="number"
-                                            id="monto_cuota"
+                                            id="valorParcialIsc"
                                             placeholder="0.00"
                                             aria-label=".form-control-lg example"
-                                            value={montoIsc}
                                         />
                                     </div>
                                 </div>
                                 <h1 className="mb-3 text-gray-400 font-sans font-bold">
-                                    IGV:
+                                    IGV (18%):
                                 </h1>
-                                <div id="porce" className="flex justify-center">
-                                    <div className="mx-7">
-                                        <input
-                                            type="radio"
-                                            id="retention_yes"
-                                            name="igvporcentaje"
-                                            value="1"
-                                            className="mr-2"
-                                            onChange={handleRadioChange}
-                                            checked={selectedValue === "1"}
-                                        />
-                                        <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
-                                            18 %
-                                        </label>
-                                        <br />
-                                    </div>
-
-                                    <div className="mx-7">
-                                        <div className="h-1"></div>
-                                        <input
-                                            type="radio"
-                                            id="retention_no"
-                                            name="igvporcentaje"
-                                            value="0"
-                                            className="mr-2"
-                                            onChange={handleRadioChange}
-                                            checked={selectedValue === "0"}
-                                        />
-                                        <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
-                                            10 %
-                                        </label>
-                                        <br />
-                                    </div>
-                                </div>
-                                <div id="igvT" className="flex justify-center">
+                                <div className="flex justify-center">
                                     <div className="mx-7">
                                         <input
                                             type="radio"
@@ -1152,7 +1228,6 @@ function FacturaForm() {
                                             value="2"
                                             className="mr-2"
                                             onChange={handleIgvTipoChange}
-                                            checked={selectedIgvTipo === "2"}
                                         />
                                         <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                             Gravado
@@ -1166,10 +1241,9 @@ function FacturaForm() {
                                             type="radio"
                                             id="retention_no"
                                             name="igvtipo"
-                                            value="1"
+                                            value="0"
                                             className="mr-2"
                                             onChange={handleIgvTipoChange}
-                                            checked={selectedIgvTipo === "1"}
                                         />
                                         <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                             Exonerado
@@ -1182,10 +1256,9 @@ function FacturaForm() {
                                             type="radio"
                                             id="retention_yes"
                                             name="igvtipo"
-                                            value="0"
+                                            value="1"
                                             className="mr-2"
                                             onChange={handleIgvTipoChange}
-                                            checked={selectedIgvTipo === "0"}
                                         />
                                         <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                             Inafecto
@@ -1202,54 +1275,54 @@ function FacturaForm() {
                                     aria-label=".form-control-lg example"
                                     value={mfinal}
                                 />
+                                <div style={{ display: selectedImpBols === '0' ? 'none' : 'block' }}>
+                                    <h1 className="text-gray-400 font-sans font-bold">
+                                        ICBPER:
+                                    </h1>
+                                    <div className='flex'>
 
-                                <h1 className="text-gray-400 font-sans font-bold">
-                                    ICBPER:
-                                </h1>
-                                <div className='flex'>
-
-                                    <select
-                                        disabled={selectedImpBols !== "1"}
-                                        value={selectedYear}
-                                        onChange={(e) => {
-                                            setSelectedYear(e.target.value);
-                                            handleYearChange(e);
-                                        }}
-                                        className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 mr-3 font-sans font-semibold text-gray-300 focus-border-yellow-100"
-                                        aria-label="ISC"
-                                    >
-                                        <option value="nada">-</option>
-                                        <option value="2019">2019</option>
-                                        <option value="2020">2020</option>
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                    </select>
+                                        <select
+                                            disabled={selectedImpBols !== "1"}
+                                            value={selectedYear}
+                                            onChange={(e) => {
+                                                setSelectedYear(e.target.value);
+                                                handleYearChange(e);
+                                            }}
+                                            className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 mr-3 font-sans font-semibold text-gray-300 focus-border-yellow-100"
+                                            aria-label="ISC"
+                                        >
+                                            <option value="nada">-</option>
+                                            <option value="2019">2019</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option value="2022">2022</option>
+                                            <option value="2023">2023</option>
+                                        </select>
 
 
 
+                                        <input
+                                            disabled
+                                            className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 ml-3 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                            type="text"
+                                            id="imp_Bols"
+                                            placeholder="0.00"
+                                            aria-label=".form-control-lg example"
+                                        />
+                                    </div>
+
+                                    <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
+                                        Impuesto ICBPER:
+                                    </label>
                                     <input
                                         disabled
-                                        className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 ml-3 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                        type="text"
-                                        id="imp_Bols"
+                                        className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                        type="number"
+                                        id="bols_tot"
                                         placeholder="0.00"
                                         aria-label=".form-control-lg example"
                                     />
                                 </div>
-
-                                <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
-                                    Impuesto ICBPER:
-                                </label>
-                                <input
-                                    disabled
-                                    className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                    type="number"
-                                    id="bols_tot"
-                                    placeholder="0.00"
-                                    aria-label=".form-control-lg example"
-                                />
-
                                 <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
                                     Importe Total del Item:
                                 </label>
@@ -1262,6 +1335,7 @@ function FacturaForm() {
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
                                 />
+
                                 <div className="h-1"></div>
                                 <div className="flex justify-end">
                                     <input
@@ -1274,27 +1348,69 @@ function FacturaForm() {
                                 </div>
                             </div>
                             <div className="mx-auto bg-text-zinc-900 dark:text-white">
-                                <table id="cuotas" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
+                                <table id="bienesServicios" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
                                     <thead>
                                         <tr className="bg-gray-200">
                                             <th className="border bg-gray-500 text-gray-300">Eliminar</th>
-                                            <th className="border bg-zinc-500 text-gray-300">Bien/Servicio</th>
-                                            <th className="border bg-zinc-500 text-gray-300">Gravado/Exonerado/Inafecto</th>
-                                            <th className="border bg-zinc-500 text-gray-300">Unidad Medida</th>
                                             <th className="border bg-zinc-500 text-gray-300">Cantidad</th>
+                                            <th className="border bg-zinc-500 text-gray-300">Unidad de medida</th>
                                             <th className="border bg-zinc-500 text-gray-300">Código</th>
                                             <th className="border bg-zinc-500 text-gray-300">Descripción</th>
+                                            <th className="border bg-zinc-500 text-gray-300">Valor unitario</th>
+                                            <th className="border bg-zinc-500 text-gray-300">ICBPER</th>
+                                            <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">ImporteTotal(c/u)</th>
+                                            <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">ISC(c/u)</th>
+                                            <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">IGV(c/u)</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cuerpo_cuotas" className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
                                         <tr>
-                                            <td className="bg-zinc-600" >Total</td>
+                                            <td className="bg-zinc-600" >Importe total</td>
                                             <td></td>
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
-                                            <td id="suma_tabla" className="bg-zinc-600" {...register("total", { required: true })}>0</td>
+                                            <td className="bg-zinc-600" id="tb_importeTotal">0</td>
+                                            <td style={{ display: 'none' }} ></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="bg-zinc-600" >ISC</td>
+                                            <td></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td className="bg-zinc-600" id="tb_isc">0</td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="bg-zinc-600" >IGV</td>
+                                            <td></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td className="bg-zinc-600" id="tb_igv">0</td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="bg-zinc-600" >ICBPER</td>
+                                            <td></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td id="tb_icbper" className="bg-zinc-600">0</td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1308,19 +1424,18 @@ function FacturaForm() {
                                 type="submit"
                                 value="Continuar"
                                 className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-extrabold hover:px-7 hover:bg-ffeba7 hover:text-zinc-900 hover:border-amber-200"
-                                onClick={onSubmit}
                             />
                             <input
                                 type="submit"
                                 value="Cancelar"
                                 className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-extrabold hover:px-7 hover:bg-ffeba7 hover:text-white hover:border-gray-400"
-                                onClick={onSubmit1}
                             />
                         </div>
+
                     </form>
                 </section>
             </div>
-        </div>
+        </div >
     );
 }
 
