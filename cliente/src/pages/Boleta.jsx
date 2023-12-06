@@ -268,6 +268,10 @@ function BoletaForm() {
 
         setSelectedImpBols(newValue);
 
+        setSelectedbolsas({
+            checked: e.target.value
+        });
+
         if (newValue === "0") {
             document.getElementById('imp_Bols').value = yearToValueMap["nada"];
             setSelectedYear("nada");
@@ -289,6 +293,8 @@ function BoletaForm() {
 
     const onChangeMonto = (e) => {
         const value = e.target.value;
+
+        setValor(value);
         setValorUnitario(value);
         updateMFinal(cantidad, value);
     };
@@ -473,6 +479,83 @@ function BoletaForm() {
         navigate('/factinf')
     })
 
+    const [selectedbos, setSelectedbos] = useState({
+        checked: null
+    });
+    const [medida, setMedida] = useState('');
+    const [codigo, setCodigo] = useState('');
+    const [descripcion, setDescripcion] = useState('');
+    const [selectedbolsas, setSelectedbolsas] = useState({
+        checked: null
+    });
+    const [valor, setValor] = useState('');
+    const [descuento, setDescuento] = useState('');
+    const [ISC, setISC] = useState('');
+    const [ICBPER, setICBPER] = useState('');
+    const [IGV, setIGV] = useState('');
+    const [Importe_total, setImporte_total] = useState('');
+
+    const handlersChange10 = (event) => {
+        const newValue = event.target.value;
+        setSelectedbos(newValue);
+    };
+    const handleMedidaChange = (event) => {
+        const newValue = event.target.value;
+        setMedida(newValue);
+    };
+    const handleCodigoChange = (event) => {
+        const newValue = event.target.value;
+        setCodigo(newValue);
+    };
+    const handleDescripcionChange = (event) => {
+        const newValue = event.target.value;
+        setDescripcion(newValue);
+    };
+    const handleRadioChange11 = e => {
+        setSelectedbolsas({
+            checked: e.target.value
+        });
+    };
+    const handleValorChange = (event) => {
+        const newValue = event.target.value;
+        setValor(newValue);
+    };
+    const handleDescuentoChange = (event) => {
+        const newValue = event.target.value;
+        setDescuento(newValue);
+    };
+    const handleISCChange = (event) => {
+        const newValue = event.target.value;
+        setISC(newValue);
+    };
+    const handleICBPERChange = (event) => {
+        const newValue = event.target.value;
+        setICBPER(newValue);
+    };
+    const handleIGVChange = (event) => {
+        const newValue = event.target.value;
+        setIGV(newValue);
+    };
+    const handleImporte_totalChange = (event) => {
+        const newValue = event.target.value;
+        setImporte_total(newValue);
+    };
+
+    const onSubmit1 = handleSubmit(async(values1) => {
+        values1.bos = selectedbos.checked;
+        values1.cantidad=cantidad;
+        values1.codigo=codigo;
+        values1.descripcion=descripcion;
+        values1.selectedbolsas=selectedbolsas.checked;
+        values1.valor=valor;
+        values1.descuento=descuento;
+        values1.ISC=ISC;
+        values1.ICBPER=ICBPER;
+        values1.IGV=IGV;
+        values1.Importe_total=Importe_total;
+
+        console.log(values);
+    })
 
     return (
         <div>
@@ -913,7 +996,7 @@ function BoletaForm() {
                             />
 
                             <div className="h-4"></div>
-                            <div className="bg-zinc-800 p-4 rounded-lg mb-4">
+                            <div className="bg-zinc-800 p-4 rounded-lg mb-4" onSubmit={onSubmit1}>
 
                                 <h1 className="text-base font-bold mb-3 text-white">
                                     Agregue los bienes o servicios:
@@ -926,6 +1009,8 @@ function BoletaForm() {
                                             name="item"
                                             value="1"
                                             className="mr-2"
+                                            checked={setSelectedbos.checked === '1'}
+                                            onChange={handlersChange10}
                                         />
                                         <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                             Bien
@@ -941,6 +1026,8 @@ function BoletaForm() {
                                             name="item"
                                             value="0"
                                             className="mr-2"
+                                            checked={setSelectedbos.checked === '0'}
+                                            onChange={handlersChange10}
                                         />
                                         <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                             Servicio
@@ -969,6 +1056,7 @@ function BoletaForm() {
                                     type="text"
                                     id="medida"
                                     aria-label=".form-control-lg example"
+                                    onChange={handleMedidaChange}
                                 />
 
                                 <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
@@ -979,6 +1067,7 @@ function BoletaForm() {
                                     type="text"
                                     id="cod"
                                     aria-label=".form-control-lg example"
+                                    onChange={handleCodigoChange}
                                 />
 
                                 <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
@@ -988,6 +1077,7 @@ function BoletaForm() {
                                     type="text"
                                     id="des"
                                     aria-label=".form-control-lg example">
+                                    onChange={handleDescripcionChange}
                                 </textarea>
 
                                 <h1 className="mb-3 text-gray-400 font-sans font-bold">
@@ -1051,6 +1141,7 @@ function BoletaForm() {
                                     id="monto_cuota"
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
+                                    onChange={handleDescuentoChange}
                                 />
                                 <div style={{ display: mostrarIsc ? mostrarRucReceptor ? 'none' : 'block' : 'none' }}>
                                     <h1 className="text-gray-400 font-sans font-bold">
@@ -1085,6 +1176,7 @@ function BoletaForm() {
                                             id="valorParcialIsc"
                                             placeholder="0.00"
                                             aria-label=".form-control-lg example"
+                                            onChange={handleISCChange}
                                         />
                                     </div>
                                 </div>
@@ -1146,6 +1238,7 @@ function BoletaForm() {
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
                                     value={mfinal}
+                                    onChange={handleIGVChange}
                                 />
                                 <div style={{ display: selectedImpBols === '0' ? 'none' : 'block' }}>
                                     <h1 className="text-gray-400 font-sans font-bold">
@@ -1193,6 +1286,7 @@ function BoletaForm() {
                                         id="bols_tot"
                                         placeholder="0.00"
                                         aria-label=".form-control-lg example"
+                                        onChange={handleICBPERChange}
                                     />
                                 </div>
                                 <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
@@ -1206,6 +1300,7 @@ function BoletaForm() {
                                     id="monto_Total"
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
+                                    onChange={handleImporte_totalChange}
                                 />
 
                                 <div className="h-1"></div>
