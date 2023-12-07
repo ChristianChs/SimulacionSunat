@@ -457,7 +457,7 @@ function FacturaForm() {
     };
 
 
-    const onSubmit = handleSubmit(async (values) => {
+    const onSubmit = handleSubmit(async (values, vaBienesServicios) => {
         values.tipo_trans = selectedtipo_trans.checked;
         values.detr = selecteddetr.checked;
         values.exp = selectedexp.checked;
@@ -471,6 +471,26 @@ function FacturaForm() {
         values.isc = selectedisc.checked;
         values.opg = selectedopg.checked;
         values.cyt = selectedcyt.checked;
+
+        var table = document.getElementById('bienesServicios');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 1; i < rows.length - 4; i++) {
+            vaBienesServicios.cantidad = rows[i].getElementsByTagName('td')[1].textContent;
+            vaBienesServicios.unidad = rows[i].getElementsByTagName('td')[2].textContent;
+            vaBienesServicios.codigo = rows[i].getElementsByTagName('td')[3].textContent;
+            vaBienesServicios.descripcion = rows[i].getElementsByTagName('td')[4].textContent;
+            vaBienesServicios.valor = rows[i].getElementsByTagName('td')[5].textContent;
+            vaBienesServicios.icbper = rows[i].getElementsByTagName('td')[6].textContent;
+            const dataCuota = {
+                //me falta terminar, poner los nombres que concuerden con la BS
+                cantidad: vaBienesServicios.cantidad,
+                unidad: vaBienesServicios.unidad,
+                monCuota: vaBienesServicios.monCuota
+            }
+            console.log(dataCuota)
+            await registrarCuotas(dataCuota);
+        }
         console.log(values);
         const data = await registrarFactura(values);
         if (data.status === 200) {
