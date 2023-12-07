@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Starts from '../components/Stars'
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../context/LoginContext'
+import { useForm } from 'react-hook-form'
 
 function FacturaForm() {
     let a = 0;
@@ -184,6 +185,32 @@ function FacturaForm() {
     const onSubmit2 = () => {
         navigate('/menu')
     };
+
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm()
+    const [cta, setCta] = useState('');
+    const [porcentaje, setPorcentaje] = useState('');
+    const [monto_detraccion, setMonto_detraccion] = useState('');
+
+    const handleCtaChange = (event) => {
+        const newValue = event.target.value;
+        setCta(newValue);
+    };
+    const handlePorcentajeChange = (event) => {
+        const newValue = event.target.value;
+        setPorcentaje(newValue);
+    };
+    const handleMonto_detraccionChange = (event) => {
+        const newValue = event.target.value;
+        setMonto_detraccion(newValue);
+    };
+
+    const onSubmit3 = handleSubmit(async (values) => {
+        values.cta = cta;
+        values.porcentaje = porcentaje;
+        values.monto_detraccion = monto_detraccion;
+
+        console.log(values);
+    })
 
     React.useEffect(() => {
 
@@ -509,7 +536,7 @@ function FacturaForm() {
                         </div>
 
 
-                        <div className="bg-zinc-900 p-4 rounded-lg mb-4">
+                        <div className="bg-zinc-900 p-4 rounded-lg mb-4" onSubmit={onSubmit3}>
                             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
                                 Consigne los datos de la detracción
                             </h1>
@@ -534,6 +561,7 @@ function FacturaForm() {
                                     <select
                                         className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                         aria-label="Tipo de Operación"
+                                        {...register("tipo_op")}
                                     >
                                         <option selected="SIN"></option>
                                         <option value="GUIAR">OPERACIÓN SUJETA A DETRACCIÓN</option>
@@ -548,6 +576,7 @@ function FacturaForm() {
                                     <select
                                         className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                         aria-label="Código de bien"
+                                        {...register("cod")}
                                     >
                                         <option selected="SIN"></option>
                                         <option value="001">001-Azúcar y melaza de caña</option>
@@ -590,11 +619,11 @@ function FacturaForm() {
                                         Nro. Cta. Banco de la Nación
                                     </label>
                                     <input
-
                                         name="description"
                                         type="text"
                                         aria-label="default input example"
                                         className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                        onChange={handleCtaChange}
                                     />
 
                                     <h1 className="text-base font-bold text-gray-400 mb-3">
@@ -603,6 +632,7 @@ function FacturaForm() {
                                     <select
                                         className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                         aria-label="Medio de pago"
+                                        {...register("medio")}
                                     >
                                         <option selected="SIN"></option>
                                         <option value="001">001-Depósito en cuenta</option>
@@ -630,6 +660,7 @@ function FacturaForm() {
                                         type="number"
                                         aria-label="default input example"
                                         className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                        onChange={handlePorcentajeChange}
                                     />
 
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
@@ -641,6 +672,7 @@ function FacturaForm() {
                                         type="number"
                                         aria-label="default input example"
                                         className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                        onChange={handleMonto_detraccionChange}
                                     />
                                 </div>
                             </div>
