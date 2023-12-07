@@ -184,6 +184,43 @@ function FacturaForm() {
     const [montoIsc, setMontoIsc] = useState(0);
     const [valorISC, setValorIsc] = useState(0);
 
+    const verificarRUC = async (ruc) => {
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imdvcm9wbzE0NDZAdGVuamIuY29tIn0.Gpe7Euk8JND4oI24TEYgB_6qEg1ej44RXNgy89Y1H74`;
+        const response = await fetch(apiUrl);
+        return await response.json();
+    };
+
+    const consultaRuc = async () => {
+        const rucPattern = /^\d{11}$/;
+        const ruc = document.getElementById('numeroRuc').value;
+
+        if (!rucPattern.test(ruc)) {
+            console.log('El RUC debe tener exactamente 11 números.');
+            return;
+        }
+
+        try {
+            const datosRUC = await verificarRUC(ruc);
+
+            if (datosRUC.estado === 'ACTIVO') {
+                console.log('RUC válido, redirigiendo...');
+                console.log('bien hecho');
+                console.log(datosRUC.razonSocial);
+                document.getElementById('razonSocialRuc').value = datosRUC.razonSocial;
+
+                if (data.status === 200) {
+                    console.log(datosRUC.razonSocial);
+                    document.getElementById('razonSocialRuc').value = datosRUC.razonSocial;
+                }
+            } else {
+                console.log('El RUC proporcionado no es válido.');
+            }
+        } catch (error) {
+            console.log('Error al conectar con la API o el servidor.');
+        }
+
+    };
+
     const handleTipoIscChange = (event) => {
         setValorIsc(document.getElementById('valorISC').value);
         setTipoIsc(event.target.value);
@@ -726,7 +763,7 @@ function FacturaForm() {
                                 RUC:
                             </label>
                             <input
-                                id="description"
+                                id="numeroRuc"
                                 name="description"
                                 type="text"
                                 aria-label="default input example"
@@ -737,12 +774,21 @@ function FacturaForm() {
                                 Razon Social:
                             </label>
                             <input
-                                id="impuesto"
+                                id="razonSocialRuc"
                                 className="monto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
                                 disabled
                             />
+                            <div className="flex justify-end">
+                                <input
+                                    id="agregar"
+                                    type="button"
+                                    value="Consignar"
+                                    className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
+                                    onClick={consultaRuc}
+                                />
+                            </div>
                         </div>
 
 
