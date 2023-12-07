@@ -482,15 +482,28 @@ function FacturaForm() {
             vaBienesServicios.descripcion = rows[i].getElementsByTagName('td')[4].textContent;
             vaBienesServicios.valor = rows[i].getElementsByTagName('td')[5].textContent;
             vaBienesServicios.icbper = rows[i].getElementsByTagName('td')[6].textContent;
+            vaBienesServicios.importeTotal = rows[i].getElementsByTagName('td')[7].textContent;
+            vaBienesServicios.isc = rows[i].getElementsByTagName('td')[8].textContent;
+            vaBienesServicios.igv = rows[i].getElementsByTagName('td')[9].textContent;
             const dataCuota = {
-                //me falta terminar, poner los nombres que concuerden con la BS
                 cantidad: vaBienesServicios.cantidad,
                 unidad: vaBienesServicios.unidad,
-                monCuota: vaBienesServicios.monCuota
+                medida: vaBienesServicios.unidad,
+                codigo: vaBienesServicios.codigo,
+                descripcion: vaBienesServicios.descripcion,
+                valor: vaBienesServicios.valor,
+                ISC: vaBienesServicios.isc,
+                ICBPER: vaBienesServicios.icbper,
+                IGV: vaBienesServicios.igv,
+                Importe_total: vaBienesServicios.importeTotal,
             }
+
             console.log(dataCuota)
-            await registrarCuotas(dataCuota);
+            await registrarPFactura(dataCuota);
         }
+
+        //CESAAAAR FALTA INDEXAR IMPORTE TOTAL/ISC/IGV/ICBPER
+        //ES LO QUE ESTA AL FINAL DE LA PAGINA EN LAS ULTIMAS 4 FILAS DE LA TABLA
         console.log(values);
         const data = await registrarFactura(values);
         if (data.status === 200) {
