@@ -539,16 +539,18 @@ function FacturaForm() {
             await registrarPfactura(dataCuota);
         }
         console.log(tb_importeTotal);
+
+        
         values.total = document.getElementById('tb_importeTotal').value;
         values.total_isc = document.getElementById('tb_isc').value;
         values.total_igv = document.getElementById('tb_igv').value;
         values.total_icbper = document.getElementById('tb_icbper').value;
-        
+
         console.log(values);
         const data = await registrarFactura(values);
-        if (data.status === 200) {
-            navigate('/factinf')
-        }
+        //if (data.status === 200) {
+          //  navigate('/factinf')
+        //}
     })
 
 
@@ -628,7 +630,7 @@ function FacturaForm() {
         values1.IGV = IGV;
         values1.Importe_total = Importe_total;
 
-        console.log(values);
+        console.log(values1);
     })
 
 
@@ -1554,7 +1556,7 @@ function FacturaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
-                                            <td className="bg-zinc-600" id="tb_importeTotal"  {...register("total")}>0</td>
+                                            <td className="bg-zinc-600" id="tb_importeTotal" >0</td>
                                             <td style={{ display: 'none' }} ></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
@@ -1566,7 +1568,7 @@ function FacturaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
-                                            <td className="bg-zinc-600" id="tb_isc" {...register("total_isc")}>0</td>
+                                            <td className="bg-zinc-600" id="tb_isc" >0</td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
@@ -1578,7 +1580,7 @@ function FacturaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
-                                            <td className="bg-zinc-600" id="tb_igv" {...register("total_igv")}>0</td>
+                                            <td className="bg-zinc-600" id="tb_igv" >0</td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
@@ -1590,7 +1592,7 @@ function FacturaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td ></td>
-                                            <td id="tb_icbper" className="bg-zinc-600" {...register("total_icbper")}>0</td>
+                                            <td id="tb_icbper" className="bg-zinc-600" >0</td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
