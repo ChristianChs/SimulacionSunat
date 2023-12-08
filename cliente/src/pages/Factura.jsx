@@ -538,18 +538,16 @@ function FacturaForm() {
             console.log(values)
             await registrarPfactura(dataCuota);
         }
-        console.log(tb_importeTotal);
 
-        
-        values.total = document.getElementById('tb_importeTotal').value;
-        values.total_isc = document.getElementById('tb_isc').value;
-        values.total_igv = document.getElementById('tb_igv').value;
-        values.total_icbper = document.getElementById('tb_icbper').value;
+        values.total = document.getElementById('tb_importeTotal').textContent;
+        values.total_isc = document.getElementById('tb_isc').textContent;
+        values.total_igv = document.getElementById('tb_igv').textContent;
+        values.total_icbper = document.getElementById('tb_icbper').textContent;
 
         console.log(values);
         const data = await registrarFactura(values);
         //if (data.status === 200) {
-          //  navigate('/factinf')
+        //  navigate('/factinf')
         //}
     })
 

@@ -394,9 +394,9 @@ function BoletaForm() {
         const selectedValue = e.target.value;
         setMostrarRucReceptor(selectedValue === "1");
         updateMFinal(cantidad, valorUnitario);
-        
+
         setSelectedexpo({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
@@ -407,31 +407,31 @@ function BoletaForm() {
 
     const handleRadioChange2 = e => {
         setSelectedpa({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange3 = e => {
         setSelecteditin({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange4 = e => {
         setSelectedesta({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange5 = e => {
         setSelecteddirec({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
-    
+
     const handleRadioChange6 = e => {
         setSelectedda({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
@@ -442,19 +442,19 @@ function BoletaForm() {
         updateMFinal(cantidad, valorUnitario);
 
         setSelectedISC_sel({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange8 = e => {
         setSelectedog({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
     const handleRadioChange9 = e => {
         setSelectedcyot({
-        checked: e.target.value
+            checked: e.target.value
         });
     };
 
@@ -463,23 +463,23 @@ function BoletaForm() {
         setNombre(newValue);
     };
 
-    const onSubmit = handleSubmit(async(values) => {
+    const onSubmit = handleSubmit(async (values) => {
         values.expo = selectedexpo.checked;
-        values.rs=rs;
+        values.rs = rs;
         values.pa = selectedpa.checked;
         values.itin = selecteditin.checked;
         values.esta = selectedesta.checked;
         values.direc = selecteddirec.checked;
         values.da = selectedda.checked;
         values.ISC_sel = selectedISC_sel.checked;
-        values.nombre=nombre;
-        values.og=selectedog;
-        values.cyot=selectedcyot;
+        values.nombre = nombre;
+        values.og = selectedog;
+        values.cyot = selectedcyot;
 
         console.log(values);
 
-        const data= await registrarBoleta(values); 
-        if(data.status===200){
+        const data = await registrarBoleta(values);
+        if (data.status === 200) {
             navigate('/factinf')
         }
     })
@@ -546,18 +546,18 @@ function BoletaForm() {
         setImporte_total(newValue);
     };
 
-    const onSubmit1 = handleSubmit(async(values1) => {
+    const onSubmit1 = handleSubmit(async (values1) => {
         values1.bos = selectedbos.checked;
-        values1.cantidad=cantidad;
-        values1.codigo=codigo;
-        values1.descripcion=descripcion;
-        values1.selectedbolsas=selectedbolsas.checked;
-        values1.valor=valor;
-        values1.descuento=descuento;
-        values1.ISC=ISC;
-        values1.ICBPER=ICBPER;
-        values1.IGV=IGV;
-        values1.Importe_total=Importe_total;
+        values1.cantidad = cantidad;
+        values1.codigo = codigo;
+        values1.descripcion = descripcion;
+        values1.selectedbolsas = selectedbolsas.checked;
+        values1.valor = valor;
+        values1.descuento = descuento;
+        values1.ISC = ISC;
+        values1.ICBPER = ICBPER;
+        values1.IGV = IGV;
+        values1.Importe_total = Importe_total;
 
         console.log(values);
     })
@@ -583,7 +583,7 @@ function BoletaForm() {
                                 name="exportacion"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedexpo.checked === '1'}
+                                //checked={setSelectedexpo.checked === '1'}
                                 onChange={handleRadioChange1}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -597,7 +597,7 @@ function BoletaForm() {
                                 name="exportacion"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedexpo.checked === '0'}
+                                //checked={setSelectedexpo.checked === '0'}
                                 onChange={handleRadioChange1}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -616,7 +616,8 @@ function BoletaForm() {
                             <select
                                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus-border-yellow-100"
                                 aria-label="Tipo de Moneda"
-                                value={selectedDoc}
+                                id="tipoDocumentoOpciones"
+                                //value={selectedDoc}
                                 onChange={handleDocChange}
                                 {...register("td")}
                             >
@@ -660,6 +661,18 @@ function BoletaForm() {
                                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 onChange={handlersChange}
                             />
+                            <div className="flex justify-end">
+                                <input
+                                    id="agregar"
+                                    type="button"
+                                    value="Ingresar"
+                                    style={{
+                                        display: document.getElementById('tipoDocumentoOpciones') === "DOCN" ? 'block' : 'none'
+                                    }}
+                                    className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
+                                    onClick
+                                />
+                            </div>
                         </div>
 
                         <div className="bg-zinc-900 p-4 rounded-lg mb-4">
@@ -672,7 +685,7 @@ function BoletaForm() {
                                 name="anticipado"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedpa.checked === '1'}
+                                //checked={setSelectedpa.checked === '1'}
                                 onChange={handleRadioChange2}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -686,7 +699,7 @@ function BoletaForm() {
                                 name="anticipado"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedpa.checked === '0'}
+                                //checked={setSelectedpa.checked === '0'}
                                 onChange={handleRadioChange2}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -705,7 +718,7 @@ function BoletaForm() {
                                 name="itinerante"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelecteditin.checked === '1'}
+                                //checked={setSelecteditin.checked === '1'}
                                 onChange={handleRadioChange3}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -719,7 +732,7 @@ function BoletaForm() {
                                 name="itinerante"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelecteditin.checked === '0'}
+                                //={setSelecteditin.checked === '0'}
                                 onChange={handleRadioChange3}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -738,7 +751,7 @@ function BoletaForm() {
                                 name="establecimiento"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedesta.checked === '1'}
+                                //checked={setSelectedesta.checked === '1'}
                                 onChange={handleRadioChange4}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -752,7 +765,7 @@ function BoletaForm() {
                                 name="establecimiento"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedesta.checked === '0'}
+                                //checked={setSelectedesta.checked === '0'}
                                 onChange={handleRadioChange4}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -771,7 +784,7 @@ function BoletaForm() {
                                 name="direccion"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelecteddirec.checked === '1'}
+                                //checked={setSelecteddirec.checked === '1'}
                                 onChange={handleRadioChange5}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -785,7 +798,7 @@ function BoletaForm() {
                                 name="direccion"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelecteddirec.checked === '0'}
+                                //checked={setSelecteddirec.checked === '0'}
                                 onChange={handleRadioChange5}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -827,7 +840,7 @@ function BoletaForm() {
                                 name="descuentos"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedda.checked === '1'}
+                                //checked={setSelectedda.checked === '1'}
                                 onChange={handleRadioChange6}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -841,7 +854,7 @@ function BoletaForm() {
                                 name="descuentos"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedda.checked === '0'}
+                                //checked={setSelectedda.checked === '0'}
                                 onChange={handleRadioChange6}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -860,7 +873,7 @@ function BoletaForm() {
                                 name="isc"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedISC_sel.checked === '1'}
+                                //checked={setSelectedISC_sel.checked === '1'}
                                 onChange={handleRadioChange7}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -874,7 +887,7 @@ function BoletaForm() {
                                 name="isc"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedISC_sel.checked === '0'}
+                                //checked={setSelectedISC_sel.checked === '0'}
                                 onChange={handleRadioChange7}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -893,7 +906,7 @@ function BoletaForm() {
                                 name="operacionesg"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedog.checked === '1'}
+                                //checked={setSelectedog.checked === '1'}
                                 onChange={handleRadioChange8}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -907,7 +920,7 @@ function BoletaForm() {
                                 name="operacionesg"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedog.checked === '0'}
+                                //checked={setSelectedog.checked === '0'}
                                 onChange={handleRadioChange8}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -926,7 +939,7 @@ function BoletaForm() {
                                 name="cargos"
                                 value="1"
                                 className="mr-2"
-                                checked={setSelectedcyot.checked === '1'}
+                                //checked={setSelectedcyot.checked === '1'}
                                 onChange={handleRadioChange9}
                             />
                             <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -940,7 +953,7 @@ function BoletaForm() {
                                 name="cargos"
                                 value="0"
                                 className="mr-2"
-                                checked={setSelectedcyot.checked === '0'}
+                                //checked={setSelectedcyot.checked === '0'}
                                 onChange={handleRadioChange9}
                             />
                             <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -1014,7 +1027,7 @@ function BoletaForm() {
                                             name="item"
                                             value="1"
                                             className="mr-2"
-                                            checked={setSelectedbos.checked === '1'}
+                                            //checked={setSelectedbos.checked === '1'}
                                             onChange={handlersChange10}
                                         />
                                         <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
@@ -1031,7 +1044,7 @@ function BoletaForm() {
                                             name="item"
                                             value="0"
                                             className="mr-2"
-                                            checked={setSelectedbos.checked === '0'}
+                                            //checked={setSelectedbos.checked === '0'}
                                             onChange={handlersChange10}
                                         />
                                         <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
@@ -1098,7 +1111,7 @@ function BoletaForm() {
                                             value="1"
                                             className="mr-2"
                                             onChange={handleImpBolsChange}
-                                            checked={selectedImpBols === "1"}
+                                        //checked={selectedImpBols === "1"}
                                         />
                                         <label htmlFor="retention_yes" className="text-gray-400 font-sans font-semibold">
                                             SI
@@ -1115,7 +1128,7 @@ function BoletaForm() {
                                             value="0"
                                             className="mr-2"
                                             onChange={handleImpBolsChange}
-                                            checked={selectedImpBols === "0"}
+                                        //checked={selectedImpBols === "0"}
                                         />
                                         <label htmlFor="retention_no" className="text-gray-400 font-sans font-semibold">
                                             NO
