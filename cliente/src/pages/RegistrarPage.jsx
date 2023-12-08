@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Stars from '../components/Stars';
 
 function RegistrarPage() {
-  
+
   const { registrar, errors: LoginErrors } = useLogin();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
@@ -15,12 +15,12 @@ function RegistrarPage() {
     const dniPattern = /^\d{8}$/;
     const dni = document.getElementById('dni_regis').value;
     const ruc = document.getElementById('ruc_regis').value;
-  
+
     const showAlertDanger = (msg) => {
       setIsAlertVisible(true);
       setErrorMessage(msg);
     };
-  
+
     if (!dniPattern.test(dni)) {
       showAlertDanger('El DNI debe tener exactamente 8 números.');
       return;
@@ -29,23 +29,23 @@ function RegistrarPage() {
       showAlertDanger('El RUC debe tener exactamente 11 números.');
       return;
     }
-  
+
     try {
       const datosDNI = await verificarDNI(dni);
-  
+
       if (datosDNI.success === true) {
         console.log('DNI válido, redirigiendo...');
         console.log('bien hecho');
-  
+
         try {
           const datosRUC = await verificarRUC(ruc);
-  
+
           if (datosRUC.estado === 'ACTIVO') {
             console.log('RUC válido, redirigiendo...');
             console.log('bien hecho');
-  
+
             const data = await registrar(values);
-  
+
             if (data.status === 200) {
               navigate('/login');
             }
@@ -62,16 +62,16 @@ function RegistrarPage() {
       showAlertDanger('Error al conectar con la API o el servidor.');
     }
   });
-  
+
 
   const verificarDNI = async (dni) => {
-    const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imdvcm9wbzE0NDZAdGVuamIuY29tIn0.Gpe7Euk8JND4oI24TEYgB_6qEg1ej44RXNgy89Y1H74`;
+    const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhcGVnaTE3OThAc2VzeGUuY29tIn0.kA46vxuxx1zjsvG9ZY5s5_2fjJCnen_veFz2L1LunIY`;
     const response = await fetch(apiUrl);
     return await response.json();
   };
 
   const verificarRUC = async (ruc) => {
-    const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imdvcm9wbzE0NDZAdGVuamIuY29tIn0.Gpe7Euk8JND4oI24TEYgB_6qEg1ej44RXNgy89Y1H74`;
+    const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhcGVnaTE3OThAc2VzeGUuY29tIn0.kA46vxuxx1zjsvG9ZY5s5_2fjJCnen_veFz2L1LunIY`;
     const response = await fetch(apiUrl);
     return await response.json();
   };

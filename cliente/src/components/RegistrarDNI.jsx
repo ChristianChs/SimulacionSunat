@@ -10,24 +10,24 @@ function RegistrarDNI({ signin }) {
 
     const verificarDNI = async (dni) => {
         const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=`;
-        const response = await fetch(apiUrl);eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imdvcm9wbzE0NDZAdGVuamIuY29tIn0.Gpe7Euk8JND4oI24TEYgB_6qEg1ej44RXNgy89Y1H74
+        const response = await fetch(apiUrl); eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhcGVnaTE3OThAc2VzeGUuY29tIn0.kA46vxuxx1zjsvG9ZY5s5_2fjJCnen_veFz2L1LunIY
         return await response.json();
     }
 
     const verificarRUC = async (ruc) => {
-        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imdvcm9wbzE0NDZAdGVuamIuY29tIn0.Gpe7Euk8JND4oI24TEYgB_6qEg1ej44RXNgy89Y1H74`;
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhcGVnaTE3OThAc2VzeGUuY29tIn0.kA46vxuxx1zjsvG9ZY5s5_2fjJCnen_veFz2L1LunIY`;
         const response = await fetch(apiUrl);
         return await response.json();
     }
 
     const dniInput = document.getElementById('dni_regis');
-    const rucInput = document.getElementById('ruc_regis'); 
+    const rucInput = document.getElementById('ruc_regis');
 
     const identificarse = () => {
         const rucPattern = /^\d{11}$/;
         const dniPattern = /^\d{8}$/;
         const dni = dniInput.value;
-        const ruc=rucInput.value;
+        const ruc = rucInput.value;
         if (!dniPattern.test(dni)) {
             showAlertDanger('alert-container', 'El DNI debe tener exactamente 8 números.');
             return;
@@ -37,12 +37,12 @@ function RegistrarDNI({ signin }) {
             return;
         }
 
-    
+
         verificarDNI(dni)
             .then((datosDNI) => {
                 if (datosDNI.success === true) {
                     console.log('DNI válido, redirigiendo...');
-                    console.log("bien hecho"); 
+                    console.log("bien hecho");
                 } else {
                     showAlertDanger('alert-container', 'El RUC proporcionado no es válido.');
                 }
@@ -51,33 +51,33 @@ function RegistrarDNI({ signin }) {
                 showAlertDanger('alert-container', 'Error al conectar con la API o el servidor.');
             })
         verificarRUC(ruc)
-            .then((datosRUC)=>{
-                if(datosRUC.estado==="ACTIVO"){
+            .then((datosRUC) => {
+                if (datosRUC.estado === "ACTIVO") {
                     console.log('RUC válido, redirigiendo...');
                     console.log("bien hecho");
                 }
-                else{
+                else {
                     showAlertDanger('alert-container', 'El RUC proporcionado no es válido.');
                 }
             })
             .catch((error) => {
                 showAlertDanger('alert-container', 'Error al conectar con la API o el servidor.');
-            })    
+            })
     };
 
-const showAlertDanger = (id, msg) => {
-    setIsAlertVisible(true);
-	let alert = document.querySelector(`#${id} .alert-danger`);
-	alert.classList.remove('d-none');
-	alert.innerHTML = msg;
-} 
+    const showAlertDanger = (id, msg) => {
+        setIsAlertVisible(true);
+        let alert = document.querySelector(`#${id} .alert-danger`);
+        alert.classList.remove('d-none');
+        alert.innerHTML = msg;
+    }
 
-  return (
-    <>
-        <form onSubmit={onSubmit}>
-             
-            <div id="fondo_gris" className="center-wrap ">
-                
+    return (
+        <>
+            <form onSubmit={onSubmit}>
+
+                <div id="fondo_gris" className="center-wrap ">
+
                     <h4 className="mb-2 pb-3 font-sans font-bold text-2xl">REGISTRAR</h4>
                     <div className="flex items-center">
                         <div className="mr-4">
@@ -90,7 +90,7 @@ const showAlertDanger = (id, msg) => {
                             placeholder="Numero de DNI"
                             {...register("dni", { required: true })}
                         />
-                        </div>
+                    </div>
                     <div className="flex items-center">
                         <div className="mr-4">
                             <ion-icon name="mail-unread-outline" className="text-gray-500"></ion-icon>
@@ -117,12 +117,12 @@ const showAlertDanger = (id, msg) => {
                             />
                         </div>
                     </div>
-                    
+
                     <div className='mt-2 pb-4'>
                         <div className="flex items-center">
                             <div className="mr-4">
                                 <ion-icon name="lock-closed-outline" className="text-gray-500"></ion-icon>
-                                
+
                             </div>
                             <input
                                 id="clave_regis"
@@ -132,15 +132,15 @@ const showAlertDanger = (id, msg) => {
                                 {...register("password", { required: true })}
                             />
                         </div>
-                        
+
                     </div>
                     <button id="regis_boton" type='submit' href="/login" className='bg-yellow-200 hover:bg-yellow-400 text-black font-bold uppercase transition duration-200 ease-in-out px-8 py-2 rounded-lg inline-flex items-center font-sans' onClick={identificarse}>Registrar</button>
-                
-            </div>
-        </form>
-    
-    
-    </>
+
+                </div>
+            </form>
+
+
+        </>
     )
 }
 

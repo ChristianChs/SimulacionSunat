@@ -219,7 +219,7 @@ function FacturaForm() {
     const [valorISC, setValorIsc] = useState(0);
 
     const verificarRUC = async (ruc) => {
-        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imdvcm9wbzE0NDZAdGVuamIuY29tIn0.Gpe7Euk8JND4oI24TEYgB_6qEg1ej44RXNgy89Y1H74`;
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhcGVnaTE3OThAc2VzeGUuY29tIn0.kA46vxuxx1zjsvG9ZY5s5_2fjJCnen_veFz2L1LunIY`;
         const response = await fetch(apiUrl);
         return await response.json();
     };
@@ -241,10 +241,17 @@ function FacturaForm() {
                 console.log('bien hecho');
                 console.log(datosRUC.razonSocial);
                 document.getElementById('razonSocialRuc').value = datosRUC.razonSocial;
+                document.getElementById('numeroDocumentoInferior').value = ruc;
+                document.getElementById('razonSocialInferior').value = datosRUC.razonSocial;
+                document.getElementById('direccionInferior').value = datosRUC.direccion;
+                document.getElementById('tipoMonedaInferior').value = document.getElementById('tipoMonedaSelect').value;
 
                 if (data.status === 200) {
                     console.log(datosRUC.razonSocial);
                     document.getElementById('razonSocialRuc').value = datosRUC.razonSocial;
+                    document.getElementById('numeroDocumentoInferior').value = ruc;
+                    document.getElementById('razonSocialInferior').value = datosRUC.razonSocial;
+                    document.getElementById('direccionInferior').value = datosRUC.direccion;
                 }
             } else {
                 console.log('El RUC proporcionado no es válido.');
@@ -840,6 +847,7 @@ function FacturaForm() {
                             <select
                                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 aria-label="Tipo de Moneda"
+                                id="tipoMonedaSelect"
                             >
                                 <option selected="SIN">SIN DOCUMENTO</option>
                                 <option value="REG">REG. ÚNICO DE CONTRIBUYENTES</option>
@@ -1195,7 +1203,7 @@ function FacturaForm() {
                             </label>
                             <input
                                 disabled
-                                id="pendiente"
+                                id="numeroDocumentoInferior"
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
@@ -1206,7 +1214,7 @@ function FacturaForm() {
                             </label>
                             <input
                                 disabled
-                                id="pendiente"
+                                id="razonSocialInferior"
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
@@ -1217,7 +1225,7 @@ function FacturaForm() {
                             </label>
                             <input
                                 disabled
-                                id="pendiente"
+                                id="direccionInferior"
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
@@ -1228,7 +1236,7 @@ function FacturaForm() {
                             </label>
                             <input
                                 disabled
-                                id="pendiente"
+                                id="tipoMonedaInferior"
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
