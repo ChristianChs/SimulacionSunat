@@ -463,7 +463,7 @@ function BoletaForm() {
         setNombre(newValue);
     };
 
-    const onSubmit = handleSubmit(async (values) => {
+    const onSubmit = handleSubmit(async (values, values1) => {
         values.expo = selectedexpo.checked;
         values.rs = rs;
         values.pa = selectedpa.checked;
@@ -476,12 +476,34 @@ function BoletaForm() {
         values.og = selectedog;
         values.cyot = selectedcyot;
 
+
+        values1.bos = selectedbos.checked;
+        values1.cantidad = cantidad;
+        values1.medida = medida;
+        values1.codigo = codigo;
+        values1.descripcion = descripcion;
+        values1.bolsas = selectedbolsas.checked;
+        values1.valor = valor;
+        values1.descuento = descuento;
+        values1.ISC = ISC;
+        values1.ICBPER = ICBPER;
+        values1.IGV = IGV;
+        values1.Importe_total = Importe_total;
+
+        values.total = document.getElementById('tb_importeTotal').textContent;
+        values.total_isc = document.getElementById('tb_isc').textContent;
+        values.total_igv = document.getElementById('tb_igv').textContent;
+        values.total_icbper = document.getElementById('tb_icbper').textContent;
+        values.sub_total = document.getElementById('tb_subtotal').textContent;
+
+
+        console.log(values1);
         console.log(values);
 
         const data = await registrarBoleta(values);
-        if (data.status === 200) {
-            navigate('/factinf')
-        }
+        //if (data.status === 200) {
+          //  navigate('/factinf')
+        //}
     })
 
     const [selectedbos, setSelectedbos] = useState({
@@ -545,22 +567,6 @@ function BoletaForm() {
         const newValue = event.target.value;
         setImporte_total(newValue);
     };
-
-    const onSubmit1 = handleSubmit(async (values1) => {
-        values1.bos = selectedbos.checked;
-        values1.cantidad = cantidad;
-        values1.codigo = codigo;
-        values1.descripcion = descripcion;
-        values1.selectedbolsas = selectedbolsas.checked;
-        values1.valor = valor;
-        values1.descuento = descuento;
-        values1.ISC = ISC;
-        values1.ICBPER = ICBPER;
-        values1.IGV = IGV;
-        values1.Importe_total = Importe_total;
-
-        console.log(values);
-    })
 
     return (
         <div>
@@ -1011,7 +1017,7 @@ function BoletaForm() {
                             />
 
                             <div className="h-4"></div>
-                            <div className="bg-zinc-800 p-4 rounded-lg mb-4" onSubmit={onSubmit1}>
+                            <div className="bg-zinc-800 p-4 rounded-lg mb-4">
 
                                 <h1 className="text-base font-bold mb-3 text-white">
                                     Agregue los bienes o servicios:
