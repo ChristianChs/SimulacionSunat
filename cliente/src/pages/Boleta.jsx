@@ -184,8 +184,8 @@ function BoletaForm() {
     const handleDocChange = (e) => {
         const selectedValue = e.target.value;
         document.getElementById('description').value = '';
-        setSelectedDoc(selectedValue);
-        console.log(selectedValue)
+        setSelectedDoc(document.getElementById('tipoDocumentoOpciones').value);
+        console.log(document.getElementById('tipoDocumentoOpciones').value)
     };
     const [monedaSeleccionada, setMonedaSeleccionada] = useState('SOLES');
 
@@ -618,7 +618,7 @@ function BoletaForm() {
                                 aria-label="Tipo de Moneda"
                                 id="tipoDocumentoOpciones"
                                 //value={selectedDoc}
-                                onChange={handleDocChange}
+                                onChange={handleOptionChange}
                                 {...register("td")}
                             >
                                 <option selected="SIN DOCUMENTO">SIN DOCUMENTO</option>
@@ -661,14 +661,11 @@ function BoletaForm() {
                                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 onChange={handlersChange}
                             />
-                            <div className="flex justify-end">
+                            <div className="flex justify-end" style={{ display: selectedDoc === "DOCN" ? 'block' : 'none' }}>
                                 <input
                                     id="agregar"
                                     type="button"
                                     value="Ingresar"
-                                    style={{
-                                        display: document.getElementById('tipoDocumentoOpciones') === "DOCN" ? 'block' : 'none'
-                                    }}
                                     className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
                                     onClick
                                 />
