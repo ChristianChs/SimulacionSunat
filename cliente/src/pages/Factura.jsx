@@ -498,7 +498,6 @@ function FacturaForm() {
         values.tipo_trans = selectedtipo_trans.checked;
         values.detr = selecteddetr.checked;
         values.exp = selectedexp.checked;
-        values.ruc = RUC;
         values.ant = selectedant.checked;
         values.itn = selecteditn.checked;
         values.est = selectedest.checked;
@@ -536,11 +535,15 @@ function FacturaForm() {
             }
 
             console.log(dataCuota)
+            console.log(values)
             await registrarPfactura(dataCuota);
         }
-
-        //CESAAAAR FALTA INDEXAR IMPORTE TOTAL/ISC/IGV/ICBPER
-        //ES LO QUE ESTA AL FINAL DE LA PAGINA EN LAS ULTIMAS 4 FILAS DE LA TABLA
+        console.log(tb_importeTotal);
+        values.total = document.getElementById('tb_importeTotal').value;
+        values.total_isc = document.getElementById('tb_isc').value;
+        values.total_igv = document.getElementById('tb_igv').value;
+        values.total_icbper = document.getElementById('tb_icbper').value;
+        
         console.log(values);
         const data = await registrarFactura(values);
         if (data.status === 200) {
@@ -768,7 +771,7 @@ function FacturaForm() {
                                 type="text"
                                 aria-label="default input example"
                                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                onChange={handleRUCChange}
+                                {...register("RUC")}
                             />
                             <label htmlFor="observation" className="text-gray-400 font-sans font-semibold">
                                 Razon Social:
@@ -999,7 +1002,6 @@ function FacturaForm() {
                             <select
                                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 aria-label="Tipo de Moneda"
-                                value="1"
                                 {...register("tipo_mon")}
                             >
                                 <option selected="SOLES">SOLES</option>
