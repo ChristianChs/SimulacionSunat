@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { loginRequest, loginRequest2, registerCuotas,registerfact,registerfactcu,registerfactde, registerRequest,registerPBol,registerBol, registerRequest2 } from "../api/login"
+import { loginRequest, loginRequest2, registerCuotas,registerfact,registerfactcu,registerfactde,registerPfact, registerRequest,registerPBol,registerBol, registerRequest2 } from "../api/login"
 const LoginContext = createContext()
 
 export const useLogin = () => {

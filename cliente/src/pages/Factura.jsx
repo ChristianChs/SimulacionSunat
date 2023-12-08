@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function FacturaForm() {
     let a = 1;
     const { registrarFactura, errors: LoginErrors } = useLogin();
-    const { registrarPFactura, errors: LoginErrors2 } = useLogin();
+    const { registrarPfactura, errors: LoginErrors2 } = useLogin();
     function insertarFila() {
         /*const fechaVencimiento = document.getElementById('fecha_vencimiento').value;
         const montoCuota = document.getElementById('monto_cuota').value;*/
@@ -536,7 +536,7 @@ function FacturaForm() {
             }
 
             console.log(dataCuota)
-            await registrarPFactura(dataCuota);
+            await registrarPfactura(dataCuota);
         }
 
         //CESAAAAR FALTA INDEXAR IMPORTE TOTAL/ISC/IGV/ICBPER
