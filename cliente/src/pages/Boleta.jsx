@@ -16,7 +16,7 @@ function BoletaForm() {
 
 
         let tblDatos = document.getElementById('bienesServicios');
-        let newRow = tblDatos.insertRow(tblDatos.rows.length - 4);
+        let newRow = tblDatos.insertRow(tblDatos.rows.length - 5);
 
         let col1 = newRow.insertCell(0);
         let col2 = newRow.insertCell(1);
@@ -28,6 +28,7 @@ function BoletaForm() {
         let col8 = newRow.insertCell(7);
         let col9 = newRow.insertCell(8);
         let col10 = newRow.insertCell(9);
+        let col11 = newRow.insertCell(10);
 
 
         const id = 'fila' + a;
@@ -41,10 +42,12 @@ function BoletaForm() {
         col8.innerHTML = iTotal;
         col9.innerHTML = document.getElementById('valorParcialIsc').value;
         col10.innerHTML = document.getElementById('igvParcial').value;
+        col11.innerHTML = document.getElementById('cant').value * document.getElementById('uni').value;
         newRow.setAttribute('data-id', id);
         col8.style.display = 'none';
         col9.style.display = 'none';
         col10.style.display = 'none';
+        col11.style.display = 'none';
 
         col1.firstChild.addEventListener('click', function () {
             eliminarFila(id);
@@ -58,7 +61,7 @@ function BoletaForm() {
 
         var sumaImporte = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[7];
             if (cell) {
                 sumaImporte += parseFloat(cell.textContent || cell.innerText);
@@ -69,7 +72,7 @@ function BoletaForm() {
 
         var sumaISC = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[8];
             if (cell) {
                 sumaISC += parseFloat(cell.textContent || cell.innerText);
@@ -80,7 +83,7 @@ function BoletaForm() {
 
         var sumaIGV = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[9];
             if (cell) {
                 sumaIGV += parseFloat(cell.textContent || cell.innerText);
@@ -91,7 +94,7 @@ function BoletaForm() {
 
         var sumaICBPER = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[6];
             if (cell) {
                 sumaICBPER += parseFloat(cell.textContent || cell.innerText);
@@ -99,6 +102,17 @@ function BoletaForm() {
         }
 
         document.getElementById('tb_icbper').textContent = sumaICBPER.toFixed(2);
+
+        var sumaSubtotal = 0;
+
+        for (var i = 1; i < rows.length - 5; i++) {
+            var cell = rows[i].getElementsByTagName('td')[10];
+            if (cell) {
+                sumaSubtotal += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_subtotal').textContent = sumaSubtotal.toFixed(2);
 
         actualizarNumerosConsecutivos();
     }
@@ -129,7 +143,7 @@ function BoletaForm() {
 
         var sumaImporte = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[7];
             if (cell) {
                 sumaImporte += parseFloat(cell.textContent || cell.innerText);
@@ -140,7 +154,7 @@ function BoletaForm() {
 
         var sumaISC = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[8];
             if (cell) {
                 sumaISC += parseFloat(cell.textContent || cell.innerText);
@@ -151,7 +165,7 @@ function BoletaForm() {
 
         var sumaIGV = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[9];
             if (cell) {
                 sumaIGV += parseFloat(cell.textContent || cell.innerText);
@@ -162,12 +176,23 @@ function BoletaForm() {
 
         var sumaICBPER = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[6];
             if (cell) {
                 sumaICBPER += parseFloat(cell.textContent || cell.innerText);
             }
         }
+
+        var sumaSubtotal = 0;
+
+        for (var i = 1; i < rows.length - 5; i++) {
+            var cell = rows[i].getElementsByTagName('td')[10];
+            if (cell) {
+                sumaSubtotal += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_subtotal').textContent = sumaSubtotal.toFixed(2);
 
         document.getElementById('tb_icbper').textContent = sumaICBPER.toFixed(2);
     }
@@ -531,6 +556,37 @@ function BoletaForm() {
         values1.ICBPER = ICBPER;
         values1.IGV = IGV;
         values1.Importe_total = Importe_total;
+
+        var table = document.getElementById('bienesServicios');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 1; i < rows.length - 5; i++) {
+            vaBienesServicios.cantidad = rows[i].getElementsByTagName('td')[1].textContent;
+            vaBienesServicios.unidad = rows[i].getElementsByTagName('td')[2].textContent;
+            vaBienesServicios.codigo = rows[i].getElementsByTagName('td')[3].textContent;
+            vaBienesServicios.descripcion = rows[i].getElementsByTagName('td')[4].textContent;
+            vaBienesServicios.valor = rows[i].getElementsByTagName('td')[5].textContent;
+            vaBienesServicios.icbper = rows[i].getElementsByTagName('td')[6].textContent;
+            vaBienesServicios.importeTotal = rows[i].getElementsByTagName('td')[7].textContent;
+            vaBienesServicios.isc = rows[i].getElementsByTagName('td')[8].textContent;
+            vaBienesServicios.igv = rows[i].getElementsByTagName('td')[9].textContent;
+            const dataCuota = {
+                cantidad: vaBienesServicios.cantidad,
+                unidad: vaBienesServicios.unidad,
+                medida: vaBienesServicios.unidad,
+                codigo: vaBienesServicios.codigo,
+                descripcion: vaBienesServicios.descripcion,
+                valor: vaBienesServicios.valor,
+                ISC: vaBienesServicios.isc,
+                ICBPER: vaBienesServicios.icbper,
+                IGV: vaBienesServicios.igv,
+                Importe_total: vaBienesServicios.importeTotal,
+            }
+
+            console.log(dataCuota)
+            console.log(values)
+            await registrarPfactura(dataCuota);
+        }
 
         values.total = document.getElementById('tb_importeTotal').textContent;
         values.total_isc = document.getElementById('tb_isc').textContent;
@@ -1394,6 +1450,7 @@ function BoletaForm() {
                                             <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">ImporteTotal(c/u)</th>
                                             <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">ISC(c/u)</th>
                                             <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">IGV(c/u)</th>
+                                            <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">Subtotal</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cuerpo_cuotas" className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
@@ -1408,6 +1465,7 @@ function BoletaForm() {
                                             <td style={{ display: 'none' }} ></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
                                         </tr>
                                         <tr>
                                             <td className="bg-zinc-600" >ISC</td>
@@ -1417,6 +1475,7 @@ function BoletaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td className="bg-zinc-600" id="tb_isc" {...register("total_isc")}>0</td>
+                                            <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
@@ -1432,6 +1491,7 @@ function BoletaForm() {
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
                                         </tr>
                                         <tr>
                                             <td className="bg-zinc-600" >ICBPER</td>
@@ -1441,6 +1501,20 @@ function BoletaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td id="tb_icbper" className="bg-zinc-600" {...register("total_icbper")}>0</td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="bg-zinc-600" >Subtotal</td>
+                                            <td></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td id="tb_subtotal" className="bg-zinc-600" >0</td>
+                                            <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
