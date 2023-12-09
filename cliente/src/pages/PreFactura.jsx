@@ -19,6 +19,7 @@ import xmlPath1 from '../assets/pdfs/xmlfactura.xml';
 function PreFactura() {
 
   const [user,setUser]=useState([])
+
   const getData = async()=>{
     const id_login=JSON.parse(localStorage.getItem('loggindata'))
     const datos=await dataLogRequest({"id_login":id_login.id})
