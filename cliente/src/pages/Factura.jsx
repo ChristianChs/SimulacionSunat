@@ -217,6 +217,14 @@ function FacturaForm() {
     const [tipoIsc, setTipoIsc] = useState("valor");
     const [montoIsc, setMontoIsc] = useState(0);
     const [valorISC, setValorIsc] = useState(0);
+    const [TipoMoneda, setTipoMoneda] = useState("SOLES");
+
+    const handleMonedaChange = (e) => {
+        console.log("hola");
+        let selectedValue = e.target.value;
+        setTipoMoneda(selectedValue);
+        document.getElementById('tipoMonedaInferior').value = selectedValue;
+    };
 
     const verificarRUC = async (ruc) => {
         const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhcGVnaTE3OThAc2VzeGUuY29tIn0.kA46vxuxx1zjsvG9ZY5s5_2fjJCnen_veFz2L1LunIY`;
@@ -252,6 +260,8 @@ function FacturaForm() {
                     document.getElementById('numeroDocumentoInferior').value = ruc;
                     document.getElementById('razonSocialInferior').value = datosRUC.razonSocial;
                     document.getElementById('direccionInferior').value = datosRUC.direccion;
+                    document.getElementById('tipoMonedaInferior').value = document.getElementById('tipoMonedaSelect').value;
+
                 }
             } else {
                 console.log('El RUC proporcionado no es válido.');
@@ -588,9 +598,9 @@ function FacturaForm() {
 
         console.log(values);
         const data = await registrarFactura(values);
-        //if (data.status === 200) {
-        //  navigate('/factinf')
-        //}
+        if (data.status === 200) {
+          navigate('/factinf')
+        }
     })
 
 
@@ -847,7 +857,6 @@ function FacturaForm() {
                             <select
                                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 aria-label="Tipo de Moneda"
-                                id="tipoMonedaSelect"
                             >
                                 <option selected="SIN">SIN DOCUMENTO</option>
                                 <option value="REG">REG. ÚNICO DE CONTRIBUYENTES</option>
@@ -1046,6 +1055,8 @@ function FacturaForm() {
                                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 aria-label="Tipo de Moneda"
                                 {...register("tipo_mon")}
+                                id="tipoMonedaSelect"
+                                onChange={handleMonedaChange}
                             >
                                 <option selected="SOLES">SOLES</option>
                                 <option value="EURO">EURO</option>
@@ -1240,6 +1251,7 @@ function FacturaForm() {
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
+                                value={TipoMoneda}
                             />
 
                             <label htmlFor="date_issue" className="text-gray-400 font-sans font-semibold">

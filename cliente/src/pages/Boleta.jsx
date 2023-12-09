@@ -16,7 +16,7 @@ function BoletaForm() {
 
 
         let tblDatos = document.getElementById('bienesServicios');
-        let newRow = tblDatos.insertRow(tblDatos.rows.length - 4);
+        let newRow = tblDatos.insertRow(tblDatos.rows.length - 5);
 
         let col1 = newRow.insertCell(0);
         let col2 = newRow.insertCell(1);
@@ -28,6 +28,7 @@ function BoletaForm() {
         let col8 = newRow.insertCell(7);
         let col9 = newRow.insertCell(8);
         let col10 = newRow.insertCell(9);
+        let col11 = newRow.insertCell(10);
 
 
         const id = 'fila' + a;
@@ -41,10 +42,12 @@ function BoletaForm() {
         col8.innerHTML = iTotal;
         col9.innerHTML = document.getElementById('valorParcialIsc').value;
         col10.innerHTML = document.getElementById('igvParcial').value;
+        col11.innerHTML = document.getElementById('cant').value * document.getElementById('uni').value;
         newRow.setAttribute('data-id', id);
         col8.style.display = 'none';
         col9.style.display = 'none';
         col10.style.display = 'none';
+        col11.style.display = 'none';
 
         col1.firstChild.addEventListener('click', function () {
             eliminarFila(id);
@@ -58,7 +61,7 @@ function BoletaForm() {
 
         var sumaImporte = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[7];
             if (cell) {
                 sumaImporte += parseFloat(cell.textContent || cell.innerText);
@@ -69,7 +72,7 @@ function BoletaForm() {
 
         var sumaISC = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[8];
             if (cell) {
                 sumaISC += parseFloat(cell.textContent || cell.innerText);
@@ -80,7 +83,7 @@ function BoletaForm() {
 
         var sumaIGV = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[9];
             if (cell) {
                 sumaIGV += parseFloat(cell.textContent || cell.innerText);
@@ -91,7 +94,7 @@ function BoletaForm() {
 
         var sumaICBPER = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[6];
             if (cell) {
                 sumaICBPER += parseFloat(cell.textContent || cell.innerText);
@@ -99,6 +102,17 @@ function BoletaForm() {
         }
 
         document.getElementById('tb_icbper').textContent = sumaICBPER.toFixed(2);
+
+        var sumaSubtotal = 0;
+
+        for (var i = 1; i < rows.length - 5; i++) {
+            var cell = rows[i].getElementsByTagName('td')[10];
+            if (cell) {
+                sumaSubtotal += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_subtotal').textContent = sumaSubtotal.toFixed(2);
 
         actualizarNumerosConsecutivos();
     }
@@ -129,7 +143,7 @@ function BoletaForm() {
 
         var sumaImporte = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[7];
             if (cell) {
                 sumaImporte += parseFloat(cell.textContent || cell.innerText);
@@ -140,7 +154,7 @@ function BoletaForm() {
 
         var sumaISC = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[8];
             if (cell) {
                 sumaISC += parseFloat(cell.textContent || cell.innerText);
@@ -151,7 +165,7 @@ function BoletaForm() {
 
         var sumaIGV = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[9];
             if (cell) {
                 sumaIGV += parseFloat(cell.textContent || cell.innerText);
@@ -162,12 +176,23 @@ function BoletaForm() {
 
         var sumaICBPER = 0;
 
-        for (var i = 1; i < rows.length - 4; i++) {
+        for (var i = 1; i < rows.length - 5; i++) {
             var cell = rows[i].getElementsByTagName('td')[6];
             if (cell) {
                 sumaICBPER += parseFloat(cell.textContent || cell.innerText);
             }
         }
+
+        var sumaSubtotal = 0;
+
+        for (var i = 1; i < rows.length - 5; i++) {
+            var cell = rows[i].getElementsByTagName('td')[10];
+            if (cell) {
+                sumaSubtotal += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_subtotal').textContent = sumaSubtotal.toFixed(2);
 
         document.getElementById('tb_icbper').textContent = sumaICBPER.toFixed(2);
     }
@@ -176,28 +201,23 @@ function BoletaForm() {
         setMostrarIsc(false);
         document.getElementById('valorISC').value = 0;
 
-        const selectedValue = e.target.value;
+        let selectedValue = e.target.value;
         setMostrarRucReceptor(selectedValue === "1");
         updateMFinal(cantidad, valorUnitario);
     };
 
     const handleDocChange = (e) => {
-        const selectedValue = e.target.value;
+        let selectedValue = e.target.value;
         document.getElementById('description').value = '';
-        setSelectedDoc(document.getElementById('tipoDocumentoOpciones').value);
-        console.log(document.getElementById('tipoDocumentoOpciones').value)
+        setSelectedDoc(selectedValue);
     };
-    const [monedaSeleccionada, setMonedaSeleccionada] = useState('SOLES');
 
-    const handleMonedaChange = (event) => {
-        setMonedaSeleccionada(event.target.value);
-    };
+    const [monedaSeleccionada, setMonedaSeleccionada] = useState('SOLES');
 
     let a = 1;
 
 
     const [igvNeto, setigvNeto] = useState('');
-    const [cantidad, setCantidad] = useState(0);
     const [valorUnitario, setValorUnitario] = useState(0);
     const [mfinal, setMFinal] = useState(0);
     const [iTotal, setITotal] = useState(0);
@@ -208,6 +228,14 @@ function BoletaForm() {
     const [mostrarIsc, setMostrarIsc] = useState(false);
     const [tipoIsc, setTipoIsc] = useState("valor");
     const [valorISC, setValorIsc] = useState(0);
+    const [TipoMoneda, setTipoMoneda] = useState("SOLES");
+
+    const handleMonedaChange = (e) => {
+        console.log("hola");
+        let selectedValue = e.target.value;
+        setTipoMoneda(selectedValue);
+        document.getElementById('tipoMonedaInferior').value = selectedValue;
+    };
 
     const handleTipoIscChange = (event) => {
         setValorIsc(document.getElementById('valorISC').value);
@@ -341,6 +369,43 @@ function BoletaForm() {
         setMFinal(resRedondeado);
     };
 
+    const verificarDNI = async (dni) => {
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhcGVnaTE3OThAc2VzeGUuY29tIn0.kA46vxuxx1zjsvG9ZY5s5_2fjJCnen_veFz2L1LunIY`;
+        const response = await fetch(apiUrl);
+        return await response.json();
+    };
+
+    const consultaDNI = async () => {
+        const dniPattern = /^\d{8}$/;
+        const dni = document.getElementById('description').value;
+
+        if (!dniPattern.test(dni)) {
+            showAlertDanger('El DNI debe tener exactamente 8 números.');
+            return;
+        }
+
+        try {
+            const datosDNI = await verificarDNI(dni);
+
+            if (datosDNI.success === true) {
+                console.log('DNI válido, redirigiendo...');
+                console.log('bien hecho');
+                console.log(datosDNI.nombres + " " + datosDNI.apellidoPaterno + " " + datosDNI.apellidoMaterno);
+                document.getElementById('NombreRazon').value = datosDNI.nombres + " " + datosDNI.apellidoPaterno + " " + datosDNI.apellidoMaterno;
+                document.getElementById('nombreClienteInferior').value = datosDNI.nombres + " " + datosDNI.apellidoPaterno + " " + datosDNI.apellidoMaterno;
+                if (data.status === 200) {
+                    console.log(datosDNI.nombres + " " + datosDNI.apellidoPaterno + " " + datosDNI.apellidoMaterno);
+                    document.getElementById('NombreRazon').value = datosDNI.nombres + " " + datosDNI.apellidoPaterno + " " + datosDNI.apellidoMaterno;
+                    document.getElementById('nombreClienteInferior').value = datosDNI.nombres + " " + datosDNI.apellidoPaterno + " " + datosDNI.apellidoMaterno;
+                }
+            } else {
+                console.log('El DNI proporcionado no es válido.');
+            }
+        } catch (error) {
+            console.log('Error al conectar con la API o el servidor.');
+        }
+
+    };
 
     React.useEffect(() => {
 
@@ -401,7 +466,8 @@ function BoletaForm() {
     };
 
     const handlersChange = (event) => {
-        const newValue = event.target.value;
+        let newValue = event.target.value;
+        document.getElementById('nombreClienteInferior').value = newValue;
         setrs(newValue);
     };
 
@@ -463,7 +529,7 @@ function BoletaForm() {
         setNombre(newValue);
     };
 
-    const onSubmit = handleSubmit(async (values) => {
+    const onSubmit = handleSubmit(async (values, vaBienesServicios) => {
         values.expo = selectedexpo.checked;
         values.rs = rs;
         values.pa = selectedpa.checked;
@@ -476,17 +542,55 @@ function BoletaForm() {
         values.og = selectedog;
         values.cyot = selectedcyot;
 
+        var table = document.getElementById('bienesServicios');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 1; i < rows.length - 5; i++) {
+            vaBienesServicios.cantidad = rows[i].getElementsByTagName('td')[1].textContent;
+            vaBienesServicios.unidad = rows[i].getElementsByTagName('td')[2].textContent;
+            vaBienesServicios.codigo = rows[i].getElementsByTagName('td')[3].textContent;
+            vaBienesServicios.descripcion = rows[i].getElementsByTagName('td')[4].textContent;
+            vaBienesServicios.valor = rows[i].getElementsByTagName('td')[5].textContent;
+            vaBienesServicios.icbper = rows[i].getElementsByTagName('td')[6].textContent;
+            vaBienesServicios.importeTotal = rows[i].getElementsByTagName('td')[7].textContent;
+            vaBienesServicios.isc = rows[i].getElementsByTagName('td')[8].textContent;
+            vaBienesServicios.igv = rows[i].getElementsByTagName('td')[9].textContent;
+            const dataCuota = {
+                cantidad: vaBienesServicios.cantidad,
+                unidad: vaBienesServicios.unidad,
+                medida: vaBienesServicios.unidad,
+                codigo: vaBienesServicios.codigo,
+                descripcion: vaBienesServicios.descripcion,
+                valor: vaBienesServicios.valor,
+                ISC: vaBienesServicios.isc,
+                ICBPER: vaBienesServicios.icbper,
+                IGV: vaBienesServicios.igv,
+                Importe_total: vaBienesServicios.importeTotal,
+            }
+
+            console.log(dataCuota)
+            console.log(values)
+            await registrarPBoleta(dataCuota);
+        }
+
+        values.total = document.getElementById('tb_importeTotal').textContent;
+        values.total_isc = document.getElementById('tb_isc').textContent;
+        values.total_igv = document.getElementById('tb_igv').textContent;
+        values.total_icbper = document.getElementById('tb_icbper').textContent;
+        values.sub_total = document.getElementById('tb_subtotal').textContent;
+
         console.log(values);
 
         const data = await registrarBoleta(values);
         if (data.status === 200) {
-            navigate('/factinf')
+          navigate('/prebol')
         }
     })
 
     const [selectedbos, setSelectedbos] = useState({
         checked: null
     });
+    const [cantidad, setCantidad] = useState('');
     const [medida, setMedida] = useState('');
     const [codigo, setCodigo] = useState('');
     const [descripcion, setDescripcion] = useState('');
@@ -546,22 +650,6 @@ function BoletaForm() {
         setImporte_total(newValue);
     };
 
-    const onSubmit1 = handleSubmit(async (values1) => {
-        values1.bos = selectedbos.checked;
-        values1.cantidad = cantidad;
-        values1.codigo = codigo;
-        values1.descripcion = descripcion;
-        values1.selectedbolsas = selectedbolsas.checked;
-        values1.valor = valor;
-        values1.descuento = descuento;
-        values1.ISC = ISC;
-        values1.ICBPER = ICBPER;
-        values1.IGV = IGV;
-        values1.Importe_total = Importe_total;
-
-        console.log(values);
-    })
-
     return (
         <div>
             <Starts className="stars-behind" />
@@ -618,8 +706,7 @@ function BoletaForm() {
                                 aria-label="Tipo de Moneda"
                                 id="tipoDocumentoOpciones"
                                 //value={selectedDoc}
-                                onChange={handleOptionChange}
-                                {...register("td")}
+                                onChange={handleDocChange}
                             >
                                 <option selected="SIN DOCUMENTO">SIN DOCUMENTO</option>
                                 <option value="DOCT">DOC. TRIB. NO DOM. SIN RUC</option>
@@ -647,7 +734,7 @@ function BoletaForm() {
                                     type="text"
                                     aria-label="default input example"
                                     className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus-border-yellow-100"
-                                    disabled={selectedDoc === 'SIN DOCUMENTO'}
+
                                 />
                             </div>
                             <label htmlFor="NombreRazon" className="text-gray-400 font-sans font-semibold">
@@ -660,6 +747,7 @@ function BoletaForm() {
                                 aria-label="default input example"
                                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 onChange={handlersChange}
+                                disabled={selectedDoc == 'DOCN'}
                             />
                             <div className="flex justify-end" style={{ display: selectedDoc === "DOCN" ? 'block' : 'none' }}>
                                 <input
@@ -667,7 +755,7 @@ function BoletaForm() {
                                     type="button"
                                     value="Ingresar"
                                     className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
-                                    onClick
+                                    onClick={consultaDNI}
                                 />
                             </div>
                         </div>
@@ -814,6 +902,8 @@ function BoletaForm() {
                             <select
                                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 aria-label="Tipo de Moneda"
+                                id="tipoMonedaSelect"
+                                onChange={handleMonedaChange}
                             >
                                 <option selected="SOLES">SOLES</option>
                                 <option value="EURO">EURO</option>
@@ -969,7 +1059,7 @@ function BoletaForm() {
                             </label>
                             <input
                                 disabled
-                                id="pendiente"
+                                id="nombreClienteInferior"
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
@@ -981,11 +1071,11 @@ function BoletaForm() {
                             </label>
                             <input
                                 disabled
-                                id="pendiente"
+                                id="tipoMonedaInferior"
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
-                                value={monedaSeleccionada}
+                                value={TipoMoneda}
                             />
 
                             <label htmlFor="date_issue" className="text-gray-400 font-sans font-semibold">
@@ -1011,7 +1101,7 @@ function BoletaForm() {
                             />
 
                             <div className="h-4"></div>
-                            <div className="bg-zinc-800 p-4 rounded-lg mb-4" onSubmit={onSubmit1}>
+                            <div className="bg-zinc-800 p-4 rounded-lg mb-4">
 
                                 <h1 className="text-base font-bold mb-3 text-white">
                                     Agregue los bienes o servicios:
@@ -1344,6 +1434,7 @@ function BoletaForm() {
                                             <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">ImporteTotal(c/u)</th>
                                             <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">ISC(c/u)</th>
                                             <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">IGV(c/u)</th>
+                                            <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">Subtotal</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cuerpo_cuotas" className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
@@ -1358,6 +1449,7 @@ function BoletaForm() {
                                             <td style={{ display: 'none' }} ></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
                                         </tr>
                                         <tr>
                                             <td className="bg-zinc-600" >ISC</td>
@@ -1367,6 +1459,7 @@ function BoletaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td className="bg-zinc-600" id="tb_isc" {...register("total_isc")}>0</td>
+                                            <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
@@ -1382,6 +1475,7 @@ function BoletaForm() {
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
                                         </tr>
                                         <tr>
                                             <td className="bg-zinc-600" >ICBPER</td>
@@ -1391,6 +1485,20 @@ function BoletaForm() {
                                             <td ></td>
                                             <td ></td>
                                             <td id="tb_icbper" className="bg-zinc-600" {...register("total_icbper")}>0</td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="bg-zinc-600" >Subtotal</td>
+                                            <td></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td id="tb_subtotal" className="bg-zinc-600" >0</td>
+                                            <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
