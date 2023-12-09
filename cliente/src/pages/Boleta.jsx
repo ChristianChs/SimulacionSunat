@@ -218,7 +218,6 @@ function BoletaForm() {
 
 
     const [igvNeto, setigvNeto] = useState('');
-    const [cantidad, setCantidad] = useState(0);
     const [valorUnitario, setValorUnitario] = useState(0);
     const [mfinal, setMFinal] = useState(0);
     const [iTotal, setITotal] = useState(0);
@@ -530,7 +529,7 @@ function BoletaForm() {
         setNombre(newValue);
     };
 
-    const onSubmit = handleSubmit(async (values, values1) => {
+    const onSubmit = handleSubmit(async (values, vaBienesServicios) => {
         values.expo = selectedexpo.checked;
         values.rs = rs;
         values.pa = selectedpa.checked;
@@ -542,20 +541,6 @@ function BoletaForm() {
         values.nombre = nombre;
         values.og = selectedog;
         values.cyot = selectedcyot;
-
-
-        values1.bos = selectedbos.checked;
-        values1.cantidad = cantidad;
-        values1.medida = medida;
-        values1.codigo = codigo;
-        values1.descripcion = descripcion;
-        values1.bolsas = selectedbolsas.checked;
-        values1.valor = valor;
-        values1.descuento = descuento;
-        values1.ISC = ISC;
-        values1.ICBPER = ICBPER;
-        values1.IGV = IGV;
-        values1.Importe_total = Importe_total;
 
         var table = document.getElementById('bienesServicios');
         var rows = table.getElementsByTagName('tr');
@@ -585,7 +570,7 @@ function BoletaForm() {
 
             console.log(dataCuota)
             console.log(values)
-            await registrarPfactura(dataCuota);
+            await registrarPBoleta(dataCuota);
         }
 
         values.total = document.getElementById('tb_importeTotal').textContent;
@@ -594,8 +579,6 @@ function BoletaForm() {
         values.total_icbper = document.getElementById('tb_icbper').textContent;
         values.sub_total = document.getElementById('tb_subtotal').textContent;
 
-
-        console.log(values1);
         console.log(values);
 
         const data = await registrarBoleta(values);
@@ -607,6 +590,7 @@ function BoletaForm() {
     const [selectedbos, setSelectedbos] = useState({
         checked: null
     });
+    const [cantidad, setCantidad] = useState('');
     const [medida, setMedida] = useState('');
     const [codigo, setCodigo] = useState('');
     const [descripcion, setDescripcion] = useState('');
