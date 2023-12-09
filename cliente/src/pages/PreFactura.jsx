@@ -9,23 +9,66 @@ import Imagen1 from '../assets/images/flecha.png';
 import Imagen2 from '../assets/images/pdf.jpg';
 import Imagen3 from '../assets/images/xml.png';
 import { dataLogRequest } from '../api/login';
+import { validaRUC } from '../api/validarDocs'
 import { dataCuota } from '../api/login';
 import TemplateTablaVertical from './TemplateTablaVertical';
 import TemplateTablaVerticalp from './TemplateTablaVerticalp';
 
 function PreFactura() {
 
+  const [user,setUser]=useState([])
+  const getData = async()=>{
+    const id_login=JSON.parse(localStorage.getItem('loggindata'))
+    const datos=await dataLogRequest({"id_login":id_login.id})
+    setUser(datos.data)
+
+    console.log(data)
+    /*setUser(datos.data)
+    return datos.data*/
+  }
+
+  const [datareceptor,setDataReceptor]=useState([])
   const [dataReceptor5, setDataReceptor5] = useState([])
+  const [datareceptor2,setDataReceptor2]=useState(null)
+  const [datareceptor3,setDataReceptor3]=useState(null)
+  const [datareceptor4,setDataReceptor4]=useState(null)
+
+  console.log(user)
+  
 
   const getinfoCuota = async () => {
     const TablaCuota = await dataCuota()
-    console.log("asdasdsa", TablaCuota.data)
     setDataReceptor5(TablaCuota.data)
   }
 
   useEffect(() => {
     getinfoCuota()
+    getData()
   }, []);
+
+  const getinfoRUCrs = async(ruc)=>{
+    const data= await validaRUC(ruc)
+    setDataReceptor(data.data.razonSocial)
+  }
+  getinfoRUCrs(user.data.ruc)
+
+  const getinfoRUCrsd = async(ruc)=>{
+    const data= await validaRUC(ruc)
+    setDataReceptor3(data.data.razonSocial)
+  }
+  getinfoRUCrsd(user.data.nrodoc_destinatario)
+
+  const getinfoRUCd = async(ruc)=>{
+    const data= await validaRUC(ruc)
+    setDataReceptor2(data.data.direccion)
+  }
+  getinfoRUCd(user.data.ruc)
+
+  const getinfoRUCdd = async(ruc)=>{
+    const data= await validaRUC(ruc)
+    setDataReceptor4(data.data.direccion)
+  }
+  getinfoRUCdd(user.data.nrodoc_destinatario)
 
   const [data, setData] = useState([
     { nroCuota: "1", fechaCuota: "15/25/2023", montoCuota: "5000" },
@@ -46,7 +89,7 @@ function PreFactura() {
         <div className="separador1" style={{ border: '2px solid #000000', borderTop: '2px solid #000000', borderLeft: '2px solid #000000', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginTop: '3px', paddingTop: '0px' }}>
           <div className="empresa" style={{ paddingRight: '20px', paddingLeft: '10px' }}>
             <h1 className="subtitulo" style={{ color: '#707070', marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>INVERSIONES PEREZ</h1>
-            <h1 className="subtitulo" style={{ color: '#707070', marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>PEREZ SALAZAR WILDER ABRAHAN</h1>
+            <h1 className="subtitulo" style={{ color: '#707070', marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor}</h1>
             <h1 className="contenido" style={{ fontWeight: 'bold', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>AV. NUEVO CAJAMARCA 793 BAR. MOLLEPAMPA BAJA INTERSEC. CON HEROES DEL CENEPA</h1>
             <h1 className="contenido" style={{ fontWeight: 'bold', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>CAJAMARCA - CAJAMARCA - CAJAMARCA</h1>
           </div>
