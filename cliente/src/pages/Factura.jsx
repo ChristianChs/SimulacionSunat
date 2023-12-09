@@ -598,9 +598,9 @@ function FacturaForm() {
 
         console.log(values);
         const data = await registrarFactura(values);
-        //if (data.status === 200) {
-        //  navigate('/factinf')
-        //}
+        if (data.status === 200) {
+          navigate('/factinf')
+        }
     })
 
 

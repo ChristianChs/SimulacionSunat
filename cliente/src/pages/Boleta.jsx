@@ -582,9 +582,9 @@ function BoletaForm() {
         console.log(values);
 
         const data = await registrarBoleta(values);
-        //if (data.status === 200) {
-        //  navigate('/factinf')
-        //}
+        if (data.status === 200) {
+          navigate('/prebol')
+        }
     })
 
     const [selectedbos, setSelectedbos] = useState({
