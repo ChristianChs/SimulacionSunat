@@ -258,7 +258,7 @@ function PreFactura() {
 
         <div className="buttons" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
         <button
-        className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold"
+        className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden"
         style={{ margin: '0 10px', padding: '8px 16px' }}
         onClick={handlePrint}
       >
