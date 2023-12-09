@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { validaRUC } from "../api/validarDocs";
 const ReciboxHContext = createContext()
 
+
 export const useReciboxH = () => {
     const context = useContext(ReciboxHContext)
     if (!context) {
@@ -15,6 +16,7 @@ export const ReciboxHProvider = ({ children }) => {
     const [isDestinatario, setDestinatario] = useState(null)
     const [isContinue, setIsContinue] = useState(false)
     const [dataAPI, setDataAPI]= useState(null)
+    const[dataUser,setUserData]=useState([])
     const consultaRUC = async (ruc) => {
         try {
             const res = await validaRUC(ruc);
@@ -29,6 +31,11 @@ export const ReciboxHProvider = ({ children }) => {
             setErrors([error.message])
             setIsContinue(false)
         }
+    }
+    const saveDataUser = (data)=>{
+        console.log("recibo de :",data)
+        setUserData(data)
+        console.log("actualizado ",dataUser)
     }
 
     /*const previewData = (data)=>{
@@ -55,12 +62,18 @@ export const ReciboxHProvider = ({ children }) => {
             return () => clearTimeout(timer)
         }
     }, [errors])
+    useEffect(()=>{
+        const id_login=JSON.parse(localStorage.getItem('loggindata'))
+        setUserData(id_login)
+    },[])
     return (
         <ReciboxHContext.Provider value={{
             consultaRUC,
             errors,
             isDestinatario,
-            isContinue
+            isContinue,
+            saveDataUser,
+            dataUser
         }}>
             {children}
         </ReciboxHContext.Provider>

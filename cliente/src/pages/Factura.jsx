@@ -3,8 +3,10 @@ import { useForm } from 'react-hook-form'
 import Starts from '../components/Stars'
 import { useLogin } from '../context/LoginContext'
 import { useNavigate } from 'react-router-dom';
+import { useReciboxH } from '../context/ReciboxHContext';
 
 function FacturaForm() {
+    const{saveDataUser}=useReciboxH()
     let a = 1;
     const { registrarFactura, errors: LoginErrors } = useLogin();
     const { registrarPfactura, errors: LoginErrors2 } = useLogin();
@@ -598,6 +600,8 @@ function FacturaForm() {
 
         console.log(values);
         const data = await registrarFactura(values);
+        const id_login=JSON.parse(localStorage.getItem('loggindata'))
+        saveDataUser(id_login)
         if (data.status === 200) {
           navigate('/factinf')
         }

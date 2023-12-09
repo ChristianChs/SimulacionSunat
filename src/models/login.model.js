@@ -49,8 +49,8 @@ model.inUser3=async(arg)=>{
 }
 
 model.inFact=async(arg)=>{
-    const { tipo_trans, detr,exp,RUC,ant,itn,est,dir,com,tipo_mon,desc_ant,isc,opg,cyt,fecha_emision,total,total_igv,total_isc,total_icbper} = arg;
-    return sequelize.query(`INSERT INTO factura(tipo_trans, detr,exp,RUC,ant,itn,est,dir,com,tipo_mon,desc_ant,isc,opg,cyt,fecha_emision,total,total_igv,total_isc,total_icbper) VALUES ('${tipo_trans}','${detr}','${exp}','${RUC}','${ant}','${itn}','${est}','${dir}','${com}','${tipo_mon}','${desc_ant}','${isc}','${opg}','${cyt}','${fecha_emision}','${total}','${total_igv}','${total_isc}','${total_icbper}')`,{raw:true})
+    const { tipo_trans, detr,exp,RUC,ant,itn,est,dir,com,tipo_mon,desc_ant,isc,opg,cyt,fecha_emision,total,total_igv,total_isc,total_icbper,sub_total} = arg;
+    return sequelize.query(`INSERT INTO factura(tipo_trans, detr,exp,RUC,ant,itn,est,dir,com,tipo_mon,desc_ant,isc,opg,cyt,fecha_emision,total,total_igv,total_isc,total_icbper,sub_total) VALUES ('${tipo_trans}','${detr}','${exp}','${RUC}','${ant}','${itn}','${est}','${dir}','${com}','${tipo_mon}','${desc_ant}','${isc}','${opg}','${cyt}','${fecha_emision}','${total}','${total_igv}','${total_isc}','${total_icbper}','${sub_total}')`,{raw:true})
     .then(([result,metadata])=>{
         const data= result.length===0?null:result
         return data
