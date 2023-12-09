@@ -13,6 +13,8 @@ import { dataCuota } from '../api/login';
 import TemplateTablaVertical from './TemplateTablaVertical';
 import TemplateTablaVerticalp from './TemplateTablaVerticalp';
 import TemplateTablaVerticalpb from './TemplateTablaverticalpb';
+import xmlPath from '../assets/pdfs/xmlboleta.xml';
+
 
 function PreBoleta() {
 
@@ -52,12 +54,13 @@ function PreBoleta() {
 
         <div className="separador1" style={{ border: '2px solid #000000', borderTop: '2px solid #000000', borderLeft: '2px solid #000000', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', marginTop: '3px', paddingTop: '0px' }}>
           <div className="empresa" style={{ paddingRight: '20px', paddingLeft: '10px' }}>
-            <h1 className="subtitulo" style={{ color: '#707070', marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>INVERSIONES PEREZ</h1>
+            <br></br>
             <h1 className="subtitulo" style={{ color: '#707070', marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>PEREZ SALAZAR WILDER ABRAHAN</h1>
             <h1 className="contenido" style={{ fontWeight: 'bold', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>AV. NUEVO CAJAMARCA 793 BAR. MOLLEPAMPA BAJA INTERSEC. CON HEROES DEL CENEPA</h1>
-            <h1 className="contenido" style={{ fontWeight: 'bold', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>CAJAMARCA - CAJAMARCA - CAJAMARCA</h1>
+            
           </div>
           <div className="factura" style={{ alignItems: 'right', border: '2px solid #000000', paddingTop: '0px', paddingLeft: '10px', paddingRight: '10px', paddingBottom: '0px', width: '20%', marginRight: '10px' }}>
+            
             <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>BOLETA ELECTRONICA</h1>
             <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>RUC: 10403401272</h1>
           </div>
@@ -188,10 +191,9 @@ function PreBoleta() {
         style={{ margin: '0 10px', padding: '8px 16px' }}
         onClick={handlePrint}
       >
-        Descargar PDF
+        Descargar PDF o Imprimir
       </button>
-          <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px' }} >Descargar XML</button>
-          <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px' }} >Imprimir</button>
+          <a className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px' }} href={xmlPath} download="boleta.xml">Descargar XML</a>
           <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px' }}>Cerrar</button>
         </div>
       </div>

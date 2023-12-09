@@ -17,6 +17,7 @@
     "express": "^4.18.2",
     "html2pdf.js": "^0.10.1",
     "mysql2": "^3.6.0",
+    "react-pdf": "^7.5.1",
     "react-spinners": "^0.13.8",
     "sequelize": "^6.33.0"
   },
