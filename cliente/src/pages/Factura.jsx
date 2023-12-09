@@ -1056,7 +1056,6 @@ function FacturaForm() {
                                 aria-label="Tipo de Moneda"
                                 {...register("tipo_mon")}
                                 id="tipoMonedaSelect"
-
                                 onChange={handleMonedaChange}
                             >
                                 <option selected="SOLES">SOLES</option>

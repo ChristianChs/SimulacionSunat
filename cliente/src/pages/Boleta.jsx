@@ -176,22 +176,18 @@ function BoletaForm() {
         setMostrarIsc(false);
         document.getElementById('valorISC').value = 0;
 
-        const selectedValue = e.target.value;
+        let selectedValue = e.target.value;
         setMostrarRucReceptor(selectedValue === "1");
         updateMFinal(cantidad, valorUnitario);
     };
 
     const handleDocChange = (e) => {
-        const selectedValue = e.target.value;
+        let selectedValue = e.target.value;
         document.getElementById('description').value = '';
-        setSelectedDoc(document.getElementById('tipoDocumentoOpciones').value);
-        console.log(document.getElementById('tipoDocumentoOpciones').value)
+        setSelectedDoc(selectedValue);
     };
-    const [monedaSeleccionada, setMonedaSeleccionada] = useState('SOLES');
 
-    const handleMonedaChange = (event) => {
-        setMonedaSeleccionada(event.target.value);
-    };
+    const [monedaSeleccionada, setMonedaSeleccionada] = useState('SOLES');
 
     let a = 1;
 
@@ -208,6 +204,14 @@ function BoletaForm() {
     const [mostrarIsc, setMostrarIsc] = useState(false);
     const [tipoIsc, setTipoIsc] = useState("valor");
     const [valorISC, setValorIsc] = useState(0);
+    const [TipoMoneda, setTipoMoneda] = useState("SOLES");
+
+    const handleMonedaChange = (e) => {
+        console.log("hola");
+        let selectedValue = e.target.value;
+        setTipoMoneda(selectedValue);
+        document.getElementById('tipoMonedaInferior').value = selectedValue;
+    };
 
     const handleTipoIscChange = (event) => {
         setValorIsc(document.getElementById('valorISC').value);
@@ -341,6 +345,43 @@ function BoletaForm() {
         setMFinal(resRedondeado);
     };
 
+    const verificarDNI = async (dni) => {
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhcGVnaTE3OThAc2VzeGUuY29tIn0.kA46vxuxx1zjsvG9ZY5s5_2fjJCnen_veFz2L1LunIY`;
+        const response = await fetch(apiUrl);
+        return await response.json();
+    };
+
+    const consultaDNI = async () => {
+        const dniPattern = /^\d{8}$/;
+        const dni = document.getElementById('description').value;
+
+        if (!dniPattern.test(dni)) {
+            showAlertDanger('El DNI debe tener exactamente 8 números.');
+            return;
+        }
+
+        try {
+            const datosDNI = await verificarDNI(dni);
+
+            if (datosDNI.success === true) {
+                console.log('DNI válido, redirigiendo...');
+                console.log('bien hecho');
+                console.log(datosDNI.nombres + " " + datosDNI.apellidoPaterno + " " + datosDNI.apellidoMaterno);
+                document.getElementById('NombreRazon').value = datosDNI.nombres + " " + datosDNI.apellidoPaterno + " " + datosDNI.apellidoMaterno;
+                document.getElementById('nombreClienteInferior').value = datosDNI.nombres + " " + datosDNI.apellidoPaterno + " " + datosDNI.apellidoMaterno;
+                if (data.status === 200) {
+                    console.log(datosDNI.nombres + " " + datosDNI.apellidoPaterno + " " + datosDNI.apellidoMaterno);
+                    document.getElementById('NombreRazon').value = datosDNI.nombres + " " + datosDNI.apellidoPaterno + " " + datosDNI.apellidoMaterno;
+                    document.getElementById('nombreClienteInferior').value = datosDNI.nombres + " " + datosDNI.apellidoPaterno + " " + datosDNI.apellidoMaterno;
+                }
+            } else {
+                console.log('El DNI proporcionado no es válido.');
+            }
+        } catch (error) {
+            console.log('Error al conectar con la API o el servidor.');
+        }
+
+    };
 
     React.useEffect(() => {
 
@@ -401,7 +442,8 @@ function BoletaForm() {
     };
 
     const handlersChange = (event) => {
-        const newValue = event.target.value;
+        let newValue = event.target.value;
+        document.getElementById('nombreClienteInferior').value = newValue;
         setrs(newValue);
     };
 
@@ -502,7 +544,7 @@ function BoletaForm() {
 
         const data = await registrarBoleta(values);
         //if (data.status === 200) {
-          //  navigate('/factinf')
+        //  navigate('/factinf')
         //}
     })
 
@@ -624,8 +666,7 @@ function BoletaForm() {
                                 aria-label="Tipo de Moneda"
                                 id="tipoDocumentoOpciones"
                                 //value={selectedDoc}
-                                onChange={handleOptionChange}
-                                {...register("td")}
+                                onChange={handleDocChange}
                             >
                                 <option selected="SIN DOCUMENTO">SIN DOCUMENTO</option>
                                 <option value="DOCT">DOC. TRIB. NO DOM. SIN RUC</option>
@@ -653,7 +694,7 @@ function BoletaForm() {
                                     type="text"
                                     aria-label="default input example"
                                     className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus-border-yellow-100"
-                                    disabled={selectedDoc === 'SIN DOCUMENTO'}
+
                                 />
                             </div>
                             <label htmlFor="NombreRazon" className="text-gray-400 font-sans font-semibold">
@@ -666,6 +707,7 @@ function BoletaForm() {
                                 aria-label="default input example"
                                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 onChange={handlersChange}
+                                disabled={selectedDoc == 'DOCN'}
                             />
                             <div className="flex justify-end" style={{ display: selectedDoc === "DOCN" ? 'block' : 'none' }}>
                                 <input
@@ -673,7 +715,7 @@ function BoletaForm() {
                                     type="button"
                                     value="Ingresar"
                                     className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
-                                    onClick
+                                    onClick={consultaDNI}
                                 />
                             </div>
                         </div>
@@ -820,6 +862,8 @@ function BoletaForm() {
                             <select
                                 className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 aria-label="Tipo de Moneda"
+                                id="tipoMonedaSelect"
+                                onChange={handleMonedaChange}
                             >
                                 <option selected="SOLES">SOLES</option>
                                 <option value="EURO">EURO</option>
@@ -975,7 +1019,7 @@ function BoletaForm() {
                             </label>
                             <input
                                 disabled
-                                id="pendiente"
+                                id="nombreClienteInferior"
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
@@ -987,11 +1031,11 @@ function BoletaForm() {
                             </label>
                             <input
                                 disabled
-                                id="pendiente"
+                                id="tipoMonedaInferior"
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
-                                value={monedaSeleccionada}
+                                value={TipoMoneda}
                             />
 
                             <label htmlFor="date_issue" className="text-gray-400 font-sans font-semibold">
