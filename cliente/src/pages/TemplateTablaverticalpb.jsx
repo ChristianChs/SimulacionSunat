@@ -19,8 +19,8 @@ const TemplateTablaVerticalpb = ({ dato }) => {
                     {
                         dato.map((item => (
                             <tr>
-                                <td className="border bg-white text-black border-slate-300" style={{ fontSize: '5px' }}>{item.cantidad_producto}</td>
-                                <td className="border bg-white text-black border-slate-300" style={{ fontSize: '12px' }}>{item.unidad_medida}</td>
+                                <td className="border bg-white text-black border-slate-300" style={{ fontSize: '5px' }}>{item.cantidad}</td>
+                                <td className="border bg-white text-black border-slate-300" style={{ fontSize: '12px' }}>{item.medida}</td>
                                 <td className="border bg-white text-black border-slate-300">{item.descripcion}</td>
                                 <td className="border bg-white text-black border-slate-300">{item.valor}</td>
                                 <td className="border bg-white text-black border-slate-300">{item.descuento}</td>
