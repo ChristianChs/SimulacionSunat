@@ -212,6 +212,9 @@ function BoletaForm() {
         let selectedValue = e.target.value;
         document.getElementById('description').value = '';
         setSelectedDoc(selectedValue);
+        
+        const newValue = e.target.value;
+        setTd(newValue);
     };
 
     const [monedaSeleccionada, setMonedaSeleccionada] = useState('SOLES');
@@ -428,6 +431,7 @@ function BoletaForm() {
         checked: null
     });
     const [rs, setrs] = useState('');
+    const [td, setTd] = useState('');
     const [selectedpa, setSelectedpa] = useState({
         checked: null
     });
@@ -536,15 +540,15 @@ function BoletaForm() {
 
     const onSubmit = handleSubmit(async (values, vaBienesServicios) => {
         values.expo = selectedexpo.checked;
-        values.rs = rs;
         values.rs = document.getElementById('nombreClienteInferior').value;
+        values.nombre = document.getElementById('NombreRazon').value;
+        values.td = td;
         values.pa = selectedpa.checked;
         values.itin = selecteditin.checked;
         values.esta = selectedesta.checked;
         values.direc = selecteddirec.checked;
         values.da = selectedda.checked;
         values.ISC_sel = selectedISC_sel.checked;
-        values.nombre = nombre;
         values.og = selectedog;
         values.cyot = selectedcyot;
         values.numero_documento = numero_documento;
@@ -720,20 +724,20 @@ function BoletaForm() {
                                 onChange={handleDocChange}
                             >
                                 <option selected="SIN DOCUMENTO">SIN DOCUMENTO</option>
-                                <option value="DOCT">DOC. TRIB. NO DOM. SIN RUC</option>
-                                <option value="DOCN">DOC. NACIONAL DE IDENTIDAD</option>
-                                <option value="CIE">CARNÉ IDENTIDAD-RR EXTERIORES</option>
-                                <option value="CPP">CARNÉ PERM.TEMP.PERMANENCIA</option>
-                                <option value="DIE">DOC. DE IDENTIDAD EXTRANJERO</option>
-                                <option value="ODV">OTROS DOC VIAJE</option>
-                                <option value="CDE">CARNÉ DE EXTRANJERÍA</option>
-                                <option value="REG">REG. ÚNICO DE CONTRIBUYENTES</option>
-                                <option value="P">PASAPORTE</option>
-                                <option value="CDI">CARNE DE IDENTIDAD</option>
-                                <option value="DOCI">DOC. IDENTIF PERS NAT NO DOM.</option>
-                                <option value="TAX">TAX IDENTIFICATION NUMBER - TIN _ DOC TRIB PP.NN</option>
-                                <option value="IDEN">IDENTIFICATION NUMBER - IN _ DOC TRIB PP.JJ</option>
-                                <option value="CPTP">CARNE PERMISO TEMP.PERMANENCIA</option>
+                                <option value="DOC. TRIB. NO DOM. SIN RUC">DOC. TRIB. NO DOM. SIN RUC</option>
+                                <option value="DOC. NACIONAL DE IDENTIDAD">DOC. NACIONAL DE IDENTIDAD</option>
+                                <option value="CARNÉ IDENTIDAD-RR EXTERIORES">CARNÉ IDENTIDAD-RR EXTERIORES</option>
+                                <option value="CARNÉ PERM.TEMP.PERMANENCIA">CARNÉ PERM.TEMP.PERMANENCIA</option>
+                                <option value="DOC. DE IDENTIDAD EXTRANJERO">DOC. DE IDENTIDAD EXTRANJERO</option>
+                                <option value="OTROS DOC VIAJE">OTROS DOC VIAJE</option>
+                                <option value="CARNÉ DE EXTRANJERÍA">CARNÉ DE EXTRANJERÍA</option>
+                                <option value="REG. ÚNICO DE CONTRIBUYENTES">REG. ÚNICO DE CONTRIBUYENTES</option>
+                                <option value="PASAPORTE">PASAPORTE</option>
+                                <option value="CARNE DE IDENTIDAD">CARNE DE IDENTIDAD</option>
+                                <option value="DOC. IDENTIF PERS NAT NO DOM.">DOC. IDENTIF PERS NAT NO DOM.</option>
+                                <option value="TAX IDENTIFICATION NUMBER - TIN _ DOC TRIB PP.NN">TAX IDENTIFICATION NUMBER - TIN _ DOC TRIB PP.NN</option>
+                                <option value="IDENTIFICATION NUMBER - IN _ DOC TRIB PP.JJ">IDENTIFICATION NUMBER - IN _ DOC TRIB PP.JJ</option>
+                                <option value="CARNE PERMISO TEMP.PERMANENCIA">CARNE PERMISO TEMP.PERMANENCIA</option>
                             </select>
                             <div id="numDocumento" style={{ display: selectedDoc === 'SIN DOCUMENTO' ? 'none' : 'block' }}>
                                 <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
