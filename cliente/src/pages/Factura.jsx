@@ -16,7 +16,7 @@ function FacturaForm() {
 
 
         let tblDatos = document.getElementById('bienesServicios');
-        let newRow = tblDatos.insertRow(tblDatos.rows.length - 5);
+        let newRow = tblDatos.insertRow(tblDatos.rows.length - 6);
 
         let col1 = newRow.insertCell(0);
         let col2 = newRow.insertCell(1);
@@ -29,6 +29,7 @@ function FacturaForm() {
         let col9 = newRow.insertCell(8);
         let col10 = newRow.insertCell(9);
         let col11 = newRow.insertCell(10);
+        let col12 = newRow.insertCell(11);
 
 
         const id = 'fila' + a;
@@ -43,11 +44,13 @@ function FacturaForm() {
         col9.innerHTML = document.getElementById('valorParcialIsc').value;
         col10.innerHTML = document.getElementById('igvParcial').value;
         col11.innerHTML = document.getElementById('cant').value * document.getElementById('uni').value;
+        col12.innerHTML = document.getElementById('monto_descuento').value;
         newRow.setAttribute('data-id', id);
         col8.style.display = 'none';
         col9.style.display = 'none';
         col10.style.display = 'none';
         col11.style.display = 'none';
+        col12.style.display = 'none';
 
         col1.firstChild.addEventListener('click', function () {
             eliminarFila(id);
@@ -61,18 +64,30 @@ function FacturaForm() {
 
         var sumaImporte = 0;
 
-        for (var i = 1; i < rows.length - 5; i++) {
+        for (var i = 1; i < rows.length - 6; i++) {
             var cell = rows[i].getElementsByTagName('td')[7];
             if (cell) {
                 sumaImporte += parseFloat(cell.textContent || cell.innerText);
             }
         }
 
-        document.getElementById('tb_importeTotal').textContent = sumaImporte.toFixed(2);
+        var sumaDescuento = 0;
+
+        for (var i = 1; i < rows.length - 6; i++) {
+            var cell = rows[i].getElementsByTagName('td')[11];
+            if (cell) {
+                sumaDescuento += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_descuento').textContent = sumaDescuento.toFixed(2);
+        var sumaImporteBeta = sumaImporte.toFixed(2)
+
+        document.getElementById('tb_importeTotal').textContent = sumaImporteBeta;
 
         var sumaISC = 0;
 
-        for (var i = 1; i < rows.length - 5; i++) {
+        for (var i = 1; i < rows.length - 6; i++) {
             var cell = rows[i].getElementsByTagName('td')[8];
             if (cell) {
                 sumaISC += parseFloat(cell.textContent || cell.innerText);
@@ -83,7 +98,7 @@ function FacturaForm() {
 
         var sumaIGV = 0;
 
-        for (var i = 1; i < rows.length - 5; i++) {
+        for (var i = 1; i < rows.length - 6; i++) {
             var cell = rows[i].getElementsByTagName('td')[9];
             if (cell) {
                 sumaIGV += parseFloat(cell.textContent || cell.innerText);
@@ -94,7 +109,7 @@ function FacturaForm() {
 
         var sumaICBPER = 0;
 
-        for (var i = 1; i < rows.length - 5; i++) {
+        for (var i = 1; i < rows.length - 6; i++) {
             var cell = rows[i].getElementsByTagName('td')[6];
             if (cell) {
                 sumaICBPER += parseFloat(cell.textContent || cell.innerText);
@@ -105,7 +120,7 @@ function FacturaForm() {
 
         var sumaSubtotal = 0;
 
-        for (var i = 1; i < rows.length - 5; i++) {
+        for (var i = 1; i < rows.length - 6; i++) {
             var cell = rows[i].getElementsByTagName('td')[10];
             if (cell) {
                 sumaSubtotal += parseFloat(cell.textContent || cell.innerText);
@@ -114,14 +129,8 @@ function FacturaForm() {
 
         document.getElementById('tb_subtotal').textContent = sumaSubtotal.toFixed(2);
 
-        for (var i = 1; i < rows.length - 5; i++) {
-            var cell = rows[i].getElementsByTagName('td')[10];
-            if (cell) {
-                sumaIGV += parseFloat(cell.textContent || cell.innerText);
-            }
-        }
 
-        document.getElementById('tb_igv').textContent = sumaIGV.toFixed(2);
+
 
         actualizarNumerosConsecutivos();
     }
@@ -152,18 +161,31 @@ function FacturaForm() {
 
         var sumaImporte = 0;
 
-        for (var i = 1; i < rows.length - 5; i++) {
+        for (var i = 1; i < rows.length - 6; i++) {
             var cell = rows[i].getElementsByTagName('td')[7];
             if (cell) {
                 sumaImporte += parseFloat(cell.textContent || cell.innerText);
             }
         }
 
-        document.getElementById('tb_importeTotal').textContent = sumaImporte.toFixed(2);
+        var sumaDescuento = 0;
+
+        for (var i = 1; i < rows.length - 6; i++) {
+            var cell = rows[i].getElementsByTagName('td')[11];
+            if (cell) {
+                sumaDescuento += parseFloat(cell.textContent || cell.innerText);
+            }
+        }
+
+        document.getElementById('tb_descuento').textContent = sumaDescuento.toFixed(2);
+        var sumaImporteBeta = sumaImporte.toFixed(2)
+        console.log("holaaaa")
+        console.log(sumaImporteBeta)
+        document.getElementById('tb_importeTotal').textContent = sumaImporteBeta;
 
         var sumaISC = 0;
 
-        for (var i = 1; i < rows.length - 5; i++) {
+        for (var i = 1; i < rows.length - 6; i++) {
             var cell = rows[i].getElementsByTagName('td')[8];
             if (cell) {
                 sumaISC += parseFloat(cell.textContent || cell.innerText);
@@ -174,7 +196,7 @@ function FacturaForm() {
 
         var sumaIGV = 0;
 
-        for (var i = 1; i < rows.length - 5; i++) {
+        for (var i = 1; i < rows.length - 6; i++) {
             var cell = rows[i].getElementsByTagName('td')[9];
             if (cell) {
                 sumaIGV += parseFloat(cell.textContent || cell.innerText);
@@ -185,7 +207,7 @@ function FacturaForm() {
 
         var sumaICBPER = 0;
 
-        for (var i = 1; i < rows.length - 5; i++) {
+        for (var i = 1; i < rows.length - 6; i++) {
             var cell = rows[i].getElementsByTagName('td')[6];
             if (cell) {
                 sumaICBPER += parseFloat(cell.textContent || cell.innerText);
@@ -196,7 +218,7 @@ function FacturaForm() {
 
         var sumaSubtotal = 0;
 
-        for (var i = 1; i < rows.length - 5; i++) {
+        for (var i = 1; i < rows.length - 6; i++) {
             var cell = rows[i].getElementsByTagName('td')[10];
             if (cell) {
                 sumaSubtotal += parseFloat(cell.textContent || cell.innerText);
@@ -204,6 +226,8 @@ function FacturaForm() {
         }
 
         document.getElementById('tb_subtotal').textContent = sumaSubtotal.toFixed(2);
+
+
     }
 
     const [igvNeto, setigvNeto] = useState('');
@@ -410,8 +434,10 @@ function FacturaForm() {
         // Convert impTotalFinal to a number (remove .toFixed)
         const impTotalFinal = parseFloat(i) + parseFloat(total_bolsas);
 
+        const descuento = document.getElementById('monto_descuento').value;
+        const importeFinalDescuento = impTotalFinal - descuento
         // Now, impTotalFinal is a number, and you can use it for calculations or display.
-        setITotal(impTotalFinal.toFixed(2));
+        setITotal(importeFinalDescuento.toFixed(2));
         setMFinal(resRedondeado);
     };
 
@@ -423,7 +449,7 @@ function FacturaForm() {
     };
 
 
-    const [mostrarRucReceptor, setMostrarRucReceptor] = useState(false);
+    const [mostrarHayDetraccion, setmostrarHayDetraccion] = useState(false);
 
     document.addEventListener('DOMContentLoaded', function () {
         const table = document.getElementById('cuotas');
@@ -492,6 +518,8 @@ function FacturaForm() {
     };
 
     const handleRadioChange2 = e => {
+        const isDetraccion = e.target.value === "1";
+        setmostrarHayDetraccion(isDetraccion)
         setSelecteddetr({
             checked: e.target.value
         });
@@ -526,8 +554,12 @@ function FacturaForm() {
             checked: e.target.value
         });
     };
+    const [mostrarAnticipos, setMostrarAnticipos] = useState(false);
 
     const handleRadioChange9 = e => {
+        const isExportacion = e.target.value === "1";
+        setMostrarAnticipos(isExportacion)
+        document.getElementById("monto_descuento").value = 0;
         setSelecteddesc_ant({
             checked: e.target.value
         });
@@ -568,7 +600,7 @@ function FacturaForm() {
         var table = document.getElementById('bienesServicios');
         var rows = table.getElementsByTagName('tr');
 
-        for (var i = 1; i < rows.length - 5; i++) {
+        for (var i = 1; i < rows.length - 6; i++) {
             vaBienesServicios.cantidad = rows[i].getElementsByTagName('td')[1].textContent;
             vaBienesServicios.unidad = rows[i].getElementsByTagName('td')[2].textContent;
             vaBienesServicios.codigo = rows[i].getElementsByTagName('td')[3].textContent;
@@ -601,6 +633,7 @@ function FacturaForm() {
         values.total_igv = document.getElementById('tb_igv').textContent;
         values.total_icbper = document.getElementById('tb_icbper').textContent;
         values.sub_total = document.getElementById('tb_subtotal').textContent;
+        values.total_descuento = document.getElementById('tb_descuento').textContent;
 
         console.log(values);
         const data = await registrarFactura(values);
@@ -655,6 +688,7 @@ function FacturaForm() {
     const handleDescuentoChange = (event) => {
         const newValue = event.target.value;
         setDescuento(newValue);
+        updateMFinal(cantidad, valorUnitario);
     };
     const handleISCChange = (event) => {
         const newValue = event.target.value;
@@ -672,6 +706,7 @@ function FacturaForm() {
         const newValue = event.target.value;
         setImporte_total(newValue);
     };
+
 
     const onSubmit1 = handleSubmit(async (values1) => {
         values1.bos = selectedbos.checked;
@@ -699,6 +734,8 @@ function FacturaForm() {
             checked: event.target.value
         });
     };
+    const [mostrarRucReceptor, setMostrarRucReceptor] = useState(false);
+
 
     React.useEffect(() => {
         const currentDate = new Date();
@@ -784,7 +821,7 @@ function FacturaForm() {
                             <br />
                         </div>
 
-                        <div className="bg-zinc-900 p-4 rounded-lg mb-4" style={{ display: selecteddetr == '0' ? 'none' : 'block' }}>
+                        <div className="bg-zinc-900 p-4 rounded-lg mb-4" style={{ display: mostrarHayDetraccion == '0' ? 'block' : 'none' }}>
                             <h1 className="text-lg font-semibold text-yellow-100 mb-5">
                                 Indique si es una Factura de Exportación
                             </h1>
@@ -1412,10 +1449,10 @@ function FacturaForm() {
                                     Descuento:
                                 </label>
                                 <input
-                                    disabled
-                                    className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                    disabled={mostrarAnticipos == '0'}
+                                    className={mostrarAnticipos == '0' ? "monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100" : "monto-cuota w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"}
                                     type="number"
-                                    id="monto_cuota"
+                                    id="monto_descuento"
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
                                     onChange={handleDescuentoChange}
@@ -1606,6 +1643,7 @@ function FacturaForm() {
                                             <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">ISC(c/u)</th>
                                             <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">IGV(c/u)</th>
                                             <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">Subtotal</th>
+                                            <th style={{ display: 'none' }} className="border bg-zinc-500 text-gray-300">descuentoUnidad</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cuerpo_cuotas" className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
@@ -1670,6 +1708,19 @@ function FacturaForm() {
                                             <td ></td>
                                             <td id="tb_subtotal" className="bg-zinc-600" >0</td>
                                             <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                            <td style={{ display: 'none' }}></td>
+                                        </tr>
+                                        <tr>
+                                            <td className="bg-zinc-600" >Descuento</td>
+                                            <td></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td ></td>
+                                            <td className="bg-zinc-600" id="tb_descuento" >0</td>
+                                            <td style={{ display: 'none' }} ></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
                                             <td style={{ display: 'none' }}></td>
