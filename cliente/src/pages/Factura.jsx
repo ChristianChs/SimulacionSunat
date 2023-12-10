@@ -229,7 +229,7 @@ function FacturaForm() {
     };
 
     const verificarRUC = async (ruc) => {
-        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InlhdG92MTQ0ODRAbWNlbmIuY29tIn0.jX25WONYq5lIII3yRVNODXs6pjKLaPcEc5y55gfEu_Q`;
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im5hbW93aTQ0ODlAZ3l4bXouY29tIn0.XAeiqe3nrWG8zlpDlbUQv3FzUmwlIbQTHTCYc5cHvJs`;
         const response = await fetch(apiUrl);
         return await response.json();
     };
@@ -287,6 +287,10 @@ function FacturaForm() {
         '2021': 0.3,
         '2022': 0.4,
         '2023': 0.5,
+    };
+
+    const onSubmit3 = () => {
+        navigate('/menu')
     };
 
     const handleYearChange = (e) => {
@@ -780,7 +784,7 @@ function FacturaForm() {
                             <br />
                         </div>
 
-                        <div className="bg-zinc-900 p-4 rounded-lg mb-4">
+                        <div className="bg-zinc-900 p-4 rounded-lg mb-4" style={{ display: selecteddetr == '0' ? 'none' : 'block' }}>
                             <h1 className="text-lg font-semibold text-yellow-100 mb-5">
                                 Indique si es una Factura de Exportación
                             </h1>
@@ -1684,6 +1688,7 @@ function FacturaForm() {
                                 className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-6 rounded-md mr-4 hover:bg-yellow-200 hover:font-extrabold hover:px-7 hover:bg-ffeba7 hover:text-zinc-900 hover:border-amber-200"
                             />
                             <input
+                                onClick={onSubmit3}
                                 type="submit"
                                 value="Cancelar"
                                 className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-extrabold hover:px-7 hover:bg-ffeba7 hover:text-white hover:border-gray-400"
