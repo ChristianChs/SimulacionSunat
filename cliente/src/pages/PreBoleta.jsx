@@ -38,19 +38,25 @@ function PreBoleta() {
   useEffect(() => {
     getinfoPBoleta()
     getinfoBoleta()
+
+    if (dataUser.ruc) {
+      getinfoRUCrs(dataUser.ruc)
+    }
+    if (datareceptor4.RUC) {
+      getinfoRUC2(datareceptor4.RUC)
+    }
   }, []);
 
   const getinfoRUCrs = async (ruc) => {
-      const data = await validaRUC(ruc)
-      setDataReceptor(data.data)
+    const data = await validaRUC(ruc)
+    setDataReceptor(data.data)
   }
-  getinfoRUCrs(dataUser.ruc)
+
 
   const getinfoRUC2 = async (ruc) => {
-      const data = await validaRUC(ruc)
-      setDataReceptor2(data.data)
+    const data = await validaRUC(ruc)
+    setDataReceptor2(data.data)
   }
-  getinfoRUC2(datareceptor4.RUC)
 
   const handlePrint = () => {
     window.print();
@@ -78,10 +84,10 @@ function PreBoleta() {
             <br></br>
             <h1 className="subtitulo" style={{ color: '#707070', marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor.razonSocial}</h1>
             <h1 className="contenido" style={{ fontWeight: 'bold', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor.direccion}</h1>
-            
+
           </div>
           <div className="factura" style={{ alignItems: 'right', border: '2px solid #000000', paddingTop: '0px', paddingLeft: '10px', paddingRight: '10px', paddingBottom: '0px', width: '20%', marginRight: '10px' }}>
-            
+
             <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>BOLETA ELECTRONICA</h1>
             <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>RUC: {datareceptor.ruc}</h1>
           </div>
@@ -177,22 +183,22 @@ function PreBoleta() {
           <div className="monto" style={{ display: 'flex', flexDirection: 'row-reverse', textAlign: 'right', margin: '0 0', paddingRight: '20px', paddingLeft: '10px' }}>
             <h1 className="mcontenido3" style={{ color: '#aea9a9', border: '1px solid #ccc', backgroundColor: '#d7d5d5', textAlign: 'left', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>S/ {datareceptor4.total}</h1>
             <h1 className="mcontenido2" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '5px', paddingRight: '5px' }}>:</h1>
-            <h1 className="mcontenido1" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '14px', width: '120px',fontWeight: '800' }}>Importe Total</h1>
+            <h1 className="mcontenido1" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '14px', width: '120px', fontWeight: '800' }}>Importe Total</h1>
           </div>
         </div>
 
 
-        <div className="buttons" 
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}
-        
+        <div className="buttons"
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}
+
         >
-        <button
-        className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden"
-        style={{ margin: '0 10px', padding: '8px 16px' }}
-        onClick={handlePrint}
-      >
-        Descargar PDF o Imprimir
-      </button>
+          <button
+            className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden"
+            style={{ margin: '0 10px', padding: '8px 16px' }}
+            onClick={handlePrint}
+          >
+            Descargar PDF o Imprimir
+          </button>
           <a className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }} href={xmlPath} download="boleta.xml">Descargar XML</a>
           <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }}>Cerrar</button>
         </div>
