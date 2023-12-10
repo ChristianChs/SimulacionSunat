@@ -375,7 +375,7 @@ function BoletaForm() {
     };
 
     const verificarDNI = async (dni) => {
-        const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImhhdG9iZTMyMDRAZ2VhcnN0YWcuY29tIn0.Va2AFD6DSppse7H1vPXw29HCQraMRxWPkh59vcrAqXo`;
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InhpbGV5bzk2MTBAbGFueGk4LmNvbSJ9.YDWOH7kPi2d_RFltLu7g8ZulEwOrXcfcBYQFe7zeKMs`;
         const response = await fetch(apiUrl);
         return await response.json();
     };
@@ -502,8 +502,12 @@ function BoletaForm() {
             checked: e.target.value
         });
     };
+    const [mostrarAnticipos, setMostrarAnticipos] = useState(false);
 
     const handleRadioChange6 = e => {
+        const isExportacion = e.target.value === "1";
+        setMostrarAnticipos(isExportacion)
+        document.getElementById("monto_descuento").value = 0;
         setSelectedda({
             checked: e.target.value
         });
@@ -1258,7 +1262,7 @@ function BoletaForm() {
                                     disabled
                                     className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                     type="number"
-                                    id="monto_cuota"
+                                    id="monto_descuento"
                                     placeholder="0.00"
                                     aria-label=".form-control-lg example"
                                     onChange={handleDescuentoChange}
