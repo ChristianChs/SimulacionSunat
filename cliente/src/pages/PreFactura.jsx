@@ -60,9 +60,9 @@ function PreFactura() {
     window.print();
   };
 
-  var a = 1;
+  var a = 0;
 
-  var b = 1;
+  var b = 0;
 
   useEffect(() => {
     getinfoCuota()
@@ -71,7 +71,6 @@ function PreFactura() {
     getinfoFacturaC()
     getinfoFacturaD()
     getinfoC(datareceptor4.tipo_trans)
-
   }, []);
 
 
@@ -80,23 +79,22 @@ function PreFactura() {
 
 
   const getinfoRUCrs = async (ruc) => {
-    const data = await validaRUC(ruc)
-    setDataReceptor(data.data)
+    if (a < 1) {
+      const data = await validaRUC(ruc)
+      setDataReceptor(data.data)
+      a++
+    }
   }
+  getinfoRUCrs(dataUser.ruc)
 
   const getinfoRUC2 = async (ruc) => {
-    const data = await validaRUC(ruc)
-    setDataReceptor2(data.data)
+    if (b < 1) {
+      const data = await validaRUC(ruc)
+      setDataReceptor2(data.data)
+      b++
+    }
   }
-
-  if (1 === 1) {
-    console.log("holaa")
-    //getinfoRUCrs(dataUser.ruc);
-  }
-  if (1 === 1) {
-    //getinfoRUC2(datareceptor4.RUC);
-    console.log("holaabb")
-  }
+  getinfoRUC2(datareceptor4.RUC)
 
   const getinfoC = async (data) => {
     if (data == 0) {
@@ -267,12 +265,12 @@ function PreFactura() {
           <div className="subseparador" style={{ paddingTop: '130px', alignItems: 'right', textAlign: 'right', display: 'flex', width: '30%', margin: '7px auto' }}>
             <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>Porcentaje de detracción</h1>
             <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>:</h1>
-            <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>{datareceptor8.porcentaje} %</h1>
+            <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>{datareceptor8.porcentaje}</h1>
           </div>
           <div className="subseparador" style={{ paddingTop: '130px', alignItems: 'right', textAlign: 'right', display: 'flex', width: '30%', margin: '7px auto' }}>
             <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>Monto de detracción</h1>
             <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>:</h1>
-            <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>S/ {datareceptor8.monto_detraccion}</h1>
+            <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>S/ 311.52</h1>
           </div>
         </div>
 

@@ -85,8 +85,8 @@ model.inFactde=async(arg)=>{
 }
 
 model.inBol=async(arg)=>{
-    const { expo,td,rs,pa,itin,esta,direc,tm,da,ISC_sel,og,cyot,nombre,fecha_emision,fecha_vencimiento,total,total_igv,total_icbper,total_isc} = arg;
-    return sequelize.query(`INSERT INTO boleta(expo,td,rs,pa,itin,esta,direc,tm,da,ISC_sel,og,cyot,nombre,fecha_emision,fecha_vencimiento,total,total_igv,total_icbper,total_isc) VALUES ('${expo}','${td}','${rs}','${pa}','${itin}','${esta}','${direc}','${tm}','${da}','${ISC_sel}','${og}','${cyot}','${nombre}','${fecha_emision}','${fecha_vencimiento}','${total}','${total_igv}','${total_icbper}','${total_isc}')`,{raw:true})
+    const { expo,td,rs,pa,itin,esta,direc,tm,da,ISC_sel,og,cyot,nombre,fecha_emision,fecha_vencimiento,total,total_igv,total_icbper,total_isc,numero_documento} = arg;
+    return sequelize.query(`INSERT INTO boleta(expo,td,rs,pa,itin,esta,direc,tm,da,ISC_sel,og,cyot,nombre,fecha_emision,fecha_vencimiento,total,total_igv,total_icbper,total_isc,numero_documento) VALUES ('${expo}','${td}','${rs}','${pa}','${itin}','${esta}','${direc}','${tm}','${da}','${ISC_sel}','${og}','${cyot}','${nombre}','${fecha_emision}','${fecha_vencimiento}','${total}','${total_igv}','${total_icbper}','${total_isc}','${numero_documento}')`,{raw:true})
     .then(([result,metadata])=>{
         const data= result.length===0?null:result
         return data
@@ -110,7 +110,7 @@ model.inPFact=async(arg)=>{
 
 model.inPBol=async(arg)=>{
     const { bos,cantidad,medida,codigo,descripcion,bolsas,valor,descuento,ISC,ICBPER,IGV,Importe_total} = arg;
-    return sequelize.query(`INSERT INTO prod_fact(bos,cantidad,medida,codigo,descripcion,bolsas,valor,descuento,ISC,ICBPER,IGV,Importe_total) VALUES ('${bos}','${cantidad}','${medida}','${codigo}','${descripcion}','${bolsas}','${valor}','${descuento}','${ISC}','${ICBPER}','${IGV}','${Importe_total}')`,{raw:true})
+    return sequelize.query(`INSERT INTO prod_bol(bos,cantidad,medida,codigo,descripcion,bolsas,valor,descuento,ISC,ICBPER,IGV,Importe_total) VALUES ('${bos}','${cantidad}','${medida}','${codigo}','${descripcion}','${bolsas}','${valor}','${descuento}','${ISC}','${ICBPER}','${IGV}','${Importe_total}')`,{raw:true})
     .then(([result,metadata])=>{
         const data= result.length===0?null:result
         return data
