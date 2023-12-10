@@ -61,8 +61,8 @@ model.inFact=async(arg)=>{
 }
 
 model.inFactcu=async(arg)=>{
-    const { numero_cuota,monto_cuota,fecha_vencimiento,monto_neto} = arg;
-    return sequelize.query(`INSERT INTO cuota_factura(numero_cuota,monto_cuota,fecha_vencimiento,monto_neto) VALUES ('${numero_cuota}','${monto_cuota}','${fecha_vencimiento}','${monto_neto}')`,{raw:true})
+    const { numero_cuota,monto_cuota,fecha_vencimiento,monto_neto,obs,total_cuota} = arg;
+    return sequelize.query(`INSERT INTO cuota_factura(numero_cuota,monto_cuota,fecha_vencimiento,monto_neto,obs,total_cuota) VALUES ('${numero_cuota}','${monto_cuota}','${fecha_vencimiento}','${monto_neto}','${obs}','${total_cuota}')`,{raw:true})
     .then(([result,metadata])=>{
         const data= result.length===0?null:result
         return data

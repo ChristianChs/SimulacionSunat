@@ -17,11 +17,11 @@ const TemplateTablaVerticalp = ({ dato }) => {
                     {
                         dato.map((item => (
                             <tr>
-                                <td className="border bg-white text-black border-slate-300">{item.cantidad_producto}</td>
-                                <td className="border bg-white text-black border-slate-300">{item.unidad_medida}</td>
+                                <td className="border bg-white text-black border-slate-300">{item.cantidad}</td>
+                                <td className="border bg-white text-black border-slate-300">{item.medida}</td>
                                 <td className="border bg-white text-black border-slate-300">{item.descripcion}</td>
-                                <td className="border bg-white text-black border-slate-300">{item.valor_unitario}</td>
-                                <td className="border bg-white text-black border-slate-300">{item.icbper}</td>
+                                <td className="border bg-white text-black border-slate-300">{item.valor}</td>
+                                <td className="border bg-white text-black border-slate-300">{item.ICBPER}</td>
                             </tr>
                         )))
                     }
