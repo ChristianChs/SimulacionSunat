@@ -26,11 +26,11 @@ function PreFactura() {
   const [datareceptor3, setDataReceptor3] = useState(null)
   const [datareceptor4, setDataReceptor4] = useState([])
   const [datareceptor6, setDataReceptor6] = useState([])
-  const [datareceptor7, setDataReceptor7] = useState([])
-  const [datareceptor8, setDataReceptor8] = useState([])
+  const [datareceptor7, setDataReceptor7] = useState("")
+  const [datareceptor8, setDataReceptor8] = useState("")
 
   const getinfoCuota = async () => {
-    const TablaCuota = await dataCuota()
+    const TablaCuota = await dataFacturaC()
     setDataReceptor5(TablaCuota.data)
   }
 
@@ -43,39 +43,42 @@ function PreFactura() {
     const TablaCuota = await dataPFactura()
     setDataReceptor6(TablaCuota.data)
   }
-  
 
   const getinfoFacturaC = async () => {
     const TablaCuota = await dataFacturaC()
-    console.log("AQUI ESSSS!!", TablaCuota.data)
-    setDataReceptor7(TablaCuota.data)
+    setDataReceptor7(TablaCuota.data[0])
   }
+  
 
   const getinfoFacturaD = async () => {
     const TablaCuota = await dataFacturaD()
     console.log("AQUI ESSSS!! 2222", TablaCuota.data)
-    setDataReceptor8(TablaCuota.data)
+    setDataReceptor8(TablaCuota.data[0])
   }
 
   const handlePrint = () => {
     window.print();
   };
 
-  let a=0;
+  var a=0;
 
-  let b=0;
+  var b=0;
 
   useEffect(() => {
     getinfoCuota()
     getinfoFactura()
     getinfoPFactura() 
     getinfoFacturaC()
-    //getinfoFacturaD()
+    getinfoFacturaD()
     getinfoC(datareceptor4.tipo_trans)
   }, []);
 
+
+  console.log(datareceptor8)
+
+
   const getinfoRUCrs = async (ruc) => {
-    if(a==1){
+    if(a<1){
       const data = await validaRUC(ruc)
       setDataReceptor(data.data)
       a++
@@ -84,9 +87,9 @@ function PreFactura() {
   getinfoRUCrs(dataUser.ruc)
 
   const getinfoRUC2 = async (ruc) => {
-    if(b==1){
+    if(b<1){
       const data = await validaRUC(ruc)
-    setDataReceptor2(data.data)
+      setDataReceptor2(data.data)
       b++
     }
   }
@@ -160,7 +163,7 @@ function PreFactura() {
             <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
               <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Observación</h1>
               <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>AQUI IRA EL DATARECEPTOR 7 </h1>
+              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor7.obs}</h1>
             </div>
           </div>
           <div className="subseparador" style={{ alignItems: 'right', textAlign: 'right', display: 'flex', width: '30%', margin: '7px auto' }}>
@@ -240,33 +243,33 @@ function PreFactura() {
             <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
               <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Tipo de Operación</h1>
               <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>1001 Operación Sujeta a Detracción</h1>
+              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor8.tipo_op}</h1>
             </div>
             <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
               <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Bien o Servicio</h1>
               <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>Otros servicios empresariales</h1>
+              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor8.cod}</h1>
             </div>
             <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
               <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Medio de Pago</h1>
               <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>003 Transferencia de fondos</h1>
+              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor8.medio}</h1>
             </div>
             <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
               <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Nro. Cta. Banco de la Nación</h1>
               <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>02352652142</h1>
+              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor8.cta}</h1>
             </div>
           </div>
           <div className="subseparador" style={{ paddingTop: '130px', alignItems: 'right', textAlign: 'right', display: 'flex', width: '30%', margin: '7px auto' }}>
             <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>Porcentaje de detracción</h1>
             <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>:</h1>
-            <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>12.00</h1>
+            <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>{datareceptor8.porcentaje} %</h1>
           </div>
           <div className="subseparador" style={{ paddingTop: '130px', alignItems: 'right', textAlign: 'right', display: 'flex', width: '30%', margin: '7px auto' }}>
             <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>Monto de detracción</h1>
             <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>:</h1>
-            <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>S/ 311.52</h1>
+            <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>S/ {datareceptor8.monto_detraccion}</h1>
           </div>
         </div>
 
@@ -276,12 +279,12 @@ function PreFactura() {
             <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
               <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Monto neto pendiente de pago</h1>
               <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>S/2,284.48</h1>
+              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>S/ {datareceptor7.monto_neto}</h1>
             </div>
             <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
               <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Total de Cuotas</h1>
               <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
-              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>1</h1>
+              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor7.total_cuota}</h1>
             </div>
           </div>
         </div>
