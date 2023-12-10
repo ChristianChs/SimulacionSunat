@@ -212,7 +212,7 @@ function BoletaForm() {
         let selectedValue = e.target.value;
         document.getElementById('description').value = '';
         setSelectedDoc(selectedValue);
-        
+
         const newValue = e.target.value;
         setTd(newValue);
     };
@@ -375,7 +375,7 @@ function BoletaForm() {
     };
 
     const verificarDNI = async (dni) => {
-        const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im5hbW93aTQ0ODlAZ3l4bXouY29tIn0.XAeiqe3nrWG8zlpDlbUQv3FzUmwlIbQTHTCYc5cHvJs`;
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImhhdG9iZTMyMDRAZ2VhcnN0YWcuY29tIn0.Va2AFD6DSppse7H1vPXw29HCQraMRxWPkh59vcrAqXo`;
         const response = await fetch(apiUrl);
         return await response.json();
     };
@@ -596,7 +596,7 @@ function BoletaForm() {
         saveDataUser(id_login)
 
         const data = await registrarBoleta(values);
-        
+
         if (data.status === 200) {
             navigate('/prebol')
         }
