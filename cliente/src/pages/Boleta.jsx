@@ -595,11 +595,7 @@ function BoletaForm() {
         const id_login = JSON.parse(localStorage.getItem('loggindata'))
         saveDataUser(id_login)
 
-        const data = await registrarBoleta(values);
-
-        if (data.status === 200) {
-            navigate('/prebol')
-        }
+        navigate('/prebol')
     })
 
     const [selectedbos, setSelectedbos] = useState({
@@ -664,6 +660,10 @@ function BoletaForm() {
         const newValue = event.target.value;
         setImporte_total(newValue);
     };
+
+    const onSubmit1 = () => {
+        navigate('/#')
+    }
 
     return (
         <div>
@@ -1533,6 +1533,7 @@ function BoletaForm() {
                             <input
                                 type="submit"
                                 value="Cancelar"
+                                onClick={onSubmit1}
                                 className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-extrabold hover:px-7 hover:bg-ffeba7 hover:text-white hover:border-gray-400"
                             />
                         </div>
