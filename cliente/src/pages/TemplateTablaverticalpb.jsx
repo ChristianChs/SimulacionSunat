@@ -22,10 +22,10 @@ const TemplateTablaVerticalpb = ({ dato }) => {
                                 <td className="border bg-white text-black border-slate-300" style={{ fontSize: '5px' }}>{item.cantidad_producto}</td>
                                 <td className="border bg-white text-black border-slate-300" style={{ fontSize: '12px' }}>{item.unidad_medida}</td>
                                 <td className="border bg-white text-black border-slate-300">{item.descripcion}</td>
-                                <td className="border bg-white text-black border-slate-300">{item.valor_unitario}</td>
+                                <td className="border bg-white text-black border-slate-300">{item.valor}</td>
                                 <td className="border bg-white text-black border-slate-300">{item.descuento}</td>
-                                <td className="border bg-white text-black border-slate-300">{item.importe_venta}</td>
-                                <td className="border bg-white text-black border-slate-300">{item.icbper}</td>
+                                <td className="border bg-white text-black border-slate-300">{item.Importe_total}</td>
+                                <td className="border bg-white text-black border-slate-300">{item.ICBPER}</td>
                             </tr>
                         )))
                     }
