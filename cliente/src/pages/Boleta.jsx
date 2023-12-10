@@ -451,6 +451,7 @@ function BoletaForm() {
         checked: null
     });
     const [nombre, setNombre] = useState('');
+    const [numero_documento, setNumero_documento] = useState('');
 
     const handleRadioChange1 = e => {
         setMostrarIsc(false);
@@ -469,6 +470,7 @@ function BoletaForm() {
         let newValue = event.target.value;
         document.getElementById('nombreClienteInferior').value = newValue;
         setrs(newValue);
+        setNombre(newValue);
     };
 
     const handleRadioChange2 = e => {
@@ -524,9 +526,10 @@ function BoletaForm() {
         });
     };
 
-    const handleNombrehange = (event) => {
+
+    const handleNumero_documentoChange = (event) => {
         const newValue = event.target.value;
-        setNombre(newValue);
+        setNumero_documento(newValue);
     };
 
     const onSubmit = handleSubmit(async (values, vaBienesServicios) => {
@@ -541,6 +544,7 @@ function BoletaForm() {
         values.nombre = nombre;
         values.og = selectedog;
         values.cyot = selectedcyot;
+        values.numero_documento = numero_documento;
 
         var table = document.getElementById('bienesServicios');
         var rows = table.getElementsByTagName('tr');
@@ -734,7 +738,7 @@ function BoletaForm() {
                                     type="text"
                                     aria-label="default input example"
                                     className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus-border-yellow-100"
-                                    onChange={handleNombrehange}
+                                    onChange={handleNumero_documentoChange}
                                 />
                             </div>
                             <label htmlFor="NombreRazon" className="text-gray-400 font-sans font-semibold">
