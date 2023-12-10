@@ -252,9 +252,9 @@ function FacturaForm() {
 
         console.log(values);
         const data = await registrarFacturaDe(values);
-        /*if (data.status === 200) {
+        if (data.status === 200) {
             navigate('/prefact')
-        }*/
+        }
 
     })
 

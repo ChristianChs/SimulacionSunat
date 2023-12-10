@@ -93,6 +93,7 @@ function PreFactura() {
   }
 
   const getinfoRUC2 = async (ruc) => {
+
     const data = await validaRUC(ruc)
     setDataReceptor2(data.data)
 

@@ -602,9 +602,7 @@ function FacturaForm() {
         const data = await registrarFactura(values);
         const id_login = JSON.parse(localStorage.getItem('loggindata'))
         saveDataUser(id_login)
-        if (data.status === 200) {
-            navigate('/factinf')
-        }
+        navigate('/factinf')
     })
 
 
