@@ -734,7 +734,7 @@ function BoletaForm() {
                                     type="text"
                                     aria-label="default input example"
                                     className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus-border-yellow-100"
-
+                                    onChange={handleNombrehange}
                                 />
                             </div>
                             <label htmlFor="NombreRazon" className="text-gray-400 font-sans font-semibold">
@@ -1063,7 +1063,6 @@ function BoletaForm() {
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
-                                onChange={handleNombrehange}
                             />
 
                             <label htmlFor="tipo_m" className="text-gray-400 font-sans font-bold">
