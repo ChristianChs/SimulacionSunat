@@ -1,5 +1,5 @@
 import axios from 'axios'
-const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZpZGVrbzIxMzFAaHVwb2kuY29tIn0.d5JtELIdNS5VJgtqwKmm5nCIQV39TPC-1Ktm2m4h_P8"
+const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imxldm9uMjIwMTZAbGFueGk4LmNvbSJ9.x6TCFvrjFWFISWwC2aHb4vdOZP-gzTwUr04eJSHUibg"
 const APIRUC = 'https://dniruc.apisperu.com/api/v1'
 
 export const validaRUC = (data) => axios.get(`${APIRUC}/ruc/${data}?token=${token}`)

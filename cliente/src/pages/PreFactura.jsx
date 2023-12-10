@@ -48,7 +48,7 @@ function PreFactura() {
     const TablaCuota = await dataFacturaC()
     setDataReceptor7(TablaCuota.data[0])
   }
-  
+
 
   const getinfoFacturaD = async () => {
     const TablaCuota = await dataFacturaD()
@@ -60,40 +60,43 @@ function PreFactura() {
     window.print();
   };
 
-  var a=0;
-
-  var b=0;
+  const [a, setA] = useState(false);
+  const [b, setB] = useState(false);
 
   useEffect(() => {
-    getinfoCuota()
-    getinfoFactura()
-    getinfoPFactura() 
-    getinfoFacturaC()
-    getinfoFacturaD()
-    getinfoC(datareceptor4.tipo_trans)
-  }, []);
+    getinfoCuota();
+    getinfoFactura();
+    getinfoPFactura();
+    getinfoFacturaC();
+    getinfoFacturaD();
+    getinfoC(datareceptor4.tipo_trans);
+
+    if (!a) {
+      getinfoRUCrs(dataUser.ruc);
+      setA(true);
+    }
+
+    if (!b) {
+      getinfoRUC2(datareceptor4.RUC);
+      setB(true);
+    }
+  }, [a, b, dataUser.ruc, datareceptor4.RUC]);
 
 
   console.log(datareceptor8)
 
 
   const getinfoRUCrs = async (ruc) => {
-    if(a<1){
-      const data = await validaRUC(ruc)
-      setDataReceptor(data.data)
-      a++
-    }
+    const data = await validaRUC(ruc)
+    setDataReceptor(data.data)
+
   }
-  getinfoRUCrs(dataUser.ruc)
 
   const getinfoRUC2 = async (ruc) => {
-    if(b<1){
-      const data = await validaRUC(ruc)
-      setDataReceptor2(data.data)
-      b++
-    }
+    const data = await validaRUC(ruc)
+    setDataReceptor2(data.data)
+
   }
-  getinfoRUC2(datareceptor4.RUC)
 
   const getinfoC = async (data) => {
     if (data == 0) {
