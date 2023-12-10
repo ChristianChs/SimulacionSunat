@@ -70,16 +70,21 @@ function PreFactura() {
   }, []);
 
   const getinfoRUCrs = async (ruc) => {
+    console.log("GETINFORUCRS = ",ruc)
     const data = await validaRUC(ruc)
     setDataReceptor(data.data)
   }
   getinfoRUCrs(dataUser.ruc)
 
   const getinfoRUC2 = async (ruc) => {
+    console.log("GETINFORUC2 = ",ruc)
     const data = await validaRUC(ruc)
     setDataReceptor2(data.data)
   }
   getinfoRUC2(datareceptor4.RUC)
+
+  console.log(datareceptor)
+  console.log(datareceptor2)
 
   const getinfoC = async (data) => {
     if (data == 0) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-12-2023 a las 17:00:13
+-- Tiempo de generación: 10-12-2023 a las 05:27:30
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -103,9 +103,22 @@ CREATE TABLE `cuota_factura` (
   `id` int(11) NOT NULL,
   `numero_cuota` int(11) NOT NULL,
   `monto_cuota` int(11) NOT NULL,
-  `fecha_vencimiento` int(11) NOT NULL,
-  `monto_neto` int(11) NOT NULL
+  `fecha_vencimiento` date NOT NULL,
+  `monto_neto` int(11) NOT NULL,
+  `obs` text NOT NULL,
+  `total_cuota` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cuota_factura`
+--
+
+INSERT INTO `cuota_factura` (`id`, `numero_cuota`, `monto_cuota`, `fecha_vencimiento`, `monto_neto`, `obs`, `total_cuota`) VALUES
+(1, 1, 234, '0000-00-00', 34, 'NOSE QUE PONERRRRRRRRRRR', 0),
+(2, 2, 234, '0000-00-00', 34, 'NOSE QUE PONERRRRRRRRRRR', 0),
+(3, 3, 234, '0000-00-00', 34, 'NOSE QUE PONERRRRRRRRRRR', 0),
+(4, 1, 1000, '2023-12-19', 2000, 'jhjachkjhajkcd', 2),
+(5, 2, 1000, '2023-12-19', 2000, 'jhjachkjhajkcd', 2);
 
 -- --------------------------------------------------------
 
@@ -123,6 +136,14 @@ CREATE TABLE `detraccion_factura` (
   `monto_detraccion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `detraccion_factura`
+--
+
+INSERT INTO `detraccion_factura` (`id`, `tipo_op`, `cod`, `cta`, `medio`, `porcentaje`, `monto_detraccion`) VALUES
+(1, 'GUIAT', '019', 2147483647, 13, 12321214, 2147483647),
+(2, 'DOCI', '008', 2147483647, 13, 2, 3344);
+
 -- --------------------------------------------------------
 
 --
@@ -134,13 +155,13 @@ CREATE TABLE `factura` (
   `tipo_trans` tinyint(1) NOT NULL,
   `detr` tinyint(1) NOT NULL,
   `exp` tinyint(1) NOT NULL,
-  `RUC` int(11) NOT NULL,
+  `RUC` varchar(11) NOT NULL,
   `ant` tinyint(1) NOT NULL,
   `itn` tinyint(1) NOT NULL,
   `est` tinyint(1) NOT NULL,
   `dir` tinyint(1) NOT NULL,
   `com` tinyint(1) NOT NULL,
-  `tipo_mon` int(11) NOT NULL,
+  `tipo_mon` text NOT NULL,
   `desc_ant` tinyint(1) NOT NULL,
   `isc` tinyint(1) NOT NULL,
   `opg` tinyint(1) NOT NULL,
@@ -158,12 +179,18 @@ CREATE TABLE `factura` (
 --
 
 INSERT INTO `factura` (`id`, `tipo_trans`, `detr`, `exp`, `RUC`, `ant`, `itn`, `est`, `dir`, `com`, `tipo_mon`, `desc_ant`, `isc`, `opg`, `cyt`, `fecha_emision`, `total`, `total_igv`, `total_isc`, `total_icbper`, `sub_total`) VALUES
-(1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2023-12-19', 0, 0, 0, 0, 0),
-(2, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, '2023-12-13', 0, 0, 0, 0, 0),
-(3, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, '2023-12-18', 0, 0, 0, 0, 0),
-(4, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, '2023-12-22', 0, 0, 0, 0, 0),
-(5, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, '2023-12-28', 0, 0, 0, 0, 0),
-(6, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, '2023-12-21', 0, 0, 0, 0, 0);
+(1, 0, 1, 0, '0', 1, 0, 0, 0, 0, '0', 0, 0, 0, 0, '2023-12-19', 0, 0, 0, 0, 0),
+(2, 0, 1, 0, '0', 1, 0, 1, 0, 1, '0', 1, 0, 1, 0, '2023-12-13', 0, 0, 0, 0, 0),
+(3, 0, 1, 0, '0', 1, 0, 1, 0, 1, '0', 1, 0, 0, 0, '2023-12-18', 0, 0, 0, 0, 0),
+(4, 0, 1, 0, '0', 1, 0, 1, 0, 1, '0', 1, 0, 1, 0, '2023-12-22', 0, 0, 0, 0, 0),
+(5, 1, 1, 0, '0', 1, 1, 1, 1, 1, '0', 1, 0, 1, 1, '2023-12-28', 0, 0, 0, 0, 0),
+(6, 1, 1, 0, '0', 1, 1, 1, 1, 1, '0', 1, 0, 1, 1, '2023-12-21', 0, 0, 0, 0, 0),
+(7, 1, 1, 0, '2147483647', 1, 1, 1, 1, 1, '0', 1, 0, 1, 1, '2023-12-12', 1953, 1899.8, 44, 9.2, 0),
+(8, 1, 1, 0, '20147796634', 1, 1, 1, 1, 1, '0', 1, 0, 1, 1, '2023-12-21', 85.92, 75.52, 8, 2.4, 64),
+(9, 1, 1, 0, '20147796634', 1, 1, 1, 1, 1, 'SOLES', 1, 0, 1, 1, '2023-12-19', 36.12, 28.32, 6, 1.8, 24),
+(10, 1, 1, 0, '20147796634', 1, 1, 1, 1, 1, 'SOLES', 1, 0, 1, 1, '2023-12-27', 2389.12, 1736.96, 632.96, 19.2, 1472),
+(11, 1, 1, 0, '20147796634', 1, 1, 1, 1, 1, 'SOLES', 1, 0, 1, 1, '2023-12-20', 188946, 188866, 80, 0, 160056),
+(12, 1, 1, 0, '20147796634', 1, 1, 1, 1, 1, 'SOLES', 1, 0, 1, 1, '2023-12-21', 2624.8, 2567.68, 43.52, 13.6, 2176);
 
 -- --------------------------------------------------------
 
@@ -176,7 +203,8 @@ CREATE TABLE `info_credito` (
   `id_recibo` int(11) NOT NULL,
   `fecha_vencimiento` date NOT NULL,
   `monto_cuota` varchar(10) NOT NULL,
-  `numero` int(20) NOT NULL
+  `numero` int(20) NOT NULL,
+  `obs` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -291,7 +319,19 @@ INSERT INTO `prod_fact` (`id`, `bos`, `cantidad`, `medida`, `codigo`, `descripci
 (2, 0, 32, 'DOTADOLARES', 323, 'fasfasf', 0, 3219, 0, 3329219, 10, 18541, 3450778),
 (3, 0, 23, 'DOTADOLARES', 323, 'fdafds', 0, 23, 0, 101, 9, 95, 734),
 (4, 0, 23, 'DOTADOLARES', 323, 'fdafds', 0, 23, 0, 101, 9, 95, 734),
-(5, 0, 23, 'DOTADOLARES', 323, 'fdafds', 0, 23, 0, 101, 9, 95, 734);
+(5, 0, 23, 'DOTADOLARES', 323, 'fdafds', 0, 23, 0, 101, 9, 95, 734),
+(6, 0, 23, 'ffdsf', 3232, '323', 0, 35, 0, 22, 5, 145, 977),
+(7, 0, 23, 'ffdsf', 3232, '323', 0, 35, 0, 22, 5, 145, 977),
+(8, 0, 4, 'DOTADOLARES', 322, 'n,mmnbmn', 0, 8, 0, 4, 1, 6, 43),
+(9, 0, 4, 'DOTADOLARES', 322, 'n,mmnbmn', 0, 8, 0, 4, 1, 6, 43),
+(10, 0, 3, 'dfdf', 322, 'eqweqweq', 0, 4, 0, 3, 1, 2, 18),
+(11, 0, 3, 'dfdf', 322, 'eqweqweq', 0, 4, 0, 3, 1, 2, 18),
+(12, 0, 32, 'dfdf', 4343, 'dsdsadsa', 0, 23, 0, 316, 10, 132, 1195),
+(13, 0, 32, 'dfdf', 4343, 'dsdsadsa', 0, 23, 0, 316, 10, 132, 1195),
+(14, 0, 234, 'ffdsf', 6654, 'fsafsa', 0, 342, 0, 40, 0, 14405, 94473),
+(15, 0, 234, 'ffdsf', 6654, 'fsafsa', 0, 342, 0, 40, 0, 14405, 94473),
+(16, 0, 34, 'DOTADOLARES', 533, 'hkjjkb', 0, 32, 0, 22, 7, 196, 1312),
+(17, 0, 34, 'DOTADOLARES', 533, 'hkjjkb', 0, 32, 0, 22, 7, 196, 1312);
 
 -- --------------------------------------------------------
 
@@ -465,19 +505,19 @@ ALTER TABLE `cuota`
 -- AUTO_INCREMENT de la tabla `cuota_factura`
 --
 ALTER TABLE `cuota_factura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `detraccion_factura`
 --
 ALTER TABLE `detraccion_factura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `info_credito`
@@ -507,7 +547,7 @@ ALTER TABLE `prod_bol`
 -- AUTO_INCREMENT de la tabla `prod_fact`
 --
 ALTER TABLE `prod_fact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `recibohonorario`
