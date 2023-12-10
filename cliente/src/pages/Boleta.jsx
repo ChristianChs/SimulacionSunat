@@ -3,9 +3,11 @@ import { useForm } from 'react-hook-form'
 import Starts from '../components/Stars'
 import { useLogin } from '../context/LoginContext'
 import { useNavigate } from 'react-router-dom';
+import { useReciboxH } from '../context/ReciboxHContext';
 
 function BoletaForm() {
     const [mostrarRucReceptor, setMostrarRucReceptor] = useState(false);
+    const { saveDataUser } = useReciboxH()
     const [selectedDoc, setSelectedDoc] = useState("SIN DOCUMENTO");
     const { registrarBoleta, errors: LoginErrors } = useLogin();
     const { registrarPBoleta, errors: LoginErrors2 } = useLogin();
@@ -535,6 +537,7 @@ function BoletaForm() {
     const onSubmit = handleSubmit(async (values, vaBienesServicios) => {
         values.expo = selectedexpo.checked;
         values.rs = rs;
+        values.rs = document.getElementById('nombreClienteInferior').value;
         values.pa = selectedpa.checked;
         values.itin = selecteditin.checked;
         values.esta = selectedesta.checked;
@@ -585,7 +588,11 @@ function BoletaForm() {
 
         console.log(values);
 
+        const id_login = JSON.parse(localStorage.getItem('loggindata'))
+        saveDataUser(id_login)
+
         const data = await registrarBoleta(values);
+        
         if (data.status === 200) {
             navigate('/prebol')
         }
