@@ -218,7 +218,7 @@ function FacturaForm() {
             documentosRelacionados.monto_cuota = rows[i].getElementsByTagName('td')[3].textContent;
             documentosRelacionados.monto_neto = document.getElementById('montoNetoPendiente').value;
             documentosRelacionados.obs = document.getElementById('observacionFactura').value;
-            documentosRelacionados.total_cuota = a;
+            documentosRelacionados.total_cuota = rows.length - 2;
             const dataCuota = {
                 numero_cuota: documentosRelacionados.numero_cuota,
                 fecha_vencimiento: documentosRelacionados.fecha_vencimiento,
@@ -683,14 +683,21 @@ function FacturaForm() {
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                                         Porcentaje de detracción
                                     </label>
-                                    <input
+                                    <div className='flex'>
+                                        <input
 
-                                        name="description"
-                                        type="number"
-                                        aria-label="default input example"
-                                        className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
-                                        onChange={handlePorcentajeChange}
-                                    />
+                                            name="description"
+                                            type="number"
+                                            aria-label="default input example"
+                                            className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                            onChange={handlePorcentajeChange}
+                                        />
+                                        <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold text-lg ml-2 mr-6 mt-2">
+                                            <div >%</div>
+                                        </label>
+                                    </div>
+
+
 
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
                                         Monto de la detracción (S/)
