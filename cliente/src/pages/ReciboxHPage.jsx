@@ -7,7 +7,7 @@ import { useLogin } from '../context/LoginContext';
 function ReciboxHPage() {
 
   const verificarDNI = async (dni) => {
-    const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1hd2FzbzQyNTNAbWNlbmIuY29tIn0.RA6X058uqupIOjStpi0AHys0QbQKwQREfsVVodg7gAY`;
+    const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZpZGVrbzIxMzFAaHVwb2kuY29tIn0.d5JtELIdNS5VJgtqwKmm5nCIQV39TPC-1Ktm2m4h_P8`;
     const response = await fetch(apiUrl);
     return await response.json();
   };
