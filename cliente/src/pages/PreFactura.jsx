@@ -43,6 +43,7 @@ function PreFactura() {
     const TablaCuota = await dataPFactura()
     setDataReceptor6(TablaCuota.data)
   }
+  
 
   const getinfoFacturaC = async () => {
     const TablaCuota = await dataFacturaC()
@@ -60,31 +61,36 @@ function PreFactura() {
     window.print();
   };
 
+  let a=0;
+
+  let b=0;
+
   useEffect(() => {
     getinfoCuota()
     getinfoFactura()
-    getinfoPFactura()
+    getinfoPFactura() 
     getinfoFacturaC()
-    //getinfoFacturaD() 
+    //getinfoFacturaD()
     getinfoC(datareceptor4.tipo_trans)
   }, []);
 
   const getinfoRUCrs = async (ruc) => {
-    console.log("GETINFORUCRS = ",ruc)
-    const data = await validaRUC(ruc)
-    setDataReceptor(data.data)
+    if(a==1){
+      const data = await validaRUC(ruc)
+      setDataReceptor(data.data)
+      a++
+    }
   }
   getinfoRUCrs(dataUser.ruc)
 
   const getinfoRUC2 = async (ruc) => {
-    console.log("GETINFORUC2 = ",ruc)
-    const data = await validaRUC(ruc)
+    if(b==1){
+      const data = await validaRUC(ruc)
     setDataReceptor2(data.data)
+      b++
+    }
   }
   getinfoRUC2(datareceptor4.RUC)
-
-  console.log(datareceptor)
-  console.log(datareceptor2)
 
   const getinfoC = async (data) => {
     if (data == 0) {
