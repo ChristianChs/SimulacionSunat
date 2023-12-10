@@ -44,7 +44,7 @@ function Consent() {
     <div className="flex justify-center mt-4">
     <Link to={'/bol'}>
       <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-      Declaro tener conocimiento y acepto las condiciones apra ser Emisor Electrónico
+      Declaro tener conocimiento y acepto las condiciones para ser Emisor Electrónico
       </button>
     </Link>
     </div>
