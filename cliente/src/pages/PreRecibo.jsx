@@ -64,6 +64,7 @@ function PreRecibo() {
             
             <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>RECIBO POR HONORARIOS</h1>
             <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>RUC: 10403401272</h1>
+            <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>Nro: E001-01</h1>
           </div>
         </div>
 

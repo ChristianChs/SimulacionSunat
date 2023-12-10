@@ -129,6 +129,7 @@ function PreFactura() {
           <div className="factura" style={{ alignItems: 'right', border: '2px solid #000000', paddingTop: '0px', paddingLeft: '10px', paddingRight: '10px', paddingBottom: '0px', width: '20%', marginRight: '10px' }}>
             <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>FACTURA ELECTRÓNICA</h1>
             <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>RUC: {datareceptor.ruc}</h1>
+            <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>E001-1</h1>
           </div>
         </div>
 
