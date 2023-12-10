@@ -8,7 +8,7 @@ import Modal from '../components/Modal'
 import Imagen1 from '../assets/images/flecha.png';
 import Imagen2 from '../assets/images/pdf.jpg';
 import Imagen3 from '../assets/images/xml.png';
-import { dataFactura, dataLogRequest,dataPFactura,dataFacturaC,dataFacturaD } from '../api/login';
+import { dataFactura, dataLogRequest, dataPFactura, dataFacturaC, dataFacturaD } from '../api/login';
 import { validaRUC } from '../api/validarDocs'
 import { dataCuota } from '../api/login';
 import TemplateTablaVertical from './TemplateTablaVertical';
@@ -18,16 +18,16 @@ import { useReciboxH } from '../context/ReciboxHContext';
 
 
 function PreFactura() {
-  const{dataUser}=useReciboxH()
+  const { dataUser } = useReciboxH()
 
-  const [datareceptor,setDataReceptor]=useState([])
+  const [datareceptor, setDataReceptor] = useState([])
   const [dataReceptor5, setDataReceptor5] = useState([])
-  const [datareceptor2,setDataReceptor2]=useState([])
-  const [datareceptor3,setDataReceptor3]=useState(null)
-  const [datareceptor4,setDataReceptor4]=useState([])
-  const [datareceptor6,setDataReceptor6]=useState([])
-  const [datareceptor7,setDataReceptor7]=useState([])
-  const [datareceptor8,setDataReceptor8]=useState([])
+  const [datareceptor2, setDataReceptor2] = useState([])
+  const [datareceptor3, setDataReceptor3] = useState(null)
+  const [datareceptor4, setDataReceptor4] = useState([])
+  const [datareceptor6, setDataReceptor6] = useState([])
+  const [datareceptor7, setDataReceptor7] = useState([])
+  const [datareceptor8, setDataReceptor8] = useState([])
 
   const getinfoCuota = async () => {
     const TablaCuota = await dataCuota()
@@ -46,13 +46,13 @@ function PreFactura() {
 
   const getinfoFacturaC = async () => {
     const TablaCuota = await dataFacturaC()
-    console.log("AQUI ESSSS!!",TablaCuota.data)
+    console.log("AQUI ESSSS!!", TablaCuota.data)
     setDataReceptor7(TablaCuota.data)
   }
 
   const getinfoFacturaD = async () => {
     const TablaCuota = await dataFacturaD()
-    console.log("AQUI ESSSS!! 2222",TablaCuota.data)
+    console.log("AQUI ESSSS!! 2222", TablaCuota.data)
     setDataReceptor8(TablaCuota.data)
   }
 
@@ -64,28 +64,28 @@ function PreFactura() {
     getinfoCuota()
     getinfoFactura()
     getinfoPFactura()
-   // getinfoFacturaC() 
+    getinfoFacturaC()
     //getinfoFacturaD() 
     getinfoC(datareceptor4.tipo_trans)
   }, []);
 
-  const getinfoRUCrs = async(ruc)=>{
-    const data= await validaRUC(ruc)
+  const getinfoRUCrs = async (ruc) => {
+    const data = await validaRUC(ruc)
     setDataReceptor(data.data)
   }
   getinfoRUCrs(dataUser.ruc)
 
-  const getinfoRUC2 = async(ruc)=>{
-    const data= await validaRUC(ruc)
+  const getinfoRUC2 = async (ruc) => {
+    const data = await validaRUC(ruc)
     setDataReceptor2(data.data)
   }
   getinfoRUC2(datareceptor4.RUC)
 
-  const getinfoC = async(data)=>{
-    if(data==0){
+  const getinfoC = async (data) => {
+    if (data == 0) {
       setDataReceptor3("Contado")
     }
-    else{
+    else {
       setDataReceptor3("Credito")
     }
   }
@@ -111,7 +111,7 @@ function PreFactura() {
           <div className="empresa" style={{ paddingRight: '20px', paddingLeft: '10px' }}>
             <h1 className="subtitulo" style={{ color: '#707070', marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor.razonSocial}</h1>
             <h1 className="contenido" style={{ fontWeight: 'bold', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor.direccion}</h1>
-            
+
           </div>
           <div className="factura" style={{ alignItems: 'right', border: '2px solid #000000', paddingTop: '0px', paddingLeft: '10px', paddingRight: '10px', paddingBottom: '0px', width: '20%', marginRight: '10px' }}>
             <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>FACTURA ELECTRÓNICA</h1>
@@ -219,7 +219,7 @@ function PreFactura() {
           <div className="monto" style={{ display: 'flex', flexDirection: 'row-reverse', textAlign: 'right', margin: '0 0', paddingRight: '20px', paddingLeft: '10px' }}>
             <h1 className="mcontenido3" style={{ color: '#aea9a9', border: '1px solid #ccc', backgroundColor: '#d7d5d5', textAlign: 'left', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>{datareceptor4.total}</h1>
             <h1 className="mcontenido2" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '5px', paddingRight: '5px' }}>:</h1>
-            <h1 className="mcontenido1" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '14px', width: '120px', fontWeight:'800' }}>Importe Total</h1>
+            <h1 className="mcontenido1" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '14px', width: '120px', fontWeight: '800' }}>Importe Total</h1>
           </div>
         </div>
 
@@ -283,13 +283,13 @@ function PreFactura() {
 
 
         <div className="buttons" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
-        <button
-        className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden"
-        style={{ margin: '0 10px', padding: '8px 16px' }}
-        onClick={handlePrint}
-      >
-        Descargar PDF o Imprimir
-      </button>
+          <button
+            className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden"
+            style={{ margin: '0 10px', padding: '8px 16px' }}
+            onClick={handlePrint}
+          >
+            Descargar PDF o Imprimir
+          </button>
           <a className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px' }} href={xmlPath1} download="factura.xml">Descargar XML</a>
           <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px' }}>Cerrar</button>
         </div>

@@ -15,7 +15,7 @@ function RegistrarDNI({ signin }) {
     }
 
     const verificarRUC = async (ruc) => {
-        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNvdG9yNTIyMTlAZ3l4bXouY29tIn0.pxPvDyUyOTHLR-SRr_IqF5nwDydaUV4kvR_fPdtuL-8`;
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imxldm9uMjIwMTZAbGFueGk4LmNvbSJ9.x6TCFvrjFWFISWwC2aHb4vdOZP-gzTwUr04eJSHUibg`;
         const response = await fetch(apiUrl);
         return await response.json();
     }
