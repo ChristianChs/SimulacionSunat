@@ -35,28 +35,32 @@ function PreBoleta() {
     setDataReceptor4(TablaCuota.data[0])
   }
 
+  var a=0;
+
+  var b=0;
+
   useEffect(() => {
     getinfoPBoleta()
     getinfoBoleta()
-
-    if (dataUser.ruc) {
-      getinfoRUCrs(dataUser.ruc)
-    }
-    if (datareceptor4.RUC) {
-      getinfoRUC2(datareceptor4.RUC)
-    }
   }, []);
 
   const getinfoRUCrs = async (ruc) => {
-    const data = await validaRUC(ruc)
-    setDataReceptor(data.data)
+    if(a<1){
+      const data = await validaRUC(ruc)
+      setDataReceptor(data.data)
+      a++
+    }
   }
-
+  getinfoRUCrs(dataUser.ruc)
 
   const getinfoRUC2 = async (ruc) => {
-    const data = await validaRUC(ruc)
-    setDataReceptor2(data.data)
+    if(b<1){
+      const data = await validaRUC(ruc)
+      setDataReceptor2(data.data)
+      b++
+    }
   }
+  getinfoRUC2(datareceptor4.RUC)
 
   const handlePrint = () => {
     window.print();
