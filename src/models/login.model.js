@@ -110,7 +110,7 @@ model.inPFact=async(arg)=>{
 
 model.inPBol=async(arg)=>{
     const { bos,cantidad,medida,codigo,descripcion,bolsas,valor,descuento,ISC,ICBPER,IGV,Importe_total} = arg;
-    return sequelize.query(`INSERT INTO prod_fact(bos,cantidad,medida,codigo,descripcion,bolsas,valor,descuento,ISC,ICBPER,IGV,Importe_total) VALUES ('${bos}','${cantidad}','${medida}','${codigo}','${descripcion}','${bolsas}','${valor}','${descuento}','${ISC}','${ICBPER}','${IGV}','${Importe_total}')`,{raw:true})
+    return sequelize.query(`INSERT INTO prod_bol(bos,cantidad,medida,codigo,descripcion,bolsas,valor,descuento,ISC,ICBPER,IGV,Importe_total) VALUES ('${bos}','${cantidad}','${medida}','${codigo}','${descripcion}','${bolsas}','${valor}','${descuento}','${ISC}','${ICBPER}','${IGV}','${Importe_total}')`,{raw:true})
     .then(([result,metadata])=>{
         const data= result.length===0?null:result
         return data
