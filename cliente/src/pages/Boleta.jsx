@@ -370,7 +370,7 @@ function BoletaForm() {
     };
 
     const verificarDNI = async (dni) => {
-        const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InlhdG92MTQ0ODRAbWNlbmIuY29tIn0.jX25WONYq5lIII3yRVNODXs6pjKLaPcEc5y55gfEu_Q`;
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im5hbW93aTQ0ODlAZ3l4bXouY29tIn0.XAeiqe3nrWG8zlpDlbUQv3FzUmwlIbQTHTCYc5cHvJs`;
         const response = await fetch(apiUrl);
         return await response.json();
     };
