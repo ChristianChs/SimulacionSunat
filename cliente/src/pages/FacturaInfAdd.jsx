@@ -190,7 +190,22 @@ function FacturaForm() {
     const [cta, setCta] = useState('');
     const [porcentaje, setPorcentaje] = useState('');
     const [monto_detraccion, setMonto_detraccion] = useState('');
+    const [tipo_op, setTipo_op] = useState('');
+    const [cod, setCod] = useState('');
+    const [medio, setMedio] = useState('');
 
+    const handleTipo_opChange = (event) => {
+        const newValue = event.target.value;
+        setTipo_op(newValue);
+    };
+    const handleCodChange = (event) => {
+        const newValue = event.target.value;
+        setCod(newValue);
+    };
+    const handleMedioChange = (event) => {
+        const newValue = event.target.value;
+        setMedio(newValue);
+    };
     const handleCtaChange = (event) => {
         const newValue = event.target.value;
         setCta(newValue);
@@ -208,7 +223,9 @@ function FacturaForm() {
         values.cta = cta;
         values.porcentaje = porcentaje;
         values.monto_detraccion = monto_detraccion;
-
+        values.tipo_op = tipo_op;
+        values.cod = cod;
+        values.medio = medio;
         var table = document.getElementById('cuotas');
         var rows = table.getElementsByTagName('tr');
 
@@ -235,9 +252,9 @@ function FacturaForm() {
 
         console.log(values);
         const data = await registrarFacturaDe(values);
-        if (data.status === 200) {
+        /*if (data.status === 200) {
             navigate('/prefact')
-        }
+        }*/
 
     })
 
@@ -590,13 +607,13 @@ function FacturaForm() {
                                     <select
                                         className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                         aria-label="Tipo de Operación"
-                                        {...register("tipo_op")}
+                                        onChange={handleTipo_opChange}
                                     >
                                         <option selected="SIN"></option>
-                                        <option value="GUIAR">OPERACIÓN SUJETA A DETRACCIÓN</option>
-                                        <option value="GUIAT">OPERACIÓN SUJETA A DETRACCIÓN - RECURSOS HIDROBIOLÓGICOS</option>
-                                        <option value="DOCI">OPERACIÓN SUJETA A DETRACCIÓN - SERVICIOS DE TRANSPORTE PASAJEROS</option>
-                                        <option value="TAX">OPERACIÓN SUJETA A DETRACCIÓN - SERVICIOS DE TRANSPORTE CARGA</option>
+                                        <option value="OPERACIÓN SUJETA A DETRACCIÓN">OPERACIÓN SUJETA A DETRACCIÓN</option>
+                                        <option value="OPERACIÓN SUJETA A DETRACCIÓN - RECURSOS HIDROBIOLÓGICOS">OPERACIÓN SUJETA A DETRACCIÓN - RECURSOS HIDROBIOLÓGICOS</option>
+                                        <option value="OPERACIÓN SUJETA A DETRACCIÓN - SERVICIOS DE TRANSPORTE PASAJEROS">OPERACIÓN SUJETA A DETRACCIÓN - SERVICIOS DE TRANSPORTE PASAJEROS</option>
+                                        <option value="OPERACIÓN SUJETA A DETRACCIÓN - SERVICIOS DE TRANSPORTE CARGA">OPERACIÓN SUJETA A DETRACCIÓN - SERVICIOS DE TRANSPORTE CARGA</option>
                                     </select>
 
                                     <h1 className="text-base font-bold text-gray-400 mb-3">
@@ -605,41 +622,41 @@ function FacturaForm() {
                                     <select
                                         className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                         aria-label="Código de bien"
-                                        {...register("cod")}
+                                        onChange={handleCodChange}
                                     >
                                         <option selected="SIN"></option>
-                                        <option value="001">001-Azúcar y melaza de caña</option>
-                                        <option value="002">002-Arroz</option>
-                                        <option value="003">003-Alcohol etílico</option>
-                                        <option value="005">005-Maíz amarillo duro</option>
-                                        <option value="007">007-Caña de azúcar</option>
-                                        <option value="008">008-Madera</option>
-                                        <option value="009">009-Arena y piedra</option>
-                                        <option value="010">010-Residuos, subproductos, desechos, recortes y desperdicios</option>
-                                        <option value="011">011-Bienes gravados con el IGV, o renuncia a la exoneración</option>
-                                        <option value="012">012-Intermediación laboral y tercerización</option>
-                                        <option value="013">013-Animales vivos</option>
-                                        <option value="014">014-Carnes y despojos comestibles</option>
-                                        <option value="015">015-Abonos, cueros y pieles de origen animal</option>
-                                        <option value="016">016-Aceite de pescado</option>
-                                        <option value="017">017-Harina, polvo y pellets de pescado, crustáceos, moluscos y demás invertebrados acuáticos</option>
-                                        <option value="019">019-Arrendamiento de bienes muebles</option>
-                                        <option value="020">020-Mantenimiento y reparación de bienes muebles</option>
-                                        <option value="021">021-Movimiento de carga</option>
-                                        <option value="022">022-Otros servicios empresariales</option>
-                                        <option value="023">023-Leche</option>
-                                        <option value="024">024-Comisión mercantil</option>
-                                        <option value="025">025-Fabricación de bienes por encargo</option>
-                                        <option value="026">026-Servicio de transporte de personas</option>
-                                        <option value="030">030-Contratos de construcción</option>
-                                        <option value="031">031-Otro gravado con el IGV</option>
-                                        <option value="032">032-Paprika y otros frutos de los generos capsicum o pimienta</option>
-                                        <option value="034">034-Minerales metálicos no auriferos</option>
-                                        <option value="035">035-Bienes exonerados del IGV</option>
-                                        <option value="036">036-Oro y demás minerales metálicos exonerados del IGV</option>
-                                        <option value="037">037-Demás servicios gravados con el IGV</option>
-                                        <option value="039">039-Minerales no metálicos</option>
-                                        <option value="040">040-Bien inmueble gravado con IGV</option>
+                                        <option value="001-Azúcar y melaza de caña">001-Azúcar y melaza de caña</option>
+                                        <option value="002-Arroz">002-Arroz</option>
+                                        <option value="003-Alcohol etílico">003-Alcohol etílico</option>
+                                        <option value="005-Maíz amarillo duro">005-Maíz amarillo duro</option>
+                                        <option value="007-Caña de azúcar">007-Caña de azúcar</option>
+                                        <option value="008-Madera">008-Madera</option>
+                                        <option value="009-Arena y piedra">009-Arena y piedra</option>
+                                        <option value="010-Residuos, subproductos, desechos, recortes y desperdicios">010-Residuos, subproductos, desechos, recortes y desperdicios</option>
+                                        <option value="011-Bienes gravados con el IGV, o renuncia a la exoneración">011-Bienes gravados con el IGV, o renuncia a la exoneración</option>
+                                        <option value="012-Intermediación laboral y tercerización">012-Intermediación laboral y tercerización</option>
+                                        <option value="013-Animales vivos">013-Animales vivos</option>
+                                        <option value="014-Carnes y despojos comestibles">014-Carnes y despojos comestibles</option>
+                                        <option value="015-Abonos, cueros y pieles de origen animal">015-Abonos, cueros y pieles de origen animal</option>
+                                        <option value="016-Aceite de pescado">016-Aceite de pescado</option>
+                                        <option value="017-Harina, polvo y pellets de pescado, crustáceos, moluscos y demás invertebrados acuáticos">017-Harina, polvo y pellets de pescado, crustáceos, moluscos y demás invertebrados acuáticos</option>
+                                        <option value="019-Arrendamiento de bienes muebles">019-Arrendamiento de bienes muebles</option>
+                                        <option value="020-Mantenimiento y reparación de bienes muebles">020-Mantenimiento y reparación de bienes muebles</option>
+                                        <option value="021-Movimiento de carga">021-Movimiento de carga</option>
+                                        <option value="022-Otros servicios empresariales">022-Otros servicios empresariales</option>
+                                        <option value="023-Leche">023-Leche</option>
+                                        <option value="024-Comisión mercantil">024-Comisión mercantil</option>
+                                        <option value="025-Fabricación de bienes por encargo">025-Fabricación de bienes por encargo</option>
+                                        <option value="026-Servicio de transporte de personas">026-Servicio de transporte de personas</option>
+                                        <option value="030-Contratos de construcción">030-Contratos de construcción</option>
+                                        <option value="031-Otro gravado con el IGV">031-Otro gravado con el IGV</option>
+                                        <option value="032-Paprika y otros frutos de los generos capsicum o pimienta">032-Paprika y otros frutos de los generos capsicum o pimienta</option>
+                                        <option value="034-Minerales metálicos no auriferos">034-Minerales metálicos no auriferos</option>
+                                        <option value="035-Bienes exonerados del IGV">035-Bienes exonerados del IGV</option>
+                                        <option value="036-Oro y demás minerales metálicos exonerados del IGV">036-Oro y demás minerales metálicos exonerados del IGV</option>
+                                        <option value="037-Demás servicios gravados con el IGV">037-Demás servicios gravados con el IGV</option>
+                                        <option value="039-Minerales no metálicos">039-Minerales no metálicos</option>
+                                        <option value="040-Bien inmueble gravado con IGV">040-Bien inmueble gravado con IGV</option>
 
                                     </select>
 
@@ -661,23 +678,23 @@ function FacturaForm() {
                                     <select
                                         className="form-select w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                         aria-label="Medio de pago"
-                                        {...register("medio")}
+                                        onChange={handleMedioChange}
                                     >
                                         <option selected="SIN"></option>
-                                        <option value="001">001-Depósito en cuenta</option>
-                                        <option value="002">002-Giro</option>
-                                        <option value="003">003-Transferencia de fondos</option>
-                                        <option value="004">004-Orden de pago</option>
-                                        <option value="005">005-Tarjeta de débito</option>
-                                        <option value="006">006-Tarjeta de crédito emitida en el país por una empresa del sistema financiero</option>
-                                        <option value="007">007-Cheques con la cláusula de NO NEGOCIABLE, INTRANSFERIBLES, NO A LA ORDEN u otra equivalente. A que se refiere el inciso g) del artículo 5* de la ley </option>
-                                        <option value="008">008-Efectivo, por operaciones en las que no existe obligación de utilizar medio de pago</option>
-                                        <option value="009">009-Efectivo, en los demás casos</option>
-                                        <option value="010">010-Medios de pago usados en comercio exterior</option>
-                                        <option value="011">011-Documentos emitidos por las EDPYMES y las cooperativas de ahorro y crédito no autorizadas a captar depósitos del público</option>
-                                        <option value="012">012-Tarjeta de crédito emitida en el país o en el exterior por una empresa no perteneciente al sistema financiero, cuyo objetio principal sea la emisión y administración de trajetas de crédito</option>
-                                        <option value="013">013-Tarjetas de crédito emitidas en el exterior por empresas bancarias o financieras no domiciliada</option>
-                                        <option value="101">101-Transferencias - Comercio exterior</option>
+                                        <option value="001-Depósito en cuenta">001-Depósito en cuenta</option>
+                                        <option value="002-Giro">002-Giro</option>
+                                        <option value="003-Transferencia de fondos">003-Transferencia de fondos</option>
+                                        <option value="004-Orden de pago">004-Orden de pago</option>
+                                        <option value="005-Tarjeta de débito">005-Tarjeta de débito</option>
+                                        <option value="006-Tarjeta de crédito emitida en el país por una empresa del sistema financiero">006-Tarjeta de crédito emitida en el país por una empresa del sistema financiero</option>
+                                        <option value="007-Cheques con la cláusula de NO NEGOCIABLE, INTRANSFERIBLES, NO A LA ORDEN u otra equivalente. A que se refiere el inciso g) del artículo 5* de la ley">007-Cheques con la cláusula de NO NEGOCIABLE, INTRANSFERIBLES, NO A LA ORDEN u otra equivalente. A que se refiere el inciso g) del artículo 5* de la ley </option>
+                                        <option value="008-Efectivo, por operaciones en las que no existe obligación de utilizar medio de pago">008-Efectivo, por operaciones en las que no existe obligación de utilizar medio de pago</option>
+                                        <option value="009-Efectivo, en los demás casos">009-Efectivo, en los demás casos</option>
+                                        <option value="010-Medios de pago usados en comercio exterior">010-Medios de pago usados en comercio exterior</option>
+                                        <option value="011-Documentos emitidos por las EDPYMES y las cooperativas de ahorro y crédito no autorizadas a captar depósitos del público">011-Documentos emitidos por las EDPYMES y las cooperativas de ahorro y crédito no autorizadas a captar depósitos del público</option>
+                                        <option value="012-Tarjeta de crédito emitida en el país o en el exterior por una empresa no perteneciente al sistema financiero, cuyo objetio principal sea la emisión y administración de trajetas de crédito">012-Tarjeta de crédito emitida en el país o en el exterior por una empresa no perteneciente al sistema financiero, cuyo objetio principal sea la emisión y administración de trajetas de crédito</option>
+                                        <option value="013-Tarjetas de crédito emitidas en el exterior por empresas bancarias o financieras no domiciliada">013-Tarjetas de crédito emitidas en el exterior por empresas bancarias o financieras no domiciliada</option>
+                                        <option value="101-Transferencias - Comercio exterior">101-Transferencias - Comercio exterior</option>
                                     </select>
 
                                     <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
