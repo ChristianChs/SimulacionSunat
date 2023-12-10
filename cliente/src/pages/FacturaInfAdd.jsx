@@ -204,10 +204,36 @@ function FacturaForm() {
         setMonto_detraccion(newValue);
     };
 
-    const onSubmit3 = handleSubmit(async (values) => {
+    const onSubmit3 = handleSubmit(async (values, documentosRelacionados) => {
         values.cta = cta;
         values.porcentaje = porcentaje;
         values.monto_detraccion = monto_detraccion;
+
+        var table = document.getElementById('cuotas');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 1; i < rows.length - 5; i++) {
+            documentosRelacionados.numero_cuota = rows[i].getElementsByTagName('td')[1].textContent;
+            documentosRelacionados.fecha_vencimiento = rows[i].getElementsByTagName('td')[2].textContent;
+            documentosRelacionados.monto_cuota = rows[i].getElementsByTagName('td')[3].textContent;
+            documentosRelacionados.monto_neto = document.getElementById('montoNetoPendiente').value;
+            documentosRelacionados.obs = document.getElementById('observacionFactura').value;
+            documentosRelacionados.total_cuota = a;
+            const dataCuota = {
+                numero_cuota: documentosRelacionados.numero_cuota,
+                fecha_vencimiento: documentosRelacionados.fecha_vencimiento,
+                monto_cuota: documentosRelacionados.monto_cuota,
+                monto_neto: documentosRelacionados.monto_neto,
+                obs: documentosRelacionados.obs,
+                total_cuota: documentosRelacionados.total_cuota,
+            }
+
+            console.log(dataCuota)
+            console.log(values)
+            await registrarFacturaCu(dataCuota);
+        }
+
+
 
         console.log(values);
     })
@@ -258,7 +284,7 @@ function FacturaForm() {
                                 Consigne las observaciones de la factura
                             </h1>
                             <input
-
+                                id="observacionFactura"
                                 name="description"
                                 type="text"
                                 aria-label="default input example"
@@ -388,7 +414,7 @@ function FacturaForm() {
                                     </label>
                                     <input
 
-                                        name="description"
+                                        id="montoNetoPendiente"
                                         type="number"
                                         aria-label="default input example"
                                         placeholder='0.00'
