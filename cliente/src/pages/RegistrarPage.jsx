@@ -65,13 +65,13 @@ function RegistrarPage() {
 
 
   const verificarDNI = async (dni) => {
-    const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InhpbGV5bzk2MTBAbGFueGk4LmNvbSJ9.YDWOH7kPi2d_RFltLu7g8ZulEwOrXcfcBYQFe7zeKMs`;
+    const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRleGV2aTU1MzhAZ2V0bW9sYS5jb20ifQ.vYKrEmb_NhYuQkdU3RJ7kSX9UH2eqkbMJAjs-YU60pE`;
     const response = await fetch(apiUrl);
     return await response.json();
   };
 
   const verificarRUC = async (ruc) => {
-    const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InhpbGV5bzk2MTBAbGFueGk4LmNvbSJ9.YDWOH7kPi2d_RFltLu7g8ZulEwOrXcfcBYQFe7zeKMs`;
+    const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRleGV2aTU1MzhAZ2V0bW9sYS5jb20ifQ.vYKrEmb_NhYuQkdU3RJ7kSX9UH2eqkbMJAjs-YU60pE`;
     const response = await fetch(apiUrl);
     return await response.json();
   };

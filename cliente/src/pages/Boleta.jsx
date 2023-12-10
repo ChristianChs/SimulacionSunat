@@ -240,6 +240,8 @@ function BoletaForm() {
     const handleDocChange = (e) => {
         let selectedValue = e.target.value;
         document.getElementById('description').value = '';
+        console.log("cesar");
+        console.log(selectedValue);
         setSelectedDoc(selectedValue);
 
         const newValue = e.target.value;
@@ -407,7 +409,7 @@ function BoletaForm() {
     };
 
     const verificarDNI = async (dni) => {
-        const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InhpbGV5bzk2MTBAbGFueGk4LmNvbSJ9.YDWOH7kPi2d_RFltLu7g8ZulEwOrXcfcBYQFe7zeKMs`;
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/dni/${dni}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRleGV2aTU1MzhAZ2V0bW9sYS5jb20ifQ.vYKrEmb_NhYuQkdU3RJ7kSX9UH2eqkbMJAjs-YU60pE`;
         const response = await fetch(apiUrl);
         return await response.json();
     };
@@ -801,9 +803,9 @@ function BoletaForm() {
                                 aria-label="default input example"
                                 className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 onChange={handlersChange}
-                                disabled={selectedDoc == 'DOCN'}
+                                disabled={selectedDoc == 'DOC. NACIONAL DE IDENTIDAD'}
                             />
-                            <div className="flex justify-end" style={{ display: selectedDoc === "DOCN" ? 'block' : 'none' }}>
+                            <div className="flex justify-end" style={{ display: selectedDoc === "DOC. NACIONAL DE IDENTIDAD" ? 'block' : 'none' }}>
                                 <input
                                     id="agregar"
                                     type="button"

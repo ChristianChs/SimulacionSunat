@@ -253,7 +253,7 @@ function FacturaForm() {
     };
 
     const verificarRUC = async (ruc) => {
-        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InhpbGV5bzk2MTBAbGFueGk4LmNvbSJ9.YDWOH7kPi2d_RFltLu7g8ZulEwOrXcfcBYQFe7zeKMs`;
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRleGV2aTU1MzhAZ2V0bW9sYS5jb20ifQ.vYKrEmb_NhYuQkdU3RJ7kSX9UH2eqkbMJAjs-YU60pE`;
         const response = await fetch(apiUrl);
         return await response.json();
     };
@@ -557,9 +557,9 @@ function FacturaForm() {
     const [mostrarAnticipos, setMostrarAnticipos] = useState(false);
 
     const handleRadioChange9 = e => {
+        document.getElementById("monto_descuento").value = 0;
         const isExportacion = e.target.value === "1";
         setMostrarAnticipos(isExportacion)
-        document.getElementById("monto_descuento").value = 0;
         setSelecteddesc_ant({
             checked: e.target.value
         });
@@ -601,6 +601,8 @@ function FacturaForm() {
         var rows = table.getElementsByTagName('tr');
 
         for (var i = 1; i < rows.length - 6; i++) {
+            const vaBienesServicios = {}; // Crea un nuevo objeto en cada iteración
+
             vaBienesServicios.cantidad = rows[i].getElementsByTagName('td')[1].textContent;
             vaBienesServicios.unidad = rows[i].getElementsByTagName('td')[2].textContent;
             vaBienesServicios.codigo = rows[i].getElementsByTagName('td')[3].textContent;
@@ -610,6 +612,7 @@ function FacturaForm() {
             vaBienesServicios.importeTotal = rows[i].getElementsByTagName('td')[7].textContent;
             vaBienesServicios.isc = rows[i].getElementsByTagName('td')[8].textContent;
             vaBienesServicios.igv = rows[i].getElementsByTagName('td')[9].textContent;
+
             const dataCuota = {
                 cantidad: vaBienesServicios.cantidad,
                 unidad: vaBienesServicios.unidad,
@@ -621,10 +624,11 @@ function FacturaForm() {
                 ICBPER: vaBienesServicios.icbper,
                 IGV: vaBienesServicios.igv,
                 Importe_total: vaBienesServicios.importeTotal,
-            }
+            };
 
-            console.log(dataCuota)
-            console.log(values)
+            console.log(i);
+            console.log(dataCuota);
+
             await registrarPfactura(dataCuota);
         }
 
@@ -636,7 +640,7 @@ function FacturaForm() {
         values.total_descuento = document.getElementById('tb_descuento').textContent;
 
         console.log(values);
-        const data = await registrarFactura(values);
+        await registrarFactura(values);
         const id_login = JSON.parse(localStorage.getItem('loggindata'))
         saveDataUser(id_login)
         navigate('/factinf')
