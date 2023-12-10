@@ -60,9 +60,6 @@ function PreFactura() {
     window.print();
   };
 
-  var a = 0;
-
-  var b = 0;
 
   useEffect(() => {
     getinfoCuota()
@@ -71,30 +68,31 @@ function PreFactura() {
     getinfoFacturaC()
     getinfoFacturaD()
     getinfoC(datareceptor4.tipo_trans)
-  }, []);
 
+    if (dataUser.ruc) {
+      getinfoRUCrs(dataUser.ruc)
+    }
+
+    if (datareceptor4.RUC) {
+      getinfoRUC2(datareceptor4.RUC)
+    }
+  }, [dataUser.ruc, datareceptor4.RUC]);
 
   console.log(datareceptor8)
 
 
 
   const getinfoRUCrs = async (ruc) => {
-    if (a < 1) {
-      const data = await validaRUC(ruc)
-      setDataReceptor(data.data)
-      a++
-    }
+    const data = await validaRUC(ruc)
+    setDataReceptor(data.data)
   }
-  getinfoRUCrs(dataUser.ruc)
+  //getinfoRUCrs(dataUser.ruc)
 
   const getinfoRUC2 = async (ruc) => {
-    if (b < 1) {
-      const data = await validaRUC(ruc)
-      setDataReceptor2(data.data)
-      b++
-    }
+    const data = await validaRUC(ruc)
+    setDataReceptor2(data.data)
   }
-  getinfoRUC2(datareceptor4.RUC)
+  //getinfoRUC2(datareceptor4.RUC)
 
   const getinfoC = async (data) => {
     if (data == 0) {
