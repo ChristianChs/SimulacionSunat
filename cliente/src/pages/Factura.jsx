@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useReciboxH } from '../context/ReciboxHContext';
 
 function FacturaForm() {
-    const{saveDataUser}=useReciboxH()
+    const { saveDataUser } = useReciboxH()
     let a = 1;
     const { registrarFactura, errors: LoginErrors } = useLogin();
     const { registrarPfactura, errors: LoginErrors2 } = useLogin();
@@ -229,7 +229,7 @@ function FacturaForm() {
     };
 
     const verificarRUC = async (ruc) => {
-        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRhcGVnaTE3OThAc2VzeGUuY29tIn0.kA46vxuxx1zjsvG9ZY5s5_2fjJCnen_veFz2L1LunIY`;
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNvdG9yNTIyMTlAZ3l4bXouY29tIn0.pxPvDyUyOTHLR-SRr_IqF5nwDydaUV4kvR_fPdtuL-8`;
         const response = await fetch(apiUrl);
         return await response.json();
     };
@@ -600,10 +600,10 @@ function FacturaForm() {
 
         console.log(values);
         const data = await registrarFactura(values);
-        const id_login=JSON.parse(localStorage.getItem('loggindata'))
+        const id_login = JSON.parse(localStorage.getItem('loggindata'))
         saveDataUser(id_login)
         if (data.status === 200) {
-          navigate('/factinf')
+            navigate('/factinf')
         }
     })
 

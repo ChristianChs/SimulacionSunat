@@ -212,7 +212,7 @@ function FacturaForm() {
         var table = document.getElementById('cuotas');
         var rows = table.getElementsByTagName('tr');
 
-        for (var i = 1; i < rows.length - 5; i++) {
+        for (var i = 1; i < rows.length - 1; i++) {
             documentosRelacionados.numero_cuota = rows[i].getElementsByTagName('td')[1].textContent;
             documentosRelacionados.fecha_vencimiento = rows[i].getElementsByTagName('td')[2].textContent;
             documentosRelacionados.monto_cuota = rows[i].getElementsByTagName('td')[3].textContent;
@@ -233,9 +233,12 @@ function FacturaForm() {
             await registrarFacturaCu(dataCuota);
         }
 
-
-
         console.log(values);
+        const data = await registrarFacturaDe(values);
+        if (data.status === 200) {
+            navigate('/prefact')
+        }
+
     })
 
     React.useEffect(() => {
@@ -256,7 +259,7 @@ function FacturaForm() {
                     <h1 className="text-2xl font-bold text-center text-yellow-100 mb-6">
                         INFORMACIÓN ADICIONAL
                     </h1>
-                    <form>
+                    <form onSubmit={onSubmit3}>
 
                         <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                             <h1 className="text-lg font-semibold text-yellow-100 mb-2">
@@ -562,7 +565,7 @@ function FacturaForm() {
                         </div>
 
 
-                        <div className="bg-zinc-900 p-4 rounded-lg mb-4" onSubmit={onSubmit3}>
+                        <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
                                 Consigne los datos de la detracción
                             </h1>
@@ -717,7 +720,7 @@ function FacturaForm() {
                             <input
                                 type="submit"
                                 value="Continuar"
-                                onClick={onSubmit1}
+                                onClick={onSubmit3}
                                 className="bg-gray-400 font-sans font-semibold text-white py-2 px-4 rounded-md hover:bg-gray-500 hover:font-bold hover:px-7 hover:bg-ffeba7 hover:text-white hover:border-gray-400"
                             />
                             <input
