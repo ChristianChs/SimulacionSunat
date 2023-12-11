@@ -3,6 +3,7 @@ import Starts from '../components/Stars'
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../context/LoginContext'
 import { useForm } from 'react-hook-form'
+import { dataFactura, dataLogRequest, dataPFactura, dataFacturaC, dataFacturaD } from '../api/login';
 
 function FacturaForm() {
     let a = 0;
@@ -250,16 +251,37 @@ function FacturaForm() {
             await registrarFacturaCu(dataCuota);
         }
 
+
         console.log(values);
         const data = await registrarFacturaDe(values);
         if (data.status === 200) {
-            navigate('/prefact')
+            navigate(
+                datareceptor4
+                    ? datareceptor5
+                        ? '/prefactsc'
+                        : '/prefactsn'
+                    : datareceptor5
+                        ? '/prefactsd'
+                        : '/prefact'
+            );
         }
 
     })
+    const [datareceptor4, setDataReceptor4] = useState([])
+    const getinfoFactura = async () => {
+        const TablaCuota = await dataFactura()
+        setDataReceptor4(TablaCuota.data[0].tipo_trans)
+    }
+
+    const [datareceptor5, setDataReceptor5] = useState([])
+    const getinfoFactura5 = async () => {
+        const TablaCuota = await dataFactura()
+        setDataReceptor5(TablaCuota.data[0].detr)
+    }
 
     React.useEffect(() => {
-
+        getinfoFactura()
+        getinfoFactura5()
         const currentDate = new Date();
         currentDate.setDate(currentDate.getDate());
         const formattedDate = currentDate.toISOString().split('T')[0];
