@@ -21,7 +21,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 function PreRecibo() {
-
   const { dataUser } = useReciboxH()
   const [dataReceptor5, setDataReceptor5] = useState([])
   const [datareceptor, setDataReceptor] = useState([])
@@ -29,13 +28,14 @@ function PreRecibo() {
   const [datareceptor3, setDataReceptor3] = useState(null)
   const [resultado, setResultado] = useState("");
   const [datareceptor2, setDataReceptor2] = useState([])
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState("")
   const navigate = useNavigate();
 
 
   const getData = async () => {
     const id_login = JSON.parse(localStorage.getItem('loggindata'))
     const datos = await dataLogRequest({ "id_login": id_login.id })
+    console.log("DATOOOS", datos.data)
     setUser(datos.data)
   }
 
@@ -47,20 +47,38 @@ function PreRecibo() {
 
 
   useEffect(() => {
-    getData()
-    getinfoCuota()
-    getinfoC(user.inciso_cat)
-    convertirNumeroALetras(user.total_neto);
+    const fetchData = async () => {
+      const id_login = JSON.parse(localStorage.getItem('loggindata'));
+      const datos = await dataLogRequest({ "id_login": id_login.id });
+
+      // Update user state after fetching data
+      setUser(datos.data);
+
+      // Call other functions that depend on the updated state
+      getData();
+      console.log("USER:", user);
+      getinfoCuota();
+      getinfoC(datos.data.inciso_cat);
+
+      // Ensure user.total_neto is valid before passing it to convertirNumeroALetras
+      if (!isNaN(datos.data.total_neto)) {
+        convertirNumeroALetras(datos.data.total_neto);
+      } else {
+        console.error("Invalid total_neto:", datos.data.total_neto);
+      }
+    };
+
+    fetchData();
   }, []);
 
   console.log(user)
 
   const getinfoC = async (data) => {
     if (data == 0) {
-      setDataReceptor3("A")
+      setDataReceptor3("B")
     }
     else {
-      setDataReceptor3("B")
+      setDataReceptor3("A")
     }
   }
 
@@ -147,7 +165,7 @@ function PreRecibo() {
       setResultado("Por favor, ingrese un número válido.");
       console.log(numeroInput)
     }
-    
+
   }
 
   const handlePrint = () => {
