@@ -177,7 +177,7 @@ function PreFacturasc() {
           <div className="subseparador" style={{ alignItems: 'right', textAlign: 'right', display: 'flex', width: '30%', margin: '7px auto' }}>
             <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>Forma de Pago</h1>
             <h1 className="subcontenido" style={{ textAlign: 'right', fontWeight: 'bold', display: 'flex', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>:</h1>
-            <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>{datareceptor3}</h1>
+            <h1 className="subcontenido" style={{ textAlign: 'right', display: 'flex', color: 'black', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', maxWidth: '100px', padding: '10px' }}>Contado</h1>
           </div>
         </div>
 
