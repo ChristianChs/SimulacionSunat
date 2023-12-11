@@ -253,7 +253,7 @@ function FacturaForm() {
     };
 
     const verificarRUC = async (ruc) => {
-        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRleGV2aTU1MzhAZ2V0bW9sYS5jb20ifQ.vYKrEmb_NhYuQkdU3RJ7kSX9UH2eqkbMJAjs-YU60pE`;
+        const apiUrl = `https://dniruc.apisperu.com/api/v1/ruc/${ruc}?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1peWFoMTk1NTBAbWNlbmIuY29tIn0.c94Mnv3goaTBnM3WvfYO-5fO3Es4NKjL-CwHTDZMtq0`;
         const response = await fetch(apiUrl);
         return await response.json();
     };

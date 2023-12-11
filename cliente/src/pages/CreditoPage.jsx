@@ -293,7 +293,7 @@ export default function CreditoPage() {
     console.log(values)
     const data = await registrarContado(values);
     if (data.status === 200) {
-      navigate('/previewcre')
+      navigate('/prerec')
     }
   });
 

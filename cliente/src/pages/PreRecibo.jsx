@@ -17,6 +17,7 @@ import TemplateTablaVerticalp from './TemplateTablaVerticalp';
 import TemplateTablaVerticalpb from './TemplateTablaverticalpb';
 import xmlPath from '../assets/pdfs/xmlboleta.xml';
 import { useReciboxH } from '../context/ReciboxHContext';
+import { useNavigate } from 'react-router-dom';
 
 
 function PreRecibo() {
@@ -28,12 +29,13 @@ function PreRecibo() {
   const [datareceptor3, setDataReceptor3] = useState(null)
   const [resultado, setResultado] = useState("");
   const [datareceptor2, setDataReceptor2] = useState([])
-  const [user,setUser]=useState([])
+  const [user, setUser] = useState([])
+  const navigate = useNavigate();
 
 
-  const getData = async()=>{
-    const id_login=JSON.parse(localStorage.getItem('loggindata'))
-    const datos=await dataLogRequest({"id_login":id_login.id})
+  const getData = async () => {
+    const id_login = JSON.parse(localStorage.getItem('loggindata'))
+    const datos = await dataLogRequest({ "id_login": id_login.id })
     setUser(datos.data)
   }
 
@@ -43,15 +45,12 @@ function PreRecibo() {
     setDataReceptor5(TablaCuota.data)
   }
 
-  var a=0;
-
-  var b=0;
 
   useEffect(() => {
     getData()
     getinfoCuota()
     getinfoC(user.inciso_cat)
-    convertirNumeroALetras(user.total_neto); 
+    convertirNumeroALetras(user.total_neto);
   }, []);
 
   console.log(user)
@@ -67,22 +66,26 @@ function PreRecibo() {
 
 
   const getinfoRUCrs = async (ruc) => {
-    if(a<1){
-      const data = await validaRUC(ruc)
-      setDataReceptor(data.data)
-      a++
-    }
+    const data = await validaRUC(ruc)
+    setDataReceptor(data.data)
   }
-  getinfoRUCrs(dataUser.ruc)
+
 
   const getinfoRUC2 = async (ruc) => {
-    if(b<1){
-      const data = await validaRUC(ruc)
-      setDataReceptor2(data.data)
-      b++
-    }
+    const data = await validaRUC(ruc)
+    setDataReceptor2(data.data)
   }
-  getinfoRUC2(user.nrodoc_destinatario)
+  const onSubmitMenu = () => {
+    navigate('/menu')
+  };
+
+  useEffect(() => {
+    getinfoRUCrs(dataUser.ruc);
+  }, [dataUser.ruc]);
+
+  useEffect(() => {
+    getinfoRUC2(user.nrodoc_destinatario);
+  }, [user.nrodoc_destinatario]);
 
   function numeroAtexto(numero) {
     const unidades = ["", "UNO", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE"];
@@ -146,7 +149,7 @@ function PreRecibo() {
   }
 
   console.log(resultado)
-  
+
   const handlePrint = () => {
     window.print();
   };
@@ -159,6 +162,7 @@ function PreRecibo() {
     { nroCuota: "1", fechaCuota: "15/25/2023", montoCuota: "5000" },
     { nroCuota: "2", fechaCuota: "16/25/2023", montoCuota: "8000" },
   ])
+  console.log(datareceptor2.razonSocial);
 
   return (
 
@@ -174,10 +178,10 @@ function PreRecibo() {
             <h1 className="subtitulo" style={{ color: '#707070', marginBottom: '10px', fontWeight: 'bold', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor.razonSocial}</h1>
             <h1 className="contenido" style={{ fontWeight: 'bold', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor.direccion}</h1>
             <h1 className="contenido" style={{ fontWeight: 'bold', color: '#707070', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{datareceptor.telefono}</h1>
-            
+
           </div>
           <div className="factura" style={{ alignItems: 'right', border: '2px solid #000000', paddingTop: '0px', paddingLeft: '10px', paddingRight: '10px', paddingBottom: '0px', width: '20%', marginRight: '10px' }}>
-            
+
             <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>RECIBO POR HONORARIOS</h1>
             <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>RUC: {dataUser.ruc}</h1>
             <h1 className="titulo" style={{ color: 'black', textAlign: 'center', fontWeight: 'bold' }}>Nro: E001-01</h1>
@@ -214,6 +218,11 @@ function PreRecibo() {
             <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
               <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Observación</h1>
               <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
+              <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>{user.obs_rxh}</h1>
+            </div>
+            <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
+              <h1 className="contenido1" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', width: '100px' }}>Inciso</h1>
+              <h1 className="contenido2" style={{ color: '#707070', fontWeight: 'bold', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px', paddingLeft: '30px', paddingRight: '30px' }}>:</h1>
               <h1 className="contenido3" style={{ color: '#000000', marginBottom: '10px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: '12px' }}>"{datareceptor3}" DEL ARTICULO 33 DE LA LEY DEL IMPUESTO A LA RENTA</h1>
             </div>
             <div className="detalle" style={{ display: 'flex', alignItems: 'left', width: '100%', margin: '0 auto', paddingRight: '20px', paddingLeft: '10px' }}>
@@ -249,19 +258,19 @@ function PreRecibo() {
           </div>
         </div>
 
-        <div className="buttons" 
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}
-        
+        <div className="buttons"
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}
+
         >
-        <button
-        className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden"
-        style={{ margin: '0 10px', padding: '8px 16px' }}
-        onClick={handlePrint}
-      >
-        Descargar PDF o Imprimir
-      </button>
-          <a className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }} href={xmlPath} download="boleta.xml">Descargar XML</a>
-          <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }}>Cerrar</button>
+          <button
+            className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden"
+            style={{ margin: '0 10px', padding: '8px 16px' }}
+            onClick={handlePrint}
+          >
+            Descargar PDF o Imprimir
+          </button>
+          <a className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }} href={xmlPath} download="recibo.xml">Descargar XML</a>
+          <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }} onClick={onSubmitMenu}>Cerrar</button>
         </div>
       </div>
 
