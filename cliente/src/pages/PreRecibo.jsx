@@ -145,10 +145,10 @@ function PreRecibo() {
       }
     } else {
       setResultado("Por favor, ingrese un número válido.");
+      console.log(numeroInput)
     }
+    
   }
-
-  console.log(resultado)
 
   const handlePrint = () => {
     window.print();
