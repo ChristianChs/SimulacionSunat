@@ -21,6 +21,10 @@ import PreFractura from './pages/PreFactura'
 import TemplateCredito from './pages/TemplateCredito'
 import PreBoleta from './pages/PreBoleta'
 import PreRecibo from './pages/PreRecibo'
+import BoletaForm from './pages/BoletaInfAdd'
+import PreFacturasc from './pages/PreFacturasc'
+import PreFacturasd from './pages/PreFacturasd'
+import PreFacturasn from './pages/PreFacturasn'
 
 export default function App() {
   return (
@@ -48,6 +52,10 @@ export default function App() {
               <Route path='test' element={<TemplateCredito />} />
               <Route path='prebol' element={<PreBoleta />} />
               <Route path='prerec' element={<PreRecibo />} />
+              <Route path='bolinf' element={<BoletaForm />} />
+              <Route path='prefactsc' element={<PreFacturasc />} />
+              <Route path='prefactsd' element={<PreFacturasd />} />
+              <Route path='prefactsn' element={<PreFacturasn />} />
             </Route>
           </Routes>
         </BrowserRouter>
