@@ -8,7 +8,7 @@ import Modal from '../components/Modal'
 import Imagen1 from '../assets/images/flecha.png';
 import Imagen2 from '../assets/images/pdf.jpg';
 import Imagen3 from '../assets/images/xml.png';
-import { dataFactura, dataLogRequest, dataPFactura, dataFacturaC, dataFacturaD } from '../api/login';
+import { dataFactura, dataLogRequest, dataPFactura, dataFacturaC, dataFacturaD, vaciar } from '../api/login';
 import { validaRUC } from '../api/validarDocs'
 import { dataCuota } from '../api/login';
 import TemplateTablaVertical from './TemplateTablaVertical';
@@ -108,6 +108,7 @@ function PreFactura() {
   }
 
   const onSubmitMenu = () => {
+    vaciar()
     navigate('/menu')
   };
 
@@ -315,7 +316,7 @@ function PreFactura() {
             Descargar PDF o Imprimir
           </button>
           <a className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }} href={xmlPath1} download="boleta.xml">Descargar XML</a>
-          <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }} onClick={onSubmitMenu}>Cerrar</button>
+          <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }} onClick={onSubmitMenu} >Cerrar</button>
         </div>
       </div>
 

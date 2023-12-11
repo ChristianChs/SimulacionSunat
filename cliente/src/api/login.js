@@ -45,3 +45,5 @@ export const dataFacturaD = (user) => axios.post(`${API}/getfactd`, user)
 export const dataPFactura= (user) => axios.post(`${API}/getpfact`, user)
 
 export const dataPBoleta= (user) => axios.post(`${API}/getpbol`, user)
+
+export const vaciar = (user) => axios.post(`${API}/vaciar`, user)
