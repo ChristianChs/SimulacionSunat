@@ -110,6 +110,7 @@ function PreFacturasc() {
   const onSubmitMenu = () => {
     navigate('/menu')
   };
+  console.log("fasdfasdfasd", datareceptor8);
 
   const [data, setData] = useState([
     { nroCuota: "1", fechaCuota: "15/25/2023", montoCuota: "5000" },

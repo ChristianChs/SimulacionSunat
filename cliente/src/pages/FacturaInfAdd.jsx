@@ -261,8 +261,8 @@ function FacturaForm() {
                         ? '/prefactsc'
                         : '/prefactsn'
                     : datareceptor5
-                        ? '/prefactsd'
-                        : '/prefact'
+                        ? '/prefact'
+                        : '/prefactsd'
             );
         }
 
@@ -435,7 +435,95 @@ function FacturaForm() {
                             </div>
                         </div>
 
-                    
+                        <div className="bg-zinc-900 p-4 rounded-lg mb-4">
+                            <h1 className="text-lg font-semibold text-yellow-100 mb-4">
+                                Consigne los datos de transaccion
+                            </h1>
+                            <div className="flex justify-center">
+                                <input
+                                    id="btnInformacionCredito"
+                                    type="button"
+                                    value={mostrarInformacionCredito ? "Ocultar Información al Crédito" : "Mostrar Información al Crédito"}
+                                    className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
+                                    onClick={() => setMostrarInformacionCredito(!mostrarInformacionCredito)}
+                                />
+                            </div>
+
+                            <div style={{ display: mostrarInformacionCredito ? 'block' : 'none' }}>
+                                <div className="bg-zinc-800 p-4 rounded-lg mb-4">
+                                    <label htmlFor="description" className="text-gray-400 font-sans font-semibold">
+                                        Monto Neto Pendiente de Pago
+                                    </label>
+                                    <input
+
+                                        id="montoNetoPendiente"
+                                        type="number"
+                                        aria-label="default input example"
+                                        placeholder='0.00'
+                                        className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                    />
+
+                                    <div className="bg-zinc-900 p-4 rounded-lg mb-4">
+                                        <h1 className="text-lg font-semibold text-yellow-100 mb-4">
+                                            Agregue las cuotas asociadas al crédito:
+                                        </h1>
+
+                                        <label htmlFor="fecha_vencimiento" className="text-gray-400 font-sans font-bold">
+                                            Fecha de Vencimiento:
+                                        </label>
+                                        <input
+                                            type="date"
+                                            id="fecha_vencimiento"
+                                            name="fecha_vencimiento"
+                                            className="w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                        />
+
+                                        <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
+                                            Monto de Cuota:
+                                        </label>
+                                        <input
+                                            className="monto-cuota w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
+                                            type="number"
+                                            id="monto_cuota"
+                                            placeholder="0.00"
+                                            aria-label=".form-control-lg example"
+                                        />
+
+                                        <div className="flex justify-end">
+                                            <input
+                                                onClick={insertarFilaCredito}
+                                                type="button"
+                                                value="Agregar Cuota"
+                                                className="bg-yellow-100 font-sans font-semibold text-zinc-900 py-2 px-4 rounded-md mb-2 hover:bg-yellow-200 hover:font-bold hover:px-6"
+                                            />
+                                        </div>
+                                    </div>
+                                    <h1 className="text-gray-400 font-sans font-bold">
+                                        Máximo podrá agregar hasta 60 Cuotas
+                                    </h1>
+                                    <div className="mx-auto bg-text-zinc-900 p-6 dark:text-white">
+                                        <table id="cuotas" className="min-w-full divide-y divide-gray-200 dark:divide-gray-700 rounded-md overflow-hidden">
+                                            <thead>
+                                                <tr className="bg-gray-200">
+                                                    <th className="border bg-gray-500 text-gray-300">Eliminar</th>
+                                                    <th className="border bg-zinc-500 text-gray-300">Número Cuota</th>
+                                                    <th className="border bg-zinc-500 text-gray-300">Fecha Vencimiento</th>
+                                                    <th className="border bg-zinc-500 text-gray-300">Monto Cuota</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="cuerpo_cuotas" className="font-sans font-semibold border border-gray-400 text-gray-200 text-center">
+                                                <tr>
+                                                    <td className="bg-zinc-600" >Total</td>
+                                                    <td></td>
+                                                    <td ></td>
+                                                    <td id="suma_tabla" className="bg-zinc-600">0</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div className="bg-zinc-900 p-4 rounded-lg mb-4">
                             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
