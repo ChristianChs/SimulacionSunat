@@ -243,13 +243,3 @@ export const ExtraerFecha = async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 }
-
-export const Vaciar = async (req, res) => {
-    try {
-        const userFound = await model.Vaciar()
-        console.log("Extraccion de cuotas",userFound)
-        res.json(userFound)
-    } catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-}

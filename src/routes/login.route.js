@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ExtraerData, ExtraerDataLog, ExtraerCuotas, ExtraerFecha,registerCuotas,registerBol,registerfactcu,registerfactde,registerPBol,registerfact,registerPfact,  login, login2, register,register2,register3, ExtraerFactura, ExtraerPFactura, ExtraerPBoleta, ExtraerFacturaD, ExtraerFacturaC, ExtraerBoleta, vaciar } from "../controllers/login.controller.js";
+import { ExtraerData, ExtraerDataLog, ExtraerCuotas, ExtraerFecha,registerCuotas,registerBol,registerfactcu,registerfactde,registerPBol,registerfact,registerPfact,  login, login2, register,register2,register3, ExtraerFactura, ExtraerPFactura, ExtraerPBoleta, ExtraerFacturaD, ExtraerFacturaC, ExtraerBoleta, } from "../controllers/login.controller.js";
 
 const router = Router()
 
@@ -46,7 +46,5 @@ router.post('/getfactd',ExtraerFacturaD)
 router.post('/getpfact',ExtraerPFactura)
 
 router.post('/getpbol',ExtraerPBoleta)
-
-router.post('/vaciar',vaciar)
 
 export default router

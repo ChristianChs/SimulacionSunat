@@ -8,7 +8,7 @@ import Modal from '../components/Modal'
 import Imagen1 from '../assets/images/flecha.png';
 import Imagen2 from '../assets/images/pdf.jpg';
 import Imagen3 from '../assets/images/xml.png';
-import { dataFactura, dataLogRequest, dataPFactura, dataFacturaC, dataFacturaD, vaciar } from '../api/login';
+import { dataFactura, dataLogRequest, dataPFactura, dataFacturaC, dataFacturaD } from '../api/login';
 import { validaRUC } from '../api/validarDocs'
 import { dataCuota } from '../api/login';
 import TemplateTablaVertical from './TemplateTablaVertical';
@@ -108,7 +108,6 @@ function PreFactura() {
   }
 
   const onSubmitMenu = () => {
-    vaciar()
     navigate('/menu')
   };
 

@@ -258,19 +258,4 @@ model.inCuota=async(arg)=>{
     })
 }
 
-model.Vaciar=async()=>{
-    try{
-        await sequelize.query(`TRUNCATE TABLE cuota_factura;`);
-        await sequelize.query(`TRUNCATE TABLE cuota;`);
-        await sequelize.query(`TRUNCATE TABLE detraccion_factura;`);
-        await sequelize.query(`TRUNCATE TABLE prod_bol;`);
-        await sequelize.query(`TRUNCATE TABLE prod_fact;`);
-    }catch(error){
-        console.error(error);
-    }
-    finally{
-        await sequelize.close();
-    }
-}
-
 export default model
