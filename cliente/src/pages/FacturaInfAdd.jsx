@@ -435,7 +435,7 @@ function FacturaForm() {
                             </div>
                         </div>
 
-                        <div className="bg-zinc-900 p-4 rounded-lg mb-4">
+                        <div className="bg-zinc-900 p-4 rounded-lg mb-4" style={{ display: datareceptor4 ? 'none' : 'block' }}>
                             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
                                 Consigne los datos de transaccion
                             </h1>
@@ -604,7 +604,7 @@ function FacturaForm() {
                         </div>
 
 
-                        <div className="bg-zinc-900 p-4 rounded-lg mb-4">
+                        <div className="bg-zinc-900 p-4 rounded-lg mb-4" style={{ display: datareceptor5 ? 'block' : 'none' }}>
                             <h1 className="text-lg font-semibold text-yellow-100 mb-4">
                                 Consigne los datos de la detracción
                             </h1>

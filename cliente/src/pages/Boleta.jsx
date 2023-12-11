@@ -1291,19 +1291,20 @@ function BoletaForm() {
                                     aria-label=".form-control-lg example"
                                     onChange={onChangeMonto}
                                 />
-
-                                <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
-                                    Descuento:
-                                </label>
-                                <input
-                                    disabled={mostrarAnticipos == '0'}
-                                    className={mostrarAnticipos == '0' ? "monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100" : "monto-cuota w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"}
-                                    type="number"
-                                    id="monto_descuento"
-                                    placeholder="0.00"
-                                    aria-label=".form-control-lg example"
-                                    onChange={handleDescuentoChange}
-                                />
+                                <div style={{ display: mostrarAnticipos ? 'block' : 'none' }}>
+                                    <label htmlFor="monto_cuota" className="text-gray-400 font-sans font-bold">
+                                        Descuento:
+                                    </label>
+                                    <input
+                                        disabled={mostrarAnticipos == '0'}
+                                        className={mostrarAnticipos == '0' ? "monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100" : "monto-cuota w-full py-2 px-3 border border-gray-900 bg-gray-900 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"}
+                                        type="number"
+                                        id="monto_descuento"
+                                        placeholder="0.00"
+                                        aria-label=".form-control-lg example"
+                                        onChange={handleDescuentoChange}
+                                    />
+                                </div>
                                 <div style={{ display: mostrarIsc ? mostrarRucReceptor ? 'none' : 'block' : 'none' }}>
                                     <h1 className="text-gray-400 font-sans font-bold">
                                         ISC:
