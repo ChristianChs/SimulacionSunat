@@ -16,6 +16,7 @@ import TemplateTablaVerticalpb from './TemplateTablaverticalpb';
 import xmlPath from '../assets/pdfs/xmlboleta.xml';
 import { useReciboxH } from '../context/ReciboxHContext';
 import { validaRUC } from '../api/validarDocs'
+import { useNavigate } from 'react-router-dom';
 
 function PreBoleta() {
 
@@ -24,6 +25,7 @@ function PreBoleta() {
   const [datareceptor, setDataReceptor] = useState([])
   const [datareceptor2, setDataReceptor2] = useState([])
   const [datareceptor4, setDataReceptor4] = useState([])
+  const navigate = useNavigate();
 
   const getinfoPBoleta = async () => {
     const TablaCuota = await dataPBoleta()
@@ -60,6 +62,10 @@ function PreBoleta() {
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const onSubmitMenu = () => {
+    navigate('/menu')
   };
 
   const [data, setData] = useState([
@@ -194,7 +200,7 @@ function PreBoleta() {
             Descargar PDF o Imprimir
           </button>
           <a className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }} href={xmlPath} download="boleta.xml">Descargar XML</a>
-          <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }}>Cerrar</button>
+          <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }} onClick={onSubmitMenu}>Cerrar</button>
         </div>
       </div>
 

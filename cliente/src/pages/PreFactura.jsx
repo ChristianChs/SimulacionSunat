@@ -15,6 +15,7 @@ import TemplateTablaVertical from './TemplateTablaVertical';
 import TemplateTablaVerticalp from './TemplateTablaVerticalp';
 import xmlPath1 from '../assets/pdfs/xmlfactura.xml';
 import { useReciboxH } from '../context/ReciboxHContext';
+import { useNavigate } from 'react-router-dom';
 
 
 function PreFactura() {
@@ -28,6 +29,7 @@ function PreFactura() {
   const [datareceptor6, setDataReceptor6] = useState([])
   const [datareceptor7, setDataReceptor7] = useState("")
   const [datareceptor8, setDataReceptor8] = useState("")
+  const navigate = useNavigate();
 
   const getinfoCuota = async () => {
     const TablaCuota = await dataFacturaC()
@@ -105,6 +107,9 @@ function PreFactura() {
     }
   }
 
+  const onSubmitMenu = () => {
+    navigate('/menu')
+  };
 
   const [data, setData] = useState([
     { nroCuota: "1", fechaCuota: "15/25/2023", montoCuota: "5000" },
@@ -118,7 +123,7 @@ function PreFactura() {
   return (
     <div className="containerprin" style={{ paddingTop: '15px', paddingBottom: '15px' }}>
       <div className="container" style={{ border: '2px solid #000000', padding: '20px', width: '80%', maxWidth: '1000px', margin: '0 auto', backgroundColor: '#FFFFFF' }}>
-        <div className="preliminar" style={{ fontSize: '18px', fontWeight: 'bolder', fontFamily: 'Helvetica-Bold', textAlign: 'center', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px' }}>
+        <div className="preliminar print:hidden" style={{ fontSize: '18px', fontWeight: 'bolder', fontFamily: 'Helvetica-Bold', textAlign: 'center', boxShadow: '1px 1px 1px #f2f1f1', paddingBottom: '1px' }}>
           <h1 className="titulo" style={{ border: '2px solid #000000', color: 'black', fontSize: '14px', fontWeight: 'bolder', fontFamily: 'Arial, Helvetica, sans-serif' }}>PRELIMINAR DE FACTURA ELECTRÓNICA</h1>
         </div>
 
@@ -298,7 +303,10 @@ function PreFactura() {
         </div>
 
 
-        <div className="buttons" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
+        <div className="buttons"
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}
+
+        >
           <button
             className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden"
             style={{ margin: '0 10px', padding: '8px 16px' }}
@@ -306,8 +314,8 @@ function PreFactura() {
           >
             Descargar PDF o Imprimir
           </button>
-          <a className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px' }} href={xmlPath1} download="factura.xml">Descargar XML</a>
-          <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold" style={{ margin: '0 10px', padding: '8px 16px' }}>Cerrar</button>
+          <a className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }} href={xmlPath1} download="boleta.xml">Descargar XML</a>
+          <button className="bg-indigo-950 text-white shadow-lg shadow-cyan-500/50 hover:bg-black hover:text-white hover:shadow-lg transition duration-300 ease-in-out px-4 py-2 font-bold print:hidden" style={{ margin: '0 10px', padding: '8px 16px' }} onClick={onSubmitMenu}>Cerrar</button>
         </div>
       </div>
 

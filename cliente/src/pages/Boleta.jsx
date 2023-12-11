@@ -264,7 +264,7 @@ function BoletaForm() {
     const [mostrarIsc, setMostrarIsc] = useState(false);
     const [tipoIsc, setTipoIsc] = useState("valor");
     const [valorISC, setValorIsc] = useState(0);
-    const [TipoMoneda, setTipoMoneda] = useState("SOLES");
+    const [tm, setTipoMoneda] = useState("SOLES");
 
     const handleMonedaChange = (e) => {
         console.log("hola");
@@ -388,7 +388,7 @@ function BoletaForm() {
 
         console.log(res)
 
-        document.getElementById('igvParcial').value = res;
+        document.getElementById('igvParcial').value = res.toFixed(2);
 
         const valorIsc1 = parseFloat(document.getElementById('valorParcialIsc').value);
         const total_bolsas = document.getElementById('imp_Bols').value * newCantidad;
@@ -579,7 +579,7 @@ function BoletaForm() {
     const onSubmit = handleSubmit(async (values, vaBienesServicios) => {
         values.expo = selectedexpo.checked;
         values.rs = document.getElementById('nombreClienteInferior').value;
-        values.nombre = document.getElementById('NombreRazon').value;
+        values.nombre = document.getElementById('nombreClienteInferior').value;
         values.td = td;
         values.pa = selectedpa.checked;
         values.itin = selecteditin.checked;
@@ -590,7 +590,7 @@ function BoletaForm() {
         values.og = selectedog;
         values.cyot = selectedcyot;
         values.numero_documento = numero_documento;
-
+        values.tm = tm;
         var table = document.getElementById('bienesServicios');
         var rows = table.getElementsByTagName('tr');
 
@@ -631,7 +631,7 @@ function BoletaForm() {
         values.sub_total = document.getElementById('tb_subtotal').textContent;
 
         console.log(values);
-
+        await registrarBoleta(values);
         const id_login = JSON.parse(localStorage.getItem('loggindata'))
         saveDataUser(id_login)
 
@@ -703,7 +703,7 @@ function BoletaForm() {
     };
 
     const onSubmit1 = () => {
-        navigate('/#')
+        navigate('/menu')
     }
 
     return (
@@ -1130,7 +1130,7 @@ function BoletaForm() {
                                 className="monto-neto w-full py-2 px-3 border border-gray-800 bg-gray-800 rounded-md mb-2 font-sans font-semibold text-gray-300 focus:border-yellow-100"
                                 type="text"
                                 aria-label=".form-control-lg example"
-                                value={TipoMoneda}
+                                value={tm}
                             />
 
                             <label htmlFor="date_issue" className="text-gray-400 font-sans font-semibold">

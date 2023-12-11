@@ -422,7 +422,7 @@ function FacturaForm() {
 
         console.log(res)
 
-        document.getElementById('igvParcial').value = res;
+        document.getElementById('igvParcial').value = res.toFixed(2);
 
         const valorIsc1 = parseFloat(document.getElementById('valorParcialIsc').value);
         const total_bolsas = document.getElementById('imp_Bols').value * newCantidad;
